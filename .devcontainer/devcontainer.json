@@ -11,11 +11,12 @@
     "salesforce.salesforcedx-vscode",
     "redhat.vscode-xml",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "sqrtt.prophet"
   ],
   "settings": {
     "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/java-11-openjdk-amd64"
-  },
+  }
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
