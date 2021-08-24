@@ -1,2 +1,10 @@
 node_modules
 ./node_modules
+dw.json
+cartridges/app_storefront_base
+cartridges/app_storefront_controllers
+cartridges/app_storefront_core
+cartridges/app_storefront_pipelines
+cartridges/bm_app_storefront_base
+cartridges/bm_cloudinary_pd
+cartridges/int_cloudinary_pd
