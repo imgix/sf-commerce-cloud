@@ -1,0 +1,6 @@
+[submodule "sfra-jsdoc"]
+	path = sfra-jsdoc
+	url = https://github.com/SalesforceCommerceCloud/sfra-jsdoc.git
+[submodule "plugin-applepay"]
+	path = plugin-applepay
+	url = https://github.com/SalesforceCommerceCloud/plugin-applepay.git
