@@ -3,12 +3,19 @@ ARG VARIANT="12"
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 # SFCC SFDX
 FROM salesforce/salesforcedx:latest-rc-full
-# Update args in docker-compose.yaml to set the UID/GID of the "node" user.
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        groupmod --gid $USER_GID node \
-        && usermod --uid $USER_UID --gid $USER_GID node \
-        && chown -R $USER_UID:$USER_GID /home/node \
-        && chown -R $USER_UID:root /usr/local/share/nvm /usr/local/share/npm-global; \
-    fi
+
+# Installs a set of common command line utilities, Oh My Zsh!, and sets up a non-root user.
+# ./common-debian.sh [Install zsh flag] [Non-root user] [User UID] [User GID] [Upgrade packages flag] [Install Oh My Zsh! flag]
+
+COPY library-scripts/common-debian.sh /tmp/library-scripts/
+RUN apt-get update && bash /tmp/library-scripts/common-debian.sh "true" "imgix" "automatic" "automatic" "true" "true"
+
+
+# Installs Node.js, nvm, yarn, and needed dependencies.
+ENV NVM_DIR="/usr/local/share/nvm"
+ENV NVM_SYMLINK_CURRENT=true \
+  PATH=${NVM_DIR}/current/bin:${PATH}
+COPY library-scripts/node-debian.sh /tmp/library-scripts/
+# ./node-debian.sh [Location to install nvm] [node version to install (use "none" to skip)] [non-root user] [Update rc files flag]
+RUN apt-get update && bash /tmp/library-scripts/node-debian.sh "${NVM_DIR}" "12" "imgix" "true"
+
