@@ -1,0 +1,28 @@
+{
+  "name": "imgix-sf-commcerce-cloud",
+  "version": "0.0.1",
+  "description": "Use this integration to insert images from imgix's Image Manager into your Salesforce Commerce Cloud websites.",
+  "main": "index.js",
+  "dependencies": {
+    "json": "^11.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imgix/sf-commerce-cloud.git"
+  },
+  "keywords": [
+    "imgix",
+    "commerce-cloud",
+    "salseforce"
+  ],
+  "author": "Luis Ball <lball@imgix.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imgix/sf-commerce-cloud/issues"
+  },
+  "homepage": "https://github.com/imgix/sf-commerce-cloud#readme"
+}
