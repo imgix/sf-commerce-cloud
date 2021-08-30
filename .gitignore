@@ -1,6 +1,7 @@
 node_modules
 ./node_modules
 dw.json
+.env
 
 cartridges/app_storefront_base/cartridge/static/default/css/
 cartridges/app_storefront_base/cartridge/static/default/js/

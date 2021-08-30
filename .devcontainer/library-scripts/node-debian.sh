@@ -138,4 +138,13 @@ EOF
 )"
 fi 
 
+# Install json
+if type json > /dev/null 2>&1; then
+    echo "json already installed."
+else
+ cd ~/bin
+ curl -L https://github.com/trentm/json/raw/master/lib/json.js > json
+ chmod 755 json
+fi
+
 echo "Done!"
