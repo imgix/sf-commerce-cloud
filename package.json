@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "description": "Use this integration to insert images from imgix's Image Manager into your Salesforce Commerce Cloud websites.",
   "main": "index.js",
-  "dependencies": {
+  "devDependencies": {
+    "dotenv": "^10.0.0",
     "json": "^11.0.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "node setup.js"
   },
   "repository": {
     "type": "git",
