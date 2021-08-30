@@ -8,15 +8,12 @@
     "args": { "VARIANT": "12" }
   },
   "extensions": [
-    "salesforce.salesforcedx-vscode",
     "redhat.vscode-xml",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "coenraads.bracket-pair-colorizer-2",
-    "cschleiden.vscode-github-actions",
     "eamodio.gitlens",
     "github.vscode-pull-request-github",
-    "ms-azuretools.vscode-docker",
     "ms-vsliveshare.vsliveshare",
     "vscode-icons-team.vscode-icons",
     "sqrtt.prophet"
