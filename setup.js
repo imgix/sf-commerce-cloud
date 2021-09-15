@@ -49,7 +49,7 @@ scripts.forEach((script) => {
   if (!script.includes("echo")) {
     console.log(`🐙  ${script}`);
   }
-  console.log(execSync(script, { stdio: "inherit" }));
+  console.log(execSync(script, { encoding: "utf8" }));
 });
 
 // const output = execSync(setupBashScript); // the default is 'buffer'
