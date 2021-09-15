@@ -1,6 +1,8 @@
 [submodule "sfra-jsdoc"]
 	path = sfra-jsdoc
 	url = https://github.com/SalesforceCommerceCloud/sfra-jsdoc.git
+	ignore = dirty
 [submodule "storefront-reference-architecture"]
 	path = storefront-reference-architecture
 	url = https://github.com/SalesforceCommerceCloud/storefront-reference-architecture.git
+	ignore = dirty
