@@ -1,15 +1,11 @@
-// launch.json
-
 {
   "version": "0.1.0",
-
   "configurations": [
     {
       "type": "prophet",
-
       "request": "launch",
-
-      "name": "SFCC"
+      "name": "Attach to Sandbox",
+      "trace": true
     }
   ]
 }
