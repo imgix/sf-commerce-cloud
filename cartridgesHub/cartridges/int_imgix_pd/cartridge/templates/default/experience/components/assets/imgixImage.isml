@@ -1,0 +1,30 @@
+<iscomment>
+    imgix Media Library Template:
+    This document renders an instance of the component. Multiple instances can be placed on the page.
+
+</iscomment>
+<isscript>
+    require('js/imgixImages.js');
+</isscript>
+
+<script>
+  var value = JSON.parse('<isprint value="${JSON.stringify(pdict.viewmodel)}" encoding="jsonvalue"/>');
+  window.pathname = window.pathname || '';
+  console.log(value);
+</script>
+
+
+<div class="ix-image-container">
+<isif condition="${pdict.viewmodel.placeholder}">
+<isif condition="${pdict.viewmodel.imageLink}">
+    <a href="${pdict.viewmodel.imageLink}">
+</isif>
+    <img class="ix-image" src="${pdict.viewmodel.placeholder}"  ix-url="${pdict.viewmodel.src}"
+    id="${pdict.viewmodel.id}"
+    alt="${pdict.viewmodel.altText}"
+    style="max-width: 100%">
+<isif condition="${pdict.viewmodel.imageLink}">
+</a>
+</isif>
+    </isif>
+</div>

@@ -1,0 +1,31 @@
+{
+  "name": "imgix Image",
+  "description": "imgix Image",
+  "group": "imgix",
+  "attribute_definition_groups": [
+    {
+      "id": "Image",
+      "attribute_definitions": [
+        {
+          "id": "image_sel",
+          "name": "Component configuration",
+          "type": "custom",
+          "required": true,
+          "editor_definition": {
+            "type": "imgix.imageForm"
+          }
+        },
+        {
+          "id": "version",
+          "name": "imgix cartridge version",
+          "type": "custom",
+          "required": false,
+          "editor_definition": {
+            "type": "imgix.version"
+          }
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}

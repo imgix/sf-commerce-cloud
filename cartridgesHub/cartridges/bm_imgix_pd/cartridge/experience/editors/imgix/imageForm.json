@@ -1,0 +1,11 @@
+{
+  "name": "imgix Image Config Form",
+  "description": "Configure Image",
+  "resources": {
+    "scripts": [
+      "/experience/editors/imgix/utils.js",
+      "/experience/editors/imgix/imageForm.js"
+    ],
+    "styles": ["/experience/editors/imgix/form.css"]
+  }
+}
