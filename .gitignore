@@ -47,3 +47,4 @@ test/acceptance/report
 test/integration/config.json
 sfra-jsdoc/
 storefront-reference-architecture/
+storefront-reference-architecture/package-lock.json
