@@ -5,11 +5,25 @@
   "main": "index.js",
   "devDependencies": {
     "dotenv": "^10.0.0",
-    "json": "^11.0.0"
+    "dotenv-cli": "^4.0.0",
+    "json": "^11.0.0",
+    "sfcc-ci": "^2.7.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "node setup.js"
+    "setup:submodules": "git submodule update --init --recursive",
+    "setup:cartridgesHub": "cd ./cartridgesHub && npm install",
+    "setup:sfra": "cd ./storefront-reference-architecture && npm install",
+    "setup:sfra-jsdoc": "cd ./sfra-jsdoc && npm install",
+    "setup:dw-json": "node setup.js",
+    "sfcc:login": "dotenv -e .env sfcc-ci client:auth",
+    "sfcc:logout": "sfcc-ci auth:logout",
+    "sandbox:list": "sfcc-ci sandbox:list",
+    "sandbox:start:dev": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:start'",
+    "sandbox:start:prod": "dotenv -e .env bash -c 'sfcc-ci sandbox:start'",
+    "sandbox:stop:dev": "dotenv -e .env bash -c 'sfcc-ci sandbox:stop'",
+    "sandbox:stop:prod": "dotenv -e .env bash -c 'sfcc-ci sandbox:start'",
+    "cartridge:add-to-path": "sfcc-ci cartridge:add"
   },
   "repository": {
     "type": "git",
