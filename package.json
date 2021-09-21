@@ -7,7 +7,8 @@
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
     "json": "^11.0.0",
-    "sfcc-ci": "^2.7.3"
+    "sfcc-ci": "^2.7.3",
+    "sgmf-scripts": "^2.4.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,7 +24,8 @@
     "sandbox:start:prod": "dotenv -e .env bash -c 'sfcc-ci sandbox:start'",
     "sandbox:stop:dev": "dotenv -e .env bash -c 'sfcc-ci sandbox:stop'",
     "sandbox:stop:prod": "dotenv -e .env bash -c 'sfcc-ci sandbox:start'",
-    "cartridge:add-to-path": "sfcc-ci cartridge:add"
+    "cartridge:add-to-path": "sfcc-ci cartridge:add",
+    "cartridge:upload": "sgmf-scripts --uploadCartridge"
   },
   "repository": {
     "type": "git",
