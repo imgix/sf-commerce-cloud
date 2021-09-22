@@ -21,9 +21,9 @@
     "sfcc:logout": "sfcc-ci auth:logout",
     "sandbox:list": "sfcc-ci sandbox:list",
     "sandbox:start:dev": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:start'",
-    "sandbox:start:prod": "dotenv -e .env bash -c 'sfcc-ci sandbox:start'",
-    "sandbox:stop:dev": "dotenv -e .env bash -c 'sfcc-ci sandbox:stop'",
-    "sandbox:stop:prod": "dotenv -e .env bash -c 'sfcc-ci sandbox:start'",
+    "sandbox:start:prod": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:start'",
+    "sandbox:stop:dev": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:stop'",
+    "sandbox:stop:prod": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:start'",
     "cartridge:add-to-path": "sfcc-ci cartridge:add",
     "uploadCartridge": "sgmf-scripts --uploadCartridge app_imgix_base_sfra"
   },
