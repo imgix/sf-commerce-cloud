@@ -1,7 +1,7 @@
 {
   "name": "Image & Tittle",
   "description": "Image & Tittle",
-  "group": "imgix", 
+  "group": "imgix",
   "attribute_definition_groups": [
     {
       "id": "ImgixImage",
@@ -22,7 +22,7 @@
         {
           "id": "Tittle",
           "name": "Tittle",
-          "type": "markup",
+          "type": "string",
           "required": false
         },
         {

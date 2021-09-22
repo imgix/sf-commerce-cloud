@@ -1,15 +1,15 @@
 <!--- TEMPLATENAME: imagerender.isml --->
-
-<div>    
+<div class="container">
+	<script>
+		let value = JSON.parse('<isprint value="${JSON.stringify(pdict.alt)}" encoding="jsonvalue" />');
+		console.log(`value: ${value}`);
+	</script>
 	<picture>
-		<isset name="noText" value="no Text" scope="page"/>
-		<isprint value="${pdict.title}"/>
+		<isset name="noText" value="no Text" scope="page" />
+		<isprint value="${pdict.title}" />
 		<a href="${pdict.link}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
-		    <img
-		        src="${pdict.image.src.mobile}"
-		        alt="${pdict.alt ? pdict.alt : noText}" 
-		        title="${pdict.title ? pdict.title : noText}"
-		        />
-		 </a>
+			<img src="${pdict.image.src.mobile}" alt="${pdict.alt ? pdict.alt : noText}"
+				title="${pdict.title ? pdict.title : noText}" />
+		</a>
 	</picture>
 </div>
