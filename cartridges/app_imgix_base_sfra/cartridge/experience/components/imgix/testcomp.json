@@ -1,0 +1,38 @@
+{
+  "name": "Image & Tittle",
+  "description": "Image & Tittle",
+  "group": "imgix", 
+  "attribute_definition_groups": [
+    {
+      "id": "ImgixImage",
+      "attribute_definitions": [
+        {
+          "id": "image",
+          "name": "Image",
+          "type": "image",
+          "required": true
+        },
+        {
+          "id": "alt",
+          "name": "Alt Text",
+          "description": "The image alt text shown by the component.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "Tittle",
+          "name": "Tittle",
+          "type": "markup",
+          "required": false
+        },
+        {
+          "id": "imageLink",
+          "name": "Image Link",
+          "type": "url",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}
