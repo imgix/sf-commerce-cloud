@@ -10,7 +10,7 @@ module.exports.render = function (context, modelIn) {
   var model = modelIn || new HashMap();
   var content = context.content;
 
-  model.title = content.title ? content.tittle : null;
+  model.title = content.title ? content.title : null;
   model.image = ImageTransformation.getScaledImage(content.image);
   // use to give link on the image, if we click on image it take to us to that page.
   model.link = content.imageLink ? content.imageLink : "#";
