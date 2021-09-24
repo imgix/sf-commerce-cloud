@@ -78,7 +78,7 @@ project:
 
 - **Do** tag someone on the SDK team to review the pull request once ready. Barring that, someone else on the engineering team who is familiar with the particular language/framework that the pull request is related to.
 
-- **Do** not check compiled, "dist" files into your PRs. Compiling, building, and prepping for distribution should be done in a separate branch or on `main` immediately before releasing.
+- **Do not** check compiled, "dist" files into your PRs. Compiling, building, and prepping for distribution should be done in a separate branch or on `main` immediately before releasing.
 
 ## Commit Messages
 
