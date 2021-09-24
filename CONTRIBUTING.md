@@ -25,7 +25,7 @@ project:
     git pull upstream next
     ```
 
-2.  Create a new topic branch (off the main project development branch) to contain your feature, change, or fix:
+2.  Create a new topic branch (off the `next` project development branch) to contain your feature, change, or fix:
 
     ```bash
     git checkout -b <topic-branch-name>
