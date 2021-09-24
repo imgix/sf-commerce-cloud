@@ -16,5 +16,6 @@ module.exports.render = function (context, modelIn) {
   model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
 
-  return new Template("/imgix/image/imgerender/imagerender").render(model).text;
+  return new Template("/imgix/image/imagerenderer/imagerenderer").render(model)
+    .text;
 };
