@@ -11,11 +11,11 @@ project:
 
     ```bash
     # Clone your fork of the repo into the current directory
-    git clone git@github.com:<YOUR_USERNAME>/react-imgix.git
+    git clone git@github.com:<YOUR_USERNAME>/sf-commerce-cloud.git
     # Navigate to the newly cloned directory
-    cd react-imgix
+    cd sf-commerce-cloud
     # Assign the original repo to a remote called "upstream"
-    git remote add upstream https://github.com/imgix/react-imgix
+    git remote add upstream https://github.com/imgix/sf-commerce-cloud
     ```
 
 1.  If you cloned a while ago, get the latest changes from upstream:
