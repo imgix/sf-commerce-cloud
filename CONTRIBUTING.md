@@ -60,7 +60,7 @@ project:
 
 ## Pull Requests
 
-- **Do** branch off `main`. You can always branch off `main`, everyone on the SDK team should have permission to commit directly to each repository. Note: In special cases, it might be necessary to branch off `beta`, `alpha`, or `next` if you are working on a pre-release version of a library. You can find more information here.
+- **Do** branch off `next`. You can always branch off `next`. Note: In special cases, it might be necessary to branch off `beta` or `alpha` if you are working on a pre-release version of a library.
 
 - **Do** make, incremental, modular changes. When creating a feature/bug-fix branch, try to keep it to one modular change only.
 
@@ -68,7 +68,7 @@ project:
 
 - **Do** rebase and merge your PR once approved/ready.
 
-- **Do** clean up your branch history before merging changes into `main`. For example, do not include commits such as `testing` or `does this do anything`. Sometimes it is unavoidable to check in changes like this (such as when testing against CI), but these commits should not make it to the default branch.
+- **Do** clean up your branch history before merging changes into `next`. For example, do not include commits such as `testing` or `does this do anything`. Sometimes it is unavoidable to check in changes like this (such as when testing against CI), but these commits should not make it to the default branch.
 
 - **Do** provide detailed descriptions. Pull requests should include an extremely-detailed description, even if you know your reviewer will have sufficient context on it.
 
