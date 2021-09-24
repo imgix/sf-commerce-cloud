@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Bellow are some guidelines for contributing to the project.
+Below are some guidelines for contributing to the project.
 
 ## Workflow
 
@@ -47,7 +47,7 @@ project:
 
 6.  [Open a Pull Request](https://help.github.com/articles/using-pull-requests/) with a clear title and description.
 
-7.  If your PR is out of sync with with `next`, locally merge (or rebase) the upstream development branch into your topic branch and force push the changes into your topic branch.
+7.  If your PR is out of sync with `next`, locally merge (or rebase) the upstream development branch into your topic branch and force push the changes into your topic branch.
 
     ```bash
     git pull [--rebase] upstream next
@@ -60,11 +60,11 @@ project:
 
 ## Pull Requests
 
-- **Do** branch off of ` m``ain `. You can always branch off of ` m``ain `, everyone on the SDK team should have permission to commit directly to each repository. Note: In special cases, it might be necessary to branch off `beta`, `alpha`, or `next` if you are working on a pre-release version of a library. You can find more information here.
+- **Do** branch off `main`. You can always branch off `main`, everyone on the SDK team should have permission to commit directly to each repository. Note: In special cases, it might be necessary to branch off `beta`, `alpha`, or `next` if you are working on a pre-release version of a library. You can find more information here.
 
 - **Do** make, incremental, modular changes. When creating a feature/bug-fix branch, try to keep it to one modular change only.
 
-- **Do** open PRs. There’s no shame in creating a new branch/pull request just to change one character in a file. PRs are free! Use em!
+- **Do** open PRs. There’s no shame in creating a new branch/pull request just to change one character in a file. PRs are free! Use 'em!
 
 - **Do** rebase and merge your PR once approved/ready.
 
@@ -100,9 +100,9 @@ A full list of commit header types can be found [here](https://www.conventionalc
 
     footer
 
-Given the format, the following message-header states that this commit makes a document-only change, `docs`, scoped to the builder-module, where the typo-fix occurs in the module readme. The header is followed by the body that describes the details of the commit.
+Given the format, the following message-header states that this commit makes a document-only change, `docs`, scoped to the builder-module, where the typo-fix occurs in the module README. The header is followed by the body that describes the details of the commit.
 
-    docs(builder): Fixes `builder` doc typos in readme
+    docs(builder): Fixes `builder` doc typos in README
 
     This PR updates the `builder` docs to reflect the latest API change in which
     the `source_path` parameter was renamed to `src_path`.
