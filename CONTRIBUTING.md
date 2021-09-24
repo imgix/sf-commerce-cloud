@@ -102,7 +102,7 @@ A full list of commit header types can be found [here](https://www.conventionalc
 
 Given the format, the following message-header states that this commit makes a document-only change, `docs`, scoped to the builder-module, where the typo-fix occurs in the module README. The header is followed by the body that describes the details of the commit.
 
-    docs(builder): Fixes `builder` doc typos in README
+    docs(builder): fixes `builder` doc typos in README
 
     This PR updates the `builder` docs to reflect the latest API change in which
     the `source_path` parameter was renamed to `src_path`.
@@ -122,7 +122,7 @@ Given the format, the following message-header states that this commit makes a d
 
 ---
 
-    docs(index.js): Fixes typos on index.md file and fixes on code examples.
+    docs(index.js): fixes typos on index.md file and fixes on code examples.
 
     1. While reading the documentation, I encountered `thisVariable` in index.js
       that was referred to as `thatVariable` in the index.md documentation file.
