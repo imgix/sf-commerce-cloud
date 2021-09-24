@@ -54,7 +54,7 @@ project:
     git push origin <topic-branch-name> --force
     ```
 
-8.  If you're happy with your changes and your PR has been approved, rebase and merge your topic branch into the main project development branch using the GitHub PR interface.
+8.  If you're happy with your changes and your PR has been approved, rebase and merge your topic branch into the `next` project development branch using the GitHub PR interface.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owner to license your work under the same license as that used by the project.
 
