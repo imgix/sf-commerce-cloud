@@ -1,0 +1,22 @@
+.ix-btn {
+  all: unset;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 40px;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.ix-btn:hover {
+  background-color: #e8f0f4;
+  cursor: pointer;
+}
+
+.ix-btn:active {
+  background-color: #dbe4e8;
+  border: 1px solid #e8f0f4;
+}
