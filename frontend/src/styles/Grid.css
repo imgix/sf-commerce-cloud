@@ -1,0 +1,56 @@
+.ix-grid-container {
+  min-height: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  background-color: #e3e7eb;
+}
+
+.ix-grid {
+  display: grid;
+  grid-gap: 20px;
+  justify-items: stretch;
+  align-items: start;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 900px) {
+  .ix-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 694px) {
+  .ix-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 540px) {
+  .ix-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ix-grid-item {
+  background: #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ix-grid-item-image {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 80%;
+}
+.ix-grid-item-image img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ix-grid-item-filename {
+  position: relative;
+  padding: 6px 10px;
+  margin: 0px;
+}
