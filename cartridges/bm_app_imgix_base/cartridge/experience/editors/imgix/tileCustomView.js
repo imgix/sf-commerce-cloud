@@ -5,4 +5,9 @@
  *
  * Initialises the custom attribute editor with server side information. This editor does not need any.
  */
-module.exports.init = function () {};
+// Ww can include the SFCC script to the component js
+var ImgixPreference = require('*/imgix/imgixPreference');
+
+module.exports.init = function (editor) {
+    
+};
