@@ -6,8 +6,9 @@ interface Props {
   label: string;
   type?: "dropdown" | null;
   Icon?: React.ReactElement;
+  onClick?: () => void;
 }
-export const Button = ({ type, label, Icon }: Props) => {
+export const Button = ({ type, label, onClick, Icon }: Props) => {
   let _type;
 
   // in future we can add more types
@@ -20,7 +21,7 @@ export const Button = ({ type, label, Icon }: Props) => {
       break;
   }
   return (
-    <button className="ix-btn">
+    <button onClick={onClick} className="ix-btn">
       <div className="ix-btn-icon">{Icon}</div>
       {label}
       {_type}
