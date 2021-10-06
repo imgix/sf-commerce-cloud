@@ -34,8 +34,8 @@ var preference = {
     getImgixPath: function () {
         return currentSite.getCustomPreferenceValue('ImgixPath');
     },
-    
-    getImgixapiKey: function () {
+
+    getImgixApiKey: function () {
         return currentSite.getCustomPreferenceValue('ImgixapiKey');
     }
 };
