@@ -1,0 +1,9 @@
+.button-story-layout {
+  background-color: #f1f2f3;
+  height: 500px;
+}
+
+.button-story-layout > .ix-source-select {
+  padding-top: 35vh;
+  padding-left: 40vw;
+}
