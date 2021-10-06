@@ -3,38 +3,6 @@
 var currentSite = require('dw/system/Site').getCurrent();
 
 var preference = {
-    getImgixBody: function () {
-        return currentSite.getCustomPreferenceValue('ImgixBody');
-    },
-
-    getImgixversion: function () {
-        return currentSite.getCustomPreferenceValue('Imgixversion');
-    },
-
-    getImgixOptions: function () {
-        return currentSite.getCustomPreferenceValue('ImgixOptions');
-    },
-
-    getImgixAPI: function () {
-        return currentSite.getCustomPreferenceValue('ImgixAPI');
-    },
-
-    getImgixMethod: function () {
-        return currentSite.getCustomPreferenceValue('ImgixMethod');
-    },
-
-    getImgixHeaders: function () {
-        return currentSite.getCustomPreferenceValue('ImgixHeaders');
-    },
-
-    getImgixSourceId: function () {
-        return currentSite.getCustomPreferenceValue('ImgixSourceId');
-    },
-
-    getImgixPath: function () {
-        return currentSite.getCustomPreferenceValue('ImgixPath');
-    },
-
     getImgixApiKey: function () {
         return currentSite.getCustomPreferenceValue('ImgixapiKey');
     }
