@@ -9,5 +9,6 @@
 var ImgixPreference = require('*/imgix/imgixPreference');
 
 module.exports.init = function (editor) {
-    
+    var Logger = require('dw/system/Logger');
+    Logger.info("ImgixPreference API infromation "+ ImgixPreference.getImgixApiKey);
 };
