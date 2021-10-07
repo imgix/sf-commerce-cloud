@@ -3,7 +3,6 @@
     "description": "Imgix component editor",
     "resources": {
         "scripts": [
-            // We can load the all library js in here.
             "/library/react.js",
             "/experience/editors/imgix/displayCustomView.js"
         ],
