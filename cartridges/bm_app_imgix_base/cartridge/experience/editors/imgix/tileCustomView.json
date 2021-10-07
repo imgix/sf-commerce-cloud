@@ -7,7 +7,6 @@
             "/experience/editors/imgix/displayCustomView.js"
         ],
         "styles": [
-            // We can load the all library CSS in here.
             "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
         ]
     }
