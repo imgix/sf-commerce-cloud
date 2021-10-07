@@ -1,0 +1,10 @@
+/* Down Arrow Styles */
+#assets-arrow {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 7px;
+  margin-left: 10px;
+  padding: 12px 0;
+  overflow: hidden;
+  fill: #475f72;
+}
