@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { SourcePropsT } from "../../../types";
+import { SourceT } from "../../../types";
 import { Button } from "../Button";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 
@@ -7,35 +7,38 @@ import "../../../styles/Button.css";
 import "../../../styles/SourceSelect.css";
 
 interface Props {
-  sources: SourcePropsT[];
+  sources: SourceT[];
 }
 
 export function SourceSelect({ sources }: Props): ReactElement {
-  const [selectedSource, setSelectedSource] = React.useState(
-    {} as SourcePropsT
-  );
+  const [selectedSourceId, setSelectedSourceId] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
+  const selectedSource = sources.find(
+    (source) => source.id === selectedSourceId
+  );
+
   const sourceList = sources.map((source) => {
     return (
       <li
         key={source.id}
         value={source.id}
-        onClick={(e) => setSelectedSource({ ...source })}
+        onClick={(e) => handleClick(source.id)}
       >
-        <Button label={source.name} Icon={<SourceMenuSvg />} />
+        <Button label={source.attributes.name} Icon={<SourceMenuSvg />} />
       </li>
     );
   });
-  // TODO(luis): Add an onClick handler so that when the user clicks on the
-  // source an optional callback can be called.
+
+  // create on click handler that closes the dropdown and sets the selected source
+  const handleClick = (id: string) => {
+    setIsOpen(!isOpen);
+    setSelectedSourceId(id);
+  };
+
   return (
     <div className={"ix-source-select" + (isOpen ? " ix-btn-flat" : "")}>
       <Button
-        label={
-          Object.keys(selectedSource).length
-            ? selectedSource.name
-            : "select a source"
-        }
+        label={selectedSource?.attributes.name || "Select a Source"}
         onClick={() => setIsOpen(!isOpen)}
         type="dropdown"
         Icon={<SourceMenuSvg />}
