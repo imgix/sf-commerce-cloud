@@ -1,5 +1,7 @@
-export type SourcePropsT = {
+export type SourceT = {
+  attributes: {
+    name: string;
+  };
   id: string;
-  name: string;
-  domain: string;
+  type: string;
 };
