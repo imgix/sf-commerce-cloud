@@ -53,10 +53,10 @@ export const imgixAPI = {
   },
   assets: {
     /**
-     * Get a list of images for a given source
+     * Get a list of assets for a given source
      * @param apiKey - The imgix API key to be used for the request
-     * @param sourceId - The source ID to find images for
-     * @returns A list of images
+     * @param sourceId - The source ID to find assets for
+     * @returns A list of assets
      */
     async get(apiKey: string, sourceId: string) {
       return await makeRequest<ImgixGETAssetsData>({
