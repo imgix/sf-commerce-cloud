@@ -16,18 +16,18 @@ Dropdown.args = {
   sources: [
     {
       id: "1",
-      name: "Source 1",
-      domain: "https://source1.com",
+      attributes: { name: "Source 1" },
+      type: "image",
     },
     {
       id: "2",
-      name: "Source 2",
-      domain: "https://source2.com",
+      attributes: { name: "Source 2" },
+      type: "image",
     },
     {
       id: "3",
-      name: "Source with a stupidly long name just as an example",
-      domain: "https://source3.com",
+      attributes: { name: "Source 3" },
+      type: "image",
     },
   ],
 };
