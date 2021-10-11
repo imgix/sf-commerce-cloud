@@ -1,5 +1,8 @@
 import ImgixManagementJS from "imgix-management-js";
-import { ImgixGETSourcesData } from "../types/imgixAPITypes";
+import {
+  ImgixGETSourcesData,
+  ImgixGETImagesData,
+} from "../types/imgixAPITypes";
 
 /**
  * Make a request to the imgix API.
@@ -43,7 +46,7 @@ export const imgixAPI = {
      */
     async get(apiKey: string) {
       return await makeRequest<ImgixGETSourcesData>({
-        url: `sources?sort=name&fields[sources]=name&filter[enabled]=true`,
+        url: `sources?sort=name&fields[sources]=name,custom_domains&filter[enabled]=true`,
         apiKey,
       });
     },
@@ -56,10 +59,10 @@ export const imgixAPI = {
        */
       async get(apiKey: string, sourceId: string) {
         return await makeRequest<ImgixGETImagesData>({
-          url: `sources/${sourceId}/assets?sort=name&fields[assets]=name`,
+          url: `assets/${sourceId}?fields[assets]=origin_path,source_id,description`,
           apiKey,
         });
-      }
-    }
+      },
+    },
   },
 };
