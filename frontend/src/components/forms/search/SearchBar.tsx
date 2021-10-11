@@ -19,7 +19,7 @@ export function SearchBar({ placeholder }: Props): ReactElement {
               type="text"
               className="ix-asset-simple-search-base-input-field"
               placeholder={
-                placeholder ? placeholder : "Search by filename or path"
+                placeholder ? placeholder : "Search filename or path"
               }
             />
           </div>
