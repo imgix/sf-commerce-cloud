@@ -12,7 +12,7 @@ const testSource: ImgixGETSourcesData[0] = {
     name: "Test Source",
   },
   id: "1234",
-  type: "source",
+  type: "sources",
 };
 
 beforeEach(() => {
