@@ -28,15 +28,18 @@ const testAsset: ImgixGETAssetsData[0] = {
   type: "assets",
 };
 
+let mockRequest: jest.Mock;
 beforeEach(() => {
   ImgixManagementJSMock.mockClear();
-  const mockRequest = jest.fn().mockImplementation(async (url) => ({
-    // Hacky way to mock the response from the API, change url matching in future
-    data: url.startsWith("sources?") ? [testSource] : [testAsset],
-    included: [],
-    jsonapi: {},
-    meta: {},
-  }));
+  mockRequest = jest.fn().mockImplementation(async (url) => {
+    return {
+      // Hacky way to mock the response from the API, change url matching in future
+      data: url.startsWith("sources?") ? [testSource] : [testAsset],
+      included: [],
+      jsonapi: {},
+      meta: {},
+    };
+  });
   ImgixManagementJSMock.mockImplementation(({ apiKey, version }) => {
     return {
       request: mockRequest,
@@ -59,3 +62,11 @@ test("should return assets correctly", async () => {
   );
   expect(data.data[0]).toMatchObject(testAsset);
 });
+
+test("should return assets in date modified descending order", async () => {
+  await imgixAPI.sources.assets.get("test-api-key", "test1234abcd");
+
+  const requestedUrl = mockRequest.mock.calls[0][0];
+  expect(requestedUrl).toMatch("sort=date_modified");
+});
+
