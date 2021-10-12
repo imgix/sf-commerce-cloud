@@ -47,5 +47,19 @@ export const imgixAPI = {
         apiKey,
       });
     },
+    assets: {
+      /**
+       * Get a list of images for a given source
+       * @param apiKey - The imgix API key to be used for the request
+       * @param sourceId - The source ID to find images for
+       * @returns A list of images
+       */
+      async get(apiKey: string, sourceId: string) {
+        return await makeRequest<ImgixGETImagesData>({
+          url: `sources/${sourceId}/assets?sort=name&fields[assets]=name`,
+          apiKey,
+        });
+      }
+    }
   },
 };
