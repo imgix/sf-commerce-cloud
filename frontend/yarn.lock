@@ -8778,6 +8778,13 @@ ignore@^5.1.4:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.8.tgz#f150a8b50a34289b33e22f5889abd4d8016f0e57"
   integrity sha512-BMpfD7PpiETpBl/A6S498BaIJ6Y/ABT93ETbby2fP00v4EbvPBXWEoaR1UBPKs3iR53pJY7EtZk5KACI57i1Uw==
 
+imgix-management-js@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/imgix-management-js/-/imgix-management-js-1.2.1.tgz#0422420f87eeab7e256edd6026e3fc4b71e4fbb9"
+  integrity sha512-OvYn9CxBHKhbxs1O4n5vAivTHGjbWIbqyn4nz51AyLP7/Es2hnjmX7Dcz1XBl9YIDS8Qov+h7OA61JCtQuK/Kg==
+  dependencies:
+    node-fetch "^2.6.0"
+
 immer@8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
@@ -10874,7 +10881,7 @@ node-dir@^0.1.10:
   dependencies:
     minimatch "^3.0.2"
 
-node-fetch@^2.6.1:
+node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.5.tgz#42735537d7f080a7e5f78b6c549b7146be1742fd"
   integrity sha512-mmlIVHJEu5rnIxgEgez6b9GgWXbkZj5YZ7fx+2r94a2E+Uirsp6HsPTPlomfdHtpt/B0cdKviwkoaM6pyvUOpQ==
