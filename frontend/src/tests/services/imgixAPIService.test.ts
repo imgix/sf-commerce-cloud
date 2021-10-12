@@ -1,4 +1,5 @@
 import ImgixManagementJS, { APIError } from "imgix-management-js";
+import URI from "jsuri";
 import { mocked } from "ts-jest/utils";
 import { imgixAPI } from "../../services/imgixAPIService";
 import {
@@ -67,6 +68,20 @@ test("should return assets in date modified descending order", async () => {
   await imgixAPI.sources.assets.get("test-api-key", "test1234abcd");
 
   const requestedUrl = mockRequest.mock.calls[0][0];
-  expect(requestedUrl).toMatch("sort=date_modified");
+  const requestedURI = new URI(requestedUrl);
+  expect(requestedURI.getQueryParamValue("sort")).toBe("date_modified");
 });
 
+test("should return name, description, and origin_path information", async () => {
+  await imgixAPI.sources.assets.get("test-api-key", "test1234abcd");
+
+  const requestedUrl = mockRequest.mock.calls[0][0];
+  const requestedURI = new URI(requestedUrl);
+  const fieldAssetsQueryParamArray = requestedURI
+    .getQueryParamValue("fields[assets]")
+    .split(",");
+
+  expect(fieldAssetsQueryParamArray).toContain("name");
+  expect(fieldAssetsQueryParamArray).toContain("description");
+  expect(fieldAssetsQueryParamArray).toContain("origin_path");
+});
