@@ -59,7 +59,7 @@ export const imgixAPI = {
        */
       async get(apiKey: string, sourceId: string) {
         return await makeRequest<ImgixGETImagesData>({
-          url: `sources/${sourceId}/assets?sort=name&fields[assets]=name`,
+          url: `sources/${sourceId}/assets?sort=date_modified&fields[assets]=name,description,origin_path`,
           apiKey,
         });
       },
