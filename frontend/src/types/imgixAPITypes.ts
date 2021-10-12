@@ -6,10 +6,12 @@ export type ImgixGETSourcesData = {
   type: string;
 }[];
 
-export type ImgixGETImagesData = {
+export type ImgixGETAssetsData = {
   attributes: {
-    name: string;
+    description: null | string;
+    name: null | string;
+    origin_path: string;
   };
   id: string;
-  type: string;
-}[];
+  type: "assets";
+}[]
