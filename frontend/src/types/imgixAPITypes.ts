@@ -3,7 +3,7 @@ export type ImgixGETSourcesData = {
     name: string;
   };
   id: string;
-  type: string;
+  type: "sources";
 }[];
 
 export type ImgixGETAssetsData = {
@@ -14,4 +14,4 @@ export type ImgixGETAssetsData = {
   };
   id: string;
   type: "assets";
-}[]
+}[];
