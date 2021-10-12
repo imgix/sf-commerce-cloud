@@ -1,5 +1,8 @@
 import ImgixManagementJS from "imgix-management-js";
-import { ImgixGETSourcesData } from "../types/imgixAPITypes";
+import {
+  ImgixGETImagesData,
+  ImgixGETSourcesData,
+} from "../types/imgixAPITypes";
 
 /**
  * Make a request to the imgix API.
@@ -59,7 +62,7 @@ export const imgixAPI = {
           url: `sources/${sourceId}/assets?sort=name&fields[assets]=name`,
           apiKey,
         });
-      }
-    }
+      },
+    },
   },
 };
