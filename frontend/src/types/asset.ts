@@ -1,4 +1,7 @@
 export type Asset = {
-  filename: string;
-  url: string;
+  attributes: {
+    origin_path: string;
+    source_id: string;
+  };
+  id: string;
 };
