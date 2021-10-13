@@ -4,7 +4,7 @@ export function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Hello world</p>
+        <p>bm_imgix_pd_react_app</p>
       </header>
     </div>
   );
