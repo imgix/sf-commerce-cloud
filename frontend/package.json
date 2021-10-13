@@ -23,12 +23,16 @@
   },
   "scripts": {
     "start": "yarn start:int",
+    "deploy": "yarn build:int && yarn build:bm",
     "start:int": "REACT_APP_APP_TYPE=int react-scripts start",
     "start:bm": "REACT_APP_APP_TYPE=bm react-scripts start",
-    "build": "yarn build:int && yarn build:bm",
     "build:int": "REACT_APP_APP_TYPE=int react-scripts build && cp -R build ../cartridges/int_imgix_pd/cartridge/experience/components/imgix/react_app",
     "build:bm": "REACT_APP_APP_TYPE=bm react-scripts build && cp -R build ../cartridges/bm_imgix_pd/cartridge/scripts/imgix/react_app",
-    "test": "react-scripts test",
+    "test": "yarn test:all",
+    "test:ci": "CI=true yarn test:int && CI=true yarn test:bm",
+    "test:all": "yarn test:int && yarn test:bm",
+    "test:int": "yarn build:int && REACT_APP_APP_TYPE=int react-scripts test -t='int_imgix_pd'",
+    "test:bm": "yarn build:bm && REACT_APP_APP_TYPE=bm react-scripts test -t='bm_imgix_pd'",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
