@@ -9,17 +9,17 @@ jobs:
     steps:
       - checkout
       - node/install:
-          install-yarn: true 
+          install-yarn: true
       # - node/install-packages:
       #     pkg-manager: yarn
       - node/install-packages:
           app-dir: frontend
           pkg-manager: yarn
       - run:
-          command: cd frontend && yarn run test
-          name: Run YARN tests
+          command: cd frontend && yarn run test:ci
+          name: Run integration and BM cartridge tests with CI flag
 
 workflows:
-  test-frontend: 
+  test-frontend:
     jobs:
       - test
