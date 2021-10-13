@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
 import { SourceSelect as _SourceSelect } from "../components/buttons/dropdowns/SourceSelect";
-import { SourcePropsT } from "../types";
+import { SourceT } from "../types";
 import "./ButtonLayout.css";
 
 interface Props {
-  sources: SourcePropsT[];
+  sources: SourceT[];
 }
 
 export function SourceSelect({ sources }: Props): ReactElement {
