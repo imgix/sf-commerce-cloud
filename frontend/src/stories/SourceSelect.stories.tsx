@@ -31,3 +31,8 @@ Dropdown.args = {
     },
   ],
 };
+
+export const NoSource = Template.bind({});
+NoSource.args = {
+  sources: [],
+};
