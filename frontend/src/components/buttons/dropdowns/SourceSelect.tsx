@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { SourceT } from "../../../types";
+import { ImgixGETSourcesData } from "../../../types";
 import { Button } from "../Button";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 
@@ -7,7 +7,7 @@ import "../../../styles/Button.css";
 import "../../../styles/SourceSelect.css";
 
 interface Props {
-  sources: SourceT[];
+  sources: ImgixGETSourcesData;
   handleSelect: (sourceId: string) => void;
 }
 
