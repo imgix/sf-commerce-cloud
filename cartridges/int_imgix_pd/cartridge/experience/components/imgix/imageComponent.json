@@ -1,34 +1,25 @@
 {
   "name": "imgix Image",
-  "description": "Image & Tittle",
+  "description": "An image component, powered by imgix",
   "group": "imgix",
   "attribute_definition_groups": [
     {
       "id": "ImgixImage",
       "attribute_definitions": [
         {
-          "id": "image",
-          "name": "Image",
-          "type": "image",
-          "required": true
+          "id": "image_url",
+          "name": "Target Image",
+          "type": "custom",
+          "required": true,
+          "editor_definition": {
+            "type": "imgix.imageSelection"
+          }
         },
         {
           "id": "alt",
           "name": "Alt Text",
           "description": "The image alt text shown by the component.",
           "type": "string",
-          "required": false
-        },
-        {
-          "id": "title",
-          "name": "Title",
-          "type": "markup",
-          "required": false
-        },
-        {
-          "id": "imageLink",
-          "name": "Image Link",
-          "type": "url",
           "required": false
         }
       ]
