@@ -1,0 +1,10 @@
+{
+  "name": "imgix Component Image Selection",
+  "description": "Select an image to use with the imgix Image component",
+  "resources": {
+    "scripts": ["/experience/editors/imgix/imageSelection.js"],
+    "styles": [
+      "https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/styles/salesforce-lightning-design-system.min.css"
+    ]
+  }
+}
