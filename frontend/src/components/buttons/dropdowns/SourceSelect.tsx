@@ -35,6 +35,12 @@ export function SourceSelect({ sources }: Props): ReactElement {
     setSelectedSourceId(id);
   };
 
+  const noSourcePlaceholder = (
+    <li key="no-source" value="">
+      <Button label={"No sources"} />
+    </li>
+  );
+
   return (
     <div className={"ix-source-select" + (isOpen ? " ix-btn-flat" : "")}>
       <Button
@@ -48,7 +54,7 @@ export function SourceSelect({ sources }: Props): ReactElement {
           "ix-dropdown" + (isOpen ? " ix-dropdown-open" : " ix-dropdown-hide")
         }
       >
-        {sourceList.length ? sourceList : <li>no sources</li>}
+        {sourceList.length ? sourceList : noSourcePlaceholder}
       </ul>
     </div>
   );
