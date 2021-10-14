@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
 import { ImgixProvider } from "react-imgix";
-import { AssetT } from "../../types";
+import { ImgixGETAssetsData } from "../../types";
 import { AssetGrid } from "../grids/AssetGrid";
 
 interface Props {
-  assets: AssetT[];
+  assets: ImgixGETAssetsData;
   domain: string;
 }
 
