@@ -1,0 +1,44 @@
+.ix-asset-browser {
+  background-color: #e3e7eb;
+  padding-bottom: 100px;
+}
+/* assign search form a column span */
+.ix-asset-simple-search-content {
+  position: relative;
+  grid-column: span 5;
+}
+/* remove left right padding to account for mobile spacing needs */
+.ix-asset-simple-search-base-input {
+  left: auto;
+  right: inherit;
+}
+.ix-asset-title-bar-container {
+  background-color: white;
+  grid-template-columns: minmax(150px, 244px) repeat(6, 1fr);
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: minmax(110px, 140px) repeat(6, 1fr);
+  grid-template-rows: 100%;
+  grid-column-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
+  padding: 8px 0;
+  align-items: center;
+}
+/* placeholder only displayed when no assets to show */
+.ix-grid-item-placeholder {
+  margin-top: 32px;
+  height: 250px;
+  border: 2px solid #eeeded;
+  border-radius: 4px;
+  display: flex;
+  background: #fafafa;
+  justify-content: center;
+  align-items: center;
+}
+/* Add a padding to asset grid to it doesn't go edge to edge */
+.ix-asset-grid-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 25px;
+}
