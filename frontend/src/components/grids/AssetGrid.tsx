@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 import Imgix from "react-imgix";
-import { AssetT, SourceT } from "../../types";
+import { ImgixGETAssetsData } from "../../types";
 import "../../styles/Grid.css";
 interface Props {
-  assets: AssetT[];
+  assets: ImgixGETAssetsData;
 }
 
 export function AssetGrid({ assets }: Props): ReactElement {
