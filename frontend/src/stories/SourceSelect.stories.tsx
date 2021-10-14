@@ -17,17 +17,17 @@ Dropdown.args = {
     {
       id: "1",
       attributes: { name: "Source 1" },
-      type: "image",
+      type: "sources",
     },
     {
       id: "2",
       attributes: { name: "Source 2" },
-      type: "image",
+      type: "sources",
     },
     {
       id: "3",
       attributes: { name: "Source 3" },
-      type: "image",
+      type: "sources",
     },
   ],
 };
