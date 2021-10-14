@@ -10,7 +10,7 @@ interface Props {
 
 export function AssetGridContainer({ assets, domain }: Props): ReactElement {
   // If there is no domain or no assets, return placeholder
-  if (!domain || !assets || !assets.length) {
+  if (!domain || !assets.length) {
     return (
       <div className="ix-grid ix-grid-item-placeholder ">
         <div className="ix-grid-item ix-asset-grid-loading">
