@@ -1,6 +1,7 @@
 export type ImgixGETSourcesData = {
   attributes: {
     name: string;
+    custom_domains?: string[];
   };
   id: string;
   type: "sources";
