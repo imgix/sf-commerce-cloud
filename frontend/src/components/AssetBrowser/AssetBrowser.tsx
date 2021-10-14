@@ -4,7 +4,7 @@ import { AssetGridContainer } from "./AssetGridContainer";
 import { imgixAPI } from "../../services/imgixAPIService";
 import { SearchBar } from "../forms/search/SearchBar";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
-import { SourceT } from "../../types";
+import { ImgixGETSourcesData } from "../../types";
 
 import "../../styles/AssetBrowser.css";
 
@@ -13,8 +13,10 @@ interface Props {
 }
 
 export function AssetBrowser({ apiKey }: Props): ReactElement {
-  const [sources, setSources] = React.useState<SourceT[]>([]);
-  const [selectedSource, setSelectedSource] = React.useState<SourceT>();
+  const [sources, setSources] = React.useState<ImgixGETSourcesData>([]);
+  const [selectedSource, setSelectedSource] = React.useState<
+    ImgixGETSourcesData[0]
+  >();
   const [assets, setAssets] = React.useState<any[]>([]);
 
   const handleSourceSelect = (sourceId: string) => {
@@ -43,7 +45,7 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
     });
   }, [apiKey]);
 
-  const parseSourceDomain = (source: SourceT) => {
+  const parseSourceDomain = (source: ImgixGETSourcesData[0]) => {
     // TODO(luis): add tests to better handle this behavior
     // If the source has no custom domains, return the source name as the domain
     if (!source) return "";
@@ -55,7 +57,7 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
     return customDomains[0];
   };
 
-  const domain = parseSourceDomain(selectedSource as SourceT);
+  const domain = parseSourceDomain(selectedSource as ImgixGETSourcesData[0]);
 
   return (
     <div className="ix-asset-browser">
