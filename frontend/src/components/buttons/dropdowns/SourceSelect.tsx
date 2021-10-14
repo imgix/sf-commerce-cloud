@@ -8,9 +8,10 @@ import "../../../styles/SourceSelect.css";
 
 interface Props {
   sources: SourceT[];
+  handleSelect: (sourceId: string) => void;
 }
 
-export function SourceSelect({ sources }: Props): ReactElement {
+export function SourceSelect({ sources, handleSelect }: Props): ReactElement {
   const [selectedSourceId, setSelectedSourceId] = React.useState("");
   const [isOpen, setIsOpen] = React.useState(false);
   const selectedSource = sources.find(
@@ -33,6 +34,7 @@ export function SourceSelect({ sources }: Props): ReactElement {
   const handleClick = (id: string) => {
     setIsOpen(!isOpen);
     setSelectedSourceId(id);
+    handleSelect(id);
   };
 
   const noSourcePlaceholder = (
