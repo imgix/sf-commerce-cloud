@@ -7,6 +7,7 @@
     right: 0;
     bottom: auto;
     left: 0;
+    z-index: 1;
   }
 }
 
@@ -27,6 +28,7 @@
   background-color: #fff;
   border: 1px solid #a6acb1;
   border-radius: 4px;
+  z-index: 1;
 }
 /* Search form base wrapper */
 @media (min-width: 694px) {
