@@ -70,3 +70,5 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 frontend/src/stories/assets
+
+dw*.json
