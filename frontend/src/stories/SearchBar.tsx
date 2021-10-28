@@ -6,12 +6,15 @@ interface Props {
 }
 
 export function SearchBar({ placeholder }: Props): ReactElement {
+  const handleSubmit = (value: string) => {
+    console.log(`handleSubmit:`, value);
+  };
   return (
     <div
       style={{ margin: 5, position: "relative" }}
       className="ix-searchbar-container"
     >
-      <_SearchBar placeholder={placeholder} />
+      <_SearchBar handleSubmit={handleSubmit} placeholder={placeholder} />
     </div>
   );
 }
