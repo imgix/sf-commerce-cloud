@@ -75,6 +75,7 @@
   left: 52px;
   right: 50px;
   height: 100%;
+  min-width: 200px;
   overflow: hidden;
   display: flex;
   align-items: center;
