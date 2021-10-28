@@ -30,6 +30,12 @@ const makeRequest = async <TData = {}>({
   });
   return {
     ...response,
+    cursor: response.meta.cursor as {
+      current: string;
+      next: string;
+      hasMore: boolean;
+      totalRecords: number;
+    },
     data: (response.data as any) as TData,
   };
 };
@@ -57,9 +63,15 @@ export const imgixAPI = {
        * @param sourceId - The source ID to find images for
        * @returns A list of images
        */
-      async get(apiKey: string, sourceId: string) {
+      async get(
+        apiKey: string,
+        sourceId: string,
+        index: string = "0",
+        size: string = "6"
+      ) {
+        // ?page[number]=${n}&page[size]=18`
         return await makeRequest<ImgixGETAssetsData>({
-          url: `assets/${sourceId}?sort=-date_modified&fields[assets]=name,description,origin_path`,
+          url: `assets/${sourceId}?page[cursor]=${index}&page[limit]=${size}&sort=date_created&fields[assets]=name,description,origin_path`,
           apiKey,
         });
       },
@@ -73,7 +85,13 @@ export const imgixAPI = {
      * @returns An `data` array of asset objects and a `meta` object with
      * pagination information
      */
-    async get(apiKey: string, sourceId: string, query: string) {
+    async get(
+      apiKey: string,
+      sourceId: string,
+      query: string,
+      index: string = "0",
+      size: string = "6"
+    ) {
       // TODO(luis): use a search endpoint rather than the assets endpoint
       // build the filter portion of the query
       const categories = `filter%5Bor:categories%5D=${query}`;
@@ -81,8 +99,8 @@ export const imgixAPI = {
       const origin_path = `&filter%5Bor:origin_path%5D=${query}`;
       const filter = categories + keywords + origin_path;
       // build the paging portion of the query
-      const pageCursor = `page%5Bcursor%5D=0`;
-      const pageLimit = `page%5Blimit%5D=60`;
+      const pageCursor = `page[cursor]=${index}`;
+      const pageLimit = `&page[limit]=${size}`;
       // build the sorting portion of the query
       const sortBy = `sort=-date_created`;
       // TODO(luis): is this fields param necessary?
@@ -90,7 +108,7 @@ export const imgixAPI = {
       // const fields = `fields[assets]=name,description,origin_path`;
 
       return await makeRequest<ImgixGETAssetsData>({
-        url: `assets/${sourceId}?${filter}&${pageCursor}&${pageLimit}&${sortBy}`,
+        url: `assets/${sourceId}?&${filter}&${pageCursor}&${pageLimit}&${sortBy}`,
         apiKey,
       });
     },
