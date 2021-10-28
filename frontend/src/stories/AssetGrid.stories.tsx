@@ -13,36 +13,37 @@ const Template: ComponentStory<typeof AssetGrid> = (args) => (
 
 export const BasicGrid = Template.bind({});
 BasicGrid.args = {
+  domain: "sdk-test.imgix.net",
   assets: [
     {
-      filename: "amsterdam.jpg",
-      url:
-        "https://sdk-test.imgix.net/amsterdam.jpg?fit=crop&w=169.828&h=136&dpr=2&q=50&auto=format%2Ccompress",
-    },
+      attributes: {
+        origin_path: "amsterdam.jpg",
+      },
+    } as any,
     {
-      filename: "amsterdam.jpg",
-      url:
-        "https://sdk-test.imgix.net/amsterdam.jpg?fit=crop&w=169.828&h=136&dpr=2&q=50&auto=format%2Ccompress",
-    },
+      attributes: {
+        origin_path: "amsterdam.jpg",
+      },
+    } as any,
     {
-      filename: "amsterdam.jpg",
-      url:
-        "https://sdk-test.imgix.net/amsterdam.jpg?fit=crop&w=169.828&h=136&dpr=2&q=50&auto=format%2Ccompress",
-    },
+      attributes: {
+        origin_path: "amsterdam.jpg",
+      },
+    } as any,
     {
-      filename: "amsterdam.jpg",
-      url:
-        "https://sdk-test.imgix.net/amsterdam.jpg?fit=crop&w=169.828&h=136&dpr=2&q=50&auto=format%2Ccompress",
-    },
+      attributes: {
+        origin_path: "amsterdam.jpg",
+      },
+    } as any,
     {
-      filename: "amsterdam.jpg",
-      url:
-        "https://sdk-test.imgix.net/amsterdam.jpg?fit=crop&w=169.828&h=136&dpr=2&q=50&auto=format%2Ccompress",
-    },
+      attributes: {
+        origin_path: "amsterdam.jpg",
+      },
+    } as any,
     {
-      filename: "amsterdam.jpg",
-      url:
-        "https://sdk-test.imgix.net/amsterdam.jpg?fit=crop&w=169.828&h=136&dpr=2&q=50&auto=format%2Ccompress",
-    },
+      attributes: {
+        origin_path: "amsterdam.jpg",
+      },
+    } as any,
   ] as any,
 };
