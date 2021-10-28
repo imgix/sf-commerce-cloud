@@ -36,7 +36,9 @@ export function AssetGrid({
             sizes="(min-width: 480px) calc(12.5vw - 20px)"
           />
         </div>
-        <p className="ix-grid-item-filename">{asset.attributes.origin_path}</p>
+        <p className="ix-grid-item-filename">
+          {domain + asset.attributes.origin_path}
+        </p>
       </div>
     );
   });
