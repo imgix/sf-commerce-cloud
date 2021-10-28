@@ -30,6 +30,9 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
           const searchAssets = res.data;
           setLoading(false);
           setAssets(searchAssets);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
@@ -62,10 +65,16 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
     } else {
       setLoading(true);
       // fetch the sources when the component mounts
-      imgixAPI.sources.get(apiKey).then((resp) => {
-        setLoading(false);
-        setSources(resp.data);
-      });
+      imgixAPI.sources
+        .get(apiKey)
+        .then((resp) => {
+          setLoading(false);
+          setSources(resp.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+        });
     }
   }, [apiKey]);
 
