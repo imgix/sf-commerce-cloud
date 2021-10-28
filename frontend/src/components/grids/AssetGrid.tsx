@@ -4,16 +4,18 @@ import { ImgixGETAssetsData } from "../../types";
 import "../../styles/Grid.css";
 interface Props {
   assets: ImgixGETAssetsData;
+  domain: string;
 }
-
-export function AssetGrid({ assets }: Props): ReactElement {
+// TODO(luis): refactor this component into smaller components
+export function AssetGrid({ assets, domain }: Props): ReactElement {
+  console.log(assets, domain);
+  // create grid-items
   const gridItems = assets.map((asset, idx) => {
-    console.log(asset);
-
     return (
       <div className="ix-grid-item" key={`${asset.id}-${idx}`}>
         <div className="ix-grid-item-image">
           <Imgix
+            domain={domain}
             src={asset.attributes.origin_path}
             width={340}
             height={340}
@@ -29,5 +31,6 @@ export function AssetGrid({ assets }: Props): ReactElement {
       </div>
     );
   });
+  // create the asset grid
   return <div className="ix-grid">{gridItems}</div>;
 }
