@@ -42,6 +42,8 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
                 handleInputChange(event);
               }}
               onSubmit={(event) => {
+                // TODO(luis): Remove this. This is a hack to prevent the form
+                // from submitting
                 event.preventDefault();
                 handleSubmit(query);
               }}
