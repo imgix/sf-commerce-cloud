@@ -14,6 +14,8 @@ interface Props {
 }
 
 export function AssetBrowser({ apiKey }: Props): ReactElement {
+  const [errors, setErrors] = React.useState<string[]>([]);
+
   const [loading, setLoading] = React.useState(true);
   const [sources, setSources] = React.useState<ImgixGETSourcesData>([]);
   const [selectedSource, setSelectedSource] = React.useState<
@@ -32,6 +34,7 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
           setAssets(searchAssets);
         })
         .catch((err) => {
+          setErrors([err.response.errors[0].detail]);
           console.log(err);
         });
     }
@@ -50,10 +53,11 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
       .get(apiKey, source.id)
       .then((res) => {
         // store the source' assets
-        setLoading(false);
         setAssets(res.data);
+        setLoading(false);
       })
       .catch((err) => {
+        setErrors([err.response.errors[0].detail]);
         console.log(err);
       });
   };
@@ -68,10 +72,11 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
       imgixAPI.sources
         .get(apiKey)
         .then((resp) => {
-          setLoading(false);
           setSources(resp.data);
+          setLoading(false);
         })
         .catch((err) => {
+          setErrors([err.response.errors[0].detail]);
           console.log(err);
           setLoading(false);
         });
@@ -93,27 +98,29 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
   const domain = parseSourceDomain(selectedSource as ImgixGETSourcesData[0]);
   const hasSources = sources && !!sources.length;
   const hasAssets = assets && !!assets.length && !!domain.length;
+  const hasErrors = errors && !!errors.length;
 
-  // create placeholder to show when no sources or assets are available
-  let placeHolderText;
-  if (!hasSources) {
-    placeHolderText = "No sources found";
-  } else if (selectedSource && !hasAssets && !loading) {
-    placeHolderText = "Selected source has no assets.";
-  } else {
-    placeHolderText = "Select a source.";
-  }
+  const renderPlaceholder = () => {
+    // TODO(luis): add tests, and refactor better handle this behavior
+    // create placeholder to show when loading, selected origin has no sources,
+    // or no assets are found.
+    let element;
 
-  const placeholder =
-    !loading && (!assets || !assets.length) ? (
-      <div className="ix-grid">
-        <div className="ix-grid ix-grid-item-placeholder ">
-          <div>
-            <div>{placeHolderText}</div>
-          </div>
-        </div>
-      </div>
-    ) : null;
+    if (!hasSources && !errors.length && !loading) {
+      element = "No sources found";
+    } else if (selectedSource && !hasAssets && !errors.length && !loading) {
+      element = "Selected source has no assets.";
+    } else if (hasErrors) {
+      element = errors[0];
+    } else if (loading) {
+      element = <LoadingSpinner loading={loading} />;
+    } else {
+      element = "Select a source.";
+    }
+    return element;
+  };
+
+  const placeholder = renderPlaceholder();
 
   return (
     <div className="ix-asset-browser">
@@ -121,12 +128,7 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
         <SourceSelect sources={sources} handleSelect={handleSourceSelect} />
         <SearchBar handleSubmit={handleSearchSubmit} />
       </div>
-      <LoadingSpinner loading={loading} />
-      {placeholder ? (
-        placeholder
-      ) : (
-        <AssetGrid domain={domain} assets={assets} />
-      )}
+      <AssetGrid domain={domain} assets={assets} placeholder={placeholder} />
       <div className="ix-asset-meta-information-container"></div>
     </div>
   );
