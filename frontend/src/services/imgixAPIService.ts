@@ -65,4 +65,34 @@ export const imgixAPI = {
       },
     },
   },
+  search: {
+    /**
+     * Search for images in the current imgix account
+     * @param apiKey - The imgix API key to be used for the request
+     * @param query - The query to search for
+     * @returns An `data` array of asset objects and a `meta` object with
+     * pagination information
+     */
+    async get(apiKey: string, sourceId: string, query: string) {
+      // TODO(luis): use a search endpoint rather than the assets endpoint
+      // build the filter portion of the query
+      const categories = `filter%5Bor:categories%5D=${query}`;
+      const keywords = `&filter%5Bor:keywords%5D=${query}`;
+      const origin_path = `&filter%5Bor:origin_path%5D=${query}`;
+      const filter = categories + keywords + origin_path;
+      // build the paging portion of the query
+      const pageCursor = `page%5Bcursor%5D=0`;
+      const pageLimit = `page%5Blimit%5D=60`;
+      // build the sorting portion of the query
+      const sortBy = `sort=-date_created`;
+      // TODO(luis): is this fields param necessary?
+      // build the fields portion of the query
+      // const fields = `fields[assets]=name,description,origin_path`;
+
+      return await makeRequest<ImgixGETAssetsData>({
+        url: `assets/${sourceId}?${filter}&${pageCursor}&${pageLimit}&${sortBy}`,
+        apiKey,
+      });
+    },
+  },
 };
