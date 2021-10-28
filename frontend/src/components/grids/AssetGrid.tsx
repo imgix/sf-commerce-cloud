@@ -5,9 +5,14 @@ import "../../styles/Grid.css";
 interface Props {
   assets: ImgixGETAssetsData;
   domain: string;
+  placeholder: string | ReactElement;
 }
 // TODO(luis): refactor this component into smaller components
-export function AssetGrid({ assets, domain }: Props): ReactElement {
+export function AssetGrid({
+  assets,
+  domain,
+  placeholder,
+}: Props): ReactElement {
   // create grid-items
   const gridItems = assets.map((asset, idx) => {
     return (
@@ -30,5 +35,17 @@ export function AssetGrid({ assets, domain }: Props): ReactElement {
     );
   });
   // create the asset grid
-  return <div className="ix-grid">{gridItems}</div>;
+  return (
+    <div className="ix-grid">
+      {!!gridItems.length ? (
+        gridItems
+      ) : (
+        <div className="ix-grid ix-grid-item-placeholder ">
+          <div>
+            <div>{placeholder}</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
