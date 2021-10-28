@@ -6,6 +6,7 @@ import { SearchBar } from "../forms/search/SearchBar";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 
 import "../../styles/AssetBrowser.css";
+import Pagination from "../buttons/Pagination";
 interface Props {
   errors: string[];
   loading: boolean;
@@ -125,6 +126,7 @@ export function AssetBrowser({
         loading={loading}
         errors={errors}
       />
+      <Pagination cursor={cursor} handlePageChange={handlePageChange} />
       <div className="ix-asset-meta-information-container"></div>
     </div>
   );
