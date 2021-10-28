@@ -67,7 +67,7 @@ export const imgixAPI = {
         apiKey: string,
         sourceId: string,
         index: string = "0",
-        size: string = "6"
+        size: string = "12"
       ) {
         // ?page[number]=${n}&page[size]=18`
         return await makeRequest<ImgixGETAssetsData>({
@@ -90,7 +90,7 @@ export const imgixAPI = {
       sourceId: string,
       query: string,
       index: string = "0",
-      size: string = "6"
+      size: string = "12"
     ) {
       // TODO(luis): use a search endpoint rather than the assets endpoint
       // build the filter portion of the query
