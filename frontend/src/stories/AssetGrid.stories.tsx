@@ -17,32 +17,32 @@ BasicGrid.args = {
   assets: [
     {
       attributes: {
-        origin_path: "amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
       },
     } as any,
     {
       attributes: {
-        origin_path: "amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
       },
     } as any,
     {
       attributes: {
-        origin_path: "amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
       },
     } as any,
     {
       attributes: {
-        origin_path: "amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
       },
     } as any,
     {
       attributes: {
-        origin_path: "amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
       },
     } as any,
     {
       attributes: {
-        origin_path: "amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
       },
     } as any,
   ] as any,
