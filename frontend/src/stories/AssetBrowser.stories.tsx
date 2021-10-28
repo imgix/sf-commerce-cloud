@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof AssetBrowser> = (args) => (
   <AssetBrowser {...args} />
 );
 
-export const NoApiKey = Template.bind({});
-NoApiKey.args = {
+export const Default = Template.bind({});
+Default.args = {
   apiKey: "",
 };
