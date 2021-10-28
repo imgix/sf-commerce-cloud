@@ -14,8 +14,7 @@ export function AssetGrid({ assets, domain }: Props): ReactElement {
       <div className="ix-grid-item" key={`${asset.id}-${idx}`}>
         <div className="ix-grid-item-image">
           <Imgix
-            domain={domain}
-            src={asset.attributes.origin_path}
+            src={"https://" + domain + asset.attributes.origin_path}
             width={340}
             height={340}
             imgixParams={{
