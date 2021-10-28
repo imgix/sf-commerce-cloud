@@ -9,7 +9,13 @@ interface Props {
 export function AssetGrid({ assets, domain }: Props): ReactElement {
   return (
     <div className="ix-grid-container">
-      <_AssetGrid domain={domain} assets={assets} placeholder={"loading..."} />
+      <_AssetGrid
+        domain={domain}
+        assets={assets}
+        placeholder={"loading..."}
+        errors={[]}
+        loading={false}
+      />
     </div>
   );
 }
