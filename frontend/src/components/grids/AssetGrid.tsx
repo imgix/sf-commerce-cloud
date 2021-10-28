@@ -8,7 +8,6 @@ interface Props {
 }
 // TODO(luis): refactor this component into smaller components
 export function AssetGrid({ assets, domain }: Props): ReactElement {
-  console.log(assets, domain);
   // create grid-items
   const gridItems = assets.map((asset, idx) => {
     return (
