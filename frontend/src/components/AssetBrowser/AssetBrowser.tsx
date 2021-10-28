@@ -1,92 +1,108 @@
 import React, { ReactElement } from "react";
+import { ImgixGETSourcesData, ImgixGETAssetsData, CursorT } from "../../types";
 
 import { AssetGrid } from "../grids/AssetGrid";
-import { imgixAPI } from "../../services/imgixAPIService";
 import { SearchBar } from "../forms/search/SearchBar";
-import { LoadingSpinner } from "../LoadingSpinner";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
-import { ImgixGETSourcesData } from "../../types";
 
 import "../../styles/AssetBrowser.css";
-
 interface Props {
-  apiKey: string;
+  errors: string[];
+  loading: boolean;
+  sources: ImgixGETSourcesData;
+  assets: ImgixGETAssetsData;
+  cursor: CursorT;
+  query: string;
+  selectedSource: ImgixGETSourcesData[0] | null;
+  setQuery: (input: string) => any;
+  setLoading: (loading: boolean) => any;
+  setSelectedSource: (source: ImgixGETSourcesData[0]) => any;
+  requestAssetsFromSource: ({
+    source,
+    cursor,
+    query,
+  }: {
+    source: ImgixGETSourcesData[0];
+    cursor?: CursorT;
+    query?: string;
+  }) => Promise<void>;
 }
+// TODO(luis): Refactor this component into smaller components
+export function AssetBrowser({
+  errors,
+  loading,
+  sources,
+  assets,
+  cursor,
+  query,
+  selectedSource,
+  setQuery,
+  setLoading,
+  setSelectedSource,
+  requestAssetsFromSource,
+}: Props): ReactElement {
+  /**
+   * Handle pagination button clicks and pass the new cursor to the parent
+   * @param offset - Either 1 or -1. 1 for next page, -1 for previous page
+   * @returns {Promise} A promise that resolves to the new assets and cursor
+   */
+  const handlePageChange = (offset: number) => {
+    // TODO(luis): handle undefined source better
+    if (!selectedSource) return;
+    // update the cursor position with the offset
+    const currentPage = Number(cursor.current) || 0;
+    const limit = cursor.limit || 6;
+    const delta = offset * limit;
+    const nextPage = "" + (currentPage + delta);
+    const newCursor = { ...cursor, current: nextPage };
 
-export function AssetBrowser({ apiKey }: Props): ReactElement {
-  const [errors, setErrors] = React.useState<string[]>([]);
-
-  const [loading, setLoading] = React.useState(true);
-  const [sources, setSources] = React.useState<ImgixGETSourcesData>([]);
-  const [selectedSource, setSelectedSource] = React.useState<
-    ImgixGETSourcesData[0]
-  >();
-  const [assets, setAssets] = React.useState<any[]>([]);
-
-  // TODO(luis): refactor this into the searchbar container
-  const handleSearchSubmit = (searchQuery: string) => {
-    if (!!searchQuery && searchQuery.length > 0) {
-      imgixAPI.search
-        .get(apiKey, selectedSource?.id || "", searchQuery)
-        .then((res) => {
-          const searchAssets = res.data;
-          setLoading(false);
-          setAssets(searchAssets);
-        })
-        .catch((err) => {
-          setErrors([err.response.errors[0].detail]);
-          console.log(err);
-        });
-    }
+    // request the assets from the new cursor position
+    requestAssetsFromSource({
+      source: selectedSource,
+      cursor: newCursor,
+      query,
+    });
   };
 
+  /**
+   * Request the assets from the selected source
+   * @param sourceId - The id of the source to request assets from
+   * @returns {Promise} A promise that resolves to the new assets and cursor
+   */
   const handleSourceSelect = (sourceId: string) => {
     setLoading(true);
     // store the selected source and fetch its assets
     const source = sources.find(
-      (currentSource) => currentSource.id === sourceId
+      (currentSource: any) => currentSource.id === sourceId
     );
     if (!source) return;
     setSelectedSource(source);
-
-    imgixAPI.sources.assets
-      .get(apiKey, source.id)
-      .then((res) => {
-        // store the source' assets
-        setAssets(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setErrors([err.response.errors[0].detail]);
-        console.log(err);
-      });
+    requestAssetsFromSource({ source });
   };
 
-  React.useEffect(() => {
-    // if no API key is provided, don't fetch sources
-    if (!apiKey) {
-      setLoading(false);
-    } else {
-      setLoading(true);
-      // fetch the sources when the component mounts
-      imgixAPI.sources
-        .get(apiKey)
-        .then((resp) => {
-          setSources(resp.data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setErrors([err.response.errors[0].detail]);
-          console.log(err);
-          setLoading(false);
-        });
-    }
-  }, [apiKey]);
+  /**
+   * Handle the search bar input and pass the new query to the parent
+   * @param query - The query to search for
+   * @returns {Promise} A promise that resolves to the new assets and cursor
+   */
+  const handleSearch = (query: string) => {
+    setLoading(true);
+    setQuery(query);
+    if (!selectedSource) return;
+    requestAssetsFromSource({ source: selectedSource, query });
+  };
 
+  /**
+   * Parse the domain from the source attributes
+   * @param source - The source to request assets from
+   * @returns {string} Either a custom source name or the default source name,
+   * `<source.attribute.name>.imgix.net`
+   */
   const parseSourceDomain = (source: ImgixGETSourcesData[0]) => {
     // TODO(luis): add tests to better handle this behavior
     // If the source has no custom domains, return the source name as the domain
-    if (!source) return "";
+    if (!source || !source.attributes) return "";
+
     const customDomains = source?.attributes?.custom_domains;
     if (!customDomains || !customDomains.length) {
       return source.attributes.name + ".imgix.net";
@@ -96,39 +112,19 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
   };
 
   const domain = parseSourceDomain(selectedSource as ImgixGETSourcesData[0]);
-  const hasSources = sources && !!sources.length;
-  const hasAssets = assets && !!assets.length && !!domain.length;
-  const hasErrors = errors && !!errors.length;
-
-  const renderPlaceholder = () => {
-    // TODO(luis): add tests, and refactor better handle this behavior
-    // create placeholder to show when loading, selected origin has no sources,
-    // or no assets are found.
-    let element;
-
-    if (!hasSources && !errors.length && !loading) {
-      element = "No sources found";
-    } else if (selectedSource && !hasAssets && !errors.length && !loading) {
-      element = "Selected source has no assets.";
-    } else if (hasErrors) {
-      element = errors[0];
-    } else if (loading) {
-      element = <LoadingSpinner loading={loading} />;
-    } else {
-      element = "Select a source.";
-    }
-    return element;
-  };
-
-  const placeholder = renderPlaceholder();
 
   return (
     <div className="ix-asset-browser">
       <div className="ix-asset-title-bar-container">
         <SourceSelect sources={sources} handleSelect={handleSourceSelect} />
-        <SearchBar handleSubmit={handleSearchSubmit} />
+        <SearchBar handleSubmit={handleSearch} />
       </div>
-      <AssetGrid domain={domain} assets={assets} placeholder={placeholder} />
+      <AssetGrid
+        domain={domain}
+        assets={assets}
+        loading={loading}
+        errors={errors}
+      />
       <div className="ix-asset-meta-information-container"></div>
     </div>
   );
