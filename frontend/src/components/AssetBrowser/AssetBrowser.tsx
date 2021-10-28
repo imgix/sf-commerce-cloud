@@ -21,6 +21,19 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
   >();
   const [assets, setAssets] = React.useState<any[]>([]);
 
+  // TODO(luis): refactor this into the searchbar container
+  const handleSearchSubmit = (searchQuery: string) => {
+    if (!!searchQuery && searchQuery.length > 0) {
+      imgixAPI.search
+        .get(apiKey, selectedSource?.id || "", searchQuery)
+        .then((res) => {
+          const searchAssets = res.data;
+          setLoading(false);
+          setAssets(searchAssets);
+        });
+    }
+  };
+
   const handleSourceSelect = (sourceId: string) => {
     setLoading(true);
     // store the selected source and fetch its assets
@@ -97,7 +110,7 @@ export function AssetBrowser({ apiKey }: Props): ReactElement {
     <div className="ix-asset-browser">
       <div className="ix-asset-title-bar-container">
         <SourceSelect sources={sources} handleSelect={handleSourceSelect} />
-        <SearchBar />
+        <SearchBar handleSubmit={handleSearchSubmit} />
       </div>
       <LoadingSpinner loading={loading} />
       {placeholder ? (
