@@ -52,7 +52,7 @@ export function AssetBrowser({
     if (!selectedSource) return;
     // update the cursor position with the offset
     const currentPage = Number(cursor.current) || 0;
-    const limit = cursor.limit || 6;
+    const limit = cursor.limit || 12;
     const delta = offset * limit;
     const nextPage = "" + (currentPage + delta);
     const newCursor = { ...cursor, current: nextPage };
