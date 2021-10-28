@@ -1,16 +1,22 @@
 import React, { ReactElement } from "react";
 import Imgix from "react-imgix";
 import { ImgixGETAssetsData } from "../../types";
+import { LoadingSpinner } from "../LoadingSpinner";
 import "../../styles/Grid.css";
+
 interface Props {
   assets: ImgixGETAssetsData;
   domain: string;
-  placeholder: string | ReactElement;
+  errors: string[];
+  loading: boolean;
+  placeholder?: string;
 }
 // TODO(luis): refactor this component into smaller components
 export function AssetGrid({
   assets,
   domain,
+  errors,
+  loading,
   placeholder,
 }: Props): ReactElement {
   // create grid-items
@@ -34,18 +40,34 @@ export function AssetGrid({
       </div>
     );
   });
-  // create the asset grid
-  return (
-    <div className="ix-grid">
-      {!!gridItems.length ? (
-        gridItems
-      ) : (
-        <div className="ix-grid ix-grid-item-placeholder ">
-          <div>
-            <div>{placeholder}</div>
-          </div>
+  // show grid error message if error
+  if (errors.length > 0) {
+    const message = errors.pop();
+    return (
+      <div className="ix-grid-item-placeholder error">
+        <div>{message}</div>
+      </div>
+    );
+  }
+  // show grid placeholder if no assets
+  else if (!assets.length && !loading) {
+    return (
+      <div className="ix-grid-item-placeholder">
+        <div>{placeholder || "Select a source"}</div>
+      </div>
+    );
+  }
+  // show loading indicator if loading
+  if (loading) {
+    return (
+      <div className="ix-grid-item-placeholder loading">
+        <div>
+          <LoadingSpinner loading={loading} />
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  // create the asset grid
+  return <div className="ix-grid">{gridItems}</div>;
 }
