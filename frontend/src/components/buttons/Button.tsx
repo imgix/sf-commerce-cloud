@@ -24,7 +24,7 @@ export const Button = ({ type, label, onClick, Icon, disabled }: Props) => {
   return (
     <button
       onClick={onClick}
-      className={`ix-btn ${disabled ? "disabled" : ""}`}
+      className={`ix-btn ${disabled ? "ix-btn-disabled" : ""}`}
     >
       <div className="ix-btn-icon">{Icon}</div>
       {label}
