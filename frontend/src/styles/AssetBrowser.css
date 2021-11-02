@@ -37,6 +37,10 @@
   grid-column-start: 1;
   grid-column-end: 4;
 }
+.error {
+  /* have text wrap into new lines */
+  white-space: pre-wrap;
+}
 /* style the loading placeholder for the asset grid */
 .ix-asset-grid-loading {
   grid-column: 2;
