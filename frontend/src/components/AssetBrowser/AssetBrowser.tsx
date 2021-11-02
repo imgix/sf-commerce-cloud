@@ -74,7 +74,7 @@ export function AssetBrowser({
     setLoading(true);
     // store the selected source and fetch its assets
     const source = sources.find(
-      (currentSource: any) => currentSource.id === sourceId
+      (currentSource: ImgixGETSourcesData[0]) => currentSource.id === sourceId
     );
     if (!source) return;
     setSelectedSource(source);
