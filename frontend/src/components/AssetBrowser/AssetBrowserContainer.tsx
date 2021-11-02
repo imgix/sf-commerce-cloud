@@ -47,8 +47,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
           errors: [err.message],
           loading: false,
         });
-        // TODO(luis): remove this console.log
-        console.log(err);
       });
   };
 
