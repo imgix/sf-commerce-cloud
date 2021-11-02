@@ -3064,10 +3064,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-imgix@^9.0.4":
-  version "9.0.4"
-  resolved "https://registry.yarnpkg.com/@types/react-imgix/-/react-imgix-9.0.4.tgz#52e575f69afe79d415b3c648abf3c4a8023e31ab"
-  integrity sha512-OZJiZ0NoVIpKFitUttzn4Jqzp3GX7jPn2FzlwP/Fk6hPjMnEtiUrBMOa3gnUcFNcCz/PNp61f3uacrl4d69GRw==
+"@types/react-imgix@^9.2.0":
+  version "9.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-imgix/-/react-imgix-9.2.0.tgz#7afe32155ed7b2c2238d1d35ca55079f9ca98a84"
+  integrity sha512-ClWo/lncZtVap6nSgsnOS/v61N3uaE65fmR3YjmbWahIivCzUs7SbmvgPcEG1P3ACzSKaOBLF+U5dL4n2qIDFQ==
   dependencies:
     "@types/react" "*"
 
