@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
-import { ImgixProvider } from "react-imgix";
 import { ImgixGETAssetsData } from "../../types";
 import { AssetGrid } from "../grids/AssetGrid";
+const { ImgixProvider } = require("react-imgix");
 
 interface Props {
   assets: ImgixGETAssetsData;
