@@ -1,13 +1,12 @@
 import React, { ReactElement } from "react";
 import { Button } from "./Button";
-// TODO(luis): replace placeholder image
-import imageSrc from "../../images/andreas-gucklhorn-unsplash.jpg";
 
 interface Props {
   handleClick?: () => void;
+  imageSrc: string;
 }
 
-export function AddImage({ handleClick }: Props): ReactElement {
+export function AddImageIcon({ handleClick, imageSrc }: Props): ReactElement {
   return (
     <div className="ix-select-image-container">
       <div className="ix-select-image-btn" onClick={handleClick}>

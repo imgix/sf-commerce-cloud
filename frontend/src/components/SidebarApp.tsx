@@ -1,7 +1,8 @@
 import React from "react";
 
-import { AddImage } from "./buttons/AddImageIcon";
-
+import { AddImageIcon } from "./buttons/AddImageIcon";
+// TODO(luis): replace placeholder image
+import imageSrc from "../images/andreas-gucklhorn-unsplash.jpg";
 import "../styles/App.css";
 
 export function App() {
@@ -12,7 +13,7 @@ export function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <AddImage handleClick={handleClick} />
+          <AddImageIcon handleClick={handleClick} imageSrc={imageSrc} />
         </div>
       </header>
     </div>
