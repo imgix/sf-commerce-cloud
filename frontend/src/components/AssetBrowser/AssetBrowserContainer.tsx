@@ -163,8 +163,11 @@ export class AssetBrowserContainer extends Component<Props, State> {
     const { apiKey } = this.props;
     const { assets } = this.state;
     if (!apiKey) {
+      // TODO(luis): refactor errors into their own module
       this.setState({
-        errors: ["No API key provided"],
+        errors: [
+          `The API key set for this integration seems to be invalid.\n\nPlease ensure a valid API key is set in your Salesforce Commerce Cloud Site settings\nwhich can be found at Business Manager > [Settings Page] > imgix.`,
+        ],
         loading: false,
       });
     } else if (assets.length === 0) {
