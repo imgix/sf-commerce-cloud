@@ -54,8 +54,9 @@ export class AssetBrowserContainer extends Component<Props, State> {
 
   /**
    *
-   * @param source - the source to request assets from
-   * @param cursor - the cursor to use for pagination
+   * @param params
+   * @param params.source - the source to request assets from
+   * @param [params.cursor] - the cursor to use for pagination
    * @returns {Promise} - A Promise that resolves to the assets from the source
    */
   requestAssets = async ({
