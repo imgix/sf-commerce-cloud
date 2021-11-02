@@ -6,9 +6,10 @@ interface Props {
   label: string;
   type?: "dropdown" | null;
   Icon?: React.ReactElement;
+  disabled: boolean;
   onClick?: () => void;
 }
-export const Button = ({ type, label, onClick, Icon }: Props) => {
+export const Button = ({ type, label, onClick, Icon, disabled }: Props) => {
   let _type;
 
   // in future we can add more types
@@ -21,7 +22,10 @@ export const Button = ({ type, label, onClick, Icon }: Props) => {
       break;
   }
   return (
-    <button onClick={onClick} className="ix-btn">
+    <button
+      onClick={onClick}
+      className={`ix-btn ${disabled ? "disabled" : ""}`}
+    >
       <div className="ix-btn-icon">{Icon}</div>
       {label}
       {_type}
