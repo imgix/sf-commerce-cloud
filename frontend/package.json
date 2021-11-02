@@ -29,6 +29,7 @@
     "start:breakout": "REACT_APP_APP_TYPE=breakout react-scripts start",
     "build": "yarn run build:sidebar && yarn run build:breakout",
     "build:no-chunks:sidebar": "REACT_APP_APP_TYPE=sidebar react-app-rewired build",
+    "build:no-chunks:breakout": "REACT_APP_APP_TYPE=breakout react-app-rewired build",
     "build:sidebar": "REACT_APP_APP_TYPE=sidebar react-scripts build && cp -R build ../cartridges/int_imgix_pd/cartridge/experience/components/imgix/react_app",
     "build:breakout": "REACT_APP_APP_TYPE=breakout react-scripts build && cp -R build ../cartridges/bm_imgix_pd/cartridge/scripts/imgix/react_app",
     "test": "yarn test:all",
