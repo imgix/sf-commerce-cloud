@@ -1,9 +1,8 @@
 import React from "react";
-
-import { AddImageIcon } from "./buttons/AddImageIcon";
+import Imgix from "react-imgix";
 // TODO(luis): replace placeholder image
-import imageSrc from "../images/andreas-gucklhorn-unsplash.jpg";
 import "../styles/App.css";
+import { AddImageIcon } from "./buttons/AddImageIcon";
 
 export function App() {
   const handleClick = () => {
@@ -13,7 +12,13 @@ export function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <AddImageIcon handleClick={handleClick} imageSrc={imageSrc} />
+          <Imgix
+            src="https://assets.imgix.net/amsterdam.jpg"
+            imgixParams={{
+              w: 350,
+            }}
+          />
+          <AddImageIcon handleClick={handleClick} />
         </div>
       </header>
     </div>
