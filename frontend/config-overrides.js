@@ -1,7 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = function override(config, env) {
-  console.log(env);
   config.optimization.splitChunks = {
     cacheGroups: {
       default: false,
