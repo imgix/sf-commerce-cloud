@@ -2,6 +2,7 @@
 
 const Template = require('dw/util/Template');
 const HashMap = require('dw/util/HashMap');
+const URLUtils = require('dw/web/URLUtils');
 
 /**
  * Render logic for storefront.productBannerStrip component.

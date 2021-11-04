@@ -21,7 +21,7 @@
     });
 
     function obtainTemplate() {
-        const { buttonBreakout } = localization;
+        const { placeholder, buttonBreakout } = localization;
         const template = document.createElement('template');
         template.innerHTML = `
         <div class="image-select no-image">
@@ -35,6 +35,9 @@
         return template;
     }
 
+    function obtainDisplayValue(value) {
+        return typeof value === 'object' && value != null && typeof value.value === 'string' ? value.value : null;
+    }
     function handleBreakoutOpen() {
         emit({
             type: 'sfcc:breakout',
