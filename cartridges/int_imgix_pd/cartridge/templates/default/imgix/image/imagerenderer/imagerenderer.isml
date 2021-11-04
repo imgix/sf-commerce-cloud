@@ -1,0 +1,12 @@
+<!--- TEMPLATENAME: imagerender.isml --->
+
+<div>
+  <picture>
+    <isset name="noText" value="no Text" scope="page" />
+    <isprint value="${pdict.title}" />
+    <a href="${pdict.link}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
+      <img src="${pdict.image.src.mobile}" alt="${pdict.alt ? pdict.alt : noText}"
+        title="${pdict.title ? pdict.title : noText}" />
+    </a>
+  </picture>
+</div>

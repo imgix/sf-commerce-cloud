@@ -1,0 +1,4 @@
+<!--- TEMPLATENAME: customBanner.isml --->
+<div>
+    <img src="${pdict.imgUrl}" alt="${pdict.imgAlt}">
+</div>
