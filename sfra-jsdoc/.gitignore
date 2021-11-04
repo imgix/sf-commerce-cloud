@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+npm-debug.log
+.idea/
+*.project
+.DS_Store
+dist/
+confclient.json
+conf.json
+confclient.json.orig
+conf.json.orig

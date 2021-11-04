@@ -1,0 +1,18 @@
+{
+    "Controllers": {
+        "title": "Controllers",
+        "children": {
+            "CachingResponses": {
+                "title": "How to cache responses"
+            }
+        }
+    },
+    "Extensions": {
+        "title": "Extension Points",
+        "children": {
+            "Payment": {
+                "title": "Payment processing"
+            }
+        }
+    }
+}
