@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="B2CCommerceCartridgesRoots">
+    <option name="cartridgesRoots">
+      <map>
+        <entry key="bm_cloudinary_pd" value="$PROJECT_DIR$/cartridges/bm_cloudinary_pd" />
+        <entry key="int_cloudinary_pd" value="$PROJECT_DIR$/cartridges/int_cloudinary_pd" />
+      </map>
+    </option>
+  </component>
+  <component name="IntellijSFCCDeploymentSettings">
+    <option name="json" value="{&#10;  &quot;isFullCodeVersionCleanup&quot;: false,&#10;  &quot;tasks&quot;: [],&#10;  &quot;isWebDavActionAllowed&quot;: true&#10;}" />
+  </component>
+</project>

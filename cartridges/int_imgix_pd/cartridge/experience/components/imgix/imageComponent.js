@@ -1,21 +1,20 @@
-"use strict";
-// These all are SFCC APIs
-var Template = require("dw/util/Template");
-var HashMap = require("dw/util/HashMap");
-// we included an existing SFCC back-end script to handle the image path
-var ImageTransformation = require("*/cartridge/experience/utilities/ImageTransformation.js");
+'use strict';
 
-// handle function for component.
-module.exports.render = function (context, modelIn) {
-  var model = modelIn || new HashMap();
-  var content = context.content;
+const Template = require('dw/util/Template');
+const HashMap = require('dw/util/HashMap');
+const URLUtils = require('dw/web/URLUtils');
 
-  model.title = content.title ? content.title : null;
-  model.image = ImageTransformation.getScaledImage(content.image);
-  // use to give link on the image, if we click on image it take to us to that page.
-  model.link = content.imageLink ? content.imageLink : "#";
-  model.alt = content.alt ? content.alt : null;
+/**
+ * Render logic for storefront.productBannerStrip component.
+ * @param {dw.experience.ComponentScriptContext} context The Component script context object.
+ * @returns {string} The template to be displayed
+ */
 
-  return new Template("/imgix/image/imagerenderer/imagerenderer").render(model)
-    .text;
+module.exports.render = function (context) {
+  const content = context.content;
+  const model = new HashMap();
+  model.imgUrl = content.image ? content.image.absURL : null;
+  model.imgAlt = content.alt;
+
+  return new Template('experience/components/imgix/imgixImage').render(model).text;
 };
