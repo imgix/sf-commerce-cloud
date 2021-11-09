@@ -9,7 +9,7 @@ declare const emit: Function;
 var rootEditorElement;
 
 export const createBreakoutApp = () => {
-  subscribe("sfcc:ready", () => {
+  subscribe("sfcc:ready", ({ config }: any) => {
     rootEditorElement = document.createElement("div");
     rootEditorElement.innerHTML = `<h3>Breakout: should be replaced by React</h3>`;
     document.body.appendChild(rootEditorElement);
@@ -26,7 +26,7 @@ export const createBreakoutApp = () => {
 
     ReactDOM.render(
       <React.StrictMode>
-        <App handleSubmit={handleSelect} />
+        <App apiKey={config.api.apiKey} handleSubmit={handleSelect} />
       </React.StrictMode>,
       rootEditorElement
     );

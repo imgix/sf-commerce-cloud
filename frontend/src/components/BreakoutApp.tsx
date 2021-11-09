@@ -1,11 +1,11 @@
 import React from "react";
 import { AssetBrowserContainer as AssetBrowser } from "./AssetBrowser/AssetBrowserContainer";
 
-export function App() {
+export function App({ apiKey }: any) {
   return (
     <div className="App">
       <header className="App-header">
-        <AssetBrowser apiKey={"placeholder"} />
+        <AssetBrowser apiKey={apiKey || undefined} />
       </header>
     </div>
   );
