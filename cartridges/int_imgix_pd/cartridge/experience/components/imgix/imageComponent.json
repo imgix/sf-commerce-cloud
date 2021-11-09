@@ -12,16 +12,7 @@
           "type": "custom",
           "required": true,
           "editor_definition": {
-            "type": "imgix.imgixEditorTrigger",
-            "configuration": {
-              "options": {
-                "config": [
-                  "Yugo",
-                  "Golf",
-                  "Mercedes"
-                ]
-              }
-            }
+            "type": "imgix.imgixEditorTrigger"
           }
         },
         {
