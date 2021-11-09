@@ -4,21 +4,24 @@
   "group": "imgix",
   "attribute_definition_groups": [
     {
-      "id": "ImgixImage",
+      "id": "Image",
       "attribute_definitions": [
         {
-          "id": "image_url",
-          "name": "Target Image",
+          "id": "image_sel",
+          "name": "Image",
           "type": "custom",
           "required": true,
           "editor_definition": {
-            "type": "imgix.imageSelection"
+            "type": "imgix.imgixEditorTrigger",
+            "configuration": {
+              "options": {}
+            }
           }
         },
         {
-          "id": "alt",
-          "name": "Alt Text",
-          "description": "The image alt text shown by the component.",
+          "id": "altText",
+          "name": "Image Alt Text",
+          "description": "Image Description",
           "type": "string",
           "required": false
         }
