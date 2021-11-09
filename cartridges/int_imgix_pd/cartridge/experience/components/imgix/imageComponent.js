@@ -21,6 +21,7 @@ module.exports.render = function (context, modelIn) {
     content.image_url || "https://assets.imgix.net/amsterdam.jpg?w=500";
   model.image_src = ImgixClient._buildURL(rawImageUrl, { txt: "Hello World" });
 
-  return new Template("/experience/components/imgix/imgixImage").render(model)
-    .text;
+  return new Template("/experience/components/imgix/imageComponent").render(
+    model
+  ).text;
 };
