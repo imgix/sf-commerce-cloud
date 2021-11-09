@@ -4,7 +4,13 @@ import Imgix from "react-imgix";
 import "../styles/App.css";
 import { AddImageIcon } from "./buttons/AddImageIcon";
 
-export function App({ handleBreakoutOpen }: any) {
+type HandleBreakoutOpenT = () => (event: string, type: string) => void;
+
+export function App({
+  handleBreakoutOpen,
+}: {
+  handleBreakoutOpen: HandleBreakoutOpenT;
+}) {
   return (
     <div className="App">
       <header className="App-header">
