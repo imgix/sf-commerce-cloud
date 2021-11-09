@@ -8,8 +8,20 @@ declare const emit: Function;
 
 var rootEditorElement;
 
+type ConfigT = {
+  api: {
+    [key: string]: any;
+  };
+  localization: {
+    [key: string]: any;
+  };
+  options: {
+    [key: string]: any;
+  };
+};
+
 export const createBreakoutApp = () => {
-  subscribe("sfcc:ready", ({ config }: any) => {
+  subscribe("sfcc:ready", ({ config }: { config: ConfigT }) => {
     rootEditorElement = document.createElement("div");
     rootEditorElement.innerHTML = `<h3>Breakout: should be replaced by React</h3>`;
     document.body.appendChild(rootEditorElement);
