@@ -22,6 +22,7 @@ export const createSidebarApp = () => {
       dataLocale,
       displayLocale,
     }: any) => {
+      // TODO: remove this log
       console.log(
         "sidebar-trigger::sfcc:ready",
         dataLocale,
