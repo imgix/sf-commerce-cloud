@@ -3,39 +3,83 @@ import ReactDOM from "react-dom";
 import { App } from "./components";
 import "./styles/index.css";
 
-declare const listen: Function;
+declare const emit: Function;
+declare const subscribe: Function;
 
 var rootEditorElement;
 
-/**
- * Initializes the base markup before page is ready. This is not part of the API, and called explicitly at the end of this module.
- */
-function init() {
-  rootEditorElement = document.createElement("div");
-  rootEditorElement.innerHTML = `<h3>Sidebar: should be replaced by React</h3>`;
-  document.body.appendChild(rootEditorElement);
-  ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    rootEditorElement
-  );
-}
-
 export const createSidebarApp = () => {
-  listen("sfcc:ready", () => {
-    init();
-  });
+  let localization: any;
+  let buttonEl: any;
 
-  // When a value was selected
-  listen("sfcc:value", (value: any) => {});
-  // When the editor must require the user to select something
-  listen("sfcc:required", (value: any) => {});
-  // When the editor is asked to disable its controls
-  listen("sfcc:disabled", (value: any) => {});
+  subscribe(
+    "sfcc:ready",
+    async ({
+      value,
+      config,
+      isDisabled,
+      isRequired,
+      dataLocale,
+      displayLocale,
+    }: any) => {
+      console.log(
+        "sidebar-trigger::sfcc:ready",
+        dataLocale,
+        displayLocale,
+        isDisabled,
+        isRequired,
+        value,
+        config
+      );
 
-  // If you want to start measuring performance in your app, pass a function
-  // to log results (for example: reportWebVitals(console.log))
-  // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-  // reportWebVitals();
+      // Extract `localization` data from `config`
+      ({ localization = {} } = config);
+
+      function handleBreakoutApply(value: any) {
+        // Emit value update to Page Designer host application
+        emit({
+          type: "sfcc:value",
+          payload: value,
+        });
+      }
+
+      function handleBreakoutCancel() {
+        // Grab focus
+        buttonEl && buttonEl.focus();
+      }
+
+      function handleBreakoutClose({ type, value }: any) {
+        // Now the "value" can be passed back to Page Designer
+        if (type === "sfcc:breakoutApply") {
+          handleBreakoutApply(value);
+        } else {
+          handleBreakoutCancel();
+        }
+      }
+
+      function handleBreakoutOpen() {
+        emit(
+          {
+            type: "sfcc:breakout",
+            payload: {
+              id: "imgixEditorBreakoutScript",
+              title: `${localization.titleBreakout}`,
+            },
+          },
+          handleBreakoutClose
+        );
+      }
+
+      // Initialize the DOM
+      rootEditorElement = document.createElement("div");
+      rootEditorElement.innerHTML = `<h3>Sidebar: should be replaced by React</h3>`;
+      document.body.appendChild(rootEditorElement);
+      ReactDOM.render(
+        <React.StrictMode>
+          <App handleBreakoutOpen={handleBreakoutOpen} />
+        </React.StrictMode>,
+        rootEditorElement
+      );
+    }
+  );
 };
