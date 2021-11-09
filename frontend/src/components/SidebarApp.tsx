@@ -4,10 +4,7 @@ import Imgix from "react-imgix";
 import "../styles/App.css";
 import { AddImageIcon } from "./buttons/AddImageIcon";
 
-export function App() {
-  const handleClick = () => {
-    console.log("clicked 'Add Image' button");
-  };
+export function App({ handleBreakoutOpen }: any) {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,7 +15,7 @@ export function App() {
               w: 350,
             }}
           />
-          <AddImageIcon handleClick={handleClick} />
+          <AddImageIcon handleClick={handleBreakoutOpen} />
         </div>
       </header>
     </div>
