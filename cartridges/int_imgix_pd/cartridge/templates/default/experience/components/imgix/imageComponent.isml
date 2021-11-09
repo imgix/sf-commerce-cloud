@@ -1,7 +1,0 @@
-<div class="sfdc-component-mock sfdc-component-assets-media_library-mock">
-  <isset name="noText" value="No text" scope="page" />
-  <isprint value="${pdict.title}" />
-  <a href="${pdict.link}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
-    <img src="${pdict.image_src}" alt="${pdict.alt ? pdict.alt : noText}" />
-  </a>
-</div>
