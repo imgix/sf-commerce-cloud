@@ -7,7 +7,7 @@
       "id": "Image",
       "attribute_definitions": [
         {
-          "id": "image_sel",
+          "id": "image_src",
           "name": "Image",
           "type": "custom",
           "required": true,
@@ -25,7 +25,7 @@
           }
         },
         {
-          "id": "altText",
+          "id": "alt",
           "name": "Image Alt Text",
           "description": "Image Description",
           "type": "string",

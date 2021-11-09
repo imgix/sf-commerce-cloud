@@ -1,20 +1,27 @@
-'use strict';
+"use strict";
+var Template = require("dw/util/Template");
+var HashMap = require("dw/util/HashMap");
+var Logger = require("dw/system/Logger");
+var ImgixClient = require("*/cartridge/scripts/jsCore/jsCore");
 
-const Template = require('dw/util/Template');
-const HashMap = require('dw/util/HashMap');
-const URLUtils = require('dw/web/URLUtils');
+// handle function for component.
+module.exports.render = function (context, modelIn) {
+  const ImgixLogger = Logger.getLogger("imgix");
+  ImgixLogger.info(
+    "************************** imgix Image Component Start Render"
+  );
 
-/**
- * Render logic for storefront.productBannerStrip component.
- * @param {dw.experience.ComponentScriptContext} context The Component script context object.
- * @returns {string} The template to be displayed
- */
+  var model = modelIn || new HashMap();
+  var content = context.content;
 
-module.exports.render = function (context) {
-  const content = context.content;
-  const model = new HashMap();
-  model.imgUrl = content.image ? content.image.absURL : null;
-  model.imgAlt = content.alt;
+  // use to give link on the image, if we click on image it take to us to that page.
+  model.link = content.imageLink ? content.imageLink : "#";
+  model.alt = content.alt ? content.alt : null;
+  const rawImageUrl =
+    content.image_url || "https://assets.imgix.net/amsterdam.jpg?w=500";
+  model.image_src = ImgixClient._buildURL(rawImageUrl, { txt: "Hello World" });
 
-  return new Template('experience/components/imgix/imgixImage').render(model).text;
+  return new Template("/experience/components/imgix/imageComponent").render(
+    model
+  ).text;
 };

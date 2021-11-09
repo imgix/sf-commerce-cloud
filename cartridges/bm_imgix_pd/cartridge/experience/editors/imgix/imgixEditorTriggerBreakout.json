@@ -1,6 +1,6 @@
 {
-  "name": "Custom Car Editor Breakout",
-  "description": "An car editor with breakout functionality",
+  "name": "Custom imgix Editor Breakout",
+  "description": "An imgix editor with breakout functionality",
   "resources": {
     "scripts": [
       "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js",
