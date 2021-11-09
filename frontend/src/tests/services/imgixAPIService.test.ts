@@ -69,7 +69,7 @@ test("should return assets in date modified descending order", async () => {
 
   const requestedUrl = mockRequest.mock.calls[0][0];
   const requestedURI = new URI(requestedUrl);
-  expect(requestedURI.getQueryParamValue("sort")).toBe("-date_modified");
+  expect(requestedURI.getQueryParamValue("sort")).toBe("date_created");
 });
 
 test("should return name, description, and origin_path information", async () => {
