@@ -5,8 +5,8 @@ import { App } from "../../components";
 describe("breakout", () => {
   test("renders the correct cartridge bundle", () => {
     render(<App />);
-    const linkElement = screen.getByText(/breakout/i);
+    const htmlElement = screen.getByText(/Loading assets.../i);
 
-    expect(linkElement).toBeInTheDocument();
+    expect(htmlElement).toBeInTheDocument();
   });
 });
