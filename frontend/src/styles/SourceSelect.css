@@ -31,7 +31,7 @@ ul {
 }
 .ix-dropdown-open {
   position: absolute;
-  opacity: 100%;
+  opacity: 1;
   height: auto;
   transition-property: all;
   transition-duration: 0.15s;
