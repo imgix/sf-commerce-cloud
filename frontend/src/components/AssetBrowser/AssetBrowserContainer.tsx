@@ -4,7 +4,7 @@ import { AssetBrowser } from "./AssetBrowser";
 import { ImgixGETSourcesData, ImgixGETAssetsData, CursorT } from "../../types";
 
 interface Props {
-  apiKey: string;
+  apiKey: string | null;
 }
 
 interface State {
@@ -34,8 +34,13 @@ export class AssetBrowserContainer extends Component<Props, State> {
    * fetched
    */
   requestSources = async () => {
+    const { apiKey } = this.props;
+    //  If the API key is not set, we don't want to make a request
+    if (!apiKey) {
+      return;
+    }
     imgixAPI.sources
-      .get(this.props.apiKey)
+      .get(apiKey)
       .then((resp) => {
         this.setState({
           sources: resp.data,
@@ -65,6 +70,10 @@ export class AssetBrowserContainer extends Component<Props, State> {
     cursor?: CursorT;
   }) => {
     const { apiKey } = this.props;
+    //  If the API key is not set, we don't want to make a request
+    if (!apiKey) {
+      return;
+    }
 
     return imgixAPI.sources.assets
       .get(apiKey, source.id, cursor?.current || "0")
@@ -107,6 +116,10 @@ export class AssetBrowserContainer extends Component<Props, State> {
     cursor?: CursorT;
   }): Promise<void> => {
     const { apiKey } = this.props;
+    //  If the API key is not set, we don't want to make a request
+    if (!apiKey) {
+      return;
+    }
     return imgixAPI.search
       .get(apiKey, source.id, query, cursor?.current || "0")
       .then((res) => {
