@@ -10,7 +10,6 @@ var rootEditorElement;
 
 export const createSidebarApp = () => {
   let localization: any;
-  let buttonEl: any;
 
   type SFCCReady = {
     value: any; // TODO: fix type, SFCC event docs say {<object of arbitrary structure>}
@@ -56,7 +55,7 @@ export const createSidebarApp = () => {
 
       function handleBreakoutCancel() {
         // Grab focus
-        buttonEl && buttonEl.focus();
+        // TODO: grab reference to the cancel button and handle cancel event
       }
 
       function handleBreakoutClose({ type, value }: any) {
