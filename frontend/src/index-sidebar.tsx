@@ -21,7 +21,15 @@ export const createSidebarApp = () => {
       isRequired,
       dataLocale,
       displayLocale,
-    }: any) => {
+    }: {
+      value: any;
+      config: any;
+      isRequired: boolean;
+      isDisabled: boolean;
+      isValid: boolean;
+      dataLocale: string;
+      displayLocale: string;
+    }) => {
       // TODO: remove this log
       console.log(
         "sidebar-trigger::sfcc:ready",
