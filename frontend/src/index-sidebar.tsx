@@ -53,17 +53,10 @@ export const createSidebarApp = () => {
         });
       }
 
-      function handleBreakoutCancel() {
-        // Grab focus
-        // TODO: grab reference to the cancel button and handle cancel event
-      }
-
       function handleBreakoutClose({ type, value }: any) {
         // Now the "value" can be passed back to Page Designer
         if (type === "sfcc:breakoutApply") {
           handleBreakoutApply(value);
-        } else {
-          handleBreakoutCancel();
         }
       }
 
