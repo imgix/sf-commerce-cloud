@@ -12,6 +12,16 @@ export const createSidebarApp = () => {
   let localization: any;
   let buttonEl: any;
 
+  type SFCCReady = {
+    value: any; // TODO: fix type, SFCC event docs say {<object of arbitrary structure>}
+    config: any; // TODO: fix type, SFCC event docs say {<object of arbitrary structure>}
+    isRequired: boolean;
+    isDisabled: boolean;
+    isValid: boolean;
+    dataLocale: string;
+    displayLocale: string;
+  };
+
   subscribe(
     "sfcc:ready",
     async ({
@@ -21,7 +31,7 @@ export const createSidebarApp = () => {
       isRequired,
       dataLocale,
       displayLocale,
-    }: any) => {
+    }: SFCCReady) => {
       // TODO: remove this log
       console.log(
         "sidebar-trigger::sfcc:ready",
