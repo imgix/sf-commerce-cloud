@@ -12,6 +12,15 @@ module.exports.render = function (context, modelIn) {
     "************************** imgix Image Component Start Render"
   );
 
+  // TODO: to be passed down from site settings
+  const defaultParams = "auto=format,compress&fit=crop";
+
+  const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
+    const [queryParamKey, queryParamValue] = v.split("=");
+    p[queryParamKey] = queryParamValue;
+    return p;
+  }, {});
+
   var model = modelIn || new HashMap();
   var content = context.content;
 
@@ -24,9 +33,9 @@ module.exports.render = function (context, modelIn) {
     content.image_url || "https://assets.imgix.net/amsterdam.jpg?w=500";
   model.image_src = ImgixClient._buildURL(
     rawImageUrl,
-    {
+    Object.assign({}, defaultParamsJSON, {
       auto: "format,compress",
-    },
+    }),
     {
       includeLibraryParam: false,
       libraryParam: ixlib,
@@ -34,9 +43,9 @@ module.exports.render = function (context, modelIn) {
   );
   model.image_srcset = ImgixClient._buildSrcSet(
     rawImageUrl,
-    {
+    Object.assign({}, defaultParamsJSON, {
       auto: "format,compress",
-    },
+    }),
     {
       includeLibraryParam: false,
       libraryParam: ixlib,
