@@ -5,6 +5,7 @@ import { ImgixGETSourcesData, ImgixGETAssetsData, CursorT } from "../../types";
 
 interface Props {
   apiKey: string | null;
+  handleBrowserClick?: () => void;
 }
 
 interface State {
@@ -204,6 +205,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
   };
 
   render() {
+    const { handleBrowserClick } = this.props;
     const {
       sources,
       assets,
@@ -226,6 +228,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
         selectedSource={selectedSource}
         setSelectedSource={this.setSelectedSource}
         requestAssetsFromSource={this.requestAssetsFromSource}
+        handleAssetBrowserClick={handleBrowserClick}
       />
     );
   }

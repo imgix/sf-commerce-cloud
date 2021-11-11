@@ -22,21 +22,11 @@ export const createSidebarApp = () => {
       dataLocale,
       displayLocale,
     }: any) => {
-      // TODO: remove this log
-      console.log(
-        "sidebar-trigger::sfcc:ready",
-        dataLocale,
-        displayLocale,
-        isDisabled,
-        isRequired,
-        value,
-        config
-      );
-
       // Extract `localization` data from `config`
       ({ localization = {} } = config);
 
       function handleBreakoutApply(value: any) {
+          console.log(value, ' from apply')
         // Emit value update to Page Designer host application
         emit({
           type: "sfcc:value",
@@ -44,8 +34,9 @@ export const createSidebarApp = () => {
         });
       }
 
-      function handleBreakoutCancel() {
+      function handleBreakoutCancel(value: any) {
         // Grab focus
+          console.log(value, ' from cancel')
         buttonEl && buttonEl.focus();
       }
 
@@ -54,7 +45,7 @@ export const createSidebarApp = () => {
         if (type === "sfcc:breakoutApply") {
           handleBreakoutApply(value);
         } else {
-          handleBreakoutCancel();
+          handleBreakoutCancel(value);
         }
       }
 

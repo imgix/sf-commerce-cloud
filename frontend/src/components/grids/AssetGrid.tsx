@@ -10,20 +10,28 @@ interface Props {
   errors: string[];
   loading: boolean;
   placeholder?: string;
+  handleAssetGridClick?: (selectedObject: any) => void;
 }
+
 // TODO(luis): refactor this component into smaller components
 export function AssetGrid({
   assets,
   domain,
   errors,
   loading,
-  placeholder,
+  placeholder, handleAssetGridClick
 }: Props): ReactElement {
   // create grid-items
   const gridItems = assets.map((asset, idx) => {
     return (
       <div className="ix-grid-item" key={`${asset.id}-${idx}`}>
-        <div className="ix-grid-item-image">
+        <div className="ix-grid-item-image" onClick={() => {
+            if (handleAssetGridClick) {
+                handleAssetGridClick({
+                    src: asset
+                })
+            }
+        }}>
           <Imgix
             src={"https://" + domain + asset.attributes.origin_path}
             width={340}
