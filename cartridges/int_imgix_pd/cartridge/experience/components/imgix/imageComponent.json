@@ -24,6 +24,13 @@
           "description": "The image alt text shown by the component.",
           "type": "string",
           "required": false
+        },
+        {
+          "id": "sizes",
+          "name": "Sizes attribute",
+          "description": "The sizes attribute for the image to help the image behave responsibly. If the image is a fixed size, set this to the image width.",
+          "type": "string",
+          "required": false
         }
       ]
     }
