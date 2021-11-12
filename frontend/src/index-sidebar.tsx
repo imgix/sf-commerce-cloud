@@ -44,8 +44,9 @@ export const createSidebarApp = () => {
         });
       }
 
-      function handleBreakoutCancel() {
+      function handleBreakoutCancel(value: any) {
         // Grab focus
+        console.log(value, " from cancel");
         buttonEl && buttonEl.focus();
       }
 
