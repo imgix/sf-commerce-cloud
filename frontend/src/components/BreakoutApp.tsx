@@ -8,6 +8,7 @@ export function App({ apiKey }: { apiKey: string | null }) {
         <AssetBrowser apiKey={apiKey} />
       </header>
       <div></div>
+      <div></div>
     </div>
   );
 }
