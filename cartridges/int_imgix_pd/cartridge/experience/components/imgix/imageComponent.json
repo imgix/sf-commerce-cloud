@@ -31,6 +31,41 @@
           "description": "The sizes attribute for the image to help the image behave responsibly. If the image is a fixed size, set this to the image width.",
           "type": "string",
           "required": false
+        },
+        {
+          "id": "width",
+          "name": "Width",
+          "description": "The width of the image in pixels. If set, will make the image render at fixed-size, making sizes have no effect",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "id": "height",
+          "name": "Height",
+          "description": "The height of the image in pixels. If set, will make the image render at fixed-size, making sizes have no effect",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "id": "fm",
+          "name": "Format",
+          "description": "The format to apply to the image. It is recommended to use the auto parameter to set format, by including 'format' in the setting above. If set, this will override auto-formatting",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "auto",
+          "name": "Auto",
+          "description": "The automatic parameters to apply to the image. Values should be separated with a comma, e.g. 'format,compress'. Default recommended is 'format,compress'",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "crop",
+          "name": "Crop",
+          "description": "The crop parameter to apply to the image. The default is 'clip'.",
+          "type": "string",
+          "required": false
         }
       ]
     }
