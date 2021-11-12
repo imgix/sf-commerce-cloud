@@ -12,6 +12,9 @@ module.exports.render = function (context, modelIn) {
     "************************** imgix Image Component Start Render"
   );
 
+  var model = modelIn || new HashMap();
+  var content = context.content;
+
   // TODO: to be passed down from site settings
   const defaultParams = "auto=format,compress&fit=crop";
 
@@ -21,37 +24,47 @@ module.exports.render = function (context, modelIn) {
     return p;
   }, {});
 
-  var model = modelIn || new HashMap();
-  var content = context.content;
+  // The context.___ != null && {} is needed here because otherwise undefined values would overwrite the defaults below.
+  const customImgixParams = Object.assign(
+    {},
+    content.width != null && { w: content.width },
+    content.height != null && { h: content.height },
+    content.fm != null && { fm: content.fm },
+    content.auto != null && { auto: content.auto },
+    content.fit != null && { fit: content.fit }
+  );
+
+  const fixedSize = content.width != null;
 
   const ixlib = "sfccPD-" + version.version;
 
   // use to give link on the image, if we click on image it take to us to that page.
   model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
+
+  // TODO: delete raw image URL when component data pipeline works
   const rawImageUrl =
-    content.image_url || "https://assets.imgix.net/amsterdam.jpg?w=500";
+    content.image_url || "https://assets.imgix.net/amsterdam.jpg";
   model.image_src = ImgixClient._buildURL(
     rawImageUrl,
-    Object.assign({}, defaultParamsJSON, {
-      auto: "format,compress",
-    }),
+    Object.assign({}, defaultParamsJSON, customImgixParams),
     {
       includeLibraryParam: false,
       libraryParam: ixlib,
     }
   );
+  // ImgixClient._buildSrcSet will make sure the srcset is a dpr srcset if w or h is provided
   model.image_srcset = ImgixClient._buildSrcSet(
     rawImageUrl,
-    Object.assign({}, defaultParamsJSON, {
-      auto: "format,compress",
-    }),
+    Object.assign({}, defaultParamsJSON, customImgixParams),
     {
       includeLibraryParam: false,
       libraryParam: ixlib,
     }
   );
-  model.image_sizes = content.sizes;
+  if (!fixedSize) {
+    model.image_sizes = content.sizes;
+  }
 
   return new Template("/experience/components/imgix/imageComponent").render(
     model
