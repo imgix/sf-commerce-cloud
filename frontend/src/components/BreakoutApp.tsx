@@ -7,6 +7,7 @@ export function App({ apiKey }: { apiKey: string | null }) {
       <header className="App-header">
         <AssetBrowser apiKey={apiKey} />
       </header>
+      <div></div>
     </div>
   );
 }
