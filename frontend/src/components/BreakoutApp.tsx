@@ -9,7 +9,7 @@ export function App({ handleSubmit, apiKey }: Props) {
     return (
         <div className="App">
             <header className="App-header">
-                <AssetBrowser apiKey={apiKey} handleBrowserClick={handleSubmit} />
+                <AssetBrowser apiKey={apiKey} handleBrowserClick={handleSubmit} anotherProp="hello" />
             </header>
         </div>
     );
