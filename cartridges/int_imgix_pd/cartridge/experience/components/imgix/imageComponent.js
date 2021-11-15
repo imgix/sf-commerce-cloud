@@ -44,7 +44,8 @@ module.exports.render = function (context, modelIn) {
 
   // TODO: delete raw image URL when component data pipeline works
   const rawImageUrl =
-    content.image_url || "https://assets.imgix.net/amsterdam.jpg";
+    (content.image_data && content.image_data.src) ||
+    "https://assets.imgix.net/amsterdam.jpg";
   model.image_src = ImgixClient._buildURL(
     rawImageUrl,
     Object.assign({}, defaultParamsJSON, customImgixParams),

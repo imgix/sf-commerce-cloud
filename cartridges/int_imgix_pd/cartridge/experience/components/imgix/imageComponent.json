@@ -7,7 +7,7 @@
       "id": "ImgixImage",
       "attribute_definitions": [
         {
-          "id": "image_url",
+          "id": "image_data",
           "name": "Target Image",
           "type": "custom",
           "required": true,
