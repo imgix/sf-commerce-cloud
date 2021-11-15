@@ -14,7 +14,6 @@ var rootEditorElement;
 
 export const createSidebarApp = () => {
   let localization: any;
-  let buttonEl: any;
 
   subscribe(
     "sfcc:ready",
@@ -38,18 +37,10 @@ export const createSidebarApp = () => {
         });
       }
 
-      function handleBreakoutCancel(value: any) {
-        // Grab focus
-        console.log(value, " from cancel");
-        buttonEl && buttonEl.focus();
-      }
-
       function handleBreakoutClose({ type, value }: any) {
         // Now the "value" can be passed back to Page Designer
         if (type === "sfcc:breakoutApply") {
           handleBreakoutApply(value);
-        } else {
-          handleBreakoutCancel(value);
         }
       }
 
