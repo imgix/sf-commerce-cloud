@@ -31,7 +31,6 @@ export function App() {
             type: "sfcc:value",
             payload: value,
         });
-        setImgUrl(value.imgUrl)
     }
 
     function handleBreakoutCancel(value: any) {
@@ -41,6 +40,7 @@ export function App() {
     }
 
     function handleBreakoutClose({ type, value }: any) {
+        setImgUrl(value.imgUrl)
         // Now the "value" can be passed back to Page Designer
         if (type === "sfcc:breakoutApply") {
             handleBreakoutApply(value);
@@ -72,7 +72,7 @@ export function App() {
               w: 350,
             }}
           />
-            <input id={'selectedImgUrl'} value={imgUrl}/>
+            <input id={'selectedImgUrl'} style={{ border: 'solid black 1px'}} value={imgUrl}/>
           <AddImageIcon handleClick={handleBreakoutOpen} />
         </div>
       </header>
