@@ -1,13 +1,11 @@
 // subscribe:Interface
-export type SandboxSubscribe = (
+export type SandboxSubscribe<Config extends Record<string, any>> = (
   type: string,
   callback: (
     payload: {
       // config and value are user defined, can be anything
       value: Object;
-      config: {
-        [key: string]: any;
-      };
+      config: Config;
       isRequired: boolean;
       isDisabled: boolean;
       isValid: boolean;
