@@ -3,9 +3,8 @@ export type SandboxSubscribe = (
   type: string,
   callback: (
     payload: {
-      // value is user defined, can be anything
+      // config and value are user defined, can be anything
       value: Object;
-      // config is user defined, can be anything
       config: {
         [key: string]: any;
       };
