@@ -28,7 +28,7 @@ export function AssetGrid({
         <div className="ix-grid-item-image" onClick={() => {
             if (handleAssetGridClick) {
                 handleAssetGridClick({
-                    src: asset
+                    imgUrl: "https://" + domain + asset.attributes.origin_path
                 })
             }
         }}>
