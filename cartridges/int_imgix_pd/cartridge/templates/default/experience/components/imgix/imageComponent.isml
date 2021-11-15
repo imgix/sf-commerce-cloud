@@ -2,6 +2,7 @@
   <isset name="noText" value="No text" scope="page" />
   <isprint value="${pdict.title}" />
   <a href="${pdict.link}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
-    <img src="${pdict.image_src}" alt="${pdict.alt ? pdict.alt : noText}" />
+    <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+      alt="${pdict.alt ? pdict.alt : noText}" />
   </a>
 </div>
