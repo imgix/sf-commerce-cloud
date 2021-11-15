@@ -6,7 +6,9 @@ import "./styles/index.css";
 import { SandboxSubscribe } from "./types";
 
 declare const emit: Function;
-declare const subscribe: SandboxSubscribe;
+declare const subscribe: SandboxSubscribe<
+  Record<string, string | number | object>
+>;
 
 var rootEditorElement;
 
