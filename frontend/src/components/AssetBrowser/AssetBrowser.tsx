@@ -27,6 +27,7 @@ interface Props {
     cursor?: CursorT;
     query?: string;
   }) => Promise<void>;
+  handleAssetBrowserClick?: () => void;
 }
 // TODO(luis): Refactor this component into smaller components
 export function AssetBrowser({
@@ -40,7 +41,7 @@ export function AssetBrowser({
   setQuery,
   setLoading,
   setSelectedSource,
-  requestAssetsFromSource,
+  requestAssetsFromSource, handleAssetBrowserClick,
 }: Props): ReactElement {
   /**
    * Handle pagination button clicks and pass the new cursor to the parent
@@ -125,6 +126,7 @@ export function AssetBrowser({
         assets={assets}
         loading={loading}
         errors={errors}
+        handleAssetGridClick={handleAssetBrowserClick}
       />
       <Pagination cursor={cursor} handlePageChange={handlePageChange} />
       <div className="ix-asset-meta-information-container"></div>
