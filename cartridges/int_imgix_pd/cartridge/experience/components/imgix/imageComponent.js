@@ -4,16 +4,16 @@ var HashMap = require("dw/util/HashMap");
 var Logger = require("dw/system/Logger");
 var ImgixClient = require("*/cartridge/scripts/jsCore/jsCore");
 var version = require("*/cartridge/scripts/imgix/version.json");
-const currentSite = require('dw/system/Site').getCurrent();
+
 // handle function for component.
 module.exports.render = function (context, modelIn) {
   const ImgixLogger = Logger.getLogger("imgix");
   ImgixLogger.info(
     "************************** imgix Image Component Start Render"
   );
-  const imgixApiKey = currentSite.getCustomPreferenceValue('imgixPageDesignerAPIkey');
+
   // TODO: to be passed down from site settings
-  const defaultParams = `auto=format,compress&fit=crop&apiKey=${imgixApiKey}`;
+  const defaultParams = "auto=format,compress&fit=crop";
 
   const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
     const [queryParamKey, queryParamValue] = v.split("=");
