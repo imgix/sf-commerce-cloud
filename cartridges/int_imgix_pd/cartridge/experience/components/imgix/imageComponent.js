@@ -3,6 +3,7 @@ var Template = require("dw/util/Template");
 var HashMap = require("dw/util/HashMap");
 var Logger = require("dw/system/Logger");
 var ImgixClient = require("*/cartridge/scripts/jsCore/jsCore");
+var version = require("*/cartridge/scripts/imgix/version.json");
 
 // handle function for component.
 module.exports.render = function (context, modelIn) {
@@ -14,12 +15,56 @@ module.exports.render = function (context, modelIn) {
   var model = modelIn || new HashMap();
   var content = context.content;
 
+  // TODO: to be passed down from site settings
+  const defaultParams = "auto=format,compress&fit=crop";
+
+  const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
+    const [queryParamKey, queryParamValue] = v.split("=");
+    p[queryParamKey] = queryParamValue;
+    return p;
+  }, {});
+
+  // The context.___ != null && {} is needed here because otherwise undefined values would overwrite the defaults below.
+  const customImgixParams = Object.assign(
+    {},
+    content.width != null && { w: content.width },
+    content.height != null && { h: content.height },
+    content.fm != null && { fm: content.fm },
+    content.auto != null && { auto: content.auto },
+    content.fit != null && { fit: content.fit }
+  );
+
+  const fixedSize = content.width != null;
+
+  const ixlib = "sfccPD-" + version.version;
+
   // use to give link on the image, if we click on image it take to us to that page.
   model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
+
+  // TODO: delete raw image URL when component data pipeline works
   const rawImageUrl =
-    content.image_url || "https://assets.imgix.net/amsterdam.jpg?w=500";
-  model.image_src = ImgixClient._buildURL(rawImageUrl, { txt: "Hello World" });
+    content.image_url || "https://assets.imgix.net/amsterdam.jpg";
+  model.image_src = ImgixClient._buildURL(
+    rawImageUrl,
+    Object.assign({}, defaultParamsJSON, customImgixParams),
+    {
+      includeLibraryParam: false,
+      libraryParam: ixlib,
+    }
+  );
+  // ImgixClient._buildSrcSet will make sure the srcset is a dpr srcset if w or h is provided
+  model.image_srcset = ImgixClient._buildSrcSet(
+    rawImageUrl,
+    Object.assign({}, defaultParamsJSON, customImgixParams),
+    {
+      includeLibraryParam: false,
+      libraryParam: ixlib,
+    }
+  );
+  if (!fixedSize) {
+    model.image_sizes = content.sizes;
+  }
 
   return new Template("/experience/components/imgix/imageComponent").render(
     model
