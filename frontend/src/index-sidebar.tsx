@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from "./components";
+import { App as SidebarApp } from "./components/SidebarApp";
 import "./styles/index.css";
-
 import { SandboxSubscribe } from "./types";
+import { IBreakoutPayload } from "./types/imgixSF";
 
 declare const emit: Function;
 declare const subscribe: SandboxSubscribe<
@@ -28,12 +28,11 @@ export const createSidebarApp = () => {
       // Extract `localization` data from `config`
       ({ localization = {} } = config);
 
-      function handleBreakoutApply(value: any) {
-        console.log(value, " from apply");
+      function handleBreakoutApply(payload: IBreakoutPayload) {
         // Emit value update to Page Designer host application
         emit({
           type: "sfcc:value",
-          payload: value,
+          payload: payload,
         });
       }
 
@@ -63,7 +62,7 @@ export const createSidebarApp = () => {
       document.body.appendChild(rootEditorElement);
       ReactDOM.render(
         <React.StrictMode>
-          <App handleBreakoutOpen={handleBreakoutOpen} />
+          <SidebarApp handleBreakoutOpen={handleBreakoutOpen} />
         </React.StrictMode>,
         rootEditorElement
       );

@@ -1,12 +1,10 @@
 import React, { ReactElement } from "react";
-import { ImgixGETSourcesData, ImgixGETAssetsData, CursorT } from "../../types";
-
-import { AssetGrid } from "../grids/AssetGrid";
-import { SearchBar } from "../forms/search/SearchBar";
-import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
-
 import "../../styles/AssetBrowser.css";
+import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
+import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 import Pagination from "../buttons/Pagination";
+import { AssetGrid, IAssetGridClickCallback } from "../grids/AssetGrid";
+
 interface Props {
   errors: string[];
   loading: boolean;
@@ -27,7 +25,7 @@ interface Props {
     cursor?: CursorT;
     query?: string;
   }) => Promise<void>;
-  handleAssetBrowserClick?: () => void;
+  handleAssetBrowserClick?: IAssetGridClickCallback;
 }
 // TODO(luis): Refactor this component into smaller components
 export function AssetBrowser({
@@ -41,7 +39,8 @@ export function AssetBrowser({
   setQuery,
   setLoading,
   setSelectedSource,
-  requestAssetsFromSource, handleAssetBrowserClick,
+  requestAssetsFromSource,
+  handleAssetBrowserClick,
 }: Props): ReactElement {
   /**
    * Handle pagination button clicks and pass the new cursor to the parent

@@ -1,16 +1,17 @@
 import React from "react";
+import { IBreakoutAppOnSubmit } from "../types/breakoutAppPublic";
 import { AssetBrowserContainer as AssetBrowser } from "./AssetBrowser/AssetBrowserContainer";
 
 interface Props {
-    handleSubmit: () => (event: string, type: string) => void;
-    apiKey:string | null
+  onSubmit: IBreakoutAppOnSubmit;
+  apiKey: string | null;
 }
-export function App({ handleSubmit, apiKey }: Props) {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <AssetBrowser apiKey={apiKey} handleBrowserClick={handleSubmit} />
-            </header>
-        </div>
-    );
+export function App({ onSubmit, apiKey }: Props) {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <AssetBrowser apiKey={apiKey} onSelectAsset={onSubmit} />
+      </header>
+    </div>
+  );
 }

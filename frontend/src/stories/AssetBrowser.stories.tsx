@@ -5,7 +5,7 @@ import { AssetBrowser } from "./AssetBrowser";
 export default {
   title: "Example/AssetBrowser",
   component: AssetBrowser,
-  argTypes: { handleBrowserClick: { action: "selected" } },
+  argTypes: { onSelectAsset: { action: "selected" } },
 } as ComponentMeta<typeof AssetBrowser>;
 
 const Template: ComponentStory<typeof AssetBrowser> = (args) => (

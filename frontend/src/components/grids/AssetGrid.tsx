@@ -4,13 +4,17 @@ import { ImgixGETAssetsData } from "../../types";
 import { LoadingSpinner } from "../LoadingSpinner";
 import "../../styles/Grid.css";
 
+export type IAssetGridClickCallback = (data: {
+  src: ImgixGETAssetsData[0];
+}) => void;
+
 interface Props {
   assets: ImgixGETAssetsData;
   domain: string;
   errors: string[];
   loading: boolean;
   placeholder?: string;
-  handleAssetGridClick?: (selectedObject: any) => void;
+  handleAssetGridClick?: IAssetGridClickCallback;
 }
 
 // TODO(luis): refactor this component into smaller components
@@ -19,19 +23,23 @@ export function AssetGrid({
   domain,
   errors,
   loading,
-  placeholder, handleAssetGridClick
+  placeholder,
+  handleAssetGridClick,
 }: Props): ReactElement {
   // create grid-items
   const gridItems = assets.map((asset, idx) => {
     return (
       <div className="ix-grid-item" key={`${asset.id}-${idx}`}>
-        <div className="ix-grid-item-image" onClick={() => {
+        <div
+          className="ix-grid-item-image"
+          onClick={() => {
             if (handleAssetGridClick) {
-                handleAssetGridClick({
-                    src: asset
-                })
+              handleAssetGridClick({
+                src: asset,
+              });
             }
-        }}>
+          }}
+        >
           <Imgix
             src={"https://" + domain + asset.attributes.origin_path}
             width={340}
