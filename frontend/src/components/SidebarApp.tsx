@@ -8,7 +8,7 @@ declare const emit: Function;
 declare const subscribe: Function;
 
 export function App() {
-  const [imgUrl, setImgUrl] = useState("-");
+  const [imgUrl, setImgUrl] = useState("");
   let localization: any;
   let buttonEl: any;
 
@@ -73,17 +73,14 @@ export function App() {
     <div className="App">
       <header className="App-header">
         <div>
-          <Imgix
-            src="https://assets.imgix.net/amsterdam.jpg"
-            imgixParams={{
-              w: 350,
-            }}
-          />
-          <input
-            id={"selectedImgUrl"}
-            style={{ border: "solid black 1px" }}
-            value={imgUrl}
-          />
+          {imgUrl.length > 0 ? (
+            <Imgix
+              src={imgUrl}
+              imgixParams={{
+                w: 350,
+              }}
+            />
+          ) : null}
           <AddImageIcon handleClick={memoizedHandleBreakoutOpen} />
         </div>
       </header>
