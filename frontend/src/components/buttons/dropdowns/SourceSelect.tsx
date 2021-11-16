@@ -21,6 +21,7 @@ export function SourceSelect({ sources, handleSelect }: Props): ReactElement {
   React.useEffect(() => {
     if (sources.length) {
       setSelectedSourceId(sources[0].id);
+      handleSelect(sources[0].id);
     }
   }, [sources]);
 
