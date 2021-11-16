@@ -9,7 +9,7 @@ interface Props {
 export function AddImageIcon({ handleClick, imageSrc }: Props): ReactElement {
   return (
     <div className="ix-select-image-container">
-      <Button label="Select an image from Origin" onClick={handleClick} />
+      <Button label="Add an imgix image" onClick={handleClick} />
     </div>
   );
 }
