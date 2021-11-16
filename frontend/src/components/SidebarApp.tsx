@@ -12,20 +12,10 @@ export function App() {
   let localization: any;
   let buttonEl: any;
 
-  subscribe(
-    "sfcc:ready",
-    async ({
-      value,
-      config,
-      isDisabled,
-      isRequired,
-      dataLocale,
-      displayLocale,
-    }: any) => {
-      // Extract `localization` data from `config`
-      ({ localization = {} } = config);
-    }
-  );
+  subscribe("sfcc:ready", async ({ config }: any) => {
+    // Extract `localization` data from `config`
+    ({ localization = {} } = config);
+  });
   function handleBreakoutApply(value: any) {
     emit({
       type: "sfcc:value",
