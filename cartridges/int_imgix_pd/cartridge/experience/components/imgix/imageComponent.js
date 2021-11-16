@@ -41,11 +41,11 @@ module.exports.render = function (context, modelIn) {
   // use to give link on the image, if we click on image it take to us to that page.
   model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
+  model.imageUrl = content.imageUrl ? content.imageUrl : "#";
 
   // TODO: delete raw image URL when component data pipeline works
-  const rawImageUrl =
-    (content.image_data && content.image_data.src) ||
-    "https://assets.imgix.net/amsterdam.jpg";
+  // const rawImageUrl = (content.image_data && content.image_data.src) || "https://assets.imgix.net/amsterdam.jpg";
+  const rawImageUrl = model.imageUrl !== "#" ? model.imageUrl : "https://assets.imgix.net/amsterdam.jpg";
   model.image_src = ImgixClient._buildURL(
     rawImageUrl,
     Object.assign({}, defaultParamsJSON, customImgixParams),
