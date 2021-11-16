@@ -1,29 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">  
     <type-extension type-id="SitePreferences">
         <custom-attribute-definitions>
-            <attribute-definition attribute-id="imgixPageDesignerAPIkey">
-                <display-name xml:lang="x-default">imgix API Key</display-name>
-                <description xml:lang="x-default">The API Key of your imgix account</description>
+			<attribute-definition attribute-id="ImgixBody">
+                <display-name xml:lang="x-default">IMGIX API BODY</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="imgixPageDesignerSourceName">
-                <display-name xml:lang="x-default">imgix Origin Name</display-name>
-                <description xml:lang="x-default">The Origin Name of your imgix account</description>
+			<attribute-definition attribute-id="ImgixHeaders">
+                <display-name xml:lang="x-default">IMGIX API HEADERS</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-        </custom-attribute-definitions>
+			<attribute-definition attribute-id="ImgixSourceId">
+                <display-name xml:lang="x-default">IMGIX SOURCE ID</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="ImgixPath">
+                <display-name xml:lang="x-default">IMAGIX API PATH</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="ImgixapiKey">
+                <display-name xml:lang="x-default">IMGIX API KEY</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="ImgixMethod">
+                <display-name xml:lang="x-default">IMGIX API METHOD</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="ImgixAPI">
+                <display-name xml:lang="x-default">IMGIX API</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="ImgixOptions">
+                <display-name xml:lang="x-default">IMGIX API OPTIONS</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="Imgixversion">
+                <display-name xml:lang="x-default">IMGIX VERSION</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			<attribute-definition attribute-id="ImgixDefaultParams">
+                <display-name xml:lang="x-default">IMGIX VERSION</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+			
+		</custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="imgixPageDesigner">
-                <display-name xml:lang="x-default">imgix Page Designer</display-name>
-                <attribute attribute-id="imgixPageDesignerSourceName"/>
-                <attribute attribute-id="imgixPageDesignerAPIkey"/>
+            <attribute-group group-id="ImgixAttributes">
+                <display-name xml:lang="x-default">IMGIX Attributes</display-name>
+                <attribute attribute-id="ImgixBody"/>
+                <attribute attribute-id="ImgixHeaders"/>
+                <attribute attribute-id="ImgixSourceId"/>
+                <attribute attribute-id="ImgixPath"/>
+                <attribute attribute-id="ImgixapiKey"/>
+                <attribute attribute-id="ImgixMethod"/>
+                <attribute attribute-id="ImgixAPI"/>
+                <attribute attribute-id="ImgixOptions"/>
+                <attribute attribute-id="Imgixversion"/>
+				<attribute attribute-id="ImgixDefaultParams"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
