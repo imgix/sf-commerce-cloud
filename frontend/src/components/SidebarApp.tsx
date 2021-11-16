@@ -66,7 +66,8 @@ export function App() {
     () => {
       handleBreakoutOpen();
     },
-    [] // Tells React to memoize regardless of arguments.
+    // Tells React to memoize regardless of arguments.
+    [] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return (
