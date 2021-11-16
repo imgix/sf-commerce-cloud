@@ -3,14 +3,17 @@ import ReactDOM from "react-dom";
 import { App } from "./components";
 import "./styles/index.css";
 
+import { SandboxSubscribe } from "./types";
+
 declare const emit: Function;
-declare const subscribe: Function;
+declare const subscribe: SandboxSubscribe<
+  Record<string, string | number | object>
+>;
 
 var rootEditorElement;
 
 export const createSidebarApp = () => {
   let localization: any;
-  let buttonEl: any;
 
   subscribe(
     "sfcc:ready",
@@ -26,7 +29,7 @@ export const createSidebarApp = () => {
       ({ localization = {} } = config);
 
       function handleBreakoutApply(value: any) {
-          console.log(value, ' from apply')
+        console.log(value, " from apply");
         // Emit value update to Page Designer host application
         emit({
           type: "sfcc:value",
@@ -34,18 +37,10 @@ export const createSidebarApp = () => {
         });
       }
 
-      function handleBreakoutCancel(value: any) {
-        // Grab focus
-          console.log(value, ' from cancel')
-        buttonEl && buttonEl.focus();
-      }
-
       function handleBreakoutClose({ type, value }: any) {
         // Now the "value" can be passed back to Page Designer
         if (type === "sfcc:breakoutApply") {
           handleBreakoutApply(value);
-        } else {
-          handleBreakoutCancel(value);
         }
       }
 
