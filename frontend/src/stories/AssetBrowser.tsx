@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { AssetBrowserContainer as _AssetBrowser } from "../components/AssetBrowser/AssetBrowserContainer";
+import "../styles/App.css";
 
 interface Props {
   apiKey: string;

@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { SearchBar as _SearchBar } from "../components/forms/search/SearchBar";
+import "../styles/App.css";
 import "../styles/Grid.css";
 interface Props {
   placeholder?: string;
