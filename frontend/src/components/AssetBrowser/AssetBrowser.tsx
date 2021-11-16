@@ -3,6 +3,7 @@ import "../../styles/AssetBrowser.css";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 import Pagination from "../buttons/Pagination";
+import { SearchBar } from "../forms/search/SearchBar";
 import { AssetGrid, IAssetGridClickCallback } from "../grids/AssetGrid";
 
 interface Props {
