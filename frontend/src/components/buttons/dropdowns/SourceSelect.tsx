@@ -18,6 +18,12 @@ export function SourceSelect({ sources, handleSelect }: Props): ReactElement {
     (source) => source.id === selectedSourceId
   );
 
+  React.useEffect(() => {
+    if (sources.length) {
+      setSelectedSourceId(sources[0].id);
+    }
+  }, [sources]);
+
   const sourceList = sources.map((source) => {
     return (
       <li
