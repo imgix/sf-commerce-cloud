@@ -10,18 +10,20 @@ export function App({
   value,
 }: {
   handleBreakoutOpen: () => void;
-  value: IImgixCustomAttributeValue;
+  value: IImgixCustomAttributeValue | undefined;
 }) {
   return (
     <div className="App">
       <header className="App-header">
         <div>
-          <Imgix
-            src={value.src}
-            imgixParams={{
-              w: 350,
-            }}
-          />
+          {value && (
+            <Imgix
+              src={value.src}
+              imgixParams={{
+                w: 350,
+              }}
+            />
+          )}
           <AddImageIcon handleClick={handleBreakoutOpen} />
         </div>
       </header>
