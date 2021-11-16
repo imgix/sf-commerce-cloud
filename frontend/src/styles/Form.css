@@ -2,7 +2,7 @@
 @media (min-width: 694px) {
   .ix-asset-simple-search-content {
     visibility: visible;
-    position: absolute;
+    position: relative;
     top: 0;
     right: 0;
     bottom: auto;
