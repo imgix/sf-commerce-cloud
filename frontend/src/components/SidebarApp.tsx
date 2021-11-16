@@ -3,6 +3,7 @@ import Imgix from "react-imgix";
 import "../styles/App.css";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddImageIcon } from "./buttons/AddImageIcon";
+import styles from "./SidebarApp.module.css";
 
 export type ISidebarAppProps = {
   handleBreakoutOpen: () => void;
@@ -14,15 +15,18 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
     <div className="App">
       <header className="App-header">
         <div>
-          {value && (
-            <Imgix
-              src={value.src}
-              imgixParams={{
-                w: 350,
-              }}
-            />
-          )}
+          <div className={styles.imageWrapper}>
+            {value && (
+              <Imgix
+                src={value.src}
+                imgixParams={{
+                  w: 350,
+                }}
+              />
+            )}
+          </div>
           <AddImageIcon handleClick={handleBreakoutOpen} />
+          <div className={styles.hr} />
         </div>
       </header>
     </div>
