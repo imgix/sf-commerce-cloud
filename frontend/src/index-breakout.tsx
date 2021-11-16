@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { App as BreakoutApp } from "./components/BreakoutApp";
 import "./styles/index.css";
 import { IBreakoutAppOnSubmit } from "./types/breakoutAppPublic";
-import { IBreakoutPayload } from "./types/imgixSF";
+import { IImgixCustomAttributeValue } from "./types/imgixSF";
 
 declare const subscribe: Function;
 declare const emit: Function;
@@ -35,7 +35,7 @@ export const createBreakoutApp = () => {
       if (!src) {
         return;
       }
-      const payload: IBreakoutPayload = { src };
+      const payload: IImgixCustomAttributeValue = { src };
       emit({
         type: "sfcc:value",
         payload,
