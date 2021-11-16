@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { App } from "./components";
+import { App as BreakoutApp } from "./components/BreakoutApp";
 import "./styles/index.css";
+import { IBreakoutAppOnSubmit } from "./types/breakoutAppPublic";
+import { IBreakoutPayload } from "./types/imgixSF";
 
 declare const subscribe: Function;
 declare const emit: Function;
@@ -26,18 +28,23 @@ export const createBreakoutApp = () => {
     rootEditorElement.innerHTML = `<h3>Breakout: should be replaced by React</h3>`;
     document.body.appendChild(rootEditorElement);
 
-    function handleSelect(target: any) {
+    var handleSelect: IBreakoutAppOnSubmit = function handleSelect({ src }) {
       // The value changed and the breakout editor's host is informed about the
       // value update via a `sfcc:value` event.
+
+      if (!src) {
+        return;
+      }
+      const payload: IBreakoutPayload = { src };
       emit({
         type: "sfcc:value",
-        payload: target ? target : null,
+        payload,
       });
-    }
+    };
 
     ReactDOM.render(
       <React.StrictMode>
-        <App apiKey={config.api.apiKey} handleSubmit={handleSelect} />
+        <BreakoutApp apiKey={config.api.apiKey} onSubmit={handleSelect} />
       </React.StrictMode>,
       rootEditorElement
     );

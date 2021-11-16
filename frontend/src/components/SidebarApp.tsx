@@ -4,12 +4,10 @@ import Imgix from "react-imgix";
 import "../styles/App.css";
 import { AddImageIcon } from "./buttons/AddImageIcon";
 
-type HandleBreakoutOpenT = () => (event: string, type: string) => void;
-
 export function App({
   handleBreakoutOpen,
 }: {
-  handleBreakoutOpen: HandleBreakoutOpenT;
+  handleBreakoutOpen: () => void;
 }) {
   return (
     <div className="App">
