@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { App as SidebarApp } from "./components/SidebarApp";
 import "./styles/index.css";
 import { SandboxSubscribe } from "./types";
-import { IBreakoutPayload } from "./types/imgixSF";
+import { IImgixCustomAttributeValue } from "./types/imgixSF";
 
 declare const emit: Function;
 declare const subscribe: SandboxSubscribe<
@@ -27,10 +27,10 @@ export const createSidebarApp = () => {
       ({ localization = {} } = config);
 
       let state = {
-        value: value || undefined,
+        value: (value as IImgixCustomAttributeValue | null) || undefined,
       };
 
-      function handleBreakoutApply(payload: IBreakoutPayload) {
+      function handleBreakoutApply(payload: IImgixCustomAttributeValue) {
         // Emit value update to Page Designer host application
         emit({
           type: "sfcc:value",

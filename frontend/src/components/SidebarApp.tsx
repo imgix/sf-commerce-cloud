@@ -2,7 +2,7 @@ import React from "react";
 import Imgix from "react-imgix";
 // TODO(luis): replace placeholder image
 import "../styles/App.css";
-import { IBreakoutPayload } from "../types/imgixSF";
+import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddImageIcon } from "./buttons/AddImageIcon";
 
 export function App({
@@ -10,7 +10,7 @@ export function App({
   value,
 }: {
   handleBreakoutOpen: () => void;
-  value: IBreakoutPayload;
+  value: IImgixCustomAttributeValue;
 }) {
   return (
     <div className="App">
