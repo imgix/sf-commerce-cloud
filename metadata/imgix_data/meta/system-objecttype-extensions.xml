@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">  
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
     <type-extension type-id="SitePreferences">
         <custom-attribute-definitions>
-			<attribute-definition attribute-id="ImgixapiKey">
+			<attribute-definition attribute-id="imgixapiKey">
                 <display-name xml:lang="x-default">IMGIX API KEY</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-			<attribute-definition attribute-id="ImgixDefaultParams">
+			<attribute-definition attribute-id="imgixDefaultParams">
                 <display-name xml:lang="x-default">IMGIX VERSION</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
@@ -20,8 +20,8 @@
         <group-definitions>
             <attribute-group group-id="ImgixAttributes">
                 <display-name xml:lang="x-default">IMGIX Attributes</display-name>
-                <attribute attribute-id="ImgixapiKey"/>
-                <attribute attribute-id="ImgixDefaultParams"/>
+                <attribute attribute-id="imgixapiKey"/>
+                <attribute attribute-id="imgixDefaultParams"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

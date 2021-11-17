@@ -17,7 +17,7 @@ module.exports.render = function (context, modelIn) {
   var content = context.content;
 
   // TODO: to be passed down from site settings
-  const defaultParams = Site.getCurrent().getCustomPreferenceValue("ImgixDefaultParams");
+  const defaultParams = Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
 
   const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
     const [queryParamKey, queryParamValue] = v.split("=");

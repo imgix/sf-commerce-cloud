@@ -46,7 +46,7 @@ module.exports.init = function (editor) {
   // Create a configuration for a custom editor to be displayed in a modal breakout dialog (breakout editor)
   var breakoutEditorConfig = new HashMap();
   imgixApi["apiKey"] = currentSite.getCustomPreferenceValue(
-    "ImgixapiKey"
+    "imgixapiKey"
   );
 
   breakoutEditorConfig.put("localization", localization);
