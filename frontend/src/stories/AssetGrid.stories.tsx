@@ -1,5 +1,6 @@
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ImgixGETAssetsData } from "../types/imgixAPITypes";
 import { AssetGrid } from "./AssetGrid";
 
 export default {
@@ -14,36 +15,12 @@ const Template: ComponentStory<typeof AssetGrid> = (args) => (
 export const BasicGrid = Template.bind({});
 BasicGrid.args = {
   domain: "sdk-test.imgix.net",
-  assets: [
-    {
-      attributes: {
-        origin_path: "/amsterdam.jpg",
-      },
-    } as any,
-    {
-      attributes: {
-        origin_path: "/amsterdam.jpg",
-      },
-    } as any,
-    {
-      attributes: {
-        origin_path: "/amsterdam.jpg",
-      },
-    } as any,
-    {
-      attributes: {
-        origin_path: "/amsterdam.jpg",
-      },
-    } as any,
-    {
-      attributes: {
-        origin_path: "/amsterdam.jpg",
-      },
-    } as any,
-    {
-      attributes: {
-        origin_path: "/amsterdam.jpg",
-      },
-    } as any,
-  ] as any,
+  assets: Array.from({ length: 10 + Math.floor(Math.random() * 50) }).map(
+    (v) =>
+      ({
+        attributes: {
+          origin_path: "/amsterdam.jpg",
+        },
+      } as ImgixGETAssetsData[0])
+  ),
 };
