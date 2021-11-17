@@ -46,14 +46,14 @@
 .ix-grid-item-image {
   position: relative;
   overflow: hidden;
-  padding-bottom: 80%;
+  height: 180px;
 }
+
 .ix-grid-item-image img {
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  object-fit: cover;
   width: 100%;
+  height: 100%;
 }
 
 .ix-grid-item-filename {

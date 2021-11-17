@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import Imgix from "react-imgix";
+import "../../styles/Grid.css";
 import { ImgixGETAssetsData } from "../../types";
 import { LoadingSpinner } from "../LoadingSpinner";
-import "../../styles/Grid.css";
 
 export type IAssetGridClickCallback = (data: {
   src: ImgixGETAssetsData[0];
@@ -42,13 +42,12 @@ export function AssetGrid({
         >
           <Imgix
             src={"https://" + domain + asset.attributes.origin_path}
-            width={340}
-            height={340}
             imgixParams={{
               auto: "format",
               fit: "crop",
               crop: "entropy",
             }}
+            // TODO: ensure sizes is set correctly
             sizes="(min-width: 480px) calc(12.5vw - 20px)"
           />
         </div>
