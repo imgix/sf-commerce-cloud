@@ -118,7 +118,11 @@ export function AssetBrowser({
   return (
     <div className="ix-asset-browser">
       <div className="ix-asset-title-bar-container">
-        <SourceSelect sources={sources} handleSelect={handleSourceSelect} />
+        <SourceSelect
+          sources={sources}
+          selectedSource={selectedSource}
+          handleSelect={handleSourceSelect}
+        />
         <SearchBar handleSubmit={handleSearch} />
       </div>
       <AssetGrid
