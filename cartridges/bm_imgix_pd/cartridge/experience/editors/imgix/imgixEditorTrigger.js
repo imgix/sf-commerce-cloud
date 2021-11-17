@@ -48,9 +48,7 @@ module.exports.init = function (editor) {
   imgixApi["apiKey"] = currentSite.getCustomPreferenceValue(
     "ImgixapiKey"
   );
-  imgixApi["source"] = currentSite.getCustomPreferenceValue(
-    "ImgixSourceId"
-  );
+
   breakoutEditorConfig.put("localization", localization);
   breakoutEditorConfig.put("api", imgixApi);
   breakoutEditorConfig.put("options", options);
