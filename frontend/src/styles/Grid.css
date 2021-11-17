@@ -42,10 +42,19 @@
   max-height: 340px;
   max-width: 340px;
   grid-column: span 2;
+  border-radius: 4px;
 }
 
 .ix-grid-item:hover {
-  box-shadow: 0 0 0 2px rgb(0 191 254 / 40%);
+  box-shadow: 0 0 0 2px rgba(0, 191, 254, 0.4);
+}
+
+.ix-grid-item-selected {
+  box-shadow: 0 0 0 2px #00bffe;
+}
+
+.ix-grid-item-selected:hover {
+  box-shadow: 0 0 0 2px #00bffe;
 }
 
 .ix-grid-item-image {
