@@ -27,19 +27,23 @@ export function AssetGrid({
   handleAssetGridClick,
 }: Props): ReactElement {
   // create grid-items
+  const [selectedAssetId, setSelectedAssetId] = React.useState<string>("");
+  const onClick = (asset: ImgixGETAssetsData[0]) => {
+    setSelectedAssetId(asset.id);
+    if (handleAssetGridClick) {
+      handleAssetGridClick({ src: asset });
+    }
+  };
   const gridItems = assets.map((asset, idx) => {
     return (
-      <div className="ix-grid-item" key={`${asset.id}-${idx}`}>
-        <div
-          className="ix-grid-item-image"
-          onClick={() => {
-            if (handleAssetGridClick) {
-              handleAssetGridClick({
-                src: asset,
-              });
-            }
-          }}
-        >
+      <div
+        className={`ix-grid-item ${
+          selectedAssetId === asset.id ? "ix-grid-item-selected" : ""
+        }`}
+        key={`${asset.id}-${idx}`}
+        onClick={() => onClick(asset)}
+      >
+        <div className="ix-grid-item-image">
           <Imgix
             src={"https://" + domain + asset.attributes.origin_path}
             imgixParams={{
