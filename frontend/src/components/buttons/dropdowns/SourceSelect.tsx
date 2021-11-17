@@ -8,20 +8,32 @@ import "../../../styles/SourceSelect.css";
 
 interface Props {
   sources: ImgixGETSourcesData;
+  selectedSource: ImgixGETSourcesData[0] | null;
   handleSelect: (sourceId: string) => void;
 }
 
-export function SourceSelect({ sources, handleSelect }: Props): ReactElement {
-  const [selectedSourceId, setSelectedSourceId] = React.useState("");
+export function SourceSelect({
+  sources,
+  selectedSource,
+  handleSelect,
+}: Props): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false);
-  const selectedSource = sources.find(
-    (source) => source.id === selectedSourceId
-  );
+
+  const updateSource = (sourceId: string) => {
+    setIsOpen(false);
+    handleSelect(sourceId);
+  };
 
   React.useEffect(() => {
     if (sources.length) {
-      setSelectedSourceId(sources[0].id);
-      handleSelect(sources[0].id);
+      // if selectedSourceId is not set or no longer in the sources array,
+      // set the selectedSourceId to the first source
+      if (
+        !selectedSource ||
+        !sources.map((source) => source.id).includes(selectedSource.id)
+      ) {
+        updateSource(sources[0].id);
+      }
     }
   }, [sources]);
 
@@ -30,19 +42,12 @@ export function SourceSelect({ sources, handleSelect }: Props): ReactElement {
       <li
         key={source.id}
         value={source.id}
-        onClick={(e) => handleClick(source.id)}
+        onClick={() => updateSource(source.id)}
       >
         <Button label={source.attributes.name} Icon={<SourceMenuSvg />} />
       </li>
     );
   });
-
-  // create on click handler that closes the dropdown and sets the selected source
-  const handleClick = (id: string) => {
-    setIsOpen(!isOpen);
-    setSelectedSourceId(id);
-    handleSelect(id);
-  };
 
   const noSourcePlaceholder = (
     <li key="no-source" value="">
