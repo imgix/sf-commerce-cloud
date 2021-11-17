@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/App.css";
 import { IBreakoutAppOnSubmit } from "../types/breakoutAppPublic";
 import { AssetBrowserContainer as AssetBrowser } from "./AssetBrowser/AssetBrowserContainer";
 
