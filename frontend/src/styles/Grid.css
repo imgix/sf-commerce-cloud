@@ -8,10 +8,10 @@
 .ix-grid {
   padding: 15px;
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 16px;
   justify-items: stretch;
   align-items: start;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(14, 1fr);
 }
 @media (max-width: 900px) {
   .ix-grid {
@@ -37,6 +37,7 @@
   overflow: hidden;
   max-height: 340px;
   max-width: 340px;
+  grid-column: span 2;
 }
 
 .ix-grid-item:hover {
