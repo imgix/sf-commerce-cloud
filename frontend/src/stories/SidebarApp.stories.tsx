@@ -13,11 +13,9 @@ const Template: ComponentStory<typeof SidebarApp> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {
-  apiKey: "",
-};
+Default.args = {};
 
 export const EmptyState = Template.bind({});
 Default.args = {
-  value: undefined
+  value: undefined,
 };
