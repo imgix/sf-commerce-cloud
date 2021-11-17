@@ -61,13 +61,18 @@
   justify-content: flex-end;
   flex: 0 1 auto;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 32px;
   color: #6c7f8e;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: normal;
+  /* This supports the "ellipsis" behaviour to ensure that the filename stays on
+   * one line */
   white-space: nowrap;
   position: relative;
   padding: 6px 10px;
   margin: 0px;
+
+  text-align: center;
 }
 
 .ix-grid-item-filename:before {
