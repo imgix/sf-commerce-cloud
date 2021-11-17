@@ -3,14 +3,12 @@ import ReactDOM from "react-dom";
 import { App as SidebarApp } from "./components/SidebarApp";
 import "./styles/index.css";
 import { SandboxSubscribe } from "./types";
-import { IBreakoutPayload } from "./types/imgixSF";
+import { IImgixCustomAttributeValue } from "./types/imgixSF";
 
 declare const emit: Function;
 declare const subscribe: SandboxSubscribe<
   Record<string, string | number | object>
 >;
-
-var rootEditorElement;
 
 export const createSidebarApp = () => {
   let localization: any;
@@ -28,12 +26,18 @@ export const createSidebarApp = () => {
       // Extract `localization` data from `config`
       ({ localization = {} } = config);
 
-      function handleBreakoutApply(payload: IBreakoutPayload) {
+      let state = {
+        value: (value as IImgixCustomAttributeValue | null) || undefined,
+      };
+
+      function handleBreakoutApply(payload: IImgixCustomAttributeValue) {
         // Emit value update to Page Designer host application
         emit({
           type: "sfcc:value",
           payload: payload,
         });
+        state.value = payload;
+        renderApp();
       }
 
       function handleBreakoutClose({ type, value }: any) {
@@ -57,15 +61,22 @@ export const createSidebarApp = () => {
       }
 
       // Initialize the DOM
-      rootEditorElement = document.createElement("div");
+      var rootEditorElement = document.createElement("div");
       rootEditorElement.innerHTML = `<h3>Sidebar: should be replaced by React</h3>`;
       document.body.appendChild(rootEditorElement);
-      ReactDOM.render(
-        <React.StrictMode>
-          <SidebarApp handleBreakoutOpen={handleBreakoutOpen} />
-        </React.StrictMode>,
-        rootEditorElement
-      );
+      function renderApp() {
+        ReactDOM.render(
+          <React.StrictMode>
+            <SidebarApp
+              handleBreakoutOpen={handleBreakoutOpen}
+              value={state.value}
+            />
+          </React.StrictMode>,
+          rootEditorElement
+        );
+      }
+
+      renderApp();
     }
   );
 };

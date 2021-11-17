@@ -1,1 +1,1 @@
-export type IBreakoutPayload = { src: string };
+export type IImgixCustomAttributeValue = { src: string };

@@ -1,0 +1,10 @@
+.imageWrapper {
+  background-color: #e3e7eb;
+  height: 160px;
+}
+
+.hr {
+  background-color: #e8f0f4;
+  height: 2px;
+  content: "";
+}

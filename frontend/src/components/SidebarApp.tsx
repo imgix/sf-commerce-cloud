@@ -1,25 +1,32 @@
 import React from "react";
 import Imgix from "react-imgix";
-// TODO(luis): replace placeholder image
 import "../styles/App.css";
+import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddImageIcon } from "./buttons/AddImageIcon";
+import styles from "./SidebarApp.module.css";
 
-export function App({
-  handleBreakoutOpen,
-}: {
+export type ISidebarAppProps = {
   handleBreakoutOpen: () => void;
-}) {
+  value: IImgixCustomAttributeValue | undefined;
+};
+
+export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
   return (
     <div className="App">
       <header className="App-header">
         <div>
-          <Imgix
-            src="https://assets.imgix.net/amsterdam.jpg"
-            imgixParams={{
-              w: 350,
-            }}
-          />
+          <div className={styles.imageWrapper}>
+            {value && (
+              <Imgix
+                src={value.src}
+                imgixParams={{
+                  w: 350,
+                }}
+              />
+            )}
+          </div>
           <AddImageIcon handleClick={handleBreakoutOpen} />
+          <div className={styles.hr} />
         </div>
       </header>
     </div>
