@@ -35,7 +35,7 @@ export function SourceSelect({
         updateSource(sources[0].id);
       }
     }
-  }, [sources]);
+  }, [sources]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sourceList = sources.map((source) => {
     return (
