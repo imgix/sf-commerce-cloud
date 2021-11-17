@@ -3,7 +3,7 @@
     <type-extension type-id="SitePreferences">
         <custom-attribute-definitions>
 			<attribute-definition attribute-id="imgixapiKey">
-                <display-name xml:lang="x-default">IMGIX API KEY</display-name>
+                <display-name xml:lang="x-default">Imgix API Key</display-name>
                 <description xml:lang="x-default">The API Key of imgix account</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
