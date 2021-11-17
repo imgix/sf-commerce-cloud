@@ -4,8 +4,8 @@ import { App as SidebarApp } from "../../components/SidebarApp";
 
 describe("sidebar", () => {
   test("renders the correct cartridge bundle", () => {
-    render(<SidebarApp handleBreakoutOpen={() => {}} />);
-    const linkElement = screen.getByText(/Select an image/i);
+    render(<SidebarApp value={undefined} handleBreakoutOpen={() => {}} />);
+    const linkElement = screen.getByText(/Add an imgix image/i);
 
     expect(linkElement).toBeInTheDocument();
   });
