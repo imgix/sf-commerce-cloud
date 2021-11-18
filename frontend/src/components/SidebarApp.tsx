@@ -3,6 +3,7 @@ import Imgix from "react-imgix";
 import "../styles/App.css";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddImageIcon } from "./buttons/AddImageIcon";
+import { AddSvg } from "./icons/AddSvg";
 import styles from "./SidebarApp.module.css";
 
 export type ISidebarAppProps = {
@@ -16,7 +17,7 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
       <header className="App-header">
         <div>
           <div className={styles.imageWrapper}>
-            {value && (
+            {value ? (
               <Imgix
                 src={value.src}
                 width={344}
@@ -25,6 +26,13 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
                   fit: "crop",
                 }}
               />
+            ) : (
+              <div className={styles.addImageButton}>
+                <div className={styles.addIcon}>
+                  <AddSvg />
+                </div>
+                ADD IMAGE
+              </div>
             )}
           </div>
           <AddImageIcon handleClick={handleBreakoutOpen} />
