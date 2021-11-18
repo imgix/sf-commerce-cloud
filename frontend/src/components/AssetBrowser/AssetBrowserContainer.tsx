@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { imgixAPI } from "../../services/imgixAPIService";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
 import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
-import { IAssetGridClickCallback } from "../grids/AssetGrid";
 import { AssetBrowser } from "./AssetBrowser";
 
 interface Props {
@@ -206,25 +205,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
     this.setState({ query });
   };
 
-  handleSelectAsset: IAssetGridClickCallback = ({ src: assetData }) => {
-    if (!this.state.selectedSource || !this.props.onSelectAsset) {
-      return;
-    }
-    const selectedSource = this.state.selectedSource;
-    // TODO: handle custom domains
-    const sourceDomain = `${selectedSource.attributes.name}.imgix.net`;
-
-    const src = `https://${sourceDomain}${assetData.attributes.origin_path}`;
-
-    const data = {
-      src,
-      mediaWidth: assetData.attributes.media_width,
-      mediaHeight: assetData.attributes.media_height,
-    };
-
-    this.props.onSelectAsset(data);
-  };
-
   render() {
     const {
       sources,
@@ -248,7 +228,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
         selectedSource={selectedSource}
         setSelectedSource={this.setSelectedSource}
         requestAssetsFromSource={this.requestAssetsFromSource}
-        handleAssetBrowserClick={this.handleSelectAsset}
+        onAssetClick={this.props.onSelectAsset}
       />
     );
   }
