@@ -41,6 +41,11 @@
   text-transform: uppercase;
 
   color: #475f72;
+
+  cursor: pointer;
+}
+.addImageButton:hover {
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .addIcon {
