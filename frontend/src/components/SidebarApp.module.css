@@ -98,3 +98,38 @@
   height: 14px;
   fill: #475f72;
 }
+
+.imageCaption {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  color: #475f72;
+}
+
+.imageCaptionText {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.removeImageButton {
+  margin-left: 4px;
+  flex: 0 0 26px;
+
+  cursor: pointer;
+  user-select: none;
+
+  height: 26px;
+  width: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeImageIcon {
+  fill: #475f72;
+  height: 16px;
+  width: 16px;
+}
