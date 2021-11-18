@@ -12,6 +12,8 @@ export type ImgixGETAssetsData = {
     description: null | string;
     name: null | string;
     origin_path: string;
+    media_height: number;
+    media_width: number;
   };
   id: string;
   type: "assets";
