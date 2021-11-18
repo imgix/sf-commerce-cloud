@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import "../../styles/AssetBrowser.css";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
+import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 import Pagination from "../buttons/Pagination";
 import { SearchBar } from "../forms/search/SearchBar";
@@ -26,7 +27,7 @@ interface Props {
     cursor?: CursorT;
     query?: string;
   }) => Promise<void>;
-  handleAssetBrowserClick?: IAssetGridClickCallback;
+  onAssetClick?: IBreakoutAppOnSubmit;
 }
 // TODO(luis): Refactor this component into smaller components
 export function AssetBrowser({
@@ -41,7 +42,7 @@ export function AssetBrowser({
   setLoading,
   setSelectedSource,
   requestAssetsFromSource,
-  handleAssetBrowserClick,
+  onAssetClick,
 }: Props): ReactElement {
   /**
    * Handle pagination button clicks and pass the new cursor to the parent
@@ -115,6 +116,30 @@ export function AssetBrowser({
 
   const domain = parseSourceDomain(selectedSource as ImgixGETSourcesData[0]);
 
+  const handleAssetGridClick: IAssetGridClickCallback = ({
+    src: assetData,
+  }) => {
+    if (!selectedSource || !onAssetClick) {
+      return;
+    }
+
+    const originPath = assetData.attributes.origin_path;
+    const originPathHasLeadingSlash = originPath.startsWith("/");
+
+    // TODO: handle custom domains
+    const src = `https://${domain}${
+      originPathHasLeadingSlash ? "" : "/"
+    }${originPath}`;
+
+    const data = {
+      src,
+      mediaWidth: assetData.attributes.media_width,
+      mediaHeight: assetData.attributes.media_height,
+    };
+
+    onAssetClick(data);
+  };
+
   return (
     <div className="ix-asset-browser">
       <div className="ix-asset-title-bar-container">
@@ -130,7 +155,7 @@ export function AssetBrowser({
         assets={assets}
         loading={loading}
         errors={errors}
-        handleAssetGridClick={handleAssetBrowserClick}
+        handleAssetGridClick={handleAssetGridClick}
       />
       <Pagination cursor={cursor} handlePageChange={handlePageChange} />
       <div className="ix-asset-meta-information-container"></div>
