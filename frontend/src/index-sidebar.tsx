@@ -16,7 +16,7 @@ export const createSidebarApp = () => {
   subscribe(
     "sfcc:ready",
     async ({
-      value,
+      value = {},
       config,
       isDisabled,
       isRequired,
@@ -26,8 +26,15 @@ export const createSidebarApp = () => {
       // Extract `localization` data from `config`
       ({ localization = {} } = config);
 
-      let state = {
-        value: (value as IImgixCustomAttributeValue | null) || undefined,
+      let state: {
+        value: IImgixCustomAttributeValue | {};
+      } = {
+        value: value || {},
+      };
+
+      const setState = (newState: typeof state) => {
+        state = newState;
+        renderApp();
       };
 
       function handleBreakoutApply(payload: IImgixCustomAttributeValue) {
@@ -36,8 +43,7 @@ export const createSidebarApp = () => {
           type: "sfcc:value",
           payload: payload,
         });
-        state.value = payload;
-        renderApp();
+        setState({ value: payload });
       }
 
       function handleBreakoutClose({ type, value }: any) {
@@ -60,16 +66,35 @@ export const createSidebarApp = () => {
         );
       }
 
+      const handleValueClear = () => {
+        emit({
+          type: "sfcc:value",
+          payload: {},
+        });
+        setState({
+          value: {},
+        });
+      };
+
       // Initialize the DOM
       var rootEditorElement = document.createElement("div");
       rootEditorElement.innerHTML = `<h3>Sidebar: should be replaced by React</h3>`;
       document.body.appendChild(rootEditorElement);
       function renderApp() {
+        const safeValue =
+          state.value != null &&
+          state.value.hasOwnProperty("src") &&
+          (state.value as any).src != null &&
+          (state.value as any).src !== ""
+            ? (state.value as IImgixCustomAttributeValue)
+            : undefined;
+
         ReactDOM.render(
           <React.StrictMode>
             <SidebarApp
-              handleBreakoutOpen={handleBreakoutOpen}
-              value={state.value}
+              onOpenBreakoutClick={handleBreakoutOpen}
+              onClear={handleValueClear}
+              value={safeValue}
             />
           </React.StrictMode>,
           rootEditorElement
