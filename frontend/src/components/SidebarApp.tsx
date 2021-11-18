@@ -2,7 +2,6 @@ import React from "react";
 import Imgix from "react-imgix";
 import "../styles/App.css";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
-import { AddImageIcon } from "./buttons/AddImageIcon";
 import { AddSvg } from "./icons/AddSvg";
 import styles from "./SidebarApp.module.css";
 
@@ -38,7 +37,6 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
               </div>
             )}
           </div>
-          <AddImageIcon handleClick={handleBreakoutOpen} />
           <div className={styles.hr} />
         </div>
       </header>
