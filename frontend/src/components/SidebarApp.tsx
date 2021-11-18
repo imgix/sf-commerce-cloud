@@ -4,14 +4,16 @@ import "../styles/App.css";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddSvg } from "./icons/AddSvg";
 import { RefreshSvg } from "./icons/RefreshSvg";
+import { TrashcanSvg } from "./icons/TrashcanSvg";
 import styles from "./SidebarApp.module.css";
 
 export type ISidebarAppProps = {
-  handleBreakoutOpen: () => void;
+  onOpenBreakoutClick: () => void;
+  onClear: () => void;
   value: IImgixCustomAttributeValue | undefined;
 };
 
-export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
+export function App({ onOpenBreakoutClick, onClear, value }: ISidebarAppProps) {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,7 +24,7 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
                 <div className={styles.replaceImageOverlay}>
                   <div
                     className={styles.replaceImageOverlayButton}
-                    onClick={handleBreakoutOpen}
+                    onClick={onOpenBreakoutClick}
                   >
                     <div className={styles.replaceImageIcon}>
                       <RefreshSvg />
@@ -42,7 +44,7 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
             ) : (
               <div
                 className={styles.addImageButton}
-                onClick={handleBreakoutOpen}
+                onClick={onOpenBreakoutClick}
               >
                 <div className={styles.addIcon}>
                   <AddSvg />
@@ -50,6 +52,16 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
                 ADD IMAGE
               </div>
             )}
+          </div>
+          <div className={styles.imageCaption}>
+            <span className={styles.imageCaptionText}>
+              {value ? value.src : "Add an imgix Image"}
+            </span>
+            <div className={styles.removeImageButton} onClick={onClear}>
+              <div className={styles.removeImageIcon}>
+                <TrashcanSvg />
+              </div>
+            </div>
           </div>
           <div className={styles.hr} />
         </div>
