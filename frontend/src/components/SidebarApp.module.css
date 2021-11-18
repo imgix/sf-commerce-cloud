@@ -3,6 +3,48 @@
   height: 160px;
   overflow: hidden;
   display: flex;
+  position: relative;
+}
+
+.replaceImageOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(17, 26, 34, 0.5);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.imageWrapper:hover .replaceImageOverlay {
+  display: flex;
+}
+.replaceImageOverlayButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 12px;
+
+  background: rgba(28, 44, 56, 0.5);
+
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  color: white;
+
+  cursor: pointer;
+}
+.replaceImageOverlayButton:hover {
+  background: rgba(28, 44, 56, 0.8);
+}
+.replaceImageIcon {
+  color: white;
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
 }
 
 .hr {
