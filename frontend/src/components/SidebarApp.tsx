@@ -27,7 +27,10 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
                 }}
               />
             ) : (
-              <div className={styles.addImageButton}>
+              <div
+                className={styles.addImageButton}
+                onClick={handleBreakoutOpen}
+              >
                 <div className={styles.addIcon}>
                   <AddSvg />
                 </div>
