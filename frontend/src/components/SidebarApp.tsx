@@ -19,8 +19,10 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
             {value && (
               <Imgix
                 src={value.src}
+                width={344}
+                height={160}
                 imgixParams={{
-                  w: 350,
+                  fit: "crop",
                 }}
               />
             )}

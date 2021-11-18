@@ -1,6 +1,7 @@
 .imageWrapper {
   background-color: #e3e7eb;
   height: 160px;
+  overflow: hidden;
 }
 
 .hr {
