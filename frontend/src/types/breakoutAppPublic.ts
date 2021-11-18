@@ -1,1 +1,5 @@
-export type IBreakoutAppOnSubmit = (data: { src: string }) => void;
+export type IBreakoutAppOnSubmit = (data: {
+  src: string;
+  mediaWidth: number;
+  mediaHeight: number;
+}) => void;
