@@ -3,6 +3,7 @@ import Imgix from "react-imgix";
 import "../styles/App.css";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddSvg } from "./icons/AddSvg";
+import { RefreshSvg } from "./icons/RefreshSvg";
 import styles from "./SidebarApp.module.css";
 
 export type ISidebarAppProps = {
@@ -17,14 +18,27 @@ export function App({ handleBreakoutOpen, value }: ISidebarAppProps) {
         <div>
           <div className={styles.imageWrapper}>
             {value ? (
-              <Imgix
-                src={value.src}
-                width={344}
-                height={160}
-                imgixParams={{
-                  fit: "crop",
-                }}
-              />
+              <>
+                <div className={styles.replaceImageOverlay}>
+                  <div
+                    className={styles.replaceImageOverlayButton}
+                    onClick={handleBreakoutOpen}
+                  >
+                    <div className={styles.replaceImageIcon}>
+                      <RefreshSvg />
+                    </div>
+                    REPLACE
+                  </div>
+                </div>
+                <Imgix
+                  src={value.src}
+                  width={344}
+                  height={160}
+                  imgixParams={{
+                    fit: "crop",
+                  }}
+                />
+              </>
             ) : (
               <div
                 className={styles.addImageButton}
