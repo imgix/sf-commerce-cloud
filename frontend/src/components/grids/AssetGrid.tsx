@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
 import Imgix from "react-imgix";
+import "../../styles/Grid.css";
 import { ImgixGETAssetsData } from "../../types";
 import { LoadingSpinner } from "../LoadingSpinner";
-import "../../styles/Grid.css";
 
 export type IAssetGridClickCallback = (data: {
   src: ImgixGETAssetsData[0];
@@ -27,29 +27,45 @@ export function AssetGrid({
   handleAssetGridClick,
 }: Props): ReactElement {
   // create grid-items
+  const [selectedAssetId, setSelectedAssetId] = React.useState<string>("");
+  const onClick = (asset: ImgixGETAssetsData[0]) => {
+    setSelectedAssetId(asset.id);
+    if (handleAssetGridClick) {
+      handleAssetGridClick({ src: asset });
+    }
+  };
   const gridItems = assets.map((asset, idx) => {
     return (
-      <div className="ix-grid-item" key={`${asset.id}-${idx}`}>
-        <div
-          className="ix-grid-item-image"
-          onClick={() => {
-            if (handleAssetGridClick) {
-              handleAssetGridClick({
-                src: asset,
-              });
-            }
-          }}
-        >
+      <div
+        className={`ix-grid-item ${
+          selectedAssetId === asset.id ? "ix-grid-item-selected" : ""
+        }`}
+        key={`${asset.id}-${idx}`}
+        onClick={() => onClick(asset)}
+      >
+        <div className="ix-grid-item-image">
           <Imgix
             src={"https://" + domain + asset.attributes.origin_path}
-            width={340}
-            height={340}
             imgixParams={{
               auto: "format",
               fit: "crop",
               crop: "entropy",
             }}
-            sizes="(min-width: 480px) calc(12.5vw - 20px)"
+            /* This sizes attribute is a monster and sets the size of the image
+             * correctly, handling both the SF breakpoints and the design
+             * breakpoints
+             * The SF modal has a breakpoint at 768px (48rem), below which the
+             * modal has a margin around it of 32px, and above which it has a
+             * margin of 5% each side.
+             * In these calculates, the format is:
+             * calc((100vw - SFmargin - modalMargin - betweenColumnMarginSum)/numColumns)
+             * */
+            sizes="(max-width: 500px) calc((100vw - 64px - 32px - 16px)/2),
+            (max-width: 700px) calc((100vw - 64px - 32px - 32px)/3),
+            (max-width: 768px) calc((100vw - 64px - 32px - 48px)/4),
+            (max-width: 820px) calc((100vw - 10vw - 32px - 48px)/4),
+            (max-width: 960px) calc((100vw - 10vw - 32px - 80px)/6),
+            calc((100vw - 10vw - 32px - 96px)/7)"
           />
         </div>
         <p className="ix-grid-item-filename">

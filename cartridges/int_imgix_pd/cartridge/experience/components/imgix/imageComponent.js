@@ -39,6 +39,8 @@ module.exports.render = function (context, modelIn) {
 
   const ixlib = "sfccPD-" + version.version;
 
+  const mediaWidth = content.image_data.mediaWidth;
+
   // use to give link on the image, if we click on image it take to us to that page.
   model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
@@ -59,10 +61,13 @@ module.exports.render = function (context, modelIn) {
   model.image_srcset = ImgixClient._buildSrcSet(
     rawImageUrl,
     Object.assign({}, defaultParamsJSON, customImgixParams),
-    {
-      includeLibraryParam: false,
-      libraryParam: ixlib,
-    }
+    Object.assign(
+      {
+        includeLibraryParam: false,
+        libraryParam: ixlib,
+      },
+      mediaWidth && { maxWidth: mediaWidth }
+    )
   );
   if (!fixedSize) {
     model.image_sizes = content.sizes;
