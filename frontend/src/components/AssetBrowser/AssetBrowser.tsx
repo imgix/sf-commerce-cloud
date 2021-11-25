@@ -126,7 +126,6 @@ export function AssetBrowser({
     const originPath = assetData.attributes.origin_path;
     const originPathHasLeadingSlash = originPath.startsWith("/");
 
-    // TODO: handle custom domains
     const src = `https://${domain}${
       originPathHasLeadingSlash ? "" : "/"
     }${originPath}`;
