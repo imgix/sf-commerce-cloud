@@ -4,6 +4,7 @@ var HashMap = require("dw/util/HashMap");
 var Logger = require("dw/system/Logger");
 var ImgixClient = require("*/cartridge/scripts/jsCore/jsCore");
 var version = require("*/cartridge/scripts/imgix/version.json");
+var Site = require('dw/system/Site');
 
 // handle function for component.
 module.exports.render = function (context, modelIn) {
@@ -16,7 +17,7 @@ module.exports.render = function (context, modelIn) {
   var content = context.content;
 
   // TODO: to be passed down from site settings
-  const defaultParams = "auto=format,compress&fit=crop";
+  const defaultParams = Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
 
   const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
     const [queryParamKey, queryParamValue] = v.split("=");
