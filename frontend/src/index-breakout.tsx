@@ -28,14 +28,22 @@ export const createBreakoutApp = () => {
     rootEditorElement.innerHTML = `<h3>Breakout: should be replaced by React</h3>`;
     document.body.appendChild(rootEditorElement);
 
-    var handleSelect: IBreakoutAppOnSubmit = function handleSelect({ src }) {
+    var handleSelect: IBreakoutAppOnSubmit = function handleSelect({
+      src,
+      mediaWidth,
+      mediaHeight,
+    }) {
       // The value changed and the breakout editor's host is informed about the
       // value update via a `sfcc:value` event.
 
       if (!src) {
         return;
       }
-      const payload: IImgixCustomAttributeValue = { src };
+      const payload: IImgixCustomAttributeValue = {
+        src,
+        mediaWidth,
+        mediaHeight,
+      };
       emit({
         type: "sfcc:value",
         payload,

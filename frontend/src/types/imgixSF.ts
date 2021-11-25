@@ -1,1 +1,5 @@
-export type IImgixCustomAttributeValue = { src: string };
+export type IImgixCustomAttributeValue = {
+  src: string;
+  mediaWidth: number;
+  mediaHeight: number;
+};

@@ -71,7 +71,7 @@ export const imgixAPI = {
       ) {
         // ?page[number]=${n}&page[size]=18`
         return await makeRequest<ImgixGETAssetsData>({
-          url: `assets/${sourceId}?page[cursor]=${index}&page[limit]=${size}&sort=date_created&fields[assets]=name,description,origin_path`,
+          url: `assets/${sourceId}?page[cursor]=${index}&page[limit]=${size}&sort=date_created&fields[assets]=name,description,origin_path,media_height,media_width`,
           apiKey,
         });
       },

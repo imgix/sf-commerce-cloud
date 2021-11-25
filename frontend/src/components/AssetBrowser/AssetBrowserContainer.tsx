@@ -218,6 +218,8 @@ export class AssetBrowserContainer extends Component<Props, State> {
 
     const data = {
       src,
+      mediaWidth: assetData.attributes.media_width,
+      mediaHeight: assetData.attributes.media_height,
     };
 
     this.props.onSelectAsset(data);

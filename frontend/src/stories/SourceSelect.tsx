@@ -9,10 +9,22 @@ interface Props {
 }
 
 export function SourceSelect({ sources }: Props): ReactElement {
-  const handleSelect = (source: string) => {};
+  const [selectedSource, setSelectedSource] = React.useState(sources[0]);
+  const handleSourceSelect = (sourceId: string) => {
+    // store the selected source and fetch its assets
+    const source = sources.find(
+      (currentSource: ImgixGETSourcesData[0]) => currentSource.id === sourceId
+    );
+    if (!source) return;
+    setSelectedSource(source);
+  };
   return (
     <div className="button-story-layout">
-      <_SourceSelect handleSelect={handleSelect} sources={sources} />
+      <_SourceSelect
+        handleSelect={handleSourceSelect}
+        selectedSource={selectedSource}
+        sources={sources}
+      />
     </div>
   );
 }

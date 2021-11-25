@@ -2,8 +2,9 @@ import React, { ReactElement } from "react";
 import { AssetGrid as _AssetGrid } from "../components/grids/AssetGrid";
 import "../styles/App.css";
 import "../styles/Grid.css";
+import { ImgixGETAssetsData } from "../types";
 interface Props {
-  assets: [];
+  assets: ImgixGETAssetsData;
   domain: string;
 }
 
