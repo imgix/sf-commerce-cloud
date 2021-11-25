@@ -19,6 +19,13 @@
           }
         },
         {
+          "id": "anchorTagUrl",
+          "name": "Anchor Tag URL",
+          "description": "This link will passed to the isml template from where this image will be wrapped in a anchor tag",
+          "type": "string",
+          "required": false
+        },
+        {
           "id": "alt",
           "name": "Alt Text",
           "description": "The image alt text shown by the component.",
