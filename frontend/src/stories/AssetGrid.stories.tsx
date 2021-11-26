@@ -24,3 +24,9 @@ BasicGrid.args = {
       } as ImgixGETAssetsData[0])
   ),
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  loading: true,
+  assets: [],
+};
