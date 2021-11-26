@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import Imgix from "react-imgix";
 import "../../styles/Grid.css";
 import { ImgixGETAssetsData } from "../../types";
-import { LoadingSpinner } from "../LoadingSpinner";
+import { Spinner } from "../Spinner/Spinner";
 
 export type IAssetGridClickCallback = (data: {
   src: ImgixGETAssetsData[0];
@@ -96,7 +96,7 @@ export function AssetGrid({
     return (
       <div className="ix-grid-item-placeholder loading">
         <div>
-          <LoadingSpinner loading={loading} />
+          <Spinner label="Loading assets..." />
         </div>
       </div>
     );
