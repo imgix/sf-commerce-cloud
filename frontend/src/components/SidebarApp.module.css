@@ -126,6 +126,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 4px;
+}
+.removeImageButton:hover {
+  background: #e8f0f4;
 }
 
 .removeImageIcon {
