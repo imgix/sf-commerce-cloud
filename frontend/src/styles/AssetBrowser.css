@@ -50,7 +50,5 @@
 }
 /* Add a padding to asset grid to it doesn't go edge to edge */
 .ix-asset-grid-container {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 25px;
+  padding: 32px 16px;
 }
