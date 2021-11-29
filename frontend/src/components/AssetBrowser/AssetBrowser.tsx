@@ -149,13 +149,15 @@ export function AssetBrowser({
         />
         <SearchBar handleSubmit={handleSearch} />
       </div>
-      <AssetGrid
-        domain={domain}
-        assets={assets}
-        loading={loading}
-        errors={errors}
-        handleAssetGridClick={handleAssetGridClick}
-      />
+      <div className="ix-asset-grid-container">
+        <AssetGrid
+          domain={domain}
+          assets={assets}
+          loading={loading}
+          errors={errors}
+          handleAssetGridClick={handleAssetGridClick}
+        />
+      </div>
       <Pagination cursor={cursor} handlePageChange={handlePageChange} />
       <div className="ix-asset-meta-information-container"></div>
     </div>
