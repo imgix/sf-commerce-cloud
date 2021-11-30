@@ -1,6 +1,7 @@
 import React from "react";
 import "../../styles/Button.css";
 import { DownArrowSvg } from "../icons/DownArrowSvg";
+import styles from "./Button.module.scss";
 
 interface Props {
   label: string;
@@ -21,8 +22,8 @@ export const Button = ({ type, label, onClick, Icon }: Props) => {
       break;
   }
   return (
-    <button onClick={onClick} className="ix-btn">
-      <div className="ix-btn-icon">{Icon}</div>
+    <button onClick={onClick} className={styles.btn}>
+      <div>{Icon}</div>
       {label}
       {_type}
     </button>
