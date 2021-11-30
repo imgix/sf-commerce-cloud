@@ -6,6 +6,7 @@ import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 import Pagination from "../buttons/Pagination";
 import { SearchBar } from "../forms/search/SearchBar";
 import { AssetGrid, IAssetGridClickCallback } from "../grids/AssetGrid";
+import styles from "./AssetBrowser.module.scss";
 
 interface Props {
   errors: string[];
@@ -140,8 +141,8 @@ export function AssetBrowser({
   };
 
   return (
-    <div className="ix-asset-browser">
-      <div className="ix-asset-title-bar-container">
+    <div className={styles.assetBrowser}>
+      <div className={styles.assetTitleBarContainer}>
         <SourceSelect
           sources={sources}
           selectedSource={selectedSource}
@@ -149,7 +150,7 @@ export function AssetBrowser({
         />
         <SearchBar handleSubmit={handleSearch} />
       </div>
-      <div className="ix-asset-grid-container">
+      <div className={styles.assetGridContainer}>
         <AssetGrid
           domain={domain}
           assets={assets}
@@ -159,7 +160,6 @@ export function AssetBrowser({
         />
       </div>
       <Pagination cursor={cursor} handlePageChange={handlePageChange} />
-      <div className="ix-asset-meta-information-container"></div>
     </div>
   );
 }
