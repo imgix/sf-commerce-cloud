@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/DownArrowSvg.css";
 
 export const AddSvg = () => {
   return (
