@@ -1,0 +1,20 @@
+.assetBrowser {
+  background-color: #e3e7eb;
+  padding-bottom: 100px;
+}
+.assetTitleBarContainer {
+  background-color: white;
+  grid-template-columns: minmax(150px, 244px) repeat(6, 1fr);
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: minmax(110px, 140px) repeat(6, 1fr);
+  grid-template-rows: 100%;
+  grid-column-gap: 20px;
+  justify-items: stretch;
+  align-items: stretch;
+  padding: 8px 0;
+  align-items: center;
+}
+.assetGridContainer {
+  padding: 32px 16px;
+}
