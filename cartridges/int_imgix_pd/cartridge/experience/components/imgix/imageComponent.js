@@ -43,7 +43,6 @@ module.exports.render = function (context, modelIn) {
   const mediaWidth = content.image_data.mediaWidth;
 
   // use to give link on the image, if we click on image it take to us to that page.
-  model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
   model.anchorTagUrl = content.anchorTagUrl ? content.anchorTagUrl : "#";
 
