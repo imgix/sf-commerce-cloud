@@ -3,6 +3,7 @@ import Imgix from "react-imgix";
 import "../../styles/Grid.css";
 import { ImgixGETAssetsData } from "../../types";
 import { Spinner } from "../Spinner/Spinner";
+import styles from "./AssetGrid.module.scss";
 
 export type IAssetGridClickCallback = (data: {
   src: ImgixGETAssetsData[0];
@@ -78,7 +79,7 @@ export function AssetGrid({
   if (errors.length > 0) {
     const message = errors.pop();
     return (
-      <div className="ix-grid-item-placeholder error">
+      <div className={styles.gridItemPlaceholder + " " + styles.error}>
         <div>{message}</div>
       </div>
     );
@@ -86,7 +87,7 @@ export function AssetGrid({
   // show grid placeholder if no assets
   else if (!assets.length && !loading) {
     return (
-      <div className="ix-grid-item-placeholder">
+      <div className={styles.gridItemPlaceholder}>
         <div>{placeholder || "Select a source"}</div>
       </div>
     );
@@ -94,7 +95,7 @@ export function AssetGrid({
   // show loading indicator if loading
   if (loading) {
     return (
-      <div className="ix-grid-item-placeholder loading">
+      <div className={styles.gridItemPlaceholder}>
         <div>
           <Spinner label="Loading assets..." />
         </div>
