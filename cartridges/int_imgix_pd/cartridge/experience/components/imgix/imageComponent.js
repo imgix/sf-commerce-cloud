@@ -44,7 +44,7 @@ module.exports.render = function (context, modelIn) {
 
   // use to give link on the image, if we click on image it take to us to that page.
   model.alt = content.alt ? content.alt : null;
-  model.anchorTagUrl = content.anchorTagUrl ? content.anchorTagUrl : "#";
+  model.anchorTagUrl = content.anchorTagUrl ? content.anchorTagUrl : "";
 
   const rawImageUrl = content.image_data && content.image_data.src;
 
