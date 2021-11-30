@@ -2,14 +2,14 @@
   <isif condition="${pdict && pdict.image_src}">
     <isset name="noText" value="No text" scope="page" />
     <isprint value="${pdict.title}" />
-    <isif condition="${pdict.anchorTagUrl == '#'}">
-      <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
-        alt="${pdict.alt ? pdict.alt : noText}" />
+    <isif condition="${!empty(pdict.anchorTagUrl)}">
+      <a href="${pdict.anchorTagUrl}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+          alt="${pdict.alt ? pdict.alt : noText}" />
+      </a>
       <iselse>
-        <a href="${pdict.anchorTagUrl}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
-          <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
-            alt="${pdict.alt ? pdict.alt : noText}" />
-        </a>
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+          alt="${pdict.alt ? pdict.alt : noText}" />
     </isif>
 <iselse/>
     <div style="display: flex; flex-direction: column; align-items: center;">
