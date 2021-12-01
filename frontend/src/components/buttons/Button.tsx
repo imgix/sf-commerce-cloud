@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/Button.css";
 import { DownArrowSvg } from "../icons/DownArrowSvg";
 import styles from "./Button.module.scss";
 
@@ -8,8 +7,17 @@ interface Props {
   type?: "dropdown" | null;
   Icon?: React.ReactElement;
   onClick?: () => void;
+  flat?: boolean;
+  className?: string;
 }
-export const Button = ({ type, label, onClick, Icon }: Props) => {
+export const Button = ({
+  type,
+  label,
+  onClick,
+  Icon,
+  flat,
+  className,
+}: Props) => {
   let _type;
 
   // in future we can add more types
@@ -22,7 +30,14 @@ export const Button = ({ type, label, onClick, Icon }: Props) => {
       break;
   }
   return (
-    <button onClick={onClick} className={styles.btn}>
+    <button
+      onClick={onClick}
+      className={
+        styles.btn +
+        (flat ? ` ${styles.flat}` : "") +
+        (className ? ` ${className}` : "")
+      }
+    >
       <div>{Icon}</div>
       {label}
       {_type}
