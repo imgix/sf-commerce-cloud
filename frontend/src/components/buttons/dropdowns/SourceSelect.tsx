@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import "../../../styles/SourceSelect.css";
 import { ImgixGETSourcesData } from "../../../types";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 import { Button } from "../Button";
+import styles from "./SourceSelect.module.scss";
 
 interface Props {
   sources: ImgixGETSourcesData;
@@ -54,20 +54,15 @@ export function SourceSelect({
   );
 
   return (
-    <div className="ix-source-select">
+    <div className={styles.container}>
       <Button
         label={selectedSource?.attributes.name || "Select a Source"}
         onClick={() => setIsOpen(!isOpen)}
         type="dropdown"
         Icon={<SourceMenuSvg />}
         flat={isOpen}
-        className="ix-dropdown-btn"
       />
-      <ul
-        className={
-          "ix-dropdown" + (isOpen ? " ix-dropdown-open" : " ix-dropdown-hide")
-        }
-      >
+      <ul className={styles.dropdown + (isOpen ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}
       </ul>
     </div>
