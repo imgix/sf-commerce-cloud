@@ -40,7 +40,8 @@ export const Button = ({
     >
       <div>{Icon}</div>
       {label}
-      {_type}
+      <div className={styles.spacer}></div>
+      <div className={styles.rightIconButton}>{_type}</div>
     </button>
   );
 };
