@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import "../../styles/Pagination.css";
 import { CursorT } from "../../types";
 import { Button } from "./Button";
 import styles from "./Pagination.module.scss";
