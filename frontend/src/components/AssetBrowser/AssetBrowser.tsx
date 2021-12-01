@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import "../../styles/AssetBrowser.css";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
 import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
