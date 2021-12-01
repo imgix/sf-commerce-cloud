@@ -1,17 +1,17 @@
-svg {
-  all: revert;
+.container {
+  svg {
+    all: revert;
+  }
+  li {
+    list-style: none;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 }
-li {
-  list-style: none;
-}
-ul {
-  margin: 0;
-  padding: 0;
-}
-.ix-btn {
-  background: #fff;
-}
-.ix-dropdown {
+
+.dropdown {
   opacity: 0;
   height: 0;
   max-width: fit-content;
@@ -28,16 +28,13 @@ ul {
   transition-property: all;
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
-}
-.ix-dropdown-open {
-  position: absolute;
-  opacity: 1;
-  height: auto;
-  transition-property: all;
-  transition-duration: 0.15s;
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
-  z-index: 2;
-}
-.ix-dropdown-btn {
-  min-width: 100%;
+  &.open {
+    position: absolute;
+    opacity: 1;
+    height: auto;
+    transition-property: all;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
+    z-index: 2;
+  }
 }
