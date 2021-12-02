@@ -33,7 +33,16 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
         // Call the handleSubmit function that was passed through props
         handleSubmit(query);
         // Add the query to the search history
-        setSearchHistory([...searchHistory, query]);
+        // if the search history is longer than 4 items, remove the first item
+        const newSearchHistory = [...searchHistory];
+        if (newSearchHistory.length > 2) {
+          newSearchHistory.shift();
+        }
+        // if query is an empty string, don't add it to the search history
+        if (query !== "") {
+          newSearchHistory.push(query);
+        }
+        setSearchHistory([...newSearchHistory]);
       }}
     >
       <div ref={visibleRef} className={styles.searchWrapper}>
