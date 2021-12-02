@@ -138,3 +138,12 @@
   opacity: 1;
   transition: opacity ease-out 0.2s;
 }
+
+hr {
+  margin-top: 115px;
+  margin-bottom: 27px;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
