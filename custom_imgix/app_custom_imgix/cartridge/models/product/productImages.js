@@ -19,7 +19,7 @@ function Images(product, imageConfig) {
             if (firstImage) {
                 result = [{
                     alt: firstImage.alt,
-                    url: firstImage.URL.toString(),  // TODO: Append imgixBaseURL
+                    url: imgixBaseURL + firstImage.URL.toString(),
                     title: firstImage.title,
                     index: '0',
                     absURL: firstImage.absURL.toString()
@@ -29,7 +29,7 @@ function Images(product, imageConfig) {
             result = collections.map(images, function (image, index) {
                 return {
                     alt: image.alt,
-                    url: image.URL.toString(), // TODO: Append imgixBaseURL
+                    url: imgixBaseURL + image.URL.toString(),
                     index: index.toString(),
                     title: image.title,
                     absURL: image.absURL.toString()
