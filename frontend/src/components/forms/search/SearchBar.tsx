@@ -11,8 +11,8 @@ interface Props {
 
 export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
   const [query, setQuery] = React.useState("");
-  const { visibleRef, isVisible, setIsVisible } = useClickOutside(false);
-  const { focusRef, isFocused, setIsFocused } = useFocus(false);
+  const { visibleRef, setIsVisible } = useClickOutside(false);
+  const { focusRef, isFocused } = useFocus(false);
   // TODO: remove this, used for testing
   // make a list of placeholder searches
   const placeholderSearches = ["Apple", "Banana", "Cherry"];
@@ -43,7 +43,9 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
               type="text"
               className={styles.searchBaseInputField}
               placeholder={
-                placeholder ? placeholder : "Search filename or path"
+                placeholder
+                  ? placeholder
+                  : "Search by filename, path, tag, or category"
               }
               value={query}
               onChange={(event) => {
@@ -57,6 +59,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
                 handleSubmit(query);
               }}
               onClick={() => {
+                // let the clickOutside hook know that the search bar is visible
                 setIsVisible(true);
               }}
             />
