@@ -146,6 +146,7 @@ export function AssetBrowser({
           sources={sources}
           selectedSource={selectedSource}
           handleSelect={handleSourceSelect}
+          className={styles.sourceSelect}
         />
         <SearchBar handleSubmit={handleSearch} />
       </div>

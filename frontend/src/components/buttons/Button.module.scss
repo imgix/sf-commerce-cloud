@@ -1,15 +1,12 @@
 .btn {
-  all: unset;
+  flex: 1 1 auto;
   display: flex;
-  -ms-flex-align: center;
   align-items: center;
   height: 40px;
   padding: 6px 10px;
-  box-sizing: border-box;
   border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid transparent;
   background: #fff;
+  color: #475f72;
 
   &:hover {
     background-color: #e8f0f4;
@@ -18,7 +15,6 @@
 
   &:active {
     background-color: #dbe4e8;
-    border: 1px solid #e8f0f4;
   }
 
   &.flat {
@@ -26,7 +22,27 @@
   }
 }
 
+.icon {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  fill: #475f72;
+}
+
+.label {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .rightIconButton {
+  flex: 0 0 auto;
+  margin-left: 10px;
   width: 26px;
   height: 26px;
   display: flex;
@@ -37,8 +53,7 @@
   }
 
   svg {
-    width: 10px;
-    height: 10px;
+    fill: #475f72;
   }
 }
 

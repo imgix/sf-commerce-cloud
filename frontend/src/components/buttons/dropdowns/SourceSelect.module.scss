@@ -1,7 +1,7 @@
 .container {
-  svg {
-    all: revert;
-  }
+  flex: 1 1 auto;
+  display: flex;
+  position: relative;
   li {
     list-style: none;
   }
@@ -11,6 +11,14 @@
   }
 }
 
+.sourceIcon {
+  width: 21px;
+}
+
+.button {
+  width: 100%;
+}
+
 .dropdown {
   opacity: 0;
   height: 0;
@@ -18,8 +26,9 @@
   min-width: 140px;
   margin-top: 0%;
 
-  position: relative;
-  /* z-index: -1; */
+  display: none;
+  position: absolute;
+  top: 40px;
   max-height: 460px;
   overflow: auto;
   background: #fff;
@@ -29,7 +38,7 @@
   transition-duration: 0.15s;
   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
   &.open {
-    position: absolute;
+    display: block;
     opacity: 1;
     height: auto;
     transition-property: all;

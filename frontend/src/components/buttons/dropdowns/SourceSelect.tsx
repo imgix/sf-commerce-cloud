@@ -8,12 +8,14 @@ interface Props {
   sources: ImgixGETSourcesData;
   selectedSource: ImgixGETSourcesData[0] | null;
   handleSelect: (sourceId: string) => void;
+  className?: string;
 }
 
 export function SourceSelect({
   sources,
   selectedSource,
   handleSelect,
+  className,
 }: Props): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -54,13 +56,14 @@ export function SourceSelect({
   );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container + className ? ` ${className}` : ""}>
       <Button
         label={selectedSource?.attributes.name || "Select a Source"}
         onClick={() => setIsOpen(!isOpen)}
         type="dropdown"
-        Icon={<SourceMenuSvg />}
+        Icon={<SourceMenuSvg className={styles.sourceIcon} />}
         flat={isOpen}
+        className={styles.button}
       />
       <ul className={styles.dropdown + (isOpen ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}

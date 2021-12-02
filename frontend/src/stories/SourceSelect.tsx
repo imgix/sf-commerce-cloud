@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { SourceSelect as _SourceSelect } from "../components/buttons/dropdowns/SourceSelect";
-import { ImgixGETSourcesData } from "../types";
 import "../styles/App.css";
+import { ImgixGETSourcesData } from "../types";
 import "./ButtonLayout.css";
 
 interface Props {
@@ -19,12 +19,10 @@ export function SourceSelect({ sources }: Props): ReactElement {
     setSelectedSource(source);
   };
   return (
-    <div className="button-story-layout">
-      <_SourceSelect
-        handleSelect={handleSourceSelect}
-        selectedSource={selectedSource}
-        sources={sources}
-      />
-    </div>
+    <_SourceSelect
+      handleSelect={handleSourceSelect}
+      selectedSource={selectedSource}
+      sources={sources}
+    />
   );
 }
