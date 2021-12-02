@@ -1,0 +1,11 @@
+.container {
+  flex: 0 0 auto;
+  // All icons should be standardised to be 16x16px
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  fill: #475f72;
+}

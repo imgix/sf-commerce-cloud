@@ -38,8 +38,8 @@ export const Button = ({
         (className ? ` ${className}` : "")
       }
     >
-      <div>{Icon}</div>
-      {label}
+      <div className={styles.icon}>{Icon}</div>
+      <div className={styles.label}>{label}</div>
       <div className={styles.spacer}></div>
       <div className={styles.rightIconButton}>{_type}</div>
     </button>
