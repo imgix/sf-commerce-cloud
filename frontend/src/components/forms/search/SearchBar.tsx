@@ -73,24 +73,27 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
           <div className={styles.searchBaseSuggestionsList}>
             <hr></hr>
             <p>Recent Searches</p>
-            {searchHistory.map((search: string) => (
-              <div
-                className={styles.searchBaseSuggestionsListItem}
-                key={search}
-                onClick={() => {
-                  setQuery(search);
-                  handleSubmit(search);
-                }}
-              >
-                {" "}
-                <div className={styles.searchBaseSuggestionsListItem}>
-                  <div className={styles.simpleSearchIcon}>
-                    <SearchIconSvg />
+            {searchHistory.map((search: string) =>
+              // if search is empty, don't render anything
+              search.length ? (
+                <div
+                  className={styles.searchBaseSuggestionsListItem}
+                  key={search}
+                  onClick={() => {
+                    setQuery(search);
+                    handleSubmit(search);
+                  }}
+                >
+                  {" "}
+                  <div className={styles.searchBaseSuggestionsListItem}>
+                    <div className={styles.simpleSearchIcon}>
+                      <SearchIconSvg />
+                    </div>
+                    {search}
                   </div>
-                  {search}
                 </div>
-              </div>
-            ))}
+              ) : null
+            )}
           </div>
         </div>
       </div>
