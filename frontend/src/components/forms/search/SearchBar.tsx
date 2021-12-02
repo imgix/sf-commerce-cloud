@@ -67,7 +67,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
         </div>
         <div className={isFocused ? styles.show : styles.hide}>
           <div className={styles.searchBaseSuggestionsList}>
-            <p>--------------</p>
+            <hr></hr>
             <p>Recent Searches</p>
             {placeholderSearches.map((search) => (
               <div
