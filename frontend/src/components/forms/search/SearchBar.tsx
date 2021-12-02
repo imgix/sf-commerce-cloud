@@ -1,6 +1,7 @@
 import React, { ReactElement } from "react";
 import { SearchIconSvg } from "../../icons/SearchIconSvg";
 import { useClickOutside } from "./useClickOutside";
+import { useLocalStorage } from "./useLocalStorage";
 import { useFocus } from "./useFocus";
 import styles from "./SearchBar.module.scss";
 
@@ -11,11 +12,12 @@ interface Props {
 
 export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
   const [query, setQuery] = React.useState("");
+  const [searchHistory, setSearchHistory] = useLocalStorage(
+    "searchHistory",
+    []
+  );
   const { visibleRef, setIsVisible } = useClickOutside(false);
   const { focusRef, isFocused } = useFocus(false);
-  // TODO: remove this, used for testing
-  // make a list of placeholder searches
-  const placeholderSearches = ["Apple", "Banana", "Cherry"];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -30,6 +32,8 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
         e.preventDefault();
         // Call the handleSubmit function that was passed through props
         handleSubmit(query);
+        // Add the query to the search history
+        setSearchHistory([...searchHistory, query]);
       }}
     >
       <div ref={visibleRef} className={styles.searchWrapper}>
@@ -69,7 +73,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
           <div className={styles.searchBaseSuggestionsList}>
             <hr></hr>
             <p>Recent Searches</p>
-            {placeholderSearches.map((search) => (
+            {searchHistory.map((search: string) => (
               <div
                 className={styles.searchBaseSuggestionsListItem}
                 key={search}
