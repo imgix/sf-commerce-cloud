@@ -1,0 +1,137 @@
+@media (min-width: 900px) {
+  .searchBaseInput {
+    right: 100px;
+  }
+}
+
+@media (min-width: 694px) {
+  .searchWrapper {
+    visibility: visible;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+  }
+  .searchBaseInput {
+    left: 26px;
+  }
+}
+// Form Styles
+.searchContent {
+  position: absolute;
+  height: 40px;
+  max-height: 400px;
+  top: 8px;
+  left: 177px;
+  background-color: white;
+  z-index: 4;
+  transition: height ease-out 0.2s;
+}
+// On focus, increase size of the searchContext form
+.searchContent:focus-within {
+  height: 500px;
+  transition: height ease-out 0.2s;
+}
+// Form children styles
+.searchWrapper {
+  background: #ffffff;
+  border: 1px solid #82929f;
+  box-sizing: border-box;
+  box-shadow: inset 0px 3px 0px #e8f0f4;
+  border-radius: 3px;
+  z-index: 1;
+  display: flex;
+  width: 820px;
+  height: 40px;
+}
+.searchWrapper:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #e8f0f4;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+/* Search form input wrapper */
+.searchBase {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+/* Search form input */
+.searchBaseInput {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 50px;
+  height: 100%;
+  min-width: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  transition-property: transform, opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
+  font-size: 14px;
+  line-height: 20px;
+  color: #475f72;
+}
+.searchBaseInputField {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid transparent;
+  color: inherit;
+  flex: 1 1 auto;
+  font: inherit;
+  line-height: normal;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 0px 10px 0px;
+  text-overflow: ellipsis;
+  height: 20px;
+}
+.searchBaseSuggestionsList {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  margin-top: 45px;
+  padding-left: 16px;
+}
+.searchBaseSuggestionsList:first-child {
+  padding-top: 24px;
+}
+.searchBaseSuggestionsListItem {
+  display: flex;
+  padding-bottom: 12px;
+}
+.searchBaseSuggestionsListItem:first-of-type {
+  padding-top: 12px;
+}
+/* Search form search icon svg */
+.simpleSearchIcon > svg:not(:root) {
+  overflow: hidden;
+}
+.simpleSearchIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  fill: #475f72;
+}
+//  Util
+.hide {
+  opacity: 0;
+  transition: opacity ease-out 0.2s;
+}
+.show {
+  opacity: 1;
+  transition: opacity ease-out 0.2s;
+}
