@@ -106,7 +106,7 @@ export function AssetBrowser({
     // If the source has no custom domains, return the source name as the domain
     if (!source || !source.attributes) return "";
 
-    const customDomains = source?.attributes?.custom_domains;
+    const customDomains = source?.attributes?.deployment.custom_domains;
     if (!customDomains || !customDomains.length) {
       return source.attributes.name + ".imgix.net";
     }
