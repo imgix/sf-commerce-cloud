@@ -52,7 +52,7 @@ export const imgixAPI = {
      */
     async get(apiKey: string) {
       return await makeRequest<ImgixGETSourcesData>({
-        url: `sources?sort=name&fields[sources]=name&filter[enabled]=true`,
+        url: `sources?sort=name&fields[sources]=name,deployment.custom_domains,deployment.type&filter[enabled]=true`,
         apiKey,
       });
     },
