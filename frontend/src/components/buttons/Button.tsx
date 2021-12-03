@@ -32,7 +32,7 @@ export const Button = ({
       break;
   }
   return (
-    <button
+    <div
       onClick={onClick}
       className={
         styles.btn +
@@ -51,6 +51,6 @@ export const Button = ({
       >
         {_type}
       </div>
-    </button>
+    </div>
   );
 };
