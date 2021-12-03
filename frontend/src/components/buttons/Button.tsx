@@ -9,6 +9,7 @@ interface Props {
   onClick?: () => void;
   flat?: boolean;
   className?: string;
+  rightButtonClassName?: string;
 }
 export const Button = ({
   type,
@@ -17,6 +18,7 @@ export const Button = ({
   Icon,
   flat,
   className,
+  rightButtonClassName,
 }: Props) => {
   let _type;
 
@@ -41,7 +43,14 @@ export const Button = ({
       <div className={styles.icon}>{Icon}</div>
       <div className={styles.label}>{label}</div>
       <div className={styles.spacer}></div>
-      <div className={styles.rightIconButton}>{_type}</div>
+      <div
+        className={
+          styles.rightIconButton +
+          (rightButtonClassName ? ` ${rightButtonClassName}` : "")
+        }
+      >
+        {_type}
+      </div>
     </button>
   );
 };
