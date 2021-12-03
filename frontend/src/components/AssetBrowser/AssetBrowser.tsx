@@ -148,6 +148,7 @@ export function AssetBrowser({
           handleSelect={handleSourceSelect}
           className={styles.sourceSelect}
         />
+        <div className={styles.spacer} />
         <SearchBar handleSubmit={handleSearch} />
       </div>
       <div className={styles.assetGridContainer}>
