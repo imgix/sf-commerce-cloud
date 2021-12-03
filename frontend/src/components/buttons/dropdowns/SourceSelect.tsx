@@ -64,6 +64,7 @@ export function SourceSelect({
         Icon={<SourceMenuSvg className={styles.sourceIcon} />}
         flat={isOpen}
         className={styles.button}
+        rightButtonClassName={styles.rightButtonIcon}
       />
       <ul className={styles.dropdown + (isOpen ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}
