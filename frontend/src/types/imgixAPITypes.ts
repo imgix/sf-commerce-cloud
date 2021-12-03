@@ -1,7 +1,12 @@
+export type IDeploymentType = "azure" | "gcs" | "s3" | "webfolder" | "webproxy";
+
 export type ImgixGETSourcesData = {
   attributes: {
     name: string;
-    custom_domains?: string[];
+    deployment: {
+      custom_domains?: string[];
+      type: IDeploymentType;
+    };
   };
   id: string;
   type: "sources";
