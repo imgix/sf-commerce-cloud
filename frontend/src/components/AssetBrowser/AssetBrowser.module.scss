@@ -11,7 +11,12 @@
 }
 .sourceSelect {
   width: 228px;
+  flex: 0 1 auto;
 }
 .assetGridContainer {
   padding: 32px 16px;
+}
+
+.spacer {
+  flex: 0 0 8px;
 }
