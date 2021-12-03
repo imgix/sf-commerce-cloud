@@ -56,7 +56,7 @@ export function SourceSelect({
   );
 
   return (
-    <div className={styles.container + className ? ` ${className}` : ""}>
+    <div className={styles.container + (className ? ` ${className}` : "")}>
       <Button
         label={selectedSource?.attributes.name || "Select a Source"}
         onClick={() => setIsOpen(!isOpen)}
