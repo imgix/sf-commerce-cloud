@@ -3,6 +3,7 @@ import { useListSelectionBehavior } from "../../../common/hooks/useListSelection
 import { ImgixGETSourcesData } from "../../../types";
 import { IDeploymentType } from "../../../types/imgixAPITypes";
 import { useClickOutside } from "../../forms/search/useClickOutside";
+import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 import { Button } from "../Button";
 import styles from "./SourceSelect.module.scss";
@@ -100,11 +101,11 @@ export function SourceSelect({
       <Button
         label={activeSource?.attributes.name || "Select a Source"}
         onClick={() => setIsVisible(true)}
-        type="dropdown"
-        Icon={<SourceMenuSvg className={styles.sourceIcon} />}
+        leftIcon={<SourceMenuSvg className={styles.sourceIcon} />}
+        rightIcon={<DownArrowSvg />}
         flat={isVisible}
         className={styles.button}
-        rightButtonClassName={styles.rightButtonIcon}
+        rightIconClassName={styles.rightButtonIcon}
       />
       <ul className={styles.dropdown + (isVisible ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}
