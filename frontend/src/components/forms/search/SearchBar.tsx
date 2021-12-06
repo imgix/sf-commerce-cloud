@@ -1,4 +1,6 @@
 import React, { ReactElement } from "react";
+import { Button } from "../../buttons/Button";
+import { DisabledSvg } from "../../icons/DisabledSvg";
 import { SearchIconSvg } from "../../icons/SearchIconSvg";
 import styles from "./SearchBar.module.scss";
 import { useClickOutside } from "./useClickOutside";
@@ -77,9 +79,29 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
             />
           </div>
         </div>
-        <div className={isVisible ? styles.show : styles.hide}>
+        <div
+          className={
+            styles.searchExpander +
+            " " +
+            (isVisible ? styles.show : styles.hide)
+          }
+        >
+          <div className={styles.searchButtons}>
+            <Button
+              className={styles.clear}
+              leftIconClassName={styles.clearIcon}
+              label={"Clear"}
+              leftIcon={<DisabledSvg />}
+            />
+            <Button
+              className={styles.search}
+              leftIconClassName={styles.searchIcon}
+              label={"Search"}
+              leftIcon={<SearchIconSvg />}
+            />
+          </div>
+          <hr></hr>
           <div className={styles.searchBaseSuggestionsList}>
-            <hr></hr>
             <p>Recent Searches</p>
             {searchHistory.map((search: string) =>
               // if search is empty, don't render anything
