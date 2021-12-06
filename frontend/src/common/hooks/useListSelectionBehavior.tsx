@@ -73,7 +73,7 @@ export const useListSelectionBehavior = <Item,>({
     }
   };
 
-  // Handle mouse interactions up and down to select items
+  // Handle keyboard interactions up and down to select items
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, true);
     return () => {
