@@ -9,7 +9,7 @@ interface Props {
   rightIconClassName?: string;
   className?: string;
   flat?: boolean;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 export const Button = ({
   label,
