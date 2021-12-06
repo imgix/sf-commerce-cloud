@@ -118,6 +118,15 @@
 .searchBaseSuggestionsListItem:first-of-type {
   padding-top: 12px;
 }
+
+.searchBaseSuggestionsListItem > div {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline #6c7f8e;
+  }
+}
+
 .searchButtons {
   display: flex;
   align-items: center;
