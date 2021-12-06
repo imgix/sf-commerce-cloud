@@ -24,7 +24,6 @@ export const useListSelectionBehavior = <Item,>({
     undefined
   );
 
-
   const getIndexCurrentItem = () =>
     selectedItemUnsafe ? items.indexOf(selectedItemUnsafe) : -1;
 
@@ -66,7 +65,8 @@ export const useListSelectionBehavior = <Item,>({
         event.preventDefault();
         break;
       case "Enter":
-        onSelectCurrentItem &&
+        active &&
+          onSelectCurrentItem &&
           selectedItemUnsafe &&
           onSelectCurrentItem(selectedItemUnsafe);
         break;
@@ -85,7 +85,6 @@ export const useListSelectionBehavior = <Item,>({
     selectedItemUnsafe && items.includes(selectedItemUnsafe)
       ? selectedItemUnsafe
       : undefined;
-
 
   const handleOtherInteraction = (item: Item | undefined) => {
     setSelectedItem(item);
