@@ -1,9 +1,8 @@
 import React, { ReactElement } from "react";
 import { SearchIconSvg } from "../../icons/SearchIconSvg";
+import styles from "./SearchBar.module.scss";
 import { useClickOutside } from "./useClickOutside";
 import { useLocalStorage } from "./useLocalStorage";
-import { useFocus } from "./useFocus";
-import styles from "./SearchBar.module.scss";
 
 interface Props {
   placeholder?: string;
@@ -16,8 +15,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
     "searchHistory",
     []
   );
-  const { visibleRef, setIsVisible } = useClickOutside(false);
-  const { focusRef, isFocused } = useFocus(false);
+  const { visibleRef, isVisible, setIsVisible } = useClickOutside(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -26,7 +24,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
 
   return (
     <form
-      className={styles.searchContent}
+      className={styles.searchContent + " " + (isVisible ? styles.open : "")}
       onSubmit={(e) => {
         // Prevent the form from submitting, i.e. reloading the page
         e.preventDefault();
@@ -51,8 +49,8 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
             <div className={styles.simpleSearchIcon}>
               <SearchIconSvg />
             </div>
+            {/* TODO: handle escape key */}
             <input
-              ref={focusRef}
               type="text"
               className={styles.searchBaseInputField}
               placeholder={
@@ -66,8 +64,6 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
                 handleInputChange(event);
               }}
               onSubmit={(event) => {
-                // TODO(luis): Remove this. This is a hack to prevent the form
-                // from submitting
                 event.preventDefault();
                 handleSubmit(query);
               }}
@@ -75,10 +71,13 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
                 // let the clickOutside hook know that the search bar is visible
                 setIsVisible(true);
               }}
+              onFocus={() => {
+                setIsVisible(true);
+              }}
             />
           </div>
         </div>
-        <div className={isFocused ? styles.show : styles.hide}>
+        <div className={isVisible ? styles.show : styles.hide}>
           <div className={styles.searchBaseSuggestionsList}>
             <hr></hr>
             <p>Recent Searches</p>
