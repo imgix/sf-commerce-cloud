@@ -1,36 +1,26 @@
 import React from "react";
-import { DownArrowSvg } from "../icons/DownArrowSvg";
 import styles from "./Button.module.scss";
 
 interface Props {
   label: string;
-  type?: "dropdown" | null;
-  Icon?: React.ReactElement;
-  onClick?: () => void;
-  flat?: boolean;
+  leftIcon?: React.ReactElement;
+  leftIconClassName?: string;
+  rightIcon?: React.ReactElement;
+  rightIconClassName?: string;
   className?: string;
-  rightButtonClassName?: string;
+  flat?: boolean;
+  onClick?: () => void;
 }
 export const Button = ({
-  type,
   label,
   onClick,
-  Icon,
+  leftIcon,
+  rightIcon,
   flat,
   className,
-  rightButtonClassName,
+  rightIconClassName,
+  leftIconClassName,
 }: Props) => {
-  let _type;
-
-  // in future we can add more types
-  switch (type) {
-    case "dropdown":
-      _type = <DownArrowSvg />;
-      break;
-
-    default:
-      break;
-  }
   return (
     <div
       onClick={onClick}
@@ -40,17 +30,27 @@ export const Button = ({
         (className ? ` ${className}` : "")
       }
     >
-      <div className={styles.icon}>{Icon}</div>
+      {leftIcon && (
+        <div
+          className={
+            styles.leftIcon + (leftIconClassName ? ` ${leftIconClassName}` : "")
+          }
+        >
+          {leftIcon}
+        </div>
+      )}
       <div className={styles.label}>{label}</div>
       <div className={styles.spacer}></div>
-      <div
-        className={
-          styles.rightIconButton +
-          (rightButtonClassName ? ` ${rightButtonClassName}` : "")
-        }
-      >
-        {_type}
-      </div>
+      {rightIcon && (
+        <div
+          className={
+            styles.rightIcon +
+            (rightIconClassName ? ` ${rightIconClassName}` : "")
+          }
+        >
+          {rightIcon}
+        </div>
+      )}
     </div>
   );
 };
