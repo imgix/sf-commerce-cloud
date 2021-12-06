@@ -24,26 +24,55 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
     setQuery(e.currentTarget.value);
   };
 
+  const updateSearchHistory = (searchQuery: string) => {
+    // Add the query to the search history
+    // if the search history is longer than 4 items, remove the first item
+    const newSearchHistory = [...searchHistory];
+    if (newSearchHistory.length > 2) {
+      newSearchHistory.shift();
+    }
+    // if query is an empty string, don't add it to the search history
+    if (searchQuery !== "") {
+      newSearchHistory.push(searchQuery);
+    }
+    setSearchHistory([...newSearchHistory]);
+  };
+
+  const handleSearchSubmit = (
+    e:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLDivElement, MouseEvent>,
+    suggestedSearch?: string
+  ) => {
+    e.preventDefault();
+    const searchTerm = suggestedSearch || query;
+    handleSubmit(searchTerm);
+    updateSearchHistory(searchTerm);
+    setQuery("");
+    setIsVisible(false);
+  };
+
+  const handleInputFocus = (
+    e:
+      | React.FocusEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    setIsVisible(true);
+  };
+
+  const handleInputClear = () => {
+    setIsVisible(false);
+    setQuery("");
+  };
+
+  const inputPlaceholder =
+    placeholder || "Search by filename, path, tag, or category";
+
   return (
     <form
       className={styles.searchContent + " " + (isVisible ? styles.open : "")}
-      onSubmit={(e) => {
-        // Prevent the form from submitting, i.e. reloading the page
-        e.preventDefault();
-        // Call the handleSubmit function that was passed through props
-        handleSubmit(query);
-        // Add the query to the search history
-        // if the search history is longer than 4 items, remove the first item
-        const newSearchHistory = [...searchHistory];
-        if (newSearchHistory.length > 2) {
-          newSearchHistory.shift();
-        }
-        // if query is an empty string, don't add it to the search history
-        if (query !== "") {
-          newSearchHistory.push(query);
-        }
-        setSearchHistory([...newSearchHistory]);
-      }}
+      onSubmit={handleSearchSubmit}
     >
       <div ref={visibleRef} className={styles.searchWrapper}>
         <div className={styles.searchBase}>
@@ -55,27 +84,11 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
             <input
               type="text"
               className={styles.searchBaseInputField}
-              placeholder={
-                placeholder
-                  ? placeholder
-                  : "Search by filename, path, tag, or category"
-              }
+              placeholder={inputPlaceholder}
               value={query}
-              onChange={(event) => {
-                event.preventDefault();
-                handleInputChange(event);
-              }}
-              onSubmit={(event) => {
-                event.preventDefault();
-                handleSubmit(query);
-              }}
-              onClick={() => {
-                // let the clickOutside hook know that the search bar is visible
-                setIsVisible(true);
-              }}
-              onFocus={() => {
-                setIsVisible(true);
-              }}
+              onChange={handleInputChange}
+              onClick={handleInputFocus}
+              onFocus={handleInputFocus}
             />
           </div>
         </div>
@@ -92,34 +105,34 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
               leftIconClassName={styles.clearIcon}
               label={"Clear"}
               leftIcon={<DisabledSvg />}
+              onClick={handleInputClear}
             />
             <Button
               className={styles.search}
               leftIconClassName={styles.searchIcon}
               label={"Search"}
               leftIcon={<SearchIconSvg />}
+              onClick={handleSearchSubmit}
             />
           </div>
           <hr></hr>
           <div className={styles.searchBaseSuggestionsList}>
             <p>Recent Searches</p>
-            {searchHistory.map((search: string) =>
+            {searchHistory.map((suggestion: string, idx: number) =>
+              // if search input is not in focus, don't render anything
               // if search is empty, don't render anything
-              search.length ? (
+              isVisible && suggestion.length ? (
                 <div
                   className={styles.searchBaseSuggestionsListItem}
-                  key={search}
-                  onClick={() => {
-                    setQuery(search);
-                    handleSubmit(search);
-                  }}
+                  key={suggestion + idx}
+                  onClick={(e) => handleSearchSubmit(e, suggestion)}
                 >
                   {" "}
                   <div className={styles.searchBaseSuggestionsListItem}>
                     <div className={styles.simpleSearchIcon}>
                       <SearchIconSvg />
                     </div>
-                    {search}
+                    {suggestion}
                   </div>
                 </div>
               ) : null
