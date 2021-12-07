@@ -1,0 +1,81 @@
+{
+  "name": "imgix Image",
+  "description": "An image component, powered by imgix",
+  "group": "imgix",
+  "attribute_definition_groups": [
+    {
+      "id": "ImgixImage",
+      "attribute_definitions": [
+        {
+          "id": "image_data",
+          "name": "Target Image",
+          "type": "custom",
+          "required": true,
+          "editor_definition": {
+            "type": "imgix.imgixEditorTrigger",
+            "configuration": {
+              "options": {}
+            }
+          }
+        },
+        {
+          "id": "anchorTagUrl",
+          "name": "URL to Link To",
+          "description": "If this value is set, clicking on the image will redirect the user to this page.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "alt",
+          "name": "Alt Text",
+          "description": "The image alt text shown by the component.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "sizes",
+          "name": "Sizes attribute",
+          "description": "The sizes attribute for the image to help the image behave responsibly. If the image is a fixed size, set this to the image width.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "width",
+          "name": "Width",
+          "description": "The width of the image in pixels. If set, will make the image render at fixed-size, making sizes have no effect",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "id": "height",
+          "name": "Height",
+          "description": "The height of the image in pixels. If set, will make the image render at fixed-size, making sizes have no effect",
+          "type": "integer",
+          "required": false
+        },
+        {
+          "id": "fm",
+          "name": "Format",
+          "description": "The format to apply to the image. It is recommended to use the auto parameter to set format, by including 'format' in the setting above. If set, this will override auto-formatting. For more information, see: https://docs.imgix.com/apis/rendering/format",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "auto",
+          "name": "Auto",
+          "description": "The automatic parameters to apply to the image. Values should be separated with a comma, e.g. 'format,compress'. Default recommended is 'format,compress'. For more information, see: https://docs.imgix.com/apis/rendering/auto/auto",
+          "type": "string",
+          "required": false
+        },
+        {
+          "id": "crop",
+          "name": "Crop",
+          "description": "The crop parameter to apply to the image. For more information, see: https://docs.imgix.com/apis/rendering/size/crop",
+          "type": "string",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "region_definitions": []
+}

@@ -1,0 +1,141 @@
+.imageWrapper {
+  background-color: #e3e7eb;
+  height: 215px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+}
+
+.replaceImageOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(17, 26, 34, 0.5);
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.imageWrapper:hover .replaceImageOverlay {
+  display: flex;
+}
+.replaceImageOverlayButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 12px;
+
+  background: rgba(28, 44, 56, 0.5);
+
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  color: white;
+
+  cursor: pointer;
+  user-select: none;
+}
+.replaceImageOverlayButton:hover {
+  background: rgba(28, 44, 56, 0.8);
+}
+.replaceImageIcon {
+  color: white;
+  height: 16px;
+  width: 16px;
+  margin-right: 4px;
+}
+
+.hr {
+  background-color: #e8f0f4;
+  height: 2px;
+  content: "";
+}
+
+.addImageButton {
+  margin: auto;
+
+  /* Auto Layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 12px;
+
+  /* position: absolute;
+  width: 113px;
+  height: 36px;
+  left: 84px;
+  top: 62px; */
+
+  background: rgba(255, 255, 255, 0.5);
+
+  border: 1px solid #475f72;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  text-transform: uppercase;
+
+  color: #475f72;
+
+  cursor: pointer;
+  user-select: none;
+}
+.addImageButton:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.addIcon {
+  margin-right: 5px;
+  width: 14px;
+  height: 14px;
+  fill: #475f72;
+}
+
+.imageCaption {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  color: #475f72;
+  background-color: white;
+}
+
+.imageCaptionText {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.removeImageButton {
+  margin-left: 4px;
+  flex: 0 0 26px;
+
+  cursor: pointer;
+  user-select: none;
+
+  height: 26px;
+  width: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+}
+.removeImageButton:hover {
+  background: #e8f0f4;
+}
+
+.removeImageIcon {
+  fill: #475f72;
+  height: 16px;
+  width: 16px;
+}

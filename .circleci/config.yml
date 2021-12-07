@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+jobs:
+  test:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+      # - node/install-packages:
+      #     pkg-manager: yarn
+      - node/install-packages:
+          app-dir: frontend
+          pkg-manager: yarn
+      - run:
+          command: cd frontend && yarn run build
+          name: Build project
+      - run:
+          command: cd frontend && yarn run test:ci
+          name: Run integration and BM cartridge tests with CI flag
+
+workflows:
+  test-frontend:
+    jobs:
+      - test

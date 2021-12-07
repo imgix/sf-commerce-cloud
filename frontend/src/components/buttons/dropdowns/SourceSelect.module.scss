@@ -1,0 +1,109 @@
+.container {
+  flex: 1 1 auto;
+  display: flex;
+  position: relative;
+  li {
+    list-style: none;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.sourceIcon {
+  width: 21px;
+}
+
+.button {
+  width: 100%;
+}
+.rightButtonIcon {
+  background-color: transparent;
+  :hover {
+    background-color: transparent;
+  }
+}
+
+.dropdown {
+  opacity: 0;
+  height: 0;
+  min-width: 140px;
+  margin-top: 0;
+
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  max-height: 460px;
+  overflow: auto;
+  background: #fff;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  transition-property: all;
+  transition-duration: 0.15s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
+  &.open {
+    display: block;
+    opacity: 1;
+    height: auto;
+    transition-property: all;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
+    z-index: 2;
+  }
+}
+
+.sourceSelectDropdownItem {
+  cursor: pointer;
+  user-select: none;
+
+  padding: 8px 16px;
+  display: flex;
+  max-width: 100%;
+}
+
+.selectedSource {
+  background-color: rgba(232, 240, 244, 0.4);
+}
+.activeSource {
+  background-color: rgba(0, 191, 254, 0.06);
+}
+
+.deploymentIndicator {
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
+  content: "";
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: #19bf7c;
+
+  margin-right: 8px;
+}
+
+.textContainer {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sourceName {
+  color: #2b3944;
+  line-height: 24px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.sourceType {
+  font-size: 14px;
+  line-height: 16px;
+  color: #475f72;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 100%;
+}

@@ -1,0 +1,221 @@
+@media (min-width: 900px) {
+  .searchBaseInput {
+    right: 100px;
+  }
+}
+
+@media (min-width: 694px) {
+  .searchWrapper {
+    visibility: visible;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+  }
+  .searchBaseInput {
+    left: 26px;
+  }
+}
+// Form Styles
+.searchContent {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  flex: 1 1 auto;
+  height: 40px;
+  max-height: 400px;
+  transition: height ease-out 0.2s;
+  z-index: 1;
+
+  &.open {
+    height: 500px;
+    transition: height ease-out 0.2s;
+  }
+}
+// Form children styles
+.searchWrapper {
+  background: #ffffff;
+  border: 1px solid #82929f;
+  box-sizing: border-box;
+  box-shadow: inset 0px 3px 0px #e8f0f4;
+  border-radius: 3px;
+  z-index: 1;
+  display: flex;
+  height: 40px;
+}
+.searchWrapper:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #e8f0f4;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+/* Search form input wrapper */
+.searchBase {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+/* Search form input */
+.searchBaseInput {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 50px;
+  height: 100%;
+  min-width: 200px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  transition-property: transform, opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94), linear;
+  font-size: 14px;
+  line-height: 20px;
+  color: #475f72;
+}
+.searchBaseInputField {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid transparent;
+  color: inherit;
+  flex: 1 1 auto;
+  font: inherit;
+  line-height: normal;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 9px 0px 10px 0px;
+  text-overflow: ellipsis;
+  height: 20px;
+}
+.searchExpander {
+  margin-top: 50px;
+}
+.searchBaseSuggestionsList {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  margin-top: 45px;
+  padding-left: 16px;
+}
+.searchBaseSuggestionsList:first-child {
+  padding-top: 24px;
+}
+.searchBaseSuggestionsListItem {
+  display: flex;
+  padding-bottom: 12px;
+}
+.searchBaseSuggestionsListItem:first-of-type {
+  padding-top: 12px;
+}
+
+.searchBaseSuggestionsListItem > div {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline #6c7f8e;
+  }
+}
+
+.searchButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  height: 40px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.searchButtons {
+  padding-right: 10px;
+  & .search {
+    background-color: #00bffe;
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 0px #e3e7eb;
+    & .searchIcon {
+      width: 16px;
+      height: 16px;
+      fill: white;
+      opacity: 60%;
+    }
+  }
+  & .search:hover {
+    background-color: #33ccfe;
+  }
+  & .search:active {
+    background-color: #0099cb;
+  }
+  & .clear {
+    background-color: #475f72;
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 0px #e3e7eb;
+    margin-right: 8px;
+  }
+  & .clear:hover {
+    background-color: #6c7f8e;
+  }
+  & .clear:active {
+    background-color: #394c5b;
+  }
+  & .clearIcon {
+    width: 16px;
+    height: 16px;
+    fill: #82929f;
+    opacity: 60%;
+  }
+}
+/* Search form search icon svg */
+.simpleSearchIcon > svg:not(:root) {
+  overflow: hidden;
+}
+.simpleSearchIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  fill: #475f72;
+}
+//  Util
+.hide {
+  opacity: 0;
+  transition: opacity ease-out 0.2s;
+}
+.show {
+  opacity: 1;
+  transition: opacity ease-out 0.2s;
+}
+
+hr {
+  margin-top: 115px;
+  margin-bottom: 27px;
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: -4px;
+  width: 97%;
+  left: 10px;
+}
