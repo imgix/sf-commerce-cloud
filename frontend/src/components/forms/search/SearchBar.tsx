@@ -127,7 +127,6 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
                   key={suggestion + idx}
                   onClick={(e) => handleSearchSubmit(e, suggestion)}
                 >
-                  {" "}
                   <div className={styles.searchBaseSuggestionsListItem}>
                     <div className={styles.simpleSearchIcon}>
                       <SearchIconSvg />
