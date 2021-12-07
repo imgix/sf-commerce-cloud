@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const useFocus = (defaultState: boolean = false) => {
   const [isFocused, setIsFocused] = useState(defaultState);
@@ -14,18 +14,19 @@ export const useFocus = (defaultState: boolean = false) => {
   useEffect(() => {
     const onFocus = () => setIsFocused(true);
     const onBlur = () => setIsFocused(false);
+    const currentRef = focusRef.current;
 
     document.addEventListener("keydown", handleHide, true);
 
-    if (focusRef.current) {
-      focusRef.current.addEventListener("focus", onFocus);
-      focusRef.current.addEventListener("blur", onBlur);
+    if (currentRef) {
+      currentRef.addEventListener("focus", onFocus);
+      currentRef.addEventListener("blur", onBlur);
     }
 
     return () => {
-      if (focusRef.current) {
-        focusRef.current.removeEventListener("focus", onFocus);
-        focusRef.current.removeEventListener("blur", onBlur);
+      if (currentRef) {
+        currentRef.removeEventListener("focus", onFocus);
+        currentRef.removeEventListener("blur", onBlur);
       }
       document.removeEventListener("keydown", handleHide, true);
     };
