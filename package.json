@@ -25,7 +25,9 @@
     "sandbox:stop:dev": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:stop -s $SFCC_DEV_SANDBOX_ID'",
     "sandbox:stop:prod": "dotenv -e .env -- bash -c 'sfcc-ci sandbox:start -s $SFCC_DEV_SANDBOX_ID'",
     "cartridge:add-to-path": "sfcc-ci cartridge:add",
-    "uploadCartridge": "sgmf-scripts --uploadCartridge app_imgix_base_sfra"
+    "uploadCartridge": "sgmf-scripts --uploadCartridge app_imgix_base_sfra",
+    "storybook": "cd frontend && npm run storybook",
+    "deploy": "cd frontend && npm run deploy"
   },
   "keywords": [
     "imgix",
