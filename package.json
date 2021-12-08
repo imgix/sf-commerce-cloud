@@ -1,6 +1,6 @@
 {
   "name": "sf-commerce-cloud",
-  "version": "0.0.1",
+  "version": "21.1.0",
   "description": "Use this integration to insert images from imgix's Image Manager into your Salesforce Commerce Cloud websites",
   "main": "index.js",
   "repository": "https://github.com/imgix/sf-commerce-cloud.git",
