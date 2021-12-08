@@ -1,0 +1,27 @@
+name: GH-Stack Annotate
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  annotate:
+    name: Annotate
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/annotate')
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
+      - name: Install the dependencies
+        run: |
+          brew tap luqven/gh-stack
+          brew install gh-stack
+      - name: Annotate the pull request
+        env:
+          PR_TITLE: ${{ github.event.issue.title }}
+          GHSTACK_TARGET_REPOSITORY: imgix/sf-commerce-cloud
+          GHSTACK_OAUTH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          PR_TITLE=$(echo "$PR_TITLE" | cut -d "]" -f 1)
+          PR_TITLE=$(echo $PR_TITLE | sed 's/[][]//g')
+          gh-stack annotate "$PR_TITLE" --ci

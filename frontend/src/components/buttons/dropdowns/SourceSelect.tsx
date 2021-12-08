@@ -1,36 +1,56 @@
 import React, { ReactElement } from "react";
+import { useListSelectionBehavior } from "../../../common/hooks/useListSelectionBehavior";
 import { ImgixGETSourcesData } from "../../../types";
-import { Button } from "../Button";
+import { IDeploymentType } from "../../../types/imgixAPITypes";
+import { useClickOutside } from "../../forms/search/useClickOutside";
+import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
-
-import "../../../styles/Button.css";
-import "../../../styles/SourceSelect.css";
+import { Button } from "../Button";
+import styles from "./SourceSelect.module.scss";
 
 interface Props {
   sources: ImgixGETSourcesData;
   selectedSource: ImgixGETSourcesData[0] | null;
   handleSelect: (sourceId: string) => void;
+  className?: string;
 }
+
+const SOURCE_MAP_DICTIONARY: { [key in IDeploymentType]: string } = {
+  azure: "Azure",
+  gcs: "Google Cloud",
+  s3: "Amazon S3",
+  webfolder: "Web Folder",
+  webproxy: "Web Proxy",
+};
 
 export function SourceSelect({
   sources,
-  selectedSource,
+  selectedSource: activeSource,
   handleSelect,
+  className,
 }: Props): ReactElement {
-  const [isOpen, setIsOpen] = React.useState(false);
-
   const updateSource = (sourceId: string) => {
-    setIsOpen(false);
+    setIsVisible(false);
     handleSelect(sourceId);
   };
+
+  const { visibleRef, setIsVisible, isVisible } = useClickOutside(false);
+
+  const { currentSelected, handleOtherInteraction } = useListSelectionBehavior({
+    items: sources,
+    active: isVisible,
+    onSelectCurrentItem: (item) => {
+      updateSource(item.id);
+    },
+  });
 
   React.useEffect(() => {
     if (sources.length) {
       // if selectedSourceId is not set or no longer in the sources array,
       // set the selectedSourceId to the first source
       if (
-        !selectedSource ||
-        !sources.map((source) => source.id).includes(selectedSource.id)
+        !activeSource ||
+        !sources.map((source) => source.id).includes(activeSource.id)
       ) {
         updateSource(sources[0].id);
       }
@@ -38,13 +58,31 @@ export function SourceSelect({
   }, [sources]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sourceList = sources.map((source) => {
+    const isSelected = currentSelected && source.id === currentSelected.id;
+    const isActive = activeSource && activeSource.id === source.id;
     return (
       <li
         key={source.id}
         value={source.id}
         onClick={() => updateSource(source.id)}
+        className={
+          (isSelected
+            ? styles.selectedSource
+            : isActive
+            ? styles.activeSource
+            : "") +
+          " " +
+          styles.sourceSelectDropdownItem
+        }
+        onMouseEnter={() => handleOtherInteraction(source)}
       >
-        <Button label={source.attributes.name} Icon={<SourceMenuSvg />} />
+        <div className={styles.deploymentIndicator}></div>
+        <div className={styles.textContainer}>
+          <div className={styles.sourceName}>{source.attributes.name}</div>
+          <div className={styles.sourceType}>
+            {SOURCE_MAP_DICTIONARY[source.attributes.deployment.type]}
+          </div>
+        </div>
       </li>
     );
   });
@@ -56,18 +94,20 @@ export function SourceSelect({
   );
 
   return (
-    <div className={"ix-source-select" + (isOpen ? " ix-btn-flat" : "")}>
+    <div
+      className={styles.container + (className ? ` ${className}` : "")}
+      ref={visibleRef}
+    >
       <Button
-        label={selectedSource?.attributes.name || "Select a Source"}
-        onClick={() => setIsOpen(!isOpen)}
-        type="dropdown"
-        Icon={<SourceMenuSvg />}
+        label={activeSource?.attributes.name || "Select a Source"}
+        onClick={() => setIsVisible(true)}
+        leftIcon={<SourceMenuSvg className={styles.sourceIcon} />}
+        rightIcon={<DownArrowSvg />}
+        flat={isVisible}
+        className={styles.button}
+        rightIconClassName={styles.rightButtonIcon}
       />
-      <ul
-        className={
-          "ix-dropdown" + (isOpen ? " ix-dropdown-open" : " ix-dropdown-hide")
-        }
-      >
+      <ul className={styles.dropdown + (isVisible ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}
       </ul>
     </div>

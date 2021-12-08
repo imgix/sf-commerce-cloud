@@ -1,0 +1,62 @@
+.btn {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: #fff;
+  color: #475f72;
+
+  &:hover {
+    background-color: #e8f0f4;
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: #dbe4e8;
+  }
+
+  &.flat {
+    border-radius: 0px;
+  }
+}
+
+.leftIcon {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  fill: #475f72;
+}
+
+.label {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rightIcon {
+  flex: 0 0 auto;
+  margin-left: 10px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  :hover {
+    background: #e8f0f4;
+  }
+
+  svg {
+    fill: #475f72;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

@@ -1,0 +1,22 @@
+.assetBrowser {
+  background-color: #e3e7eb;
+  padding-bottom: 100px;
+}
+.assetTitleBarContainer {
+  background-color: white;
+  display: flex;
+  align-items: stretch;
+  padding: 8px 16px 8px 8px;
+  height: 56px;
+}
+.sourceSelect {
+  width: 228px;
+  flex: 0 1 auto;
+}
+.assetGridContainer {
+  padding: 32px 16px;
+}
+
+.spacer {
+  flex: 0 0 8px;
+}

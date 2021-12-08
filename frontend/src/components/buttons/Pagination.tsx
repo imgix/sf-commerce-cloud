@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
-import { Button } from "./Button";
-import "../../styles/Pagination.css";
 import { CursorT } from "../../types";
+import { Button } from "./Button";
+import styles from "./Pagination.module.scss";
 
 interface Props {
   cursor: CursorT;
@@ -19,14 +19,14 @@ export default function Pagination({
   if (!cursor.totalRecords) return <div />;
 
   return (
-    <div className="ix-pagination">
-      <div className="ix-pagination-button">
+    <div className={styles.pagination}>
+      <div>
         {page > 0 && (
           <Button label="< previous" onClick={() => handlePageChange(-1)} />
         )}
       </div>
 
-      <div className="ix-pagination-button">
+      <div>
         {cursor.next && (
           <Button label="next >" onClick={() => handlePageChange(1)} />
         )}

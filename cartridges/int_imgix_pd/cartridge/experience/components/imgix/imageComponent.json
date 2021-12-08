@@ -20,8 +20,8 @@
         },
         {
           "id": "anchorTagUrl",
-          "name": "Anchor Tag URL",
-          "description": "This link will passed to the isml template from where this image will be wrapped in a anchor tag",
+          "name": "URL to Link To",
+          "description": "If this value is set, clicking on the image will redirect the user to this page.",
           "type": "string",
           "required": false
         },

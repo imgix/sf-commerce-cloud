@@ -1,14 +1,24 @@
-<div class="sfdc-component-mock sfdc-component-assets-media_library-mock">
-  <isset name="noText" value="No text" scope="page" />
-  <isprint value="${pdict.title}" />
-
-  <isif condition="${pdict.anchorTagUrl == '#'}">
-    <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
-         alt="${pdict.alt ? pdict.alt : noText}" />
+<div>
+  <isif condition="${pdict && pdict.image_src}">
+    <isset name="noText" value="No text" scope="page" />
+    <isprint value="${pdict.title}" />
+    <isif condition="${!empty(pdict.anchorTagUrl)}">
+      <a href="${pdict.anchorTagUrl}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+          alt="${pdict.alt ? pdict.alt : noText}" />
+      </a>
       <iselse>
-        <a href="${pdict.anchorTagUrl}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
-          <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
-               alt="${pdict.alt ? pdict.alt : noText}" />
-        </a>
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+          alt="${pdict.alt ? pdict.alt : noText}" />
+    </isif>
+<iselse/>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div style="margin-bottom: 16px;">
+        <img
+          src="https://ix-www.imgix.net/press/imgix-press-kit.pdf?fm=png&page=3&w=256&h=96&dpr=2&dl=imgix_logo_1_small.png"
+          width="128" height="48" />
+      </div>
+      <div>Click to start adding an image</div>
+    </div>
   </isif>
 </div>
