@@ -1,11 +1,11 @@
 import React, { ReactElement } from "react";
-import "../../styles/AssetBrowser.css";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
 import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 import Pagination from "../buttons/Pagination";
 import { SearchBar } from "../forms/search/SearchBar";
 import { AssetGrid, IAssetGridClickCallback } from "../grids/AssetGrid";
+import styles from "./AssetBrowser.module.scss";
 
 interface Props {
   errors: string[];
@@ -106,7 +106,7 @@ export function AssetBrowser({
     // If the source has no custom domains, return the source name as the domain
     if (!source || !source.attributes) return "";
 
-    const customDomains = source?.attributes?.custom_domains;
+    const customDomains = source?.attributes?.deployment.custom_domains;
     if (!customDomains || !customDomains.length) {
       return source.attributes.name + ".imgix.net";
     }
@@ -140,24 +140,27 @@ export function AssetBrowser({
   };
 
   return (
-    <div className="ix-asset-browser">
-      <div className="ix-asset-title-bar-container">
+    <div className={styles.assetBrowser}>
+      <div className={styles.assetTitleBarContainer}>
         <SourceSelect
           sources={sources}
           selectedSource={selectedSource}
           handleSelect={handleSourceSelect}
+          className={styles.sourceSelect}
         />
+        <div className={styles.spacer} />
         <SearchBar handleSubmit={handleSearch} />
       </div>
-      <AssetGrid
-        domain={domain}
-        assets={assets}
-        loading={loading}
-        errors={errors}
-        handleAssetGridClick={handleAssetGridClick}
-      />
+      <div className={styles.assetGridContainer}>
+        <AssetGrid
+          domain={domain}
+          assets={assets}
+          loading={loading}
+          errors={errors}
+          handleAssetGridClick={handleAssetGridClick}
+        />
+      </div>
       <Pagination cursor={cursor} handlePageChange={handlePageChange} />
-      <div className="ix-asset-meta-information-container"></div>
     </div>
   );
 }

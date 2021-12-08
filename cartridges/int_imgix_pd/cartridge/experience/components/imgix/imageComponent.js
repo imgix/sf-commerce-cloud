@@ -4,7 +4,7 @@ var HashMap = require("dw/util/HashMap");
 var Logger = require("dw/system/Logger");
 var ImgixClient = require("*/cartridge/scripts/jsCore/jsCore");
 var version = require("*/cartridge/scripts/imgix/version.json");
-var Site = require('dw/system/Site');
+var Site = require("dw/system/Site");
 
 // handle function for component.
 module.exports.render = function (context, modelIn) {
@@ -17,7 +17,8 @@ module.exports.render = function (context, modelIn) {
   var content = context.content;
 
   // TODO: to be passed down from site settings
-  const defaultParams = Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
+  const defaultParams =
+    Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
 
   const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
     const [queryParamKey, queryParamValue] = v.split("=");
@@ -42,35 +43,35 @@ module.exports.render = function (context, modelIn) {
   const mediaWidth = content.image_data.mediaWidth;
 
   // use to give link on the image, if we click on image it take to us to that page.
-  model.link = content.imageLink ? content.imageLink : "#";
   model.alt = content.alt ? content.alt : null;
-  model.anchorTagUrl = content.anchorTagUrl ? content.anchorTagUrl : "#";
+  model.anchorTagUrl = content.anchorTagUrl ? content.anchorTagUrl : "";
 
-  // TODO: delete raw image URL when component data pipeline works
-  const rawImageUrl = (content.image_data && content.image_data.src) || "https://assets.imgix.net/amsterdam.jpg";
+  const rawImageUrl = content.image_data && content.image_data.src;
 
-  model.image_src = ImgixClient._buildURL(
-    rawImageUrl,
-    Object.assign({}, defaultParamsJSON, customImgixParams),
-    {
-      includeLibraryParam: false,
-      libraryParam: ixlib,
-    }
-  );
-  // ImgixClient._buildSrcSet will make sure the srcset is a dpr srcset if w or h is provided
-  model.image_srcset = ImgixClient._buildSrcSet(
-    rawImageUrl,
-    Object.assign({}, defaultParamsJSON, customImgixParams),
-    Object.assign(
+  if (rawImageUrl) {
+    model.image_src = ImgixClient._buildURL(
+      rawImageUrl,
+      Object.assign({}, defaultParamsJSON, customImgixParams),
       {
         includeLibraryParam: false,
         libraryParam: ixlib,
-      },
-      mediaWidth && { maxWidth: mediaWidth }
-    )
-  );
-  if (!fixedSize) {
-    model.image_sizes = content.sizes;
+      }
+    );
+    // ImgixClient._buildSrcSet will make sure the srcset is a dpr srcset if w or h is provided
+    model.image_srcset = ImgixClient._buildSrcSet(
+      rawImageUrl,
+      Object.assign({}, defaultParamsJSON, customImgixParams),
+      Object.assign(
+        {
+          includeLibraryParam: false,
+          libraryParam: ixlib,
+        },
+        mediaWidth && { maxWidth: mediaWidth }
+      )
+    );
+    if (!fixedSize) {
+      model.image_sizes = content.sizes;
+    }
   }
 
   return new Template("/experience/components/imgix/imageComponent").render(
