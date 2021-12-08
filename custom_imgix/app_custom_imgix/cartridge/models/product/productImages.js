@@ -14,7 +14,7 @@ function Images(product, imageConfig) {
     let imgixJsonImages = null;
 
     if (product instanceof require('dw/catalog/ProductVariationModel')) {
-        const productVariant = product.selectedVariant || product.defaultVariant;
+        const productVariant = product.selectedVariant;
         imgixJsonImages = productVariant && productVariant.custom && productVariant.custom.imgixData && JSON.parse(product.selectedVariant.custom.imgixData);
     } else if (product instanceof require('dw/catalog/Variant') || product instanceof require('dw/catalog/Product')) {
         imgixJsonImages = product.custom && product.custom.imgixData && JSON.parse(product.custom.imgixData);
