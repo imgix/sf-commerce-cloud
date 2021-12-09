@@ -11,6 +11,15 @@ const currentSite = require('dw/system/Site').getCurrent();
  */
 function Images(product, imageConfig) {
     const imgixBaseURL = currentSite.getCustomPreferenceValue('imgixBaseURL') || '';
+    let imgixJsonImages = null;
+
+    if (product instanceof require('dw/catalog/ProductVariationModel')) {
+        // Get imgix data custom attribute from selected variant or master product
+        const productData = product.selectedVariant || product.master;
+        imgixJsonImages = productData && productData.custom && productData.custom.imgixData && JSON.parse(productData.custom.imgixData);
+    } else if (product instanceof require('dw/catalog/Variant') || product instanceof require('dw/catalog/Product')) {
+        imgixJsonImages = product.custom && product.custom.imgixData && JSON.parse(product.custom.imgixData);
+    }
 
     imageConfig.types.forEach(function (type) {
         var images = product.getImages(type);
@@ -19,9 +28,13 @@ function Images(product, imageConfig) {
         if (imageConfig.quantity === 'single') {
             var firstImage = collections.first(images);
             if (firstImage) {
+                let imageUrl = imgixBaseURL + firstImage.URL.toString();
+                if (imgixJsonImages) {
+                    imageUrl = imgixJsonImages.images.primary.src;
+                }
                 result = [{
                     alt: firstImage.alt,
-                    url: imgixBaseURL + firstImage.URL.toString(),
+                    url: imageUrl,
                     title: firstImage.title,
                     index: '0',
                     absURL: firstImage.absURL.toString()
@@ -29,9 +42,20 @@ function Images(product, imageConfig) {
             }
         } else {
             result = collections.map(images, function (image, index) {
+                let imageUrl = imgixBaseURL + image.URL.toString();
+                if (imgixJsonImages) {
+                    if (index === 0) {
+                        imageUrl = imgixJsonImages.images.primary.src;
+                    } else {
+                        const imageIndex = index - 1;
+                        if (imageIndex < imgixJsonImages.images.alternatives.length) {
+                            imageUrl = imgixJsonImages.images.alternatives[imageIndex].src;
+                        }
+                    }
+                }
                 return {
                     alt: image.alt,
-                    url: imgixBaseURL + image.URL.toString(),
+                    url: imageUrl,
                     index: index.toString(),
                     title: image.title,
                     absURL: image.absURL.toString()
