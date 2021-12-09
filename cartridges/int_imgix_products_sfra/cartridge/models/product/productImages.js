@@ -18,6 +18,26 @@ function Images(product, imageConfig) {
 
   if (isBaseURLSet) {
     // Here we transform the URL
+    let imgixJsonImages = null;
+
+    if (product instanceof require("dw/catalog/ProductVariationModel")) {
+      // Get imgix data custom attribute from selected variant or master product
+      const productData = product.selectedVariant || product.master;
+      imgixJsonImages =
+        productData &&
+        productData.custom &&
+        productData.custom.imgixData &&
+        JSON.parse(productData.custom.imgixData);
+    } else if (
+      product instanceof require("dw/catalog/Variant") ||
+      product instanceof require("dw/catalog/Product")
+    ) {
+      imgixJsonImages =
+        product.custom &&
+        product.custom.imgixData &&
+        JSON.parse(product.custom.imgixData);
+    }
+
     imageConfig.types.forEach(function (type) {
       var images = product.getImages(type);
       var result = {};
@@ -25,15 +45,23 @@ function Images(product, imageConfig) {
       if (imageConfig.quantity === "single") {
         var firstImage = collections.first(images);
         if (firstImage) {
+          let imageUrl =
+            imgixBaseURL +
+            firstImage.URL.toString() +
+            (isBaseURLSet && imgixDefaultParams
+              ? "?" + imgixDefaultParams
+              : "");
+          if (imgixJsonImages) {
+            // TODO: add tests for default params
+            imageUrl =
+              imgixJsonImages.images.primary.src +
+              (imgixDefaultParams ? "?" + imgixDefaultParams : "");
+          }
+
           result = [
             {
               alt: firstImage.alt,
-              url:
-                imgixBaseURL +
-                firstImage.URL.toString() +
-                (isBaseURLSet && imgixDefaultParams
-                  ? "?" + imgixDefaultParams
-                  : ""),
+              url: imageUrl,
               title: firstImage.title,
               index: "0",
               absURL: firstImage.absURL.toString(),
@@ -41,15 +69,35 @@ function Images(product, imageConfig) {
           ];
         }
       } else {
+        let imageUrl =
+          imgixBaseURL +
+          image.URL.toString() +
+          (isBaseURLSet && imgixDefaultParams ? "?" + imgixDefaultParams : "");
+        if (imgixJsonImages) {
+          if (index === 0) {
+            // TODO: add tests for default params
+            imageUrl =
+              imgixJsonImages.images.primary.src +
+              (isBaseURLSet && imgixDefaultParams
+                ? "?" + imgixDefaultParams
+                : "");
+          } else {
+            const imageIndex = index - 1;
+            if (imageIndex < imgixJsonImages.images.alternatives.length) {
+              // TODO: add tests for default params
+              imageUrl =
+                imgixJsonImages.images.alternatives[imageIndex].src +
+                (isBaseURLSet && imgixDefaultParams
+                  ? "?" + imgixDefaultParams
+                  : "");
+            }
+          }
+        }
+
         result = collections.map(images, function (image, index) {
           return {
             alt: image.alt,
-            url:
-              imgixBaseURL +
-              image.URL.toString() +
-              (isBaseURLSet && imgixDefaultParams
-                  ? "?" + imgixDefaultParams
-                : ""),
+            url: imageUrl,
             index: index.toString(),
             title: image.title,
             absURL: image.absURL.toString(),

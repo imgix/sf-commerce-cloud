@@ -52,6 +52,9 @@ describe("productImages", function () {
           };
         },
       },
+      "dw/catalog/ProductVariationModel": function () {},
+      "dw/catalog/Variant": function () {},
+      "dw/catalog/Product": function () {},
     }
   );
 
