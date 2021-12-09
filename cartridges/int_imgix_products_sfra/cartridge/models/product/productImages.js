@@ -10,7 +10,7 @@ const currentSite = require('dw/system/Site').getCurrent();
  * @param {Object} imageConfig - configuration object with image types
  */
 function Images(product, imageConfig) {
-    const imgixBaseURL = currentSite.getCustomPreferenceValue('imgixBaseURL');
+    const imgixBaseURL = currentSite.getCustomPreferenceValue('imgixBaseURL') || '';
 
     imageConfig.types.forEach(function (type) {
         var images = product.getImages(type);

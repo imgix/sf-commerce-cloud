@@ -8,13 +8,17 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "chai": "^3.5.0",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
     "json": "^11.0.0",
-    "sfcc-ci": "^2.7.3"
+    "mocha": "^5.2.0",
+    "proxyquire": "1.7.4",
+    "sgmf-scripts": "^2.3.0",
+    "sinon": "^1.17.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "sgmf-scripts --test test/unit/**/*.js",
     "setup": "npm run setup:dw-json",
     "setup:dw-json": "node setup.js",
     "sfcc:login": "dotenv -e .env sfcc-ci client:auth",
