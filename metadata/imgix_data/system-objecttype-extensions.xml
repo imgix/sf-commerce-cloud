@@ -11,7 +11,7 @@
                 <min-length>0</min-length>
             </attribute-definition>
 			<attribute-definition attribute-id="imgixDefaultParams">
-                <display-name xml:lang="x-default">Imgix Default Params</display-name>
+                <display-name xml:lang="x-default">imgix Default Params</display-name>
                 <description xml:lang="x-default">imgix Default Params to be passed in URL</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
