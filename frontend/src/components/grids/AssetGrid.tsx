@@ -104,5 +104,5 @@ export function AssetGrid({
   }
 
   // create the asset grid
-  return <div className="ix-grid">{gridItems}</div>;
+  return <div className={"ix-grid " + styles.gridContainer}>{gridItems}</div>;
 }
