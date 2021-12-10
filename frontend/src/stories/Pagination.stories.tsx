@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { Pagination as PaginationComponent } from "../components/Pagination/Pagination";
+import {
+  IPaginationData,
+  Pagination as PaginationComponent,
+} from "../components/Pagination/Pagination";
 import { MultiStory } from "./common/MultiStory";
 
 export default {
@@ -26,7 +29,11 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
         story: (
           <PaginationComponent
             {...args}
-            cursor={{ ...args.cursor, current: "0" }}
+            data={{
+              ...args.data,
+              current: 0,
+              hasPrev: false,
+            }}
           />
         ),
       },
@@ -35,7 +42,17 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
         story: (
           <PaginationComponent
             {...args}
-            cursor={{ ...args.cursor, next: "" }}
+            data={{ ...args.data, hasNext: false }}
+          />
+        ),
+      },
+      {
+        label: "Disabled",
+        story: (
+          <PaginationComponent
+            {...args}
+            data={{ ...args.data, hasNext: false }}
+            disabled
           />
         ),
       },
@@ -46,11 +63,10 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
 
 export const Pagination = Template.bind({});
 Pagination.args = {
-  cursor: {
-    current: "1",
-    next: "2",
-    limit: 100,
-    hasMore: true,
-    totalRecords: 10,
-  },
+  data: {
+    current: 0,
+    hasNext: true,
+    hasPrev: true,
+    totalNumPages: 10,
+  } as IPaginationData,
 };
