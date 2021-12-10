@@ -22,6 +22,26 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
         story: <PaginationComponent {...args} />,
         options: { style: { width: 300 } },
       },
+      {
+        label: "First page",
+        story: (
+          <PaginationComponent
+            {...args}
+            cursor={{ ...args.cursor, current: "0" }}
+          />
+        ),
+        options: { style: { width: 300 } },
+      },
+      {
+        label: "Last page",
+        story: (
+          <PaginationComponent
+            {...args}
+            cursor={{ ...args.cursor, next: "" }}
+          />
+        ),
+        options: { style: { width: 300 } },
+      },
     ]}
     style={{ background: "#e3e7eb" }}
   ></MultiStory>
