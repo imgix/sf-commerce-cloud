@@ -2,9 +2,9 @@ import React, { ReactElement } from "react";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
 import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
-import Pagination from "../buttons/Pagination";
 import { SearchBar } from "../forms/search/SearchBar";
 import { AssetGrid, IAssetGridClickCallback } from "../grids/AssetGrid";
+import { Pagination } from "../Pagination/Pagination";
 import styles from "./AssetBrowser.module.scss";
 
 interface Props {
