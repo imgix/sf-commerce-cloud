@@ -14,6 +14,7 @@
     "json": "^11.0.0",
     "mocha": "^5.2.0",
     "proxyquire": "1.7.4",
+    "sfcc-ci": "^2.7.3",
     "sgmf-scripts": "^2.3.0",
     "sinon": "^1.17.7"
   },
