@@ -6,9 +6,12 @@ import styles from "./Pagination.module.scss";
 
 interface PaginationProps {
   cursor: CursorT;
-  handlePageChange: (page: number) => void;
+  onPageChange: (page: number) => void;
 }
-export const Pagination = ({ cursor, handlePageChange }: PaginationProps) => {
+export const Pagination = ({
+  cursor,
+  onPageChange: handlePageChange,
+}: PaginationProps) => {
   let page = parseInt(cursor.current);
   // never let the page be less than 1
   if (page < 0) page = 0;
