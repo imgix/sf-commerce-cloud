@@ -40,9 +40,12 @@ export const MultiStory = ({
         <div
           style={{
             ...(story.options?.flex === false ? {} : { display: "flex" }),
-            justifyContent: "flex-start",
-            ...story.options?.style,
+            flexDirection: "column",
+            ...(story.options?.style?.width == null && {
+              alignItems: "flex-start",
+            }),
             marginBottom: 32 * spacingMultiplier,
+            ...story.options?.style,
           }}
         >
           {story.story}

@@ -15,7 +15,6 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
       {
         label: "Normal",
         story: <PaginationComponent {...args} />,
-        options: { style: { width: 223 } },
       },
       {
         label: "300px wide",
@@ -30,7 +29,6 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
             cursor={{ ...args.cursor, current: "0" }}
           />
         ),
-        options: { style: { width: 223 } },
       },
       {
         label: "Last page",
@@ -40,7 +38,6 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
             cursor={{ ...args.cursor, next: "" }}
           />
         ),
-        options: { style: { width: 223 } },
       },
     ]}
     style={{ background: "#e3e7eb" }}
