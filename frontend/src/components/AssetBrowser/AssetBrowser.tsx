@@ -4,7 +4,7 @@ import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
 import { SourceSelect } from "../buttons/dropdowns/SourceSelect";
 import { SearchBar } from "../forms/search/SearchBar";
 import { AssetGrid, IAssetGridClickCallback } from "../grids/AssetGrid";
-import { Pagination } from "../Pagination/Pagination";
+import { IPaginationData, Pagination } from "../Pagination/Pagination";
 import styles from "./AssetBrowser.module.scss";
 
 interface Props {
@@ -12,7 +12,10 @@ interface Props {
   loading: boolean;
   sources: ImgixGETSourcesData;
   assets: ImgixGETAssetsData;
-  cursor: CursorT;
+
+  paginationData: IPaginationData;
+  onPrevPage?: () => void;
+  onNextPage?: () => void;
   query: string;
   selectedSource: ImgixGETSourcesData[0] | null;
   setQuery: (input: string) => any;
@@ -35,7 +38,9 @@ export function AssetBrowser({
   loading,
   sources,
   assets,
-  cursor,
+  paginationData,
+  onPrevPage,
+  onNextPage,
   query,
   selectedSource,
   setQuery,
@@ -44,29 +49,6 @@ export function AssetBrowser({
   requestAssetsFromSource,
   onAssetClick,
 }: Props): ReactElement {
-  /**
-   * Handle pagination button clicks and pass the new cursor to the parent
-   * @param offset - Either 1 or -1. 1 for next page, -1 for previous page
-   * @returns {Promise} A promise that resolves to the new assets and cursor
-   */
-  const handlePageChange = (offset: number) => {
-    // TODO(luis): handle undefined source better
-    if (!selectedSource) return;
-    // update the cursor position with the offset
-    const currentPage = Number(cursor.current) || 0;
-    const limit = cursor.limit || 12;
-    const delta = offset * limit;
-    const nextPage = "" + (currentPage + delta);
-    const newCursor = { ...cursor, current: nextPage };
-
-    // request the assets from the new cursor position
-    requestAssetsFromSource({
-      source: selectedSource,
-      cursor: newCursor,
-      query,
-    });
-  };
-
   /**
    * Request the assets from the selected source
    * @param sourceId - The id of the source to request assets from
@@ -160,7 +142,16 @@ export function AssetBrowser({
           handleAssetGridClick={handleAssetGridClick}
         />
       </div>
-      <Pagination cursor={cursor} onPageChange={handlePageChange} />
+      <div className={styles.paginationContainer}>
+        {assets.length > 0 && (
+          <Pagination
+            data={paginationData}
+            onPrevPage={onPrevPage}
+            onNextPage={onNextPage}
+            disabled={loading}
+          />
+        )}
+      </div>
     </div>
   );
 }

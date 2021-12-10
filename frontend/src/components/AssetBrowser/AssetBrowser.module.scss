@@ -1,7 +1,7 @@
 .assetBrowser {
   flex: 1 1 auto;
   background-color: #e3e7eb;
-  padding-bottom: 100px;
+  padding-bottom: 16px;
   display: flex;
   flex-direction: column;
 }
@@ -20,6 +20,11 @@
 .assetGridContainer {
   flex: 1 1 auto;
   padding: 32px 16px;
+}
+.paginationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .spacer {

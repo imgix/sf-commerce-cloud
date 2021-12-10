@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { imgixAPI } from "../../services/imgixAPIService";
 import { CursorT, ImgixGETAssetsData, ImgixGETSourcesData } from "../../types";
 import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
+import { IPaginationData } from "../Pagination/Pagination";
 import { AssetBrowser } from "./AssetBrowser";
+
+const CURSOR_PAGE_LIMIT = 12;
 
 interface Props {
   apiKey: string | null;
@@ -205,6 +208,55 @@ export class AssetBrowserContainer extends Component<Props, State> {
     this.setState({ query });
   };
 
+  get cursorLimit() {
+    return this.state.cursor.limit || CURSOR_PAGE_LIMIT;
+  }
+
+  get currentPageNumber() {
+    return Math.floor(
+      (Number(this.state.cursor.current) || 0) / this.cursorLimit
+    );
+  }
+
+  /**
+   * Handle pagination button clicks and pass the new cursor to the parent
+   * @param offset - Either 1 or -1. 1 for next page, -1 for previous page
+   * @returns {Promise} A promise that resolves to the new assets and cursor
+   */
+  handlePageChange = (offset: number) => {
+    const { selectedSource, cursor, query } = this.state;
+    // TODO(luis): handle undefined source better
+    if (!selectedSource) return;
+    // update the cursor position with the offset
+    const currentPage = Number(cursor.current) || 0;
+    const limit = this.cursorLimit;
+    const delta = offset * limit;
+    const nextPageNum = currentPage + delta;
+    const nextPage = String(nextPageNum);
+    const newCursor = {
+      ...cursor,
+      current: nextPage,
+      hasMore: nextPageNum < cursor.totalRecords,
+    };
+
+    // optimistically update cursor
+    this.setState({ cursor: newCursor });
+    // request the assets from the new cursor position
+    this.requestAssetsFromSource({
+      source: selectedSource,
+      cursor: newCursor,
+      query,
+    });
+  };
+
+  handlePrevPage = () => {
+    this.handlePageChange(-1);
+  };
+
+  handleNextPage = () => {
+    this.handlePageChange(1);
+  };
+
   render() {
     const {
       sources,
@@ -215,13 +267,28 @@ export class AssetBrowserContainer extends Component<Props, State> {
       query,
       selectedSource,
     } = this.state;
+
+    const paginationData = ((): IPaginationData => {
+      const limit = this.cursorLimit;
+      const current = this.currentPageNumber;
+      const totalNumPages = Math.floor(cursor.totalRecords / limit);
+      return {
+        current: current,
+        hasPrev: current > 0,
+        hasNext: cursor.hasMore,
+        totalNumPages,
+      };
+    })();
+
     return (
       <AssetBrowser
         errors={errors}
         loading={loading}
         sources={sources}
         assets={assets}
-        cursor={cursor}
+        paginationData={paginationData}
+        onPrevPage={this.handlePrevPage}
+        onNextPage={this.handleNextPage}
         query={query}
         setQuery={this.setQuery}
         setLoading={this.setLoading}
