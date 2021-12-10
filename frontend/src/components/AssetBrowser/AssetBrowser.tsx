@@ -160,7 +160,7 @@ export function AssetBrowser({
           handleAssetGridClick={handleAssetGridClick}
         />
       </div>
-      <Pagination cursor={cursor} handlePageChange={handlePageChange} />
+      <Pagination cursor={cursor} onPageChange={handlePageChange} />
     </div>
   );
 }
