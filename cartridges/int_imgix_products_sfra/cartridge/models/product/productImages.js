@@ -2,6 +2,9 @@
 
 var collections = require('*/cartridge/scripts/util/collections');
 const currentSite = require('dw/system/Site').getCurrent();
+const ProductVariationModel = require('dw/catalog/ProductVariationModel');
+const Variant = require('dw/catalog/Variant');
+const Product = require('dw/catalog/Product');
 
 /**
  * @constructor
@@ -13,11 +16,11 @@ function Images(product, imageConfig) {
     const imgixBaseURL = currentSite.getCustomPreferenceValue('imgixBaseURL') || '';
     let imgixJsonImages = null;
 
-    if (product instanceof require('dw/catalog/ProductVariationModel')) {
+    if (product instanceof ProductVariationModel) {
         // Get imgix data custom attribute from selected variant or master product
         const productData = product.selectedVariant || product.master;
         imgixJsonImages = productData && productData.custom && productData.custom.imgixData && JSON.parse(productData.custom.imgixData);
-    } else if (product instanceof require('dw/catalog/Variant') || product instanceof require('dw/catalog/Product')) {
+    } else if (product instanceof Variant || product instanceof Product) {
         imgixJsonImages = product.custom && product.custom.imgixData && JSON.parse(product.custom.imgixData);
     }
 
