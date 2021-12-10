@@ -18,16 +18,18 @@ export const Pagination = ({
   // don't render buttons if no assets
   if (!cursor.totalRecords) return <div />;
 
+  const isFirstPage = page <= 0;
+  const isLastPage = !cursor.next;
   return (
     <div className={styles.container}>
-      {page > 0 && (
-        <div
-          className={styles.arrowButton}
-          onClick={() => handlePageChange(-1)}
-        >
-          <ArrowLeft />
-        </div>
-      )}
+      <div
+        className={
+          styles.arrowButton + (isFirstPage ? ` ${styles.disabled}` : "")
+        }
+        onClick={() => !isFirstPage && handlePageChange(-1)}
+      >
+        <ArrowLeft />
+      </div>
       <div className={styles.spacer12}></div>
       <div className={styles.pageSelectorContainer}>
         <div className={styles.currentPage}>Page {page}</div>
@@ -36,11 +38,12 @@ export const Pagination = ({
         </div> */}
       </div>
       <div className={styles.spacer12}></div>
-      {cursor.next && (
-        <div className={styles.arrowButton} onClick={() => handlePageChange(1)}>
-          <ArrowRight />
-        </div>
-      )}
+      <div
+        className={styles.arrowButton + (isLastPage ? ` ${styles.disabled}` : "")}
+        onClick={() => !isLastPage && handlePageChange(1)}
+      >
+        <ArrowRight />
+      </div>
     </div>
   );
 };

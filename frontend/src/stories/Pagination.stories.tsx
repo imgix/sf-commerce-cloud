@@ -30,7 +30,7 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
             cursor={{ ...args.cursor, current: "0" }}
           />
         ),
-        options: { style: { width: 300 } },
+        options: { style: { width: 223 } },
       },
       {
         label: "Last page",
@@ -40,7 +40,7 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
             cursor={{ ...args.cursor, next: "" }}
           />
         ),
-        options: { style: { width: 300 } },
+        options: { style: { width: 223 } },
       },
     ]}
     style={{ background: "#e3e7eb" }}
