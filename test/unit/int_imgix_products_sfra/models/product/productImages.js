@@ -5,6 +5,67 @@ var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
 var ArrayList = require('../../../../mocks/dw.util.Collection');
 var toProductMock = require('../../../../util');
 
+var images = new ArrayList([{
+    alt: 'First Image',
+    title: 'First Image',
+    index: '0',
+    URL: {
+        toString: function () {
+            return '/first_image_url';
+        }
+    },
+    absURL: {
+        toString: function () {
+            return 'path/first_image_url';
+        }
+    }
+}, {
+    alt: 'Second Image',
+    title: 'Second Image',
+    index: '1',
+    URL: {
+        toString: function () {
+            return '/second_image_url';
+        }
+    },
+    absURL: {
+        toString: function () {
+            return 'path/second_image_url';
+        }
+    }
+}]);
+var productMock = {
+    getImages: {
+        return: images,
+        type: 'function'
+    }
+};
+var customData = {
+    imgixData: '{"images": {"primary": {"src": "imgixBaseURL/first_image_url"},"alternatives": [{"src": "imgixBaseURL/second_image_url","sourceWidth": 3000}]}}'
+};
+
+function ProductVariationModel(isSelectedVariant, isMaster) {
+    this.selectedVariant = isSelectedVariant ? { custom: customData } : null;
+    this.master = isMaster ? { custom: customData } : null;
+    this.getImages = function () {
+        return images;
+    }
+}
+
+function Product() {
+    this.custom = customData;
+    this.getImages = function () {
+        return images;
+    }
+}
+
+function Variant() {
+    Product.call(this);
+}
+Variant.prototype = Object.create(Product.prototype);
+Variant.prototype.constructor = Variant;
+
+
 describe('productImages', function () {
     var ProductImages = proxyquire(process.cwd() + '/cartridges/int_imgix_products_sfra/cartridge/models/product/productImages', {
         '*/cartridge/scripts/util/collections': {
@@ -37,45 +98,10 @@ describe('productImages', function () {
                 };
             }
         },
-        'dw/catalog/ProductVariationModel': function () {},
-        'dw/catalog/Variant': function () {},
-        'dw/catalog/Product': function () {}
+        'dw/catalog/ProductVariationModel': ProductVariationModel,
+        'dw/catalog/Product': Product,
+        'dw/catalog/Variant': Variant
     });
-
-    var productMock = {
-        getImages: {
-            return: new ArrayList([{
-                alt: 'First Image',
-                title: 'First Image',
-                index: '0',
-                URL: {
-                    toString: function () {
-                        return '/first_image_url';
-                    }
-                },
-                absURL: {
-                    toString: function () {
-                        return 'path/first_image_url';
-                    }
-                }
-            }, {
-                alt: 'Second Image',
-                title: 'Second Image',
-                index: '1',
-                URL: {
-                    toString: function () {
-                        return '/second_image_url';
-                    }
-                },
-                absURL: {
-                    toString: function () {
-                        return 'path/second_image_url';
-                    }
-                }
-            }]),
-            type: 'function'
-        }
-    };
 
     it('should get all small images with imgixBaseURL', function () {
         var images = new ProductImages(toProductMock(productMock), { types: ['small'], quantity: '*' });
@@ -92,6 +118,56 @@ describe('productImages', function () {
 
     it('should get only first small image with imgixBaseURL', function () {
         var images = new ProductImages(toProductMock(productMock), { types: ['small'], quantity: 'single' });
+        assert.equal(images.small.length, 1);
+        assert.equal(images.small[0].alt, 'First Image');
+        assert.equal(images.small[0].title, 'First Image');
+        assert.equal(images.small[0].index, '0');
+        assert.equal(images.small[0].url, 'imgixBaseURL/first_image_url');
+        assert.equal(images.small[0].absURL, 'path/first_image_url');
+    });
+
+    it('should get all small images with imgix data from selected variant product', function () {
+        var productObj = new ProductVariationModel(true, true);
+        var images = new ProductImages(productObj, { types: ['small'], quantity: '*' });
+        assert.equal(images.small.length, 2);
+        assert.equal(images.small[0].alt, 'First Image');
+        assert.equal(images.small[0].index, '0');
+        assert.equal(images.small[0].title, 'First Image');
+        assert.equal(images.small[0].url, 'imgixBaseURL/first_image_url');
+        assert.equal(images.small[0].absURL, 'path/first_image_url');
+        assert.equal(images.small[1].url, 'imgixBaseURL/second_image_url');
+        assert.equal(images.small[1].absURL, 'path/second_image_url');
+        assert.equal(images.small[1].index, '1');
+    });
+
+    it('should get all small images with imgix data from master product', function () {
+        var productObj = new ProductVariationModel(false, true);
+        var images = new ProductImages(productObj, { types: ['small'], quantity: '*' });
+        assert.equal(images.small.length, 2);
+        assert.equal(images.small[0].alt, 'First Image');
+        assert.equal(images.small[0].index, '0');
+        assert.equal(images.small[0].title, 'First Image');
+        assert.equal(images.small[0].url, 'imgixBaseURL/first_image_url');
+        assert.equal(images.small[0].absURL, 'path/first_image_url');
+        assert.equal(images.small[1].url, 'imgixBaseURL/second_image_url');
+        assert.equal(images.small[1].absURL, 'path/second_image_url');
+        assert.equal(images.small[1].index, '1');
+    });
+
+    it('should get only first small with imgix data from master product', function () {
+        var productObj = new Product();
+        var images = new ProductImages(productObj, { types: ['small'], quantity: 'single' });
+        assert.equal(images.small.length, 1);
+        assert.equal(images.small[0].alt, 'First Image');
+        assert.equal(images.small[0].title, 'First Image');
+        assert.equal(images.small[0].index, '0');
+        assert.equal(images.small[0].url, 'imgixBaseURL/first_image_url');
+        assert.equal(images.small[0].absURL, 'path/first_image_url');
+    });
+
+    it('should get only first small with imgix data from variant product', function () {
+        var productObj = new Variant();
+        var images = new ProductImages(productObj, { types: ['small'], quantity: 'single' });
         assert.equal(images.small.length, 1);
         assert.equal(images.small[0].alt, 'First Image');
         assert.equal(images.small[0].title, 'First Image');
