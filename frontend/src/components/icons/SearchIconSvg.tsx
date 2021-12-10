@@ -1,10 +1,23 @@
 import React, { ReactElement } from "react";
-
-export function SearchIconSvg(): ReactElement {
+import styles from "./Icon.module.scss";
+export const SearchIconSvg = ({
+  className,
+}: {
+  className?: string;
+}): ReactElement => {
   return (
-    <svg id="search" viewBox="0 0 24 24">
-      {" "}
-      <path d="M17.9,13.9c0.7-1.3,1.1-2.8,1.1-4.4C19,4.3,14.7,0,9.5,0S0,4.3,0,9.5S4.3,19,9.5,19c1.6,0,3.1-0.4,4.4-1.1L20,24l4-4 L17.9,13.9z M9.5,15C6.5,15,4,12.5,4,9.5C4,6.5,6.5,4,9.5,4S15,6.5,15,9.5C15,12.5,12.5,15,9.5,15z"></path>{" "}
-    </svg>
+    <div className={styles.container + (className ? ` ${className}` : "")}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="#475f72"
+      >
+        <g>
+          <path d="M16 14L11.12 9.12C11.67 8.21 12 7.14 12 6C12 2.69 9.31 0 6 0C2.69 0 0 2.69 0 6C0 9.31 2.69 12 6 12C7.14 12 8.21 11.67 9.12 11.12L14 16L16 14ZM6 10C3.79 10 2 8.21 2 6C2 3.79 3.79 2 6 2C8.21 2 10 3.79 10 6C10 8.21 8.21 10 6 10Z" />
+        </g>
+      </svg>
+    </div>
   );
-}
+};

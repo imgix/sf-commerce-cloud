@@ -5,6 +5,7 @@ import { IDeploymentType } from "../../../types/imgixAPITypes";
 import { useClickOutside } from "../../forms/search/useClickOutside";
 import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
+import { SourceTypeIcon } from "../../icons/SourceTypeIcon";
 import { Button } from "../Button";
 import styles from "./SourceSelect.module.scss";
 
@@ -81,6 +82,10 @@ export function SourceSelect({
           <div className={styles.sourceName}>{source.attributes.name}</div>
           <div className={styles.sourceType}>
             {SOURCE_MAP_DICTIONARY[source.attributes.deployment.type]}
+            <SourceTypeIcon
+              type={source.attributes.deployment.type}
+              className={styles.sourceTypeIcon}
+            />
           </div>
         </div>
       </li>
