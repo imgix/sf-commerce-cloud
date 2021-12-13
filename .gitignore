@@ -70,5 +70,6 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 frontend/src/stories/assets
+!metadata/imgix_data.zip
 
 dw*.json
