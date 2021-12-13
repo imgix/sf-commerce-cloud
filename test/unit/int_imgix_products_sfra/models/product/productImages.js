@@ -135,7 +135,7 @@ describe('productImages', function () {
         assert.equal(images.small[0].title, 'First Image');
         assert.equal(images.small[0].url, 'imgixBaseURL/first_image_url');
         assert.equal(images.small[0].absURL, 'path/first_image_url');
-        assert.equal(images.small[1].url, 'imgixBaseURL/second_image_url');
+        assert.equal(images.small[1].url, 'imgixBaseURL/second_image_url?sourceWidth=3000');
         assert.equal(images.small[1].absURL, 'path/second_image_url');
         assert.equal(images.small[1].index, '1');
     });
@@ -149,7 +149,7 @@ describe('productImages', function () {
         assert.equal(images.small[0].title, 'First Image');
         assert.equal(images.small[0].url, 'imgixBaseURL/first_image_url');
         assert.equal(images.small[0].absURL, 'path/first_image_url');
-        assert.equal(images.small[1].url, 'imgixBaseURL/second_image_url');
+        assert.equal(images.small[1].url, 'imgixBaseURL/second_image_url?sourceWidth=3000');
         assert.equal(images.small[1].absURL, 'path/second_image_url');
         assert.equal(images.small[1].index, '1');
     });
