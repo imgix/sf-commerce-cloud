@@ -2,17 +2,17 @@
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
     <type-extension type-id="SitePreferences">
         <custom-attribute-definitions>
-            <attribute-definition attribute-id="imgixPageDesignerAPIkey">
+            <attribute-definition attribute-id="imgixApiKey">
                 <display-name xml:lang="x-default">imgix API Key</display-name>
-                <description xml:lang="x-default">The API Key of your imgix account</description>
+                <description xml:lang="x-default">The API Key of imgix account</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="imgixPageDesignerSourceName">
-                <display-name xml:lang="x-default">imgix Origin Name</display-name>
-                <description xml:lang="x-default">The Origin Name of your imgix account</description>
+            <attribute-definition attribute-id="imgixDefaultParams">
+                <display-name xml:lang="x-default">imgix Default Params</display-name>
+                <description xml:lang="x-default">imgix Default Params to be passed in URL</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -20,10 +20,10 @@
             </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="imgixPageDesigner">
-                <display-name xml:lang="x-default">imgix Page Designer</display-name>
-                <attribute attribute-id="imgixPageDesignerSourceName"/>
-                <attribute attribute-id="imgixPageDesignerAPIkey"/>
+            <attribute-group group-id="imgixAttributes">
+                <display-name xml:lang="x-default">imgix Attributes</display-name>
+                <attribute attribute-id="imgixApiKey"/>
+                <attribute attribute-id="imgixDefaultParams"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
