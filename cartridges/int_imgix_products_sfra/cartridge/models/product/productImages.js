@@ -56,6 +56,11 @@ function Images(product, imageConfig) {
             imageUrl =
               imgixJsonImages.images.primary.src +
               (imgixDefaultParams ? "?" + imgixDefaultParams : "");
+            // TODO: update sourceWidth adding
+            imageUrl = appendImageUrl(
+              imageUrl,
+              imgixJsonImages.images.primary.sourceWidth
+            );
           }
 
           result = [
@@ -81,6 +86,11 @@ function Images(product, imageConfig) {
               (isBaseURLSet && imgixDefaultParams
                 ? "?" + imgixDefaultParams
                 : "");
+            // TODO: update sourceWidth adding
+            imageUrl = appendImageUrl(
+              imageUrl,
+              imgixJsonImages.images.primary.sourceWidth
+            );
           } else {
             const imageIndex = index - 1;
             if (imageIndex < imgixJsonImages.images.alternatives.length) {
@@ -90,6 +100,11 @@ function Images(product, imageConfig) {
                 (isBaseURLSet && imgixDefaultParams
                   ? "?" + imgixDefaultParams
                   : "");
+              // TODO: update sourceWidth adding
+              imageUrl = appendImageUrl(
+                imageUrl,
+                imgixJsonImages.images.primary.sourceWidth
+              );
             }
           }
         }
@@ -139,6 +154,21 @@ function Images(product, imageConfig) {
       this[type] = result;
     }, this);
   }
+}
+
+/**
+ * Append image URL
+ * @param {String} imageUrl - Image Url
+ * @param {Number} sourceWidth - Source width
+ * @returns {String} Image Url
+ */
+function appendImageUrl(imageUrl, sourceWidth) {
+  if (sourceWidth) {
+    imageUrl += imageUrl.indexOf("?") !== -1 ? "&" : "?";
+    imageUrl += "sourceWidth=" + sourceWidth;
+  }
+
+  return imageUrl;
 }
 
 module.exports = Images;
