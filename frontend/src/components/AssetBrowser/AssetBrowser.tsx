@@ -32,7 +32,7 @@ interface Props {
   }) => Promise<void>;
   onAssetClick?: IBreakoutAppOnSubmit;
 }
-// TODO(luis): Refactor this component into smaller components
+
 export function AssetBrowser({
   errors,
   loading,
@@ -84,7 +84,6 @@ export function AssetBrowser({
    * `<source.attribute.name>.imgix.net`
    */
   const parseSourceDomain = (source: ImgixGETSourcesData[0]) => {
-    // TODO(luis): add tests to better handle this behavior
     // If the source has no custom domains, return the source name as the domain
     if (!source || !source.attributes) return "";
 

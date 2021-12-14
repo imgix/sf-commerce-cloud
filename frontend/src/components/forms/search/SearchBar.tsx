@@ -80,7 +80,6 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
             <div className={styles.simpleSearchIcon}>
               <SearchIconSvg />
             </div>
-            {/* TODO: handle escape key */}
             <input
               type="text"
               className={styles.searchBaseInputField}

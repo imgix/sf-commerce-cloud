@@ -16,7 +16,6 @@ module.exports.render = function (context, modelIn) {
   var model = modelIn || new HashMap();
   var content = context.content;
 
-  // TODO: to be passed down from site settings
   const defaultParams =
     Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
 
