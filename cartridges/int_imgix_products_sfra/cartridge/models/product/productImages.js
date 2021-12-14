@@ -57,7 +57,7 @@ function Images(product, imageConfig) {
               imgixJsonImages.images.primary.src +
               (imgixDefaultParams ? "?" + imgixDefaultParams : "");
             // TODO: update sourceWidth adding
-            imageUrl = appendImageUrl(
+            imageUrl = appendSourceWidth(
               imageUrl,
               imgixJsonImages.images.primary.sourceWidth
             );
@@ -87,7 +87,7 @@ function Images(product, imageConfig) {
                 ? "?" + imgixDefaultParams
                 : "");
             // TODO: update sourceWidth adding
-            imageUrl = appendImageUrl(
+            imageUrl = appendSourceWidth(
               imageUrl,
               imgixJsonImages.images.primary.sourceWidth
             );
@@ -101,7 +101,7 @@ function Images(product, imageConfig) {
                   ? "?" + imgixDefaultParams
                   : "");
               // TODO: update sourceWidth adding
-              imageUrl = appendImageUrl(
+              imageUrl = appendSourceWidth(
                 imageUrl,
                 imgixJsonImages.images.primary.sourceWidth
               );
@@ -157,12 +157,12 @@ function Images(product, imageConfig) {
 }
 
 /**
- * Append image URL
+ * Append source width
  * @param {String} imageUrl - Image Url
  * @param {Number} sourceWidth - Source width
  * @returns {String} Image Url
  */
-function appendImageUrl(imageUrl, sourceWidth) {
+function appendSourceWidth(imageUrl, sourceWidth) {
   if (sourceWidth) {
     imageUrl += imageUrl.indexOf("?") !== -1 ? "&" : "?";
     imageUrl += "sourceWidth=" + sourceWidth;
