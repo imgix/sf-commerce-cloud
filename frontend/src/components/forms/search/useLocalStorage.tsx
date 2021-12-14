@@ -24,7 +24,6 @@ export function useLocalStorage(key: string, initialValue: any) {
       // Save to local storage so that on page refresh we can get it back
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
-      // TODO: handle errors
       console.log(error);
     }
   };

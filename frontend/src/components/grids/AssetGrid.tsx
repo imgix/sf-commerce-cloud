@@ -18,7 +18,6 @@ interface Props {
   handleAssetGridClick?: IAssetGridClickCallback;
 }
 
-// TODO(luis): refactor this component into smaller components
 export function AssetGrid({
   assets,
   domain,

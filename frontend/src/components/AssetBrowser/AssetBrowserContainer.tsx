@@ -98,7 +98,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
           errors: [err.message],
           loading: false,
         });
-        // TODO(luis): remove this console.log
         console.log(err);
       });
   };
@@ -143,7 +142,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
           errors: [err.message],
           loading: false,
         });
-        // TODO(luis): remove this console.log
         console.log(err);
       });
   };
@@ -181,7 +179,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
     const { apiKey } = this.props;
     const { assets } = this.state;
     if (!apiKey) {
-      // TODO(luis): refactor errors into their own module
       this.setState({
         errors: [
           `The API key set for this integration seems to be invalid.\n\nPlease ensure a valid API key is set in your Salesforce Commerce Cloud Site settings\nwhich can be found at Business Manager > [Settings Page] > imgix.`,
@@ -225,7 +222,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
    */
   handlePageChange = (offset: number) => {
     const { selectedSource, cursor, query } = this.state;
-    // TODO(luis): handle undefined source better
     if (!selectedSource) return;
     // update the cursor position with the offset
     const currentPage = Number(cursor.current) || 0;

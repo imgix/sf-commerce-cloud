@@ -92,7 +92,6 @@ export const imgixAPI = {
       index: string = "0",
       size: string = "14"
     ) {
-      // TODO(luis): use a search endpoint rather than the assets endpoint
       // build the filter portion of the query
       const categories = `filter%5Bor:categories%5D=${query}`;
       const keywords = `&filter%5Bor:keywords%5D=${query}`;
@@ -103,9 +102,6 @@ export const imgixAPI = {
       const pageLimit = `&page[limit]=${size}`;
       // build the sorting portion of the query
       const sortBy = `sort=-date_created`;
-      // TODO(luis): is this fields param necessary?
-      // build the fields portion of the query
-      // const fields = `fields[assets]=name,description,origin_path`;
 
       return await makeRequest<ImgixGETAssetsData>({
         url: `assets/${sourceId}?&${filter}&${pageCursor}&${pageLimit}&${sortBy}`,
