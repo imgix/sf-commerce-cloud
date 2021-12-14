@@ -34,7 +34,7 @@ function Images(product, imageConfig) {
                 let imageUrl = imgixBaseURL + firstImage.URL.toString();
                 if (imgixJsonImages) {
                     imageUrl = imgixJsonImages.images.primary.src;
-                    imageUrl = appendImageUrl(imageUrl, imgixJsonImages.images.primary.sourceWidth);
+                    imageUrl = appendSourceWidth(imageUrl, imgixJsonImages.images.primary.sourceWidth);
                 }
                 result = [{
                     alt: firstImage.alt,
@@ -50,12 +50,12 @@ function Images(product, imageConfig) {
                 if (imgixJsonImages) {
                     if (index === 0) {
                         imageUrl = imgixJsonImages.images.primary.src;
-                        imageUrl = appendImageUrl(imageUrl, imgixJsonImages.images.primary.sourceWidth);
+                        imageUrl = appendSourceWidth(imageUrl, imgixJsonImages.images.primary.sourceWidth);
                     } else {
                         const imageIndex = index - 1;
                         if (imageIndex < imgixJsonImages.images.alternatives.length) {
                             imageUrl = imgixJsonImages.images.alternatives[imageIndex].src;
-                            imageUrl = appendImageUrl(imageUrl, imgixJsonImages.images.alternatives[imageIndex].sourceWidth);
+                            imageUrl = appendSourceWidth(imageUrl, imgixJsonImages.images.alternatives[imageIndex].sourceWidth);
                         }
                     }
                 }
@@ -73,12 +73,12 @@ function Images(product, imageConfig) {
 }
 
 /**
- * Append image URL
+ * Append source width
  * @param {String} imageUrl - Image Url
  * @param {Number} sourceWidth - Source width
  * @returns {String} Image Url
  */
-function appendImageUrl(imageUrl, sourceWidth) {
+function appendSourceWidth(imageUrl, sourceWidth) {
     if (sourceWidth) {
         imageUrl += imageUrl.indexOf('?') !== -1 ? '&' : '?';
         imageUrl += 'sourceWidth=' + sourceWidth;
