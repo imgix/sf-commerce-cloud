@@ -19,7 +19,7 @@
                 <min-length>0</min-length>
             </attribute-definition>
             <attribute-definition attribute-id="imgixBaseURL">
-                <display-name xml:lang="x-default">Imgix Base URL</display-name>
+                <display-name xml:lang="x-default">imgix Base URL</display-name>
                 <description xml:lang="x-default">Include Protocol Eg: http:// or https://</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
@@ -39,7 +39,7 @@
     <type-extension type-id="Product">
         <custom-attribute-definitions>
             <attribute-definition attribute-id="imgixData">
-                <display-name xml:lang="x-default">Imgix Images</display-name>
+                <display-name xml:lang="x-default">imgix Images</display-name>
                 <type>text</type>
                 <localizable-flag>false</localizable-flag>
                 <site-specific-flag>false</site-specific-flag>
@@ -52,7 +52,7 @@
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="imgix">
-                <display-name xml:lang="x-default">Imgix</display-name>
+                <display-name xml:lang="x-default">imgix</display-name>
                 <attribute attribute-id="imgixData"/>
             </attribute-group>
         </group-definitions>
