@@ -19,7 +19,7 @@
                 <min-length>0</min-length>
             </attribute-definition>
             <attribute-definition attribute-id="imgixBaseURL">
-                <display-name xml:lang="x-default">Imgix Base URL</display-name>
+                <display-name xml:lang="x-default">imgix Base URL</display-name>
                 <description xml:lang="x-default">Include Protocol Eg: http:// or https://</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
