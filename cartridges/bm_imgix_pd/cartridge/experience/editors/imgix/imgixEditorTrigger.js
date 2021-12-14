@@ -19,13 +19,15 @@ module.exports.init = function (editor) {
     source: "",
   };
 
+  // Store the message from the specified properties resource bundle in the
+  // accumulator under the given key.
   var reducer = function (acc, key) {
     acc.put(
       key,
       Resource.msg(
         key,
-        "experience.editors.imgix.imgixEditorTrigger",
-        defaults[key]
+        "experience.editors.imgix.imgixEditorTrigger", // bundleName
+        defaults[key] // defaultMessage
       )
     );
     return acc;
