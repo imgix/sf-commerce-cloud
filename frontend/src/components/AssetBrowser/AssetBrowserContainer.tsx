@@ -5,7 +5,7 @@ import { IBreakoutAppOnSubmit } from "../../types/breakoutAppPublic";
 import { IPaginationData } from "../Pagination/Pagination";
 import { AssetBrowser } from "./AssetBrowser";
 
-const CURSOR_PAGE_LIMIT = 12;
+const CURSOR_PAGE_LIMIT = 14;
 
 interface Props {
   apiKey: string | null;
