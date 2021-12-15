@@ -1,7 +1,5 @@
 <!-- ix-docs-ignore -->
 
-> ⚠️ This plugin is in **active development** and may change at any time. Use it at your own risk.
-
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
 A Salesforce Commerce Cloud integration between imgix's Image Manager product and Commerce Cloud. Use this integration to insert images from your cloud buckets into your Commerce Cloud pages.
