@@ -12,10 +12,6 @@ A Salesforce Commerce Cloud integration between imgix's Image Manager product an
 
 <!-- /ix-docs-ignore -->
 
-## In Active Development
-
-This plugin is in **active development** and may change at any time. Use it at your own risk.
-
 ## License
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fimgix%2Fsf-commerce-cloud.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fimgix%2Fsf-commerce-cloud?ref=badge_shield)
