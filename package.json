@@ -33,7 +33,7 @@
     "uploadCartridge": "sgmf-scripts --uploadCartridge app_imgix_base_sfra",
     "storybook": "cd frontend && npm run storybook",
     "deploy": "cd frontend && npm run deploy",
-    "build-zip": "zip metadata/imgix_data.zip metadata/imgix_data"
+    "build-zip": "zip -j imgix_data.zip metadata/imgix_data/meta metadata/imgix_data/services.xml"
   },
   "keywords": [
     "imgix",
