@@ -7,6 +7,7 @@ var toProductMock = require("../../../../util");
 
 describe("productImages", function () {
   let imgixBaseURLPreferenceValue = "imgixBaseURL";
+  let imgixProductDefaultParamsPreferenceValue = "";
   var ProductImages = proxyquire(
     process.cwd() +
       "/cartridges/int_imgix_products_sfra/cartridge/models/product/productImages",
@@ -39,7 +40,14 @@ describe("productImages", function () {
         getCurrent: function () {
           return {
             getCustomPreferenceValue: function (preference) {
-              return imgixBaseURLPreferenceValue;
+              switch (preference) {
+                case "imgixProductDefaultParams":
+                  return imgixProductDefaultParamsPreferenceValue;
+                case "imgixBaseURL":
+                  return imgixBaseURLPreferenceValue;
+                default:
+                  throw new Error("Preference value not set");
+              }
             },
           };
         },
@@ -133,5 +141,42 @@ describe("productImages", function () {
 
     // Restore old value
     imgixBaseURLPreferenceValue = oldImgixBaseURLPreferenceValue;
+  });
+  it("should set default params on product images", function () {
+    // Setup test, keep old value to restore later
+    const oldImgixProductDefaultParamsPreferenceValue =
+      imgixProductDefaultParamsPreferenceValue;
+
+    // Disable imgix base URL preference
+    imgixProductDefaultParamsPreferenceValue = "auto=format&fit=crop";
+
+    const containsDefaultParams = (url) =>
+      url.includes("?auto=format&fit=crop");
+
+    const singleSmallImage = new ProductImages(toProductMock(productMock), {
+      types: ["small"],
+      quantity: "single",
+    });
+    assert(
+      containsDefaultParams(singleSmallImage.small[0].url),
+      "url should include default params"
+    );
+
+    const smallImages = new ProductImages(toProductMock(productMock), {
+      types: ["small"],
+      quantity: "*",
+    });
+    assert(
+      containsDefaultParams(smallImages.small[0].url),
+      "url should include default params"
+    );
+    assert(
+      containsDefaultParams(smallImages.small[1].url),
+      "url should include default params"
+    );
+
+    // Restore old value
+    imgixProductDefaultParamsPreferenceValue =
+      oldImgixProductDefaultParamsPreferenceValue;
   });
 });
