@@ -11,8 +11,8 @@
                 <min-length>0</min-length>
             </attribute-definition>
             <attribute-definition attribute-id="imgixDefaultParams">
-                <display-name xml:lang="x-default">imgix Default Params</display-name>
-                <description xml:lang="x-default">imgix Default Params to be passed in URL</description>
+                <display-name xml:lang="x-default">imgix Page Designer Default Params</display-name>
+                <description xml:lang="x-default">imgix Default Params to be set for images rendered using the Page Designer integration</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -26,6 +26,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="imgixProductDefaultParams">
+                <display-name xml:lang="x-default">imgix Product Default Params</display-name>
+                <description xml:lang="x-default">imgix Default Params to be set for images rendered using the product integration</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="imgixAttributes">
@@ -33,6 +41,7 @@
                 <attribute attribute-id="imgixApiKey"/>
                 <attribute attribute-id="imgixDefaultParams"/>
                 <attribute attribute-id="imgixBaseURL"/>
+                <attribute attribute-id="imgixProductDefaultParams"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
