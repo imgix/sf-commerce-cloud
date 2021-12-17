@@ -32,7 +32,7 @@ function Images(product, imageConfig) {
                 imgixBaseURL +
                 firstImage.URL.toString() +
                 (isBaseURLSet && imgixDefaultParams
-                  ? `?${imgixDefaultParams}`
+                  ? "?" + imgixDefaultParams
                   : ""),
               title: firstImage.title,
               index: "0",
@@ -48,7 +48,7 @@ function Images(product, imageConfig) {
               imgixBaseURL +
               image.URL.toString() +
               (isBaseURLSet && imgixDefaultParams
-                ? `?${imgixDefaultParams}`
+                  ? "?" + imgixDefaultParams
                 : ""),
             index: index.toString(),
             title: image.title,
