@@ -32,7 +32,8 @@
     "cartridge:add-to-path": "sfcc-ci cartridge:add",
     "uploadCartridge": "sgmf-scripts --uploadCartridge app_imgix_base_sfra",
     "storybook": "cd frontend && npm run storybook",
-    "deploy": "cd frontend && npm run deploy"
+    "deploy": "cd frontend && npm run deploy",
+    "build-zip": "zip metadata/imgix_data.zip metadata/imgix_data"
   },
   "keywords": [
     "imgix",
