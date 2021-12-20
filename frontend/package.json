@@ -26,8 +26,8 @@
   "scripts": {
     "start": "yarn start:sidebar",
     "build": "yarn run build:breakout && yarn run build:sidebar",
-    "build:no-chunks:breakout": "cross-env REACT_APP_APP_TYPE=breakout react-app-rewired build",
-    "build:no-chunks:sidebar": "cross-env REACT_APP_APP_TYPE=sidebar react-app-rewired build",
+    "build:no-chunks:breakout": "cross-env REACT_APP_APP_TYPE=breakout SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
+    "build:no-chunks:sidebar": "cross-env REACT_APP_APP_TYPE=sidebar SKIP_PREFLIGHT_CHECK=true react-app-rewired build",
     "build:breakout": "yarn build:no-chunks:breakout",
     "build:sidebar": "yarn build:no-chunks:sidebar",
     "deploy": "yarn deploy:breakout && yarn deploy:sidebar",
