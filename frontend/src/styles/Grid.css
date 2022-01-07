@@ -58,7 +58,8 @@
 }
 
 .ix-grid-item-image {
-  position: relative;
+  /* position: relative; */
+  position: static;
   overflow: hidden;
   height: 180px;
 }
@@ -82,20 +83,14 @@
   /* This supports the "ellipsis" behaviour to ensure that the filename stays on
    * one line */
   white-space: nowrap;
-  position: relative;
+  /* position: relative; */
+  position: static;
   padding: 6px 10px;
   margin: 0px;
-
   text-align: center;
-}
-
-.ix-grid-item-filename:before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 20px;
-  background: linear-gradient(90deg, #fff 25%, #fff);
-  background: linear-gradient(90deg, #fff 25%, hsla(0, 0%, 100%, 0));
+  /* place gradient over start of filename to fade out text */
+  background-image: linear-gradient(270deg, #000000 57%, rgba(0, 0, 0, 0));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
