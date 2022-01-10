@@ -74,29 +74,18 @@ function Images(product, imageConfig) {
           ];
         }
       } else {
-        let imageUrl =
-          imgixBaseURL +
-          image.URL.toString() +
-          (isBaseURLSet && imgixDefaultParams ? "?" + imgixDefaultParams : "");
-        if (imgixJsonImages) {
-          if (index === 0) {
-            // TODO: add tests for default params
-            imageUrl =
-              imgixJsonImages.images.primary.src +
-              (isBaseURLSet && imgixDefaultParams
-                ? "?" + imgixDefaultParams
-                : "");
-            // TODO: update sourceWidth adding
-            imageUrl = appendSourceWidth(
-              imageUrl,
-              imgixJsonImages.images.primary.sourceWidth
-            );
-          } else {
-            const imageIndex = index - 1;
-            if (imageIndex < imgixJsonImages.images.alternatives.length) {
+        result = collections.map(images, function (image, index) {
+          let imageUrl =
+            imgixBaseURL +
+            image.URL.toString() +
+            (isBaseURLSet && imgixDefaultParams
+              ? "?" + imgixDefaultParams
+              : "");
+          if (imgixJsonImages) {
+            if (index === 0) {
               // TODO: add tests for default params
               imageUrl =
-                imgixJsonImages.images.alternatives[imageIndex].src +
+                imgixJsonImages.images.primary.src +
                 (isBaseURLSet && imgixDefaultParams
                   ? "?" + imgixDefaultParams
                   : "");
@@ -105,11 +94,24 @@ function Images(product, imageConfig) {
                 imageUrl,
                 imgixJsonImages.images.primary.sourceWidth
               );
+            } else {
+              const imageIndex = index - 1;
+              if (imageIndex < imgixJsonImages.images.alternatives.length) {
+                // TODO: add tests for default params
+                imageUrl =
+                  imgixJsonImages.images.alternatives[imageIndex].src +
+                  (isBaseURLSet && imgixDefaultParams
+                    ? "?" + imgixDefaultParams
+                    : "");
+                // TODO: update sourceWidth adding
+                imageUrl = appendSourceWidth(
+                  imageUrl,
+                  imgixJsonImages.images.alternatives[imageIndex].sourceWidth
+                );
+              }
             }
           }
-        }
 
-        result = collections.map(images, function (image, index) {
           return {
             alt: image.alt,
             url: imageUrl,
