@@ -79,8 +79,8 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  font-size: 13px;
-  line-height: 15px;
+  font-size: 0.813rem; /* 13px */
+  line-height: 1.15rem;
   text-transform: uppercase;
 
   color: #475f72;

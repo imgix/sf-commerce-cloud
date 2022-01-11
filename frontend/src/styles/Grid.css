@@ -74,8 +74,8 @@
   display: flex;
   justify-content: flex-end;
   flex: 0 1 auto;
-  font-size: 14px;
-  line-height: 32px;
+  font-size: 0.875rem; /* 14px */
+  line-height: 2rem;
   color: #6c7f8e;
   font-style: normal;
   font-weight: normal;
