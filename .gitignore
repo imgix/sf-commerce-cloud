@@ -73,3 +73,5 @@ frontend/src/stories/assets
 !metadata/imgix_data.zip
 
 dw*.json
+
+metadata/system-objecttype-extensions.xml
