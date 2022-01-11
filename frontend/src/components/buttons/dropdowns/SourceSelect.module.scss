@@ -92,15 +92,15 @@
 
 .sourceName {
   color: #2b3944;
-  line-height: 1.5em; /* 24px */
-  margin-bottom: 8px;
+  line-height: 1.5rem;
+  margin-bottom: 0.5rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 .sourceType {
-  font-size: 0.875em; /* 14px */
-  line-height: 1.2307692307692308em; /* 16px */
+  font-size: 0.875rem; /* 14px */
+  line-height: 1rem;
   color: #475f72;
   white-space: nowrap;
   text-overflow: ellipsis;
