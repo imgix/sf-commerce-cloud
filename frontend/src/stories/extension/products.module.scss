@@ -1,0 +1,50 @@
+/* Styles copied from SF */
+.tableHeader {
+  background-color: #eee;
+  color: #54585a;
+  font-weight: bold;
+  padding: 3px 5px;
+  white-space: nowrap;
+}
+.aldi {
+  border: 1px solid #dadada;
+}
+
+.top {
+  vertical-align: top;
+}
+.fielditem2 {
+  font-weight: bold;
+  color: #000;
+  padding: 6px;
+  vertical-align: top;
+  white-space: nowrap;
+  padding-top: 5px;
+}
+.tableDetail {
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  height: 18px;
+}
+
+.tableDetail,
+.tableDetail td {
+  color: #000;
+}
+
+.textarea {
+  background-color: #fff !important;
+  background-image: none;
+  border: 1px solid #a5aeb5;
+  padding: 1px 0 2px 2px;
+  margin: 0;
+}
+
+.w100 {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
