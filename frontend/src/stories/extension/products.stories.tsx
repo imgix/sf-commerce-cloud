@@ -1,6 +1,6 @@
 import { ComponentMeta } from "@storybook/react";
 import React from "react";
-import { injectExtensionApp } from "../../index-extension";
+import { injectExtensionAppWithInterval } from "../../index-extension";
 import "../../styles/App.css";
 import styles from "./products.module.scss";
 
@@ -79,7 +79,7 @@ export const NoExtension = NoExtensionTemplate.bind({});
 
 const WithExtensionTemplate = () => {
   React.useLayoutEffect(() => {
-    injectExtensionApp();
+    injectExtensionAppWithInterval();
   }, []);
   return <NoExtensionTemplate />;
 };
