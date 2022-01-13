@@ -4,18 +4,33 @@ const productsLabelSelector = '[data-dw-tooltip="Product.imgixData"]';
 export const injectExtensionApp = () => {
   const productsLabel = document.querySelector(productsLabelSelector);
   const productsLabelParentTable = productsLabel?.closest("table");
-  const closestTD = productsLabelParentTable?.closest("td");
+  const closestTR = productsLabelParentTable?.closest("tr");
+  const customAttributeTextarea = closestTR?.querySelector("textarea");
 
-  if (!closestTD) {
+  if (!closestTR || !customAttributeTextarea) {
     return;
   }
 
-  closestTD.nextElementSibling?.remove();
-  closestTD.setAttribute("colspan", "2");
+  const newTR = document.createElement("tr");
+  const newTD = document.createElement("td");
+  newTD.setAttribute("colspan", "2");
+  newTR.appendChild(newTD);
 
-  closestTD.innerHTML = "Insert React App here!";
+  closestTR.insertAdjacentElement("afterend", newTR);
+  closestTR.style.display = "none";
+
+  /**
+   * Set the imgix custom attribute value.
+   * @param value The stringified JSON value to set in the custom attribute textarea
+   */
+  const setCustomAttributeValue = (value: string) => {
+    // TODO: check correct way to set textarea value
+    customAttributeTextarea.textContent = value;
+  };
+
+  newTD.innerHTML = "Insert React App here!";
   // uncomment next line when React app is ready
-  // ReactDOM.render(<App />, closestTD)
+  // ReactDOM.render(<App onChange={setCustomAttributeValue} />, newTD)
 };
 
 export const injectExtensionAppWithInterval = () => {
