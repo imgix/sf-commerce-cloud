@@ -1,3 +1,5 @@
+import styles from "./index-extension.module.scss";
+
 declare const chrome: any;
 
 const productsLabelSelector = '[data-dw-tooltip="Product.imgixData"]';
@@ -14,6 +16,7 @@ export const injectExtensionApp = () => {
   const newTR = document.createElement("tr");
   const newTD = document.createElement("td");
   newTD.setAttribute("colspan", "2");
+  newTD.setAttribute("class", styles.appContainer);
   newTR.appendChild(newTD);
 
   closestTR.insertAdjacentElement("afterend", newTR);
