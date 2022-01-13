@@ -43,7 +43,7 @@
     "deploy:sidebar:js": "cp -R build/js/sidebar.js ../cartridges/bm_imgix_pd/cartridge/static/default/experience/editors/imgix/imgixEditorTriggerScript.js",
     "deploy:sidebar:css:win": "copy build\\css\\sidebar.css ..\\cartridges\\bm_imgix_pd\\cartridge\\static\\default\\experience\\editors\\imgix\\imgixEditorTriggerCSS.css",
     "deploy:sidebar:js:win": "copy build\\js\\sidebar.js ..\\cartridges\\bm_imgix_pd\\cartridge\\static\\default\\experience\\editors\\imgix\\imgixEditorTriggerScript.js",
-    "deploy:extension": "yarn build:extension && cp build/js/extension.js ../src/extension/src/inject/inject.js",
+    "deploy:extension": "yarn build:extension && cp build/js/extension.js ../src/extension/src/inject/inject.js && cp build/css/extension.css ../src/extension/src/inject/inject.css",
     "test": "yarn test:all",
     "test:ci": "CI=true yarn test:sidebar && CI=true yarn test:breakout",
     "test:all": "yarn test:sidebar && yarn test:breakout",
