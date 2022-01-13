@@ -19,12 +19,19 @@ export const injectExtensionApp = () => {
 };
 
 export const injectExtensionAppWithInterval = () => {
+  let n = 0;
   const interval = setInterval(() => {
     console.log("[imgix] Starting search for products label");
     if (document.querySelector(productsLabelSelector)) {
       console.log("[imgix] Products label found, clearing interval");
       clearInterval(interval);
       injectExtensionApp();
+      return;
+    }
+    n++;
+    if (n > 3000 /* 3000 * 10ms = 30s */) {
+      clearInterval();
+      console.log("[imgix] Products label not found, clearing interval");
     }
   }, 10);
 };
