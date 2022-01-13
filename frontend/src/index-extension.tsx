@@ -1,7 +1,7 @@
 declare const chrome: any;
 
+const productsLabelSelector = '[data-dw-tooltip="Product.imgixData"]';
 export const injectExtensionApp = () => {
-  const el = document.querySelector('[data-dw-tooltip="Product.imgixData"]');
   const productsLabel = document.querySelector(productsLabelSelector);
   const productsLabelParentTable = productsLabel?.closest("table");
   const closestTD = productsLabelParentTable?.closest("td");
@@ -17,6 +17,16 @@ export const injectExtensionApp = () => {
   // uncomment next line when React app is ready
   // ReactDOM.render(<App />, closestTD)
 };
+
+export const injectExtensionAppWithInterval = () => {
+  const interval = setInterval(() => {
+    console.log("[imgix] Starting search for products label");
+    if (document.querySelector(productsLabelSelector)) {
+      console.log("[imgix] Products label found, clearing interval");
+      clearInterval(interval);
+      injectExtensionApp();
+    }
+  }, 10);
 };
 
 export const runExtension = () => {
@@ -25,12 +35,8 @@ export const runExtension = () => {
       if (document.readyState === "complete") {
         clearInterval(readyStateCheckInterval);
 
-        // ----------------------------------------------------------
-        // This part of the script triggers when page is done loading
-        console.log("Hello. This message was sent from scripts/inject.js");
-        // ----------------------------------------------------------
-
-        setTimeout(injectExtensionApp, 3000);
+        console.log("[imgix] Content Script initiated");
+        injectExtensionAppWithInterval();
       }
     }, 10);
   });
