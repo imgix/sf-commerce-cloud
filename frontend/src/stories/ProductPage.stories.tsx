@@ -4,6 +4,7 @@ import {
   ProductPageImages,
   ProductPageImagesProps,
 } from "../components/ProductPageImages";
+import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { MultiStory } from "./common/MultiStory";
 
 export default {
@@ -14,16 +15,14 @@ export default {
 
 const selectedImage = [
   {
-    title: "Image 1",
-    url: "https://sdk-test.imgix.net/amsterdam.jpg",
+    src: "https://sdk-test.imgix.net/amsterdam.jpg",
   },
-];
+] as IImgixCustomAttributeValue[];
 const selectedImages: any = [];
 
 for (let i = 0; i < 50; i++) {
   selectedImages.push({
-    title: "Image 1",
-    url: "https://sdk-test.imgix.net/amsterdam.jpg",
+    src: "https://sdk-test.imgix.net/amsterdam.jpg",
   });
 }
 
@@ -49,7 +48,7 @@ const Template: ComponentStory<typeof ProductPageImages> = (args) => (
   ></MultiStory>
 );
 
-export const ProductPageImageContainer = Template.bind({});
-ProductPageImageContainer.args = {
+export const ImageContainer = Template.bind({});
+ImageContainer.args = {
   images: null,
 } as ProductPageImagesProps;
