@@ -91,6 +91,15 @@
 .addImageButton:hover {
   background: rgba(255, 255, 255, 0.8);
 }
+.addImageButtonDisabled {
+  background: rgba(255, 255, 255, 0.249);
+  color: #475f72;
+  cursor: default;
+}
+.addImageButtonDisabled:hover {
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.249);
+}
 
 .addIcon {
   margin-right: 5px;
