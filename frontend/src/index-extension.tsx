@@ -2,10 +2,21 @@ declare const chrome: any;
 
 export const injectExtensionApp = () => {
   const el = document.querySelector('[data-dw-tooltip="Product.imgixData"]');
-  console.log(`el`, el);
-  if (el) {
-    el.innerHTML = "Hello World (came from the Browser Extension)!";
+  const productsLabel = document.querySelector(productsLabelSelector);
+  const productsLabelParentTable = productsLabel?.closest("table");
+  const closestTD = productsLabelParentTable?.closest("td");
+
+  if (!closestTD) {
+    return;
   }
+
+  closestTD.nextElementSibling?.remove();
+  closestTD.setAttribute("colspan", "2");
+
+  closestTD.innerHTML = "Insert React App here!";
+  // uncomment next line when React app is ready
+  // ReactDOM.render(<App />, closestTD)
+};
 };
 
 export const runExtension = () => {
