@@ -26,13 +26,13 @@ export const injectExtensionApp = () => {
    * Set the imgix custom attribute value.
    * @param value The stringified JSON value to set in the custom attribute textarea
    */
-  const setCustomAttributeValue = (value: string) => {
+  /* const setCustomAttributeValue = (value: string) => {
     // TODO: check correct way to set textarea value
-    customAttributeTextarea.textContent = value;
-  };
+    customAttributeTextarea.value = value;
+  }; */
 
   newTD.innerHTML = "Insert React App here!";
-  // uncomment next line when React app is ready
+  // uncomment next line and setCustomAttributeValue function when React app is ready
   // ReactDOM.render(<App onChange={setCustomAttributeValue} />, newTD)
 };
 
