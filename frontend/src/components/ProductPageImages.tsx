@@ -6,7 +6,7 @@ import { ProductImageContainer } from "./ProductImage/ProductImageContainer";
 
 export interface ProductPageImagesProps {
   disabled: boolean;
-  images: IImgixCustomAttributeValue[] | null;
+  images: IImgixCustomAttributeValue[] | undefined;
   onClick: () => void;
 }
 
@@ -17,6 +17,13 @@ export const ProductPageImages = ({
 }: ProductPageImagesProps): ReactElement => {
   return (
     <OverflowScrollX>
+      <div style={{ margin: 5, minWidth: 120, display: "flex" }}>
+        <AddButton
+          disabled={disabled}
+          label="ADD IMAGE"
+          onOpenBreakoutClick={onClick}
+        />
+      </div>
       <>
         {/* we have to create a fragment around jsx elements otherwise
         typescript will throw an error */}
@@ -29,13 +36,6 @@ export const ProductPageImages = ({
           );
         })}
       </>
-      <div style={{ margin: 5, minWidth: 120, display: "flex" }}>
-        <AddButton
-          disabled={disabled}
-          label="ADD IMAGE"
-          onOpenBreakoutClick={onClick}
-        />
-      </div>
     </OverflowScrollX>
   );
 };
