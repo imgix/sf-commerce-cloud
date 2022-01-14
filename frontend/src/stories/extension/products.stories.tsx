@@ -52,7 +52,45 @@ export const SFImgixProductsSection = () => {
                       name="Meta48576099ecdd41387849fbe603"
                       rows={10}
                       className={`${styles.w100} ${styles.textarea}`}
-                    ></textarea>
+                    >
+                      {JSON.stringify({
+                        images: {
+                          primary: {
+                            src:
+                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwdb18b57a/images/large/PG.10221714.JJ169XX.PZ.jpg",
+                          },
+                          alternatives: [
+                            {
+                              src:
+                                "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwd910a0e9/images/large/PG.10221714.JJ169XX.BZ.jpg",
+                              sourceWidth: 3000,
+                            },
+                          ],
+                        },
+                        swatchImages: [
+                          {
+                            src:
+                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwc3a4d25c/images/swatch/PG.10221714.JJ169XX.CP.jpg",
+                          },
+                          {
+                            src:
+                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwcb9a6e30/images/swatch/PG.10221714.JJ370XX.CP.jpg",
+                          },
+                          {
+                            src:
+                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dw163523bf/images/swatch/PG.10221714.JJ8UTXX.CP.jpg",
+                          },
+                          {
+                            src:
+                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dw9400c632/images/swatch/PG.10221714.JJ908XX.CP.jpg",
+                          },
+                          {
+                            src:
+                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwe3dd90d4/images/swatch/PG.10221714.JJI15XX.CP.jpg",
+                          },
+                        ],
+                      })}
+                    </textarea>
                   </td>
                 </tr>
               </tbody>
