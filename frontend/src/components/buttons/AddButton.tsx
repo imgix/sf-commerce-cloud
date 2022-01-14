@@ -12,7 +12,7 @@ interface Props {
 export const AddButton = ({
   onOpenBreakoutClick,
   disabled,
-  height = 60,
+  height,
   label,
   width,
 }: Props): ReactElement => {

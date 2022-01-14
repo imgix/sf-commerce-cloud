@@ -1,9 +1,10 @@
 .addButtonWrapper {
   background-color: #e3e7eb;
-  height: 215px;
-  overflow: hidden;
   display: flex;
+  height: 60px;
+  overflow: hidden;
   position: relative;
+  width: 114px;
 }
 
 .addImageButton {
@@ -26,18 +27,18 @@
   padding: 10px 12px;
   text-transform: uppercase;
   user-select: none;
-}
-.addImageButton:hover {
-  background: rgba(255, 255, 255, 0.8);
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
 }
 .addImageButtonDisabled {
   background: rgba(255, 255, 255, 0.249);
   color: #475f72;
   cursor: default;
-}
-.addImageButtonDisabled:hover {
-  cursor: not-allowed;
-  background: rgba(255, 255, 255, 0.249);
+  &:hover {
+    cursor: not-allowed;
+    background: rgba(255, 255, 255, 0.249);
+  }
 }
 
 .addIcon {
