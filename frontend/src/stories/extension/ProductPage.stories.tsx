@@ -3,12 +3,12 @@ import React from "react";
 import {
   ProductPageImages,
   ProductPageImagesProps,
-} from "../components/ProductPageImages";
-import { IImgixCustomAttributeValue } from "../types/imgixSF";
-import { MultiStory } from "./common/MultiStory";
+} from "../../components/ProductPageImages";
+import { IImgixCustomAttributeValue } from "../../types/imgixSF";
+import { MultiStory } from "../common/MultiStory";
 
 export default {
-  title: "Example/ProductPage",
+  title: "Extension/Product Image Container",
   component: ProductPageImages,
   argTypes: { onClick: { action: "clicked" } },
 } as ComponentMeta<typeof ProductPageImages>;
@@ -48,7 +48,7 @@ const Template: ComponentStory<typeof ProductPageImages> = (args) => (
   ></MultiStory>
 );
 
-export const ImageContainer = Template.bind({});
-ImageContainer.args = {
-  images: null,
+export const ProductImages = Template.bind({});
+ProductImages.args = {
+  images: selectedImage,
 } as ProductPageImagesProps;
