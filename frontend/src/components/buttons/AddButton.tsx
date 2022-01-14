@@ -9,7 +9,7 @@ interface Props {
   width?: number;
 }
 
-export const AddIButton = ({
+export const AddButton = ({
   onOpenBreakoutClick,
   disabled,
   height = 60,
