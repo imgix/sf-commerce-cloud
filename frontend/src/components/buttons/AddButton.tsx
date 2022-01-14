@@ -1,25 +1,25 @@
 import React, { ReactElement } from "react";
 import { AddSvg } from "../icons/AddSvg";
-import styles from "../SidebarApp.module.css";
+import styles from "./AddButton.module.scss";
 interface Props {
-  width?: number;
+  onOpenBreakoutClick: () => void;
+  disabled?: boolean;
   height?: number;
   label?: string;
-  disabled?: boolean;
-  onOpenBreakoutClick: () => void;
+  width?: number;
 }
 
 export const AddIButton = ({
-  width,
+  onOpenBreakoutClick,
+  disabled,
   height = 60,
   label,
-  disabled,
-  onOpenBreakoutClick,
+  width,
 }: Props): ReactElement => {
   return (
     <div
+      className={styles.addButtonWrapper}
       onClick={onOpenBreakoutClick}
-      className={styles.imageWrapper}
       style={{ height, width }}
     >
       <div

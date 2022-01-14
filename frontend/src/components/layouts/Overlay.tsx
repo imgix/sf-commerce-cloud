@@ -1,10 +1,11 @@
 import React, { ReactChild, ReactElement } from "react";
-import styles from "../SidebarApp.module.css";
+import styles from "./Overlay.module.scss";
 
 interface Props {
   children: ReactChild | ReactChild[];
+  visible: boolean;
 }
 
-export const Overlay = ({ children }: Props): ReactElement => {
-  return <div className={styles.replaceImageOverlay}>{children}</div>;
+export const Overlay = ({ children, visible }: Props): ReactElement => {
+  return visible ? <div className={styles.Overlay}>{children}</div> : <></>;
 };

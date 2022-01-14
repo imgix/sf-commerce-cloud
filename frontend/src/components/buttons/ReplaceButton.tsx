@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { RefreshSvg } from "../icons/RefreshSvg";
-import styles from "../SidebarApp.module.css";
+import styles from "./ReplaceButton.module.scss";
 interface Props {
   label?: string;
   onCLick?: () => void;
@@ -14,8 +14,8 @@ export const ReplaceButton = ({
     <>
       <div className={styles.replaceImageOverlayButton} onClick={onCLick}>
         <div
-          style={label?.length ? {} : { marginRight: 0 }}
           className={styles.replaceImageIcon}
+          style={label?.length ? {} : { marginRight: 0 }}
         >
           <RefreshSvg />
         </div>
