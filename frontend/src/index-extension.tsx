@@ -1,3 +1,5 @@
+import ReactDOM from "react-dom";
+import { App } from "./components/ExtensionApp";
 import styles from "./index-extension.module.scss";
 
 declare const chrome: any;
@@ -26,14 +28,59 @@ export const injectExtensionApp = () => {
    * Set the imgix custom attribute value.
    * @param value The stringified JSON value to set in the custom attribute textarea
    */
-  /* const setCustomAttributeValue = (value: string) => {
+  const setCustomAttributeValue = (value: string) => {
     // TODO: check correct way to set textarea value
     customAttributeTextarea.value = value;
-  }; */
+  };
 
-  newTD.innerHTML = "Insert React App here!";
+  const clearCustomAttributeValue = () => {
+    setCustomAttributeValue("");
+  };
+
+  newTD.innerHTML = "";
+
+  const customAttributeValue = JSON.parse(customAttributeTextarea.value);
+
+  // reduce the custom attribute value to an array of images, where each image
+  // is an object with src, sourceWidth, and imageType properties
+  const storeCustomAttributeImages = (customAttributeValue: any) => {
+    let customImages = [];
+    // add the primary image to the array of images
+    customImages.push({
+      src: customAttributeValue?.images?.primary?.src,
+      sourceWidth: customAttributeValue?.images?.primary?.sourceWidth,
+      imageType: "primary",
+    });
+    customImages.push(
+      ...customAttributeValue?.images?.alternatives?.map((image: any) => ({
+        src: image.src,
+        sourceWidth: image.sourceWidth,
+        imageType: "alternative",
+      }))
+    );
+    // add the swatch images to the array of images
+    customImages.push(
+      ...customAttributeValue?.swatchImages?.map((image: any) => ({
+        src: image.src,
+        sourceWidth: image.sourceWidth,
+        imageType: "swatch",
+      }))
+    );
+
+    return customImages;
+  };
+
+  const images = storeCustomAttributeImages(customAttributeValue);
+
   // uncomment next line and setCustomAttributeValue function when React app is ready
-  // ReactDOM.render(<App onChange={setCustomAttributeValue} />, newTD)
+  ReactDOM.render(
+    <App
+      images={images}
+      onChange={setCustomAttributeValue}
+      onClear={clearCustomAttributeValue}
+    />,
+    newTD
+  );
 };
 
 export const injectExtensionAppWithInterval = () => {
