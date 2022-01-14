@@ -6,21 +6,17 @@ interface Props {
   onCLick?: () => void;
 }
 
-export const ReplaceButton = ({
-  onCLick = () => null,
-  label,
-}: Props): ReactElement => {
+export const ReplaceButton = ({ onCLick, label }: Props): ReactElement => {
   return (
-    <>
-      <div className={styles.replaceImageOverlayButton} onClick={onCLick}>
-        <div
-          className={styles.replaceImageIcon}
-          style={label?.length ? {} : { marginRight: 0 }}
-        >
-          <RefreshSvg />
-        </div>
-        {label}
+    <div className={styles.replaceImageOverlayButton} onClick={onCLick}>
+      <div
+        className={styles.replaceImageIcon}
+        // if no label is provided, we use remove the margin to center the icon
+        style={label?.length ? {} : { marginRight: 0 }}
+      >
+        <RefreshSvg />
       </div>
-    </>
+      {label}
+    </div>
   );
 };
