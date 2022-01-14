@@ -10,9 +10,9 @@
   flex-direction: row;
   padding: 10px 12px;
   user-select: none;
-}
-.replaceImageOverlayButton:hover {
-  background: rgba(28, 44, 56, 0.8);
+  &:hover {
+    background: rgba(28, 44, 56, 0.8);
+  }
 }
 
 .replaceImageIcon {
