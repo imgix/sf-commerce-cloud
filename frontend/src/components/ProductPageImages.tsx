@@ -1,41 +1,41 @@
 import React, { ReactElement } from "react";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddIButton } from "./buttons/AddButton";
+import { OverflowScrollX } from "./layouts/OverflowScrollX";
 import { ProductImageContainer } from "./ProductImage/ProductImageContainer";
 
 export interface ProductPageImagesProps {
-  images: IImgixCustomAttributeValue[] | null;
   disabled: boolean;
+  images: IImgixCustomAttributeValue[] | null;
   onClick: () => void;
 }
 
 export const ProductPageImages = ({
-  images,
   disabled,
+  images,
   onClick,
 }: ProductPageImagesProps): ReactElement => {
   return (
-    <div style={{ width: 500, overflowX: "auto" }}>
-      <ul style={{ display: "flex", flexDirection: "row" }}>
-        {/* create an li for each image in data.images */}
-        {images?.map((image, index) => (
-          <li style={{ margin: 5, minWidth: 60 }} key={index}>
+    <OverflowScrollX>
+      <>
+        {/* we have to create a fragment around jsx elements otherwise
+        typescript will throw an error */}
+        {images?.map((image: IImgixCustomAttributeValue) => {
+          return (
             <ProductImageContainer
-              value={{ src: image.src } as IImgixCustomAttributeValue}
               onOpenBreakoutClick={onClick}
-              width={60}
-              height={60}
+              value={{ ...image } as IImgixCustomAttributeValue}
             />
-          </li>
-        ))}
-        <li style={{ margin: 5, minWidth: 120, display: "flex" }}>
-          <AddIButton
-            onOpenBreakoutClick={onClick}
-            disabled={disabled}
-            label="ADD IMAGE"
-          />
-        </li>
-      </ul>
-    </div>
+          );
+        })}
+      </>
+      <div style={{ margin: 5, minWidth: 120, display: "flex" }}>
+        <AddIButton
+          disabled={disabled}
+          label="ADD IMAGE"
+          onOpenBreakoutClick={onClick}
+        />
+      </div>
+    </OverflowScrollX>
   );
 };

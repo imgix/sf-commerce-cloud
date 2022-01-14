@@ -3,42 +3,43 @@ import Imgix from "react-imgix";
 import { IImgixCustomAttributeValue } from "../../types/imgixSF";
 import { ReplaceButton } from "../buttons/ReplaceButton";
 import { Overlay } from "../layouts/Overlay";
-import styles from "../SidebarApp.module.css";
+import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
   onOpenBreakoutClick: () => void;
   value: IImgixCustomAttributeValue;
-  width?: number;
-  height?: number;
-  buttonLabel?: string;
-  imgixParams?: any;
 }
 
 export const ProductImageContainer = ({
   value,
   onOpenBreakoutClick,
-  width = 344,
-  height = 215,
-  buttonLabel,
-  imgixParams = {
-    fit: "crop",
-  },
 }: Props): ReactElement => {
+  const [hovering, setHovering] = React.useState(false);
+
+  const onMouseEnter = (): void => {
+    setHovering(true);
+  };
+
+  const onMouseLeave = (): void => {
+    setHovering(false);
+  };
+
   return (
-    <div onClick={onOpenBreakoutClick}>
-      <div style={{ width, height }} className={styles.imageWrapper}>
-        <>
-          <Overlay>
-            <ReplaceButton label={buttonLabel} />
-          </Overlay>
-          <Imgix
-            src={value.src}
-            width={width}
-            height={height}
-            imgixParams={imgixParams}
-          />
-        </>
-      </div>
+    <div
+      className={styles.imageWrapper}
+      onClick={onOpenBreakoutClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <Overlay visible={hovering}>
+        <ReplaceButton />
+      </Overlay>
+      <Imgix
+        height={60}
+        imgixParams={{ fit: "crop" }}
+        src={value.src}
+        width={60}
+      />
     </div>
   );
 };
