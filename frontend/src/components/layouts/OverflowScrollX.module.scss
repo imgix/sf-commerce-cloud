@@ -1,0 +1,13 @@
+.overflowXContainer {
+  overflow-x: auto;
+  width: 500px;
+}
+
+.overflowListContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+li {
+  list-style: none;
+}
