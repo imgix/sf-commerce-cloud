@@ -5,11 +5,10 @@ import { ProductPageImages } from "./ProductPageImages";
 
 export type ISidebarAppProps = {
   onChange: (value: string) => void;
-  onClear: () => void;
   images: IImgixCustomAttributeValue[] | undefined;
 };
 
-export function ExtensionApp({ onChange, onClear, images }: ISidebarAppProps) {
+export function ExtensionApp({ onChange, images }: ISidebarAppProps) {
   const disabled = images === undefined || images.length === 0;
   const onOpenBreakoutClick = () => {
     console.log("[imgix] onOpenBreakoutClick");
@@ -20,7 +19,6 @@ export function ExtensionApp({ onChange, onClear, images }: ISidebarAppProps) {
         <div>
           <ProductPageImages
             onClick={onOpenBreakoutClick}
-            // TODO: add an `onClear` handler
             images={images}
             disabled={disabled}
           />
