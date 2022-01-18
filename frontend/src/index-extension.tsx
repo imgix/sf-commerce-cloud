@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { App } from "./components/ExtensionApp";
+import { ExtensionApp } from "./components/ExtensionApp";
 import styles from "./index-extension.module.scss";
 
 declare const chrome: any;
@@ -74,7 +74,7 @@ export const injectExtensionApp = () => {
 
   // uncomment next line and setCustomAttributeValue function when React app is ready
   ReactDOM.render(
-    <App
+    <ExtensionApp
       images={images}
       onChange={setCustomAttributeValue}
       onClear={clearCustomAttributeValue}

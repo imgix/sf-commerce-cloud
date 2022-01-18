@@ -9,7 +9,7 @@ export type ISidebarAppProps = {
   images: IImgixCustomAttributeValue[] | undefined;
 };
 
-export function App({ onChange, onClear, images }: ISidebarAppProps) {
+export function ExtensionApp({ onChange, onClear, images }: ISidebarAppProps) {
   const disabled = images === undefined || images.length === 0;
   const onOpenBreakoutClick = () => {
     console.log("[imgix] onOpenBreakoutClick");
