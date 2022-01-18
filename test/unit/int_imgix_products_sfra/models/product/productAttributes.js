@@ -73,7 +73,7 @@ describe('productAttributes', function () {
         }
     };
 
-    it('should return empty array if product doesn not have attributes', function () {
+    it(`should return empty array if product doesn't have attributes`, function () {
         var mock = toProductMock(variationsMock);
         var attributeConfig = {
             attributes: ['color'],
@@ -241,7 +241,7 @@ describe('productAttributes', function () {
         assert.equal(attrs[0].resetUrl, '?pid=25604524&dwvar_25604524_size=&dwvar_25604524_color=BLACKFB');
     });
 
-    it('should return all atributes when using "*" as the attributeConfig', function () {
+    it('should return all attributes when using "*" as the attributeConfig', function () {
         var tempMock = Object.assign({}, variationsMock);
 
         tempMock.productVariationAttributes = new ArrayList([{
