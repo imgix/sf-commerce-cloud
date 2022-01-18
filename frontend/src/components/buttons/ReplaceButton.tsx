@@ -3,12 +3,12 @@ import { RefreshSvg } from "../icons/RefreshSvg";
 import styles from "./ReplaceButton.module.scss";
 interface Props {
   label?: string;
-  onCLick?: () => void;
+  onClick?: () => void;
 }
 
-export const ReplaceButton = ({ onCLick, label }: Props): ReactElement => {
+export const ReplaceButton = ({ onClick, label }: Props): ReactElement => {
   return (
-    <div className={styles.replaceImageOverlayButton} onClick={onCLick}>
+    <div className={styles.replaceImageOverlayButton} onClick={onClick}>
       <div
         className={styles.replaceImageIcon}
         // if no label is provided, we use remove the margin to center the icon
