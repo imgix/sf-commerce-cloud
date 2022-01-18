@@ -33,8 +33,6 @@ export const injectExtensionApp = () => {
     customAttributeTextarea.value = value;
   };
 
-  newTD.innerHTML = "";
-
   const customAttributeValue = JSON.parse(customAttributeTextarea.value);
 
   // reduce the custom attribute value to an array of images, where each image
