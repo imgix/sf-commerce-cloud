@@ -33,10 +33,6 @@ export const injectExtensionApp = () => {
     customAttributeTextarea.value = value;
   };
 
-  const clearCustomAttributeValue = () => {
-    setCustomAttributeValue("");
-  };
-
   newTD.innerHTML = "";
 
   const customAttributeValue = JSON.parse(customAttributeTextarea.value);
@@ -74,11 +70,7 @@ export const injectExtensionApp = () => {
 
   // uncomment next line and setCustomAttributeValue function when React app is ready
   ReactDOM.render(
-    <ExtensionApp
-      images={images}
-      onChange={setCustomAttributeValue}
-      onClear={clearCustomAttributeValue}
-    />,
+    <ExtensionApp images={images} onChange={setCustomAttributeValue} />,
     newTD
   );
 };
