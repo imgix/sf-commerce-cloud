@@ -7,7 +7,7 @@ import { ProductImageContainer } from "./ProductImage/ProductImageContainer";
 export interface ProductPageImagesProps {
   disabled: boolean;
   images: IImgixCustomAttributeValue[] | undefined;
-  onClick: () => void;
+  onClick: (data: any) => void;
 }
 
 export const ProductPageImages = ({
@@ -21,7 +21,7 @@ export const ProductPageImages = ({
         <AddButton
           disabled={disabled}
           label="ADD IMAGE"
-          onOpenBreakoutClick={onClick}
+          onOpenBreakoutClick={() => onClick(null)}
         />
       </div>
       <>

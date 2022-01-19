@@ -6,7 +6,7 @@ import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
-  onOpenBreakoutClick: () => void;
+  onOpenBreakoutClick: (data: any) => void;
   value: IImgixCustomAttributeValue;
 }
 
@@ -27,7 +27,7 @@ export const ProductImageContainer = ({
   return (
     <div
       className={styles.imageWrapper}
-      onClick={onOpenBreakoutClick}
+      onClick={() => onOpenBreakoutClick(value)}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
