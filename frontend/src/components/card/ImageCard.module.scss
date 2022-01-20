@@ -1,0 +1,85 @@
+.grid {
+  grid-column: span 2;
+}
+
+.container {
+  justify-self: stretch;
+  background: #fff;
+  border-radius: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  max-height: 340px;
+  max-width: 340px;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: 0 0 0 2px rgba(0, 191, 254, 0.4);
+  }
+
+  & .selected {
+    box-shadow: 0 0 0 2px #00bffe;
+  }
+
+  & .selected:hover {
+    box-shadow: 0 0 0 2px #00bffe;
+  }
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  height: 180px;
+
+  & img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.filename {
+  display: flex;
+  justify-content: center;
+  flex: 0 1 auto;
+  font-size: 0.875rem; /* 14px */
+  line-height: 2rem;
+  color: #6c7f8e;
+  font-style: normal;
+  font-weight: normal;
+  /* This supports the "ellipsis" behaviour to ensure that the filename stays on
+   * one line */
+  white-space: nowrap;
+  position: relative;
+  padding: 6px 10px;
+  margin: 0px;
+  text-align: center;
+}
+
+.filename:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  background: linear-gradient(90deg, #fff 25%, #fff);
+  background: linear-gradient(90deg, #fff 25%, hsla(0, 0%, 100%, 0));
+}
+
+.placeholder {
+  background: #1c2c38;
+  background-image: linear-gradient(45deg, #16232d 25%, transparent 0),
+    linear-gradient(-45deg, #16232d 25%, transparent 0),
+    linear-gradient(45deg, transparent 75%, #16232d 0),
+    linear-gradient(-45deg, transparent 75%, #16232d 0);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, 10px 0;
+  transition: none;
+  min-height: 180px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
