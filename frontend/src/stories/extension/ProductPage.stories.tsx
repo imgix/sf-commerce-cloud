@@ -43,7 +43,7 @@ const Template: ComponentStory<typeof ProductPageImages> = (args) => (
       },
     ]}
     style={{
-      background: "#e3e7eb",
+      background: "#EEF0F2",
     }}
   ></MultiStory>
 );
