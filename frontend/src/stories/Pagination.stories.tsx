@@ -57,7 +57,7 @@ const Template: ComponentStory<typeof PaginationComponent> = (args) => (
         ),
       },
     ]}
-    style={{ background: "#e3e7eb" }}
+    style={{ background: "#EEF0F2" }}
   ></MultiStory>
 );
 
