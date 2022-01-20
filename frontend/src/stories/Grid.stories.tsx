@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ImageCard } from "../components/card/ImageCard";
+import { AssetCard } from "../components/card/AssetCard";
 import { Grid } from "../components/layouts/ImageGrid";
 import { MultiStory } from "./common/MultiStory";
 
@@ -12,7 +12,7 @@ export default {
   },
 } as ComponentMeta<typeof Grid>;
 
-const Template: ComponentStory<typeof ImageCard> = (args) => (
+const Template: ComponentStory<typeof AssetCard> = (args) => (
   <MultiStory
     stories={[
       {
@@ -40,7 +40,7 @@ const Template: ComponentStory<typeof ImageCard> = (args) => (
         story: (
           <Grid>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((i) => (
-              <ImageCard
+              <AssetCard
                 {...{
                   ...args,
                   asset: {
