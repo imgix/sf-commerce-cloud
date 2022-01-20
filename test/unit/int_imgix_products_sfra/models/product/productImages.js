@@ -12,12 +12,12 @@ var images = new ArrayList([
     index: "0",
     URL: {
       toString: function () {
-        return "/first_image_url";
+        return "/sf_first_image_url";
       },
     },
     absURL: {
       toString: function () {
-        return "path/first_image_url";
+        return "path/sf_first_image_url";
       },
     },
   },
@@ -27,12 +27,12 @@ var images = new ArrayList([
     index: "1",
     URL: {
       toString: function () {
-        return "/second_image_url";
+        return "/sf_second_image_url";
       },
     },
     absURL: {
       toString: function () {
-        return "path/second_image_url";
+        return "path/sf_second_image_url";
       },
     },
   },
@@ -45,7 +45,7 @@ var productMock = {
 };
 var customData = {
   imgixData:
-    '{"images": {"primary": {"src": "imgixBaseURL/first_image_url"},"alternatives": [{"src": "imgixBaseURL/second_image_url","sourceWidth": 3000}]}}',
+    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
 };
 
 function ProductVariationModel(isSelectedVariant, isMaster) {
@@ -56,18 +56,17 @@ function ProductVariationModel(isSelectedVariant, isMaster) {
   };
 }
 
-function Product() {
-  this.custom = customData;
-  this.getImages = function () {
+class Product {
+  constructor({ customData } = {}) {
+    if (customData) {
+      this.custom = customData;
+    }
+  }
+  getImages() {
     return images;
-  };
+  }
 }
-
-function Variant() {
-  Product.call(this);
-}
-Variant.prototype = Object.create(Product.prototype);
-Variant.prototype.constructor = Variant;
+class Variant extends Product {}
 
 describe("productImages", function () {
   let imgixBaseURLPreferenceValue = "imgixBaseURL";
@@ -122,161 +121,270 @@ describe("productImages", function () {
     }
   );
 
-  it("should get all small images with imgixBaseURL", function () {
-    var images = new ProductImages(toProductMock(productMock), {
-      types: ["small"],
-      quantity: "*",
+  describe("with custom attribute", function () {
+    it("should get all small images with imgixBaseURL", function () {
+      var product = new Product({ customData });
+      var images = new ProductImages(product, {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert.equal(images.small.length, 2);
+      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
+      assert.equal(
+        images.small[0].absURL,
+        "customImgixURL/imgix_first_image_url"
+      );
+      assert.equal(
+        images.small[1].url,
+        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+      );
+      // TODO: check if we should be modifying path
+      assert.equal(
+        images.small[1].absURL,
+        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+      );
+      assert.equal(images.small[1].index, "1");
     });
-    assert.equal(images.small.length, 2);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].url, "imgixBaseURL/first_image_url");
-    assert.equal(images.small[0].absURL, "path/first_image_url");
-    assert.equal(images.small[1].url, "imgixBaseURL/second_image_url");
-    assert.equal(images.small[1].absURL, "path/second_image_url");
-    assert.equal(images.small[1].index, "1");
+
+    it("should get only first small image with customImgixURL", function () {
+      var product = new Product({ customData });
+      var images = new ProductImages(product, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small.length, 1);
+      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
+      assert.equal(
+        images.small[0].absURL,
+        "customImgixURL/imgix_first_image_url"
+      );
+    });
+    it("should get all small images with imgix data from selected variant product", function () {
+      var productObj = new ProductVariationModel(true, true);
+      var images = new ProductImages(productObj, {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert.equal(images.small.length, 2);
+      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
+      assert.equal(
+        images.small[0].absURL,
+        "customImgixURL/imgix_first_image_url"
+      );
+      assert.equal(
+        images.small[1].url,
+        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+      );
+
+      assert.equal(
+        images.small[1].absURL,
+        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+      );
+      assert.equal(images.small[1].index, "1");
+    });
+    it("should get all small images with imgix data from master product", function () {
+      var productObj = new ProductVariationModel(false, true);
+      var images = new ProductImages(productObj, {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert.equal(images.small.length, 2);
+      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
+      assert.equal(
+        images.small[0].absURL,
+        "customImgixURL/imgix_first_image_url"
+      );
+      assert.equal(
+        images.small[1].url,
+        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+      );
+
+      assert.equal(
+        images.small[1].absURL,
+        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+      );
+      assert.equal(images.small[1].index, "1");
+    });
+    it("should get only first small with imgix data from master product", function () {
+      var productObj = new Product({ customData });
+      var images = new ProductImages(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small.length, 1);
+      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
+      assert.equal(
+        images.small[0].absURL,
+        "customImgixURL/imgix_first_image_url"
+      );
+    });
+    it("should get only first small with imgix data from variant product", function () {
+      var productObj = new Product({ customData });
+      var images = new ProductImages(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small.length, 1);
+      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
+      assert.equal(
+        images.small[0].absURL,
+        "customImgixURL/imgix_first_image_url"
+      );
+    });
+
+    it("should still work when imgixBaseURL preference is not set");
+    it("should set default params on images");
   });
 
-  it("should get only first small image with imgixBaseURL", function () {
-    var images = new ProductImages(toProductMock(productMock), {
-      types: ["small"],
-      quantity: "single",
+  describe("without custom attribute", () => {
+    describe("when imgixBaseURL preference set", () => {
+      it("should get all small images with imgixBaseURL", function () {
+        var images = new ProductImages(toProductMock(productMock), {
+          types: ["small"],
+          quantity: "*",
+        });
+        assert.equal(images.small.length, 2);
+        assert.equal(images.small[0].alt, "First Image");
+        assert.equal(images.small[0].index, "0");
+        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
+        assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
+        assert.equal(images.small[1].url, "imgixBaseURL/sf_second_image_url");
+        assert.equal(
+          images.small[1].absURL,
+          "imgixBaseURL/sf_second_image_url"
+        );
+        assert.equal(images.small[1].index, "1");
+      });
+
+      it("should get only first small image with imgixBaseURL", function () {
+        var images = new ProductImages(toProductMock(productMock), {
+          types: ["small"],
+          quantity: "single",
+        });
+        assert.equal(images.small.length, 1);
+        assert.equal(images.small[0].alt, "First Image");
+        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].index, "0");
+        assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
+        assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
+      });
     });
-    assert.equal(images.small.length, 1);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].url, "imgixBaseURL/first_image_url");
-    assert.equal(images.small[0].absURL, "path/first_image_url");
+    describe("when imgixBaseURL preference is not set", () => {
+      it("should pass through small images when imgixBaseURL preference is not set", function () {
+        // Setup test, keep old value to restore later
+        const oldImgixBaseURLPreferenceValue = imgixBaseURLPreferenceValue;
+
+        // Disable imgix base URL preference
+        imgixBaseURLPreferenceValue = "";
+
+        var images = new ProductImages(toProductMock(productMock), {
+          types: ["small"],
+          quantity: "*",
+        });
+        assert.equal(images.small.length, 2);
+        assert.equal(images.small[0].alt, "First Image");
+        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].index, "0");
+        assert.equal(images.small[0].url, "/sf_first_image_url");
+        assert.equal(images.small[0].absURL, "path/sf_first_image_url");
+        assert.equal(images.small[1].url, "/sf_second_image_url");
+        assert.equal(images.small[1].absURL, "path/sf_second_image_url");
+        assert.equal(images.small[1].index, "1");
+
+        // Restore old value
+        imgixBaseURLPreferenceValue = oldImgixBaseURLPreferenceValue;
+      });
+      it("should pass through small image when imgixBaseURL preference is not set", function () {
+        // Setup test, keep old value to restore later
+        const oldImgixBaseURLPreferenceValue = imgixBaseURLPreferenceValue;
+
+        // Disable imgix base URL preference
+        imgixBaseURLPreferenceValue = "";
+
+        var images = new ProductImages(toProductMock(productMock), {
+          types: ["small"],
+          quantity: "single",
+        });
+        assert.equal(images.small.length, 1);
+        assert.equal(images.small[0].alt, "First Image");
+        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].index, "0");
+        assert.equal(images.small[0].url, "/sf_first_image_url");
+
+        // Restore old value
+        imgixBaseURLPreferenceValue = oldImgixBaseURLPreferenceValue;
+      });
+    });
+
+    it("should set default params on product images", function () {
+      const oldImgixProductDefaultParamsPreferenceValue =
+        imgixProductDefaultParamsPreferenceValue;
+
+      imgixProductDefaultParamsPreferenceValue = "auto=format&fit=crop";
+
+      const containsDefaultParams = (url) =>
+        url.includes("?auto=format&fit=crop");
+
+      const singleSmallImage = new ProductImages(toProductMock(productMock), {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert(
+        containsDefaultParams(singleSmallImage.small[0].url),
+        "url should include default params"
+      );
+
+      const smallImages = new ProductImages(toProductMock(productMock), {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert(
+        containsDefaultParams(smallImages.small[0].url),
+        "url should include default params"
+      );
+      assert(
+        containsDefaultParams(smallImages.small[1].url),
+        "url should include default params"
+      );
+
+      // Restore old value
+      imgixProductDefaultParamsPreferenceValue =
+        oldImgixProductDefaultParamsPreferenceValue;
+    });
   });
 
-  it("should pass through small image when imgixBaseURL preference is not set", function () {
-    // Setup test, keep old value to restore later
-    const oldImgixBaseURLPreferenceValue = imgixBaseURLPreferenceValue;
-
-    // Disable imgix base URL preference
-    imgixBaseURLPreferenceValue = "";
-
-    var images = new ProductImages(toProductMock(productMock), {
-      types: ["small"],
-      quantity: "single",
+  describe("auto-resizing images", () => {
+    describe("should not resize passed-through images", () => {
+      it("small image");
+      it("medium image");
+      it("large image");
+      it("original size image");
     });
-    assert.equal(images.small.length, 1);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].url, "/first_image_url");
 
-    // Restore old value
-    imgixBaseURLPreferenceValue = oldImgixBaseURLPreferenceValue;
-  });
-
-  it("should set default params on product images", function () {
-    // Setup test, keep old value to restore later
-    const oldImgixProductDefaultParamsPreferenceValue =
-      imgixProductDefaultParamsPreferenceValue;
-
-    // Disable imgix base URL preference
-    imgixProductDefaultParamsPreferenceValue = "auto=format&fit=crop";
-
-    const containsDefaultParams = (url) =>
-      url.includes("?auto=format&fit=crop");
-
-    const singleSmallImage = new ProductImages(toProductMock(productMock), {
-      types: ["small"],
-      quantity: "single",
+    describe("should resize image from custom attribute", () => {
+      it("small image");
+      it("medium image");
+      it("large image");
+      it("original size image");
     });
-    assert(
-      containsDefaultParams(singleSmallImage.small[0].url),
-      "url should include default params"
-    );
-
-    const smallImages = new ProductImages(toProductMock(productMock), {
-      types: ["small"],
-      quantity: "*",
-    });
-    assert(
-      containsDefaultParams(smallImages.small[0].url),
-      "url should include default params"
-    );
-    assert(
-      containsDefaultParams(smallImages.small[1].url),
-      "url should include default params"
-    );
-
-    // Restore old value
-    imgixProductDefaultParamsPreferenceValue =
-      oldImgixProductDefaultParamsPreferenceValue;
-  });
-
-  it("should get all small images with imgix data from selected variant product", function () {
-    var productObj = new ProductVariationModel(true, true);
-    var images = new ProductImages(productObj, {
-      types: ["small"],
-      quantity: "*",
-    });
-    assert.equal(images.small.length, 2);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].url, "imgixBaseURL/first_image_url");
-    assert.equal(images.small[0].absURL, "path/first_image_url");
-    assert.equal(
-      images.small[1].url,
-      "imgixBaseURL/second_image_url?sourceWidth=3000"
-    );
-
-    assert.equal(images.small[1].absURL, "path/second_image_url");
-    assert.equal(images.small[1].index, "1");
-  });
-
-  it("should get all small images with imgix data from master product", function () {
-    var productObj = new ProductVariationModel(false, true);
-    var images = new ProductImages(productObj, {
-      types: ["small"],
-      quantity: "*",
-    });
-    assert.equal(images.small.length, 2);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].url, "imgixBaseURL/first_image_url");
-    assert.equal(images.small[0].absURL, "path/first_image_url");
-    assert.equal(
-      images.small[1].url,
-      "imgixBaseURL/second_image_url?sourceWidth=3000"
-    );
-
-    assert.equal(images.small[1].absURL, "path/second_image_url");
-    assert.equal(images.small[1].index, "1");
-  });
-
-  it("should get only first small with imgix data from master product", function () {
-    var productObj = new Product();
-    var images = new ProductImages(productObj, {
-      types: ["small"],
-      quantity: "single",
-    });
-    assert.equal(images.small.length, 1);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].url, "imgixBaseURL/first_image_url");
-    assert.equal(images.small[0].absURL, "path/first_image_url");
-  });
-
-  it("should get only first small with imgix data from variant product", function () {
-    var productObj = new Variant();
-    var images = new ProductImages(productObj, {
-      types: ["small"],
-      quantity: "single",
-    });
-    assert.equal(images.small.length, 1);
-    assert.equal(images.small[0].alt, "First Image");
-    assert.equal(images.small[0].title, "First Image");
-    assert.equal(images.small[0].index, "0");
-    assert.equal(images.small[0].url, "imgixBaseURL/first_image_url");
-    assert.equal(images.small[0].absURL, "path/first_image_url");
   });
 });
