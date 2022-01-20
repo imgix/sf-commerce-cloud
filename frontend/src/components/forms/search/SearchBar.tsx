@@ -1,10 +1,10 @@
 import React, { ReactElement } from "react";
+import { useClickOutside } from "../../../common/hooks/useClickOutside";
+import { useLocalStorage } from "../../../common/hooks/useLocalStorage";
 import { Button } from "../../buttons/Button";
 import { DisabledSvg } from "../../icons/DisabledSvg";
 import { SearchIconSvg } from "../../icons/SearchIconSvg";
 import styles from "./SearchBar.module.scss";
-import { useClickOutside } from "./useClickOutside";
-import { useLocalStorage } from "./useLocalStorage";
 
 interface Props {
   placeholder?: string;
