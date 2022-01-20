@@ -1,0 +1,59 @@
+// breakpoints
+$breakpoint-largest: 1700px;
+$breakpoint-xxl: 1460px;
+$breakpoint-xl: 1260px;
+$breakpoint-lg: 1000px;
+$breakpoint-md: 820px;
+$breakpoint-sm: 700px;
+$breakpoint-xs: 500px;
+
+// colors
+$color-primary: #ffff;
+$color-secondary: #00bffe;
+$color-secondary-dark: rgba(174, 209, 221, 0.4);
+
+.grid {
+  display: grid;
+  grid-gap: 16px;
+  justify-items: stretch;
+  align-items: start;
+  grid-template-columns: repeat(14, 1fr);
+
+  @media (max-width: $breakpoint-largest) {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  @media (max-width: $breakpoint-xxl) {
+    grid-template-columns: repeat(10, 1fr);
+  }
+  @media (max-width: $breakpoint-xl) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: $breakpoint-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: $breakpoint-xs) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gridItem {
+  background: $color-primary;
+  border-radius: 2px;
+  max-height: 340px;
+  max-width: 340px;
+  grid-column: span 2;
+  border-radius: 4px;
+
+  &.selected {
+    box-shadow: 0 0 0 2px $color-secondary;
+    &:hover {
+      box-shadow: 0 0 0 2px $color-secondary;
+    }
+  }
+}
