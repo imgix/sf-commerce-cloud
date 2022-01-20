@@ -7,4 +7,17 @@ export const parameters = {
     },
   },
   layout: "fullscreen",
+  backgrounds: {
+    default: "grey",
+    values: [
+      {
+        name: "grey",
+        value: "#EEF0F2",
+      },
+      {
+        name: "white",
+        value: "#ffffff",
+      },
+    ],
+  },
 };
