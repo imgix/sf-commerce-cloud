@@ -1,27 +1,27 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ImageCard } from "../components/card/ImageCard";
+import { AssetCard } from "../components/card/AssetCard";
 import { MultiStory } from "./common/MultiStory";
 
 export default {
   title: "Example/Image Card",
-  component: ImageCard,
+  component: AssetCard,
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof ImageCard>;
+} as ComponentMeta<typeof AssetCard>;
 
-const Template: ComponentStory<typeof ImageCard> = (args) => (
+const Template: ComponentStory<typeof AssetCard> = (args) => (
   <MultiStory
     stories={[
       {
         label: "Normal",
-        story: <ImageCard {...args} />,
+        story: <AssetCard {...args} />,
       },
       {
         label: "with unsupported file formal",
         story: (
-          <ImageCard
+          <AssetCard
             {...{
               ...args,
               asset: {
@@ -39,7 +39,7 @@ const Template: ComponentStory<typeof ImageCard> = (args) => (
       {
         label: "with invalid path",
         story: (
-          <ImageCard
+          <AssetCard
             {...{
               ...args,
               asset: {
