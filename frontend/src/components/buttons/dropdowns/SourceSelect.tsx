@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
+import { useClickOutside } from "../../../common/hooks//useClickOutside";
 import { useListSelectionBehavior } from "../../../common/hooks/useListSelectionBehavior";
 import { ImgixGETSourcesData } from "../../../types";
 import { IDeploymentType } from "../../../types/imgixAPITypes";
-import { useClickOutside } from "../../forms/search/useClickOutside";
 import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 import { SourceTypeIcon } from "../../icons/SourceTypeIcon";
