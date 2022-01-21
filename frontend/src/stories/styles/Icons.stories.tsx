@@ -6,9 +6,11 @@ import {
   ArrowLeft,
   ArrowRight,
   AzureIcon,
+  DeleteIcon,
   DisabledSvg,
   DownArrowSvg,
   GCSIcon,
+  ImageSingle,
   RefreshSvg,
   S3Icon,
   SearchIconSvg,
@@ -132,10 +134,26 @@ const Template: ComponentStory<typeof FrameButton> = (args) => (
         ),
       },
       {
+        label: "ImageSingle",
+        story: (
+          <_Button {...args}>
+            <ImageSingle />
+          </_Button>
+        ),
+      },
+      {
         label: "TrashcanSvg",
         story: (
           <_Button {...args}>
             <TrashcanSvg />
+          </_Button>
+        ),
+      },
+      {
+        label: "DeleteIcon",
+        story: (
+          <_Button {...args}>
+            <DeleteIcon />
           </_Button>
         ),
       },
