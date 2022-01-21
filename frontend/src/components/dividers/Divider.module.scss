@@ -1,0 +1,11 @@
+@import "../../styles/Colors.module.scss";
+
+.divider {
+  background-color: $color_chrome;
+  bottom: 100%;
+  height: 1px;
+  left: 0%;
+  right: 0%;
+  top: -2.04%;
+  width: fill-available;
+}
