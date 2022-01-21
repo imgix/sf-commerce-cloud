@@ -1,0 +1,85 @@
+@import "../../styles/Colors.module.scss";
+
+.container {
+  background-color: $color_bg;
+  color: $color_fg;
+  padding: 25px;
+  min-width: 350px;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: $type_size_base;
+  height: 40px;
+  justify-content: flex-start;
+
+  & p {
+    margin-left: 10px;
+  }
+
+  svg {
+    height: $icon_size;
+    width: unset;
+  }
+}
+
+.productContainer {
+  .assetTitleBar {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-size: $type_size_small;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+
+    svg {
+      height: $icon_size;
+    }
+
+    .assetTitle {
+      padding: 5px;
+    }
+
+    .deleteIcon {
+      cursor: pointer;
+      margin-left: auto;
+    }
+  }
+
+  .assetContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    .assetCardContainer {
+      height: 150px;
+      width: 150px;
+    }
+
+    .assetButtonsContainer {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      font-size: $type_size_small;
+      justify-content: space-between;
+      width: 100px;
+
+      .assetButtons {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        font-size: $type_size_small;
+        justify-content: space-between;
+        padding: 10px 0 10px 0px;
+        width: 70px;
+
+        p {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
