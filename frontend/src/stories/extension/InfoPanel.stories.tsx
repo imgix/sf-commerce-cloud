@@ -16,6 +16,12 @@ const selectedAssets = ["5e9f9f9f-f9f9-f9f9-f9f9-f9f9f9f9f9f9"];
 
 const Template: ComponentStory<typeof InfoPanel> = (args) => (
   <MultiStory
+    style={{
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "space-evenly",
+    }}
     stories={[
       {
         label: "Default",
