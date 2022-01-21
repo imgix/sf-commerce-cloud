@@ -2,10 +2,10 @@ import React, { ReactElement } from "react";
 import styles from "./FrameButton.module.scss";
 
 type Props = {
-  icon: ReactElement;
+  icon?: ReactElement;
   color?: "primary" | "secondary" | "tertiary";
   disabled?: boolean;
-  framed?: boolean;
+  frameless?: boolean;
   onClick?: () => void;
   size?: "small" | "large";
   text?: string;
@@ -14,7 +14,7 @@ type Props = {
 export function FrameButton({
   color = "primary",
   disabled,
-  framed = true,
+  frameless,
   icon,
   onClick,
   size = "large",
@@ -26,7 +26,7 @@ export function FrameButton({
     styles.button,
     styles[color],
     styles[(disabled && "disabled") || " "],
-    styles[(framed && " ") || "frameless"],
+    styles[(frameless && "frameless") || ""],
     styles[(icon && " ") || "noIcon"],
     styles[size],
     styles[(text && " ") || "iconOnly"],
