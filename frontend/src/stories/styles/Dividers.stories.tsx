@@ -8,7 +8,7 @@ const Container = ({ children }: any) => {
 };
 
 export default {
-  title: "Styles/Divider",
+  title: "Styles/Dividers",
   component: Divider,
   parameters: {
     layout: "centered",
