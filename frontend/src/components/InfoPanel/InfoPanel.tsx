@@ -28,7 +28,7 @@ export function InfoPanel({
       </div>
       <Divider />
       <ul>
-        {assets.map((asset) => {
+        {assets.map((asset, idx) => {
           if (selectedAssets.includes(asset.id)) {
             const assetTitle = asset.attributes.origin_path.split("/").pop();
             return (
@@ -69,7 +69,7 @@ export function InfoPanel({
                     </div>
                   </div>
                 </div>
-                <Divider />
+                {idx !== selectedAssets.length - 1 && <Divider />}
               </li>
             );
           }
