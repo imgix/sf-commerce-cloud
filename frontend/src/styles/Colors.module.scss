@@ -1,0 +1,355 @@
+// Tint and Shade are not SASS built-ins.
+// We add these functions for Tint and Shade.
+// The other functions in this pen are SASS built-in.
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+@function alpha($color, $percentage) {
+  @return mix($color, transparent, $percentage);
+}
+
+/* These should rarely be used directly--see $color_accent_orange and $color_accent_blue sections below */
+$color_brand_orange: #f8510f;
+$color_brand_blue: #00c0fa;
+
+/*--- Base Colors ---*/
+
+/* Background color */
+$color_bg: #ffffff;
+$color_bg_new: #eef0f2;
+$color_bg_shade: #e8f0f4;
+
+/* Foreground color for text and UI elements */
+$color_fg: #475f72;
+$color_fg_tint: tint($color_fg, 20%);
+$color_fg_shade: shade($color_fg, 20%);
+$color_fg_tint2: tint($color_fg, 40%);
+$color_fg_shade2: shade($color_fg, 40%);
+$color_fg_shade3: shade($color_fg, 50%);
+
+/* Used for borders, dividers, etc. */
+$color_chrome: #d0d7dd;
+$color_chrome_tint: tint($color_chrome, 20%);
+$color_chrome_shade: shade($color_chrome, 20%);
+$color_chrome_tint2: tint($color_chrome, 40%);
+$color_chrome_shade2: shade($color_chrome, 40%);
+
+/*--- Inverted Colors ---*/
+
+/* Background color */
+$color_invert_bg: #1c2c38;
+$color_invert_bg_tint: tint($color_invert_bg, 20%);
+$color_invert_bg_shade: shade($color_invert_bg, 20%);
+$color_invert_bg_tint2: tint($color_invert_bg, 40%);
+$color_invert_bg_shade2: shade($color_invert_bg, 40%);
+$color_invert_bg_shade3: shade($color_invert_bg, 65%);
+
+/* Foreground color for text and UI elements */
+$color_invert_fg: #fafafa;
+$color_invert_fg_shade: $color_chrome;
+
+/* Used for borders, dividers, etc. */
+$color_invert_chrome: #637787;
+$color_invert_chrome_tint: tint($color_invert_chrome, 20%);
+$color_invert_chrome_shade: shade($color_invert_chrome, 20%);
+$color_invert_chrome_tint2: tint($color_invert_chrome, 40%);
+$color_invert_chrome_shade2: shade($color_invert_chrome, 40%);
+$color_invert_chrome_shade3: shade($color_invert_chrome, 70%);
+
+/*--- Accent Colors ---*/
+
+/* Primary accent color (orange) */
+$color_accent_orange: #f8510f;
+$color_accent_orange_tint: tint($color_accent_orange, 20%);
+$color_accent_orange_shade: shade($color_accent_orange, 20%);
+$color_accent_orange_tint2: tint($color_accent_orange, 40%);
+$color_accent_orange_shade2: shade($color_accent_orange, 40%);
+
+/* Secondary accent color (blue) */
+$color_accent_blue: #00bffe;
+$color_accent_blue_tint: tint($color_accent_blue, 20%);
+$color_accent_blue_shade: shade($color_accent_blue, 20%);
+$color_accent_blue_tint2: tint($color_accent_blue, 40%);
+$color_accent_blue_shade2: shade($color_accent_blue, 40%);
+
+/* Tertiary accent colors */
+$color_accent_green: #28e398;
+$color_accent_green_tint: tint($color_accent_green, 40%);
+$color_accent_green_shade: shade($color_accent_green, 20%);
+$color_accent_green_tint2: tint($color_accent_green, 60%);
+$color_accent_green_shade2: shade($color_accent_green, 40%);
+
+$color_accent_yellow: #fed800;
+$color_accent_yellow_tint: #fced96;
+$color_accent_yellow_shade: #efa50d;
+
+/* Graph colors */
+$color_graph_blue: $color_accent_blue;
+$color_graph_green: $color_accent_green;
+$color_graph_orange: $color_accent_orange;
+$color_graph_purple: #b48cbf;
+$color_graph_tan: #e0a07e;
+$color_graph_teal: #91c4d9;
+$color_graph_yellow: #f5b942;
+$color_graph_silver: $color_chrome_shade;
+$color_graph_grey: $color_fg_tint;
+
+/*--- Box Shadows ---*/
+
+$shadow_unit: 2px;
+$shadow_length: 0 $shadow_unit;
+$shadow_light_color: alpha(shade($color_bg_shade, 30%), 30%);
+$shadow_dark_color: alpha(shade($color_invert_bg_shade, 80%), 30%);
+
+/*--- Lengths ---*/
+
+$unit_v: 12px;
+$unit_h: 20px;
+
+$section_spacing: 60px;
+
+$icon_size: 16px;
+$border_radius: 4px;
+
+/* The breakpoint at which the text size adjusts */
+$breakpoint_compact: 540px;
+
+/*--- Typography sizes ---*/
+
+/* Base */
+$type_size_base: 16px;
+$type_line_base: 24px;
+$type_line_tight: 20px;
+$type_size_base_compact: 13px;
+$type_line_base_compact: 18px;
+$type_line_tight_compact: 16px;
+
+/* Small */
+$type_size_small: 14px;
+$type_line_small: 20px;
+$type_size_small_compact: 11px;
+$type_line_small_compact: 14px;
+
+/* Headings */
+$type_size_h1: 112px;
+$type_line_h1: 128px;
+$type_size_h1_compact: 84px;
+$type_line_h1_compact: 96px;
+
+$type_size_h2: 56px;
+$type_line_h2: 64px;
+$type_size_h2_compact: 39px;
+$type_line_h2_compact: 48px;
+
+$type_size_h3: 45px;
+$type_line_h3: 64px;
+$type_size_h3_compact: 30px;
+$type_line_h3_compact: 42px;
+
+$type_size_h4: 34px;
+$type_line_h4: 40px;
+$type_size_h4_compact: 21px;
+$type_line_h4_compact: 28px;
+
+$type_size_h5: 24px;
+$type_line_h5: 36px;
+$type_size_h5_compact: 18px;
+$type_line_h5_compact: 24px;
+
+$type_size_h6: 20px;
+$type_line_h6: 30px;
+$type_size_h6_compact: 15px;
+$type_line_h6_compact: 20px;
+
+/*--- Z-index index ---*/
+
+$zIndex_graphFocus: 90;
+$zIndex_graphHitBox: 91;
+$zIndex_sticky: 150;
+$zIndex_ixSelect: 200;
+$zIndex_callout: 500;
+$zIndex_globalOverlay: 800;
+
+.color_brand_orange {
+  background-color: #f8510f;
+}
+.color_brand_blue {
+  background-color: #00c0fa;
+}
+.color_bg {
+  background-color: #ffffff;
+}
+.color_bg_shade {
+  background-color: #e8f0f4;
+}
+.color_bg_new {
+  background-color: $color_bg_new;
+}
+.color_fg {
+  background-color: #475f72;
+}
+.color_fg_tint {
+  background-color: $color_fg_tint;
+}
+.color_fg_shade {
+  background-color: shade($color_fg, 20%);
+}
+.color_fg_tint2 {
+  background-color: tint($color_fg, 40%);
+}
+.color_fg_shade2 {
+  background-color: shade($color_fg, 40%);
+}
+.color_fg_shade3 {
+  background-color: shade($color_fg, 50%);
+}
+.color_chrome {
+  background-color: #d0d7dd;
+}
+.color_chrome_tint {
+  background-color: tint($color_chrome, 20%);
+}
+.color_chrome_shade {
+  background-color: shade($color_chrome, 20%);
+}
+.color_chrome_tint2 {
+  background-color: tint($color_chrome, 40%);
+}
+.color_chrome_shade2 {
+  background-color: shade($color_chrome, 40%);
+}
+.color_chrome_shade_new {
+  background-color: rgba(28, 44, 56, 0.5);
+}
+.color_invert_bg {
+  background-color: #1c2c38;
+}
+.color_invert_bg_tint {
+  background-color: tint($color_invert_bg, 20%);
+}
+.color_invert_bg_shade {
+  background-color: shade($color_invert_bg, 20%);
+}
+.color_invert_bg_tint2 {
+  background-color: tint($color_invert_bg, 40%);
+}
+.color_invert_bg_shade2 {
+  background-color: shade($color_invert_bg, 40%);
+}
+.color_invert_bg_shade3 {
+  background-color: shade($color_invert_bg, 65%);
+}
+.color_invert_fg {
+  background-color: #fafafa;
+}
+.color_invert_fg_shade {
+  background-color: $color_chrome;
+}
+.color_invert_chrome {
+  background-color: #637787;
+}
+.color_invert_chrome_tint {
+  background-color: tint($color_invert_chrome, 20%);
+}
+.color_invert_chrome_shade {
+  background-color: shade($color_invert_chrome, 20%);
+}
+.color_invert_chrome_tint2 {
+  background-color: tint($color_invert_chrome, 40%);
+}
+.color_invert_chrome_shade2 {
+  background-color: shade($color_invert_chrome, 40%);
+}
+.color_invert_chrome_shade3 {
+  background-color: shade($color_invert_chrome, 70%);
+}
+.color_accent_orange {
+  background-color: #f8510f;
+}
+.color_accent_orange_tint {
+  background-color: tint($color_accent_orange, 20%);
+}
+.color_accent_orange_shade {
+  background-color: shade($color_accent_orange, 20%);
+}
+.color_accent_orange_tint2 {
+  background-color: tint($color_accent_orange, 40%);
+}
+.color_accent_orange_shade2 {
+  background-color: shade($color_accent_orange, 40%);
+}
+.color_accent_blue {
+  background-color: #00bffe;
+}
+.color_accent_blue_tint {
+  background-color: tint($color_accent_blue, 20%);
+}
+.color_accent_blue_shade {
+  background-color: shade($color_accent_blue, 20%);
+}
+.color_accent_blue_tint2 {
+  background-color: tint($color_accent_blue, 40%);
+}
+.color_accent_blue_shade2 {
+  background-color: shade($color_accent_blue, 40%);
+}
+.color_accent_green {
+  background-color: #28e398;
+}
+.color_accent_green_tint {
+  background-color: tint($color_accent_green, 40%);
+}
+.color_accent_green_shade {
+  background-color: shade($color_accent_green, 20%);
+}
+.color_accent_green_tint2 {
+  background-color: tint($color_accent_green, 60%);
+}
+.color_accent_green_shade2 {
+  background-color: shade($color_accent_green, 40%);
+}
+.color_accent_yellow {
+  background-color: #fed800;
+}
+.color_accent_yellow_tint {
+  background-color: #fced96;
+}
+.color_accent_yellow_shade {
+  background-color: #efa50d;
+}
+.color_graph_blue {
+  background-color: $color_accent_blue;
+}
+.color_graph_green {
+  background-color: $color_accent_green;
+}
+.color_graph_orange {
+  background-color: $color_accent_orange;
+}
+.color_graph_purple {
+  background-color: #b48cbf;
+}
+.color_graph_tan {
+  background-color: #e0a07e;
+}
+.color_graph_teal {
+  background-color: #91c4d9;
+}
+.color_graph_yellow {
+  background-color: #f5b942;
+}
+.color_graph_silver {
+  background-color: $color_chrome_shade;
+}
+.color_graph_grey {
+  background-color: $color_fg_tint;
+}
+.shadow_light_color {
+  background-color: alpha(shade($color_bg_shade, 30%), 30%);
+}
+.shadow_dark_color {
+  background-color: alpha(shade($color_invert_bg_shade, 80%), 30%);
+}
