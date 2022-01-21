@@ -6,7 +6,9 @@ import styles from "./AssetCard.module.scss";
 interface AssetCardProps {
   asset: ImgixGETAssetsData[0];
   domain: string;
+  height?: string;
   layout?: "grid" | "list";
+  noFilepath?: boolean;
   placeholder?: string;
   selectedAssetId?: string;
   onClick?: (data: Object) => void;
@@ -15,7 +17,9 @@ interface AssetCardProps {
 export function AssetCard({
   asset,
   domain,
+  height,
   layout,
+  noFilepath,
   placeholder,
   selectedAssetId,
   onClick,
@@ -42,15 +46,17 @@ export function AssetCard({
       onClick={() => onClick && onClick(asset)}
     >
       {isImage ? (
-        <div className={styles.image}>
+        <div style={{ height }} className={styles.image}>
           <Image asset={asset} domain={domain} />
         </div>
       ) : (
-        <div className={styles.placeholder}>
+        <div style={{ height }} className={styles.placeholder}>
           <img src={placeholder} />
         </div>
       )}
-      <p className={styles.filename}>{domain + filename}</p>
+      {noFilepath ? null : (
+        <p className={styles.filename}>{domain + filename}</p>
+      )}
     </div>
   );
 }
