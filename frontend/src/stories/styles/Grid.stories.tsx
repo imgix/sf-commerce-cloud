@@ -1,16 +1,16 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { AssetCard } from "../components/card/AssetCard";
-import { Grid } from "../components/layouts/ImageGrid";
-import { MultiStory } from "./common/MultiStory";
+import { AssetCard } from "../../components/card/AssetCard";
+import { Grid as _Grid } from "../../components/layouts/ImageGrid";
+import { MultiStory } from "../common/MultiStory";
 
 export default {
-  title: "Example/Grid",
-  component: Grid,
+  title: "Styles/Grid",
+  component: _Grid,
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof Grid>;
+} as ComponentMeta<typeof _Grid>;
 
 const Template: ComponentStory<typeof AssetCard> = (args) => (
   <MultiStory
@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof AssetCard> = (args) => (
       {
         label: "Normal",
         story: (
-          <Grid>
+          <_Grid>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((i) => (
               <div
                 key={i}
@@ -32,13 +32,13 @@ const Template: ComponentStory<typeof AssetCard> = (args) => (
                 {i}
               </div>
             ))}
-          </Grid>
+          </_Grid>
         ),
       },
       {
-        label: "With images",
+        label: "With AssetCards",
         story: (
-          <Grid>
+          <_Grid>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((i) => (
               <AssetCard
                 {...{
@@ -53,15 +53,15 @@ const Template: ComponentStory<typeof AssetCard> = (args) => (
                 }}
               />
             ))}
-          </Grid>
+          </_Grid>
         ),
       },
     ]}
   />
 );
 
-export const Simple = Template.bind({});
-Simple.args = {
+export const Grid = Template.bind({});
+Grid.args = {
   asset: {
     id: "1",
     type: "assets",
