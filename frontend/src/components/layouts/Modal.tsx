@@ -9,7 +9,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export default function Modal({ children, locked, open, onClose }: ModalProps) {
+export function Modal({ children, locked, open, onClose }: ModalProps) {
   const backdrop = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -46,12 +46,14 @@ export default function Modal({ children, locked, open, onClose }: ModalProps) {
   return (
     <>
       {open && (
-        <Portal className="modalPortal">
+        <Portal>
           <div
             ref={backdrop}
-            className={`${styles.backdrop} ${open && "active"}`}
+            className={`${styles.backdrop} ${open && styles.active}`}
           >
-            <div className={`${styles.content} modal-content`}>{children}</div>
+            <div className={`${styles.content} ${styles["modal-content"]}`}>
+              {children}
+            </div>
           </div>
         </Portal>
       )}
