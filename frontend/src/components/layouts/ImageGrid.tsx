@@ -6,7 +6,7 @@ interface GridProps {
   className?: string;
 }
 
-export function Grid({ children, className }: GridProps) {
+export function ImageGrid({ children, className }: GridProps) {
   return (
     <div className={`${styles.grid} ${className}`}>
       {React.Children.map(children, (element) => 
