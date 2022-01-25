@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { AssetCard } from "../../components/card/AssetCard";
-import { Grid as _Grid } from "../../components/layouts/ImageGrid";
+import { ImageGrid as _Grid } from "../../components/layouts/ImageGrid";
 import { MultiStory } from "../common/MultiStory";
 
 export default {
