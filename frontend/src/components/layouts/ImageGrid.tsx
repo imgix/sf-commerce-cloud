@@ -9,9 +9,9 @@ interface GridProps {
 export function Grid({ children, className }: GridProps) {
   return (
     <div className={`${styles.grid} ${className}`}>
-      {React.Children.map(children, (child) => (
-        <div className={styles.gridItem}>{child}</div>
-      ))}
+      {React.Children.map(children, (element) => 
+        React.cloneElement(element, { className: `${styles.gridItem} ${element.props.className || ''}`)
+      )}
     </div>
   );
 }
