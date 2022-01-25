@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import styles from "./ImageGrid.module.scss";
 
 interface GridProps {
@@ -9,8 +9,10 @@ interface GridProps {
 export function ImageGrid({ children, className }: GridProps) {
   return (
     <div className={`${styles.grid} ${className}`}>
-      {React.Children.map(children, (element) => 
-        React.cloneElement(element, { className: `${styles.gridItem} ${element.props.className || ''}`)
+      {React.Children.map(children as ReactElement[], (element: ReactElement) =>
+        React.cloneElement(element, {
+          className: `${styles.gridItem} ${element.props.className || ""}`,
+        })
       )}
     </div>
   );
