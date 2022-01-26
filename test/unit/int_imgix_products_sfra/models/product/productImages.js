@@ -6,13 +6,13 @@ var ArrayList = require("../../../../mocks/dw.util.Collection");
 var toProductMock = require("../../../../util");
 
 /**
- * Test Information: 
+ * Test Information:
  * `images` variable helps ensure we're using the correct paths
  *   - in `images` data (which mocks SF data), path includes 'sf' to indicate that
  *     it came from SF data.
  *   - in `customData` (which mocks custom attribute data), path includes 'imgix'
  *     to show that data came from imgix.
- * 
+ *
  */
 var images = new ArrayList([
   {
@@ -84,6 +84,7 @@ class Variant extends Product {}
 describe("ProductImages model", function () {
   let imgixBaseURLPreferenceValue = "imgixBaseURL";
   let imgixProductDefaultParamsPreferenceValue = "";
+  let imgixEnableProductImageProxyValue = true;
   var ProductImages = proxyquire(
     process.cwd() +
       "/cartridges/int_imgix_products_sfra/cartridge/models/product/productImages",
@@ -121,6 +122,8 @@ describe("ProductImages model", function () {
                   return imgixProductDefaultParamsPreferenceValue;
                 case "imgixBaseURL":
                   return imgixBaseURLPreferenceValue;
+                case "imgixEnableProductImageProxy":
+                  return imgixEnableProductImageProxyValue;
                 default:
                   throw new Error("Preference value not set");
               }
@@ -454,6 +457,41 @@ describe("ProductImages model", function () {
       it("medium image");
       it("large image");
       it("original size image");
+    });
+
+    describe("should not proxy images when feature is disabled", () => {
+      it("when querying single image from a product with a custom attribute", () => {
+        imgixEnableProductImageProxyValue = false;
+
+        const singleImage = new ProductImages(new Product({ customData }), {
+          types: ["large"],
+          quantity: "single",
+        });
+
+        assert.notInclude(singleImage.large[0].url, "customImgixURL");
+        assert.include(singleImage.large[0].url, "sf_first_image_url");
+
+        imgixEnableProductImageProxyValue = true;
+      });
+
+      it("when querying multiple images from a product with a custom attribute", () => {
+        imgixEnableProductImageProxyValue = false;
+
+        const multipleImages = new ProductImages(new Product({ customData }), {
+          types: ["large"],
+          quantity: "*",
+        });
+
+        assert.notInclude(multipleImages.large[0].url, "customImgixURL");
+        assert.include(multipleImages.large[0].url, "sf_first_image_url");
+
+        assert.notInclude(multipleImages.large[1].url, "customImgixURL");
+        assert.include(multipleImages.large[1].url, "sf_second_image_url");
+
+        imgixEnableProductImageProxyValue = true;
+      });
+
+      it("pass-through images");
     });
   });
 });
