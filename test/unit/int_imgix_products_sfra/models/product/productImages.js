@@ -5,6 +5,15 @@ var proxyquire = require("proxyquire").noCallThru().noPreserveCache();
 var ArrayList = require("../../../../mocks/dw.util.Collection");
 var toProductMock = require("../../../../util");
 
+/**
+ * Test Information: 
+ * `images` variable helps ensure we're using the correct paths
+ *   - in `images` data (which mocks SF data), path includes 'sf' to indicate that
+ *     it came from SF data.
+ *   - in `customData` (which mocks custom attribute data), path includes 'imgix'
+ *     to show that data came from imgix.
+ * 
+ */
 var images = new ArrayList([
   {
     alt: "First Image",
@@ -37,15 +46,16 @@ var images = new ArrayList([
     },
   },
 ]);
+var customData = {
+  imgixData:
+    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
+};
+
 var productMock = {
   getImages: {
     return: images,
     type: "function",
   },
-};
-var customData = {
-  imgixData:
-    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
 };
 
 function ProductVariationModel(isSelectedVariant, isMaster) {
