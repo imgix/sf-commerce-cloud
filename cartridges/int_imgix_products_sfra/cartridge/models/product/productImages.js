@@ -18,6 +18,9 @@ function Images(product, imageConfig) {
   const isBaseURLSet = imgixBaseURL.trim().length > 0;
   const imgixDefaultParams =
     currentSite.getCustomPreferenceValue("imgixProductDefaultParams") || "";
+  const imgixEnableProductImageProxy = currentSite.getCustomPreferenceValue(
+    "imgixEnableProductImageProxy"
+  );
 
   const imgixCustomAttributeData = (() => {
     if (product instanceof ProductVariationModel) {
@@ -46,7 +49,9 @@ function Images(product, imageConfig) {
    * 3. fallback to the built-in SF data
    */
 
-  if (imgixCustomAttributeData) {
+  if (imgixEnableProductImageProxy && imgixCustomAttributeData) {
+    // 1. custom attribute data exists
+
     imageConfig.types.forEach(function (type) {
       var images = product.getImages(type);
       var result = {};
@@ -117,7 +122,9 @@ function Images(product, imageConfig) {
       }
       this[type] = result;
     }, this);
-  } else if (isBaseURLSet) {
+  } else if (imgixEnableProductImageProxy && isBaseURLSet) {
+    // 2. if the imgixBaseURL is set, use that to render the images
+
     imageConfig.types.forEach(function (type) {
       var images = product.getImages(type);
       var result = {};
@@ -163,7 +170,8 @@ function Images(product, imageConfig) {
       this[type] = result;
     }, this);
   } else {
-    // Here we just pass through values
+    // 3. fallback to the built-in SF data. Here we just pass through values.
+
     imageConfig.types.forEach(function (type) {
       var images = product.getImages(type);
       var result = {};
