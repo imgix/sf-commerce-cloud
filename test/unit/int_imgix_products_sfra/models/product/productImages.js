@@ -57,18 +57,21 @@ function ProductVariationModel(isSelectedVariant, isMaster) {
 }
 
 class Product {
-  constructor({ customData } = {}) {
+  constructor({ customData, images } = {}) {
     if (customData) {
       this.custom = customData;
     }
+    if (images) {
+      this.images = images;
+    }
   }
   getImages() {
-    return images;
+    return this.images || images;
   }
 }
 class Variant extends Product {}
 
-describe("productImages", function () {
+describe("ProductImages model", function () {
   let imgixBaseURLPreferenceValue = "imgixBaseURL";
   let imgixProductDefaultParamsPreferenceValue = "";
   var ProductImages = proxyquire(
@@ -374,10 +377,66 @@ describe("productImages", function () {
 
   describe("auto-resizing images", () => {
     describe("should not resize passed-through images", () => {
-      it("small image");
-      it("medium image");
-      it("large image");
-      it("original size image");
+      it("small image", () => {
+        const singleSmallImage = new ProductImages(new Product(), {
+          types: ["small"],
+          quantity: "single",
+        });
+
+        assert.notInclude(singleSmallImage.small[0].url, "w=");
+        assert.notInclude(singleSmallImage.small[0].url, "h=");
+      });
+      it("small images", () => {
+        const singleSmallImage = new ProductImages(new Product(), {
+          types: ["small"],
+          quantity: "*",
+        });
+
+        assert.notInclude(singleSmallImage.small[0].url, "w=");
+        assert.notInclude(singleSmallImage.small[0].url, "h=");
+        assert.notInclude(singleSmallImage.small[1].url, "w=");
+        assert.notInclude(singleSmallImage.small[1].url, "h=");
+      });
+      it("medium image", () => {
+        const singleSmallImage = new ProductImages(new Product(), {
+          types: ["medium"],
+          quantity: "single",
+        });
+
+        assert.notInclude(singleSmallImage.medium[0].url, "w=");
+        assert.notInclude(singleSmallImage.medium[0].url, "h=");
+      });
+      it("medium images", () => {
+        const singleSmallImage = new ProductImages(new Product(), {
+          types: ["medium"],
+          quantity: "*",
+        });
+
+        assert.notInclude(singleSmallImage.medium[0].url, "w=");
+        assert.notInclude(singleSmallImage.medium[0].url, "h=");
+        assert.notInclude(singleSmallImage.medium[1].url, "w=");
+        assert.notInclude(singleSmallImage.medium[1].url, "h=");
+      });
+      it("large image", () => {
+        const singleSmallImage = new ProductImages(new Product(), {
+          types: ["large"],
+          quantity: "single",
+        });
+
+        assert.notInclude(singleSmallImage.large[0].url, "w=");
+        assert.notInclude(singleSmallImage.large[0].url, "h=");
+      });
+      it("large images", () => {
+        const singleSmallImage = new ProductImages(new Product(), {
+          types: ["large"],
+          quantity: "*",
+        });
+
+        assert.notInclude(singleSmallImage.large[0].url, "w=");
+        assert.notInclude(singleSmallImage.large[0].url, "h=");
+        assert.notInclude(singleSmallImage.large[1].url, "w=");
+        assert.notInclude(singleSmallImage.large[1].url, "h=");
+      });
     });
 
     describe("should resize image from custom attribute", () => {
