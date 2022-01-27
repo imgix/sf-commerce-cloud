@@ -11,7 +11,7 @@ interface AssetCardProps {
   noFilepath?: boolean;
   placeholder?: string;
   selectedAssetId?: string;
-  onClick?: (data: Object) => void;
+  onClick?: (data: ImgixGETAssetsData[0]) => void;
 }
 
 export function AssetCard({
