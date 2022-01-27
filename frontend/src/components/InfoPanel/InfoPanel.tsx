@@ -38,7 +38,7 @@ export function InfoPanel({
                   <p className={styles.assetTitle}>{assetTitle}</p>
                   <div className={styles.deleteIcon}>
                     <FrameButton
-                      color="tertiary"
+                      type="tertiary"
                       frameless
                       icon={<DeleteIcon />}
                     />
@@ -56,15 +56,15 @@ export function InfoPanel({
                   </div>
                   <div className={styles.assetButtonsContainer}>
                     <div className={styles.assetButtons}>
-                      <FrameButton size="small" color="primary" />
+                      <FrameButton size="small" type="primary" />
                       <p>Large</p>
                     </div>
                     <div className={styles.assetButtons}>
-                      <FrameButton size="small" color="primary" />
+                      <FrameButton size="small" type="primary" />
                       <p>Medium</p>
                     </div>
                     <div className={styles.assetButtons}>
-                      <FrameButton size="small" color="primary" />
+                      <FrameButton size="small" type="primary" />
                       <p>Small</p>
                     </div>
                   </div>

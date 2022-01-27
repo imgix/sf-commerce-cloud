@@ -3,7 +3,7 @@ import styles from "./FrameButton.module.scss";
 
 type Props = {
   className?: string;
-  color?: "primary" | "secondary" | "tertiary";
+  type?: "primary" | "secondary" | "tertiary";
   disabled?: boolean;
   frameless?: boolean;
   icon?: ReactElement;
@@ -16,7 +16,7 @@ type Props = {
 
 export function FrameButton({
   className,
-  color = "primary",
+  type = "primary",
   disabled,
   frameless,
   icon,
@@ -30,7 +30,7 @@ export function FrameButton({
   // otherwise, display a button with icon and label
   const buttonStyles = [
     styles.button,
-    styles[color],
+    styles[type],
     styles[(disabled && "disabled") || " "],
     styles[(frameless && "frameless") || ""],
     styles[(icon && " ") || "noIcon"],

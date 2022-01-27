@@ -113,7 +113,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
             />
             <FrameButton
               noFill
-              color="secondary"
+              type="secondary"
               size="small"
               className={styles.search}
               label={"Search"}
