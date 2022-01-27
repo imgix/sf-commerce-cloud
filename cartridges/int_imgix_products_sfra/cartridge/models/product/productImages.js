@@ -5,6 +5,7 @@ const currentSite = require("dw/system/Site").getCurrent();
 const ProductVariationModel = require("dw/catalog/ProductVariationModel");
 const Variant = require("dw/catalog/Variant");
 const Product = require("dw/catalog/Product");
+const Logger = require("dw/catalog/Logger");
 
 /**
  * @constructor
@@ -52,75 +53,32 @@ function Images(product, imageConfig) {
   if (imgixEnableProductImageProxy && imgixCustomAttributeData) {
     // 1. custom attribute data exists
 
-    imageConfig.types.forEach(function (type) {
-      var images = product.getImages(type);
-      var result = {};
-
-      if (imageConfig.quantity === "single") {
-        var firstImage = collections.first(images);
-        if (firstImage) {
-          let imageUrl =
-            imgixCustomAttributeData.images.primary.src +
-            (imgixDefaultParams ? "?" + imgixDefaultParams : "");
-          // TODO: update sourceWidth adding
-          imageUrl = appendSourceWidth(
-            imageUrl,
-            imgixCustomAttributeData.images.primary.sourceWidth
-          );
-
-          result = [
-            {
-              alt: firstImage.alt,
-              url: imageUrl,
-              title: firstImage.title,
-              index: "0",
-              absURL: imageUrl,
-            },
-          ];
+    imageConfig.types.forEach(function (viewType) {
+      const images = (() => {
+        if (imageConfig.quantity === "single") {
+          return [imgixCustomAttributeData.images.primary];
         }
-      } else {
-        result = collections.map(images, function (image, index) {
-          let imageUrl;
-          if (index === 0) {
-            // TODO: add tests for default params
-            imageUrl =
-              imgixCustomAttributeData.images.primary.src +
-              (imgixDefaultParams ? "?" + imgixDefaultParams : "");
-            // TODO: update sourceWidth adding
-            imageUrl = appendSourceWidth(
-              imageUrl,
-              imgixCustomAttributeData.images.primary.sourceWidth
-            );
-          } else {
-            const imageIndex = index - 1;
-            if (
-              imageIndex < imgixCustomAttributeData.images.alternatives.length
-            ) {
-              // TODO: add tests for default params
-              imageUrl =
-                imgixCustomAttributeData.images.alternatives[imageIndex].src +
-                (isBaseURLSet && imgixDefaultParams
-                  ? "?" + imgixDefaultParams
-                  : "");
-              // TODO: update sourceWidth adding
-              imageUrl = appendSourceWidth(
-                imageUrl,
-                imgixCustomAttributeData.images.alternatives[imageIndex]
-                  .sourceWidth
-              );
-            }
-          }
+        return [
+          imgixCustomAttributeData.images.primary,
+          ...imgixCustomAttributeData.images.alternatives,
+        ];
+      })();
 
-          return {
-            alt: image.alt,
-            url: imageUrl,
-            index: index.toString(),
-            title: image.title,
-            absURL: imageUrl,
-          };
-        });
-      }
-      this[type] = result;
+      const result = images.map((image, index) => {
+        // TODO: add tests for default params
+        const imageUrl =
+          image.src +
+          (isBaseURLSet && imgixDefaultParams ? "?" + imgixDefaultParams : "");
+
+        return {
+          alt: image.alt,
+          url: imageUrl,
+          index: index.toString(),
+          title: image.title,
+          absURL: imageUrl,
+        };
+      });
+      this[viewType] = result;
     }, this);
   } else if (imgixEnableProductImageProxy && isBaseURLSet) {
     // 2. if the imgixBaseURL is set, use that to render the images
