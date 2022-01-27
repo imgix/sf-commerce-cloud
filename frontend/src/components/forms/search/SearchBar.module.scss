@@ -21,6 +21,12 @@
 }
 // Form Styles
 .searchContent {
+  @media screen {
+    @media (max-width: 820px) {
+      display: none;
+    }
+  }
+
   align-items: center;
   background-color: $color_invert_fg;
   border-radius: 4px;
