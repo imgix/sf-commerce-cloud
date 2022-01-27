@@ -38,35 +38,35 @@ const Template: ComponentStory<typeof FrameButton> = (args) => (
       },
       {
         label: "Secondary",
-        story: <_FrameButton {...args} color="secondary" />,
+        story: <_FrameButton {...args} type="secondary" />,
       },
       {
         label: "Tertiary",
-        story: <_FrameButton {...args} color="tertiary" />,
+        story: <_FrameButton {...args} type="tertiary" />,
       },
       {
         label: "Primary - no icon",
-        story: <_FrameButton {...args} icon={null} />,
+        story: <_FrameButton {...args} />,
       },
       {
         label: "Secondary - no icon",
-        story: <_FrameButton {...args} color="secondary" icon={null} />,
+        story: <_FrameButton {...args} type="secondary" />,
       },
       {
         label: "Tertiary - no icon",
-        story: <_FrameButton {...args} color="tertiary" icon={null} />,
+        story: <_FrameButton {...args} type="tertiary" />,
       },
       {
         label: "Primary - icon only",
-        story: <_FrameButton {...args} text={null} />,
+        story: <_FrameButton {...args} />,
       },
       {
         label: "Secondary - icon only",
-        story: <_FrameButton {...args} color="secondary" text={null} />,
+        story: <_FrameButton {...args} type="secondary" />,
       },
       {
         label: "Tertiary - icon only",
-        story: <_FrameButton {...args} color="tertiary" text={null} />,
+        story: <_FrameButton {...args} type="tertiary" />,
       },
     ]}
   ></MultiStory>
@@ -75,6 +75,6 @@ const Template: ComponentStory<typeof FrameButton> = (args) => (
 export const Buttons = Template.bind({});
 Buttons.args = {
   label: "Button",
-  color: "primary",
+  type: "primary",
   icon: <AddSvg />,
 };
