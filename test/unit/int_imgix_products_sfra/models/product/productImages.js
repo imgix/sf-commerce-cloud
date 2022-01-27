@@ -48,7 +48,7 @@ var images = new ArrayList([
 ]);
 var customData = {
   imgixData:
-    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
+    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url", "title": "First Image title", "alt": "First Image alt"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
 };
 
 var productMock = {
@@ -80,6 +80,12 @@ class Product {
   }
 }
 class Variant extends Product {}
+
+class Logger {
+  static info(...args) {
+    console.log(...args);
+  }
+}
 
 describe("ProductImages model", function () {
   let imgixBaseURLPreferenceValue = "imgixBaseURL";
@@ -134,6 +140,7 @@ describe("ProductImages model", function () {
       "dw/catalog/ProductVariationModel": ProductVariationModel,
       "dw/catalog/Product": Product,
       "dw/catalog/Variant": Variant,
+      "dw/catalog/Logger": Logger,
     }
   );
 
@@ -145,9 +152,9 @@ describe("ProductImages model", function () {
         quantity: "*",
       });
       assert.equal(images.small.length, 2);
-      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
       assert.equal(
         images.small[0].absURL,
@@ -155,12 +162,12 @@ describe("ProductImages model", function () {
       );
       assert.equal(
         images.small[1].url,
-        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+        "customImgixURL/imgix_second_image_url"
       );
       // TODO: check if we should be modifying path
       assert.equal(
         images.small[1].absURL,
-        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+        "customImgixURL/imgix_second_image_url"
       );
       assert.equal(images.small[1].index, "1");
     });
@@ -172,8 +179,8 @@ describe("ProductImages model", function () {
         quantity: "single",
       });
       assert.equal(images.small.length, 1);
-      assert.equal(images.small[0].alt, "First Image");
-      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
       assert.equal(
@@ -188,9 +195,9 @@ describe("ProductImages model", function () {
         quantity: "*",
       });
       assert.equal(images.small.length, 2);
-      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
       assert.equal(
         images.small[0].absURL,
@@ -198,12 +205,12 @@ describe("ProductImages model", function () {
       );
       assert.equal(
         images.small[1].url,
-        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+        "customImgixURL/imgix_second_image_url"
       );
 
       assert.equal(
         images.small[1].absURL,
-        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+        "customImgixURL/imgix_second_image_url"
       );
       assert.equal(images.small[1].index, "1");
     });
@@ -214,9 +221,9 @@ describe("ProductImages model", function () {
         quantity: "*",
       });
       assert.equal(images.small.length, 2);
-      assert.equal(images.small[0].alt, "First Image");
+      assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
       assert.equal(
         images.small[0].absURL,
@@ -224,12 +231,12 @@ describe("ProductImages model", function () {
       );
       assert.equal(
         images.small[1].url,
-        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+        "customImgixURL/imgix_second_image_url"
       );
 
       assert.equal(
         images.small[1].absURL,
-        "customImgixURL/imgix_second_image_url?sourceWidth=3000"
+        "customImgixURL/imgix_second_image_url"
       );
       assert.equal(images.small[1].index, "1");
     });
@@ -240,8 +247,8 @@ describe("ProductImages model", function () {
         quantity: "single",
       });
       assert.equal(images.small.length, 1);
-      assert.equal(images.small[0].alt, "First Image");
-      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
       assert.equal(
@@ -256,8 +263,8 @@ describe("ProductImages model", function () {
         quantity: "single",
       });
       assert.equal(images.small.length, 1);
-      assert.equal(images.small[0].alt, "First Image");
-      assert.equal(images.small[0].title, "First Image");
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
       assert.equal(
