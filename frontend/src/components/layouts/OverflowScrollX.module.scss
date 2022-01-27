@@ -1,6 +1,9 @@
 .overflowXContainer {
   overflow-x: auto;
-  width: 500px;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+  max-width: 100%;
 }
 
 .overflowListContainer {
