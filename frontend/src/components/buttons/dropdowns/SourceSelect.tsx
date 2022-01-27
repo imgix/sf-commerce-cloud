@@ -6,7 +6,7 @@ import { IDeploymentType } from "../../../types/imgixAPITypes";
 import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 import { SourceTypeIcon } from "../../icons/SourceTypeIcon";
-import { Button } from "../Button";
+import { SourceSelectButton } from "../SourceSelectButton";
 import styles from "./SourceSelect.module.scss";
 
 interface Props {
@@ -94,7 +94,7 @@ export function SourceSelect({
 
   const noSourcePlaceholder = (
     <li key="no-source" value="">
-      <Button label={"No sources"} />
+      <SourceSelectButton label={"No sources"} />
     </li>
   );
 
@@ -103,7 +103,7 @@ export function SourceSelect({
       className={styles.container + (className ? ` ${className}` : "")}
       ref={visibleRef}
     >
-      <Button
+      <SourceSelectButton
         label={activeSource?.attributes.name || "Select a Source"}
         onClick={() => setIsVisible(true)}
         leftIcon={<SourceMenuSvg className={styles.sourceIcon} />}
