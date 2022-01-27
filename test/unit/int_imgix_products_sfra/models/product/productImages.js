@@ -459,7 +459,7 @@ describe("ProductImages model", function () {
       it("original size image");
     });
 
-    describe("should not proxy images when feature is disabled", () => {
+    describe("should not proxy url or absURL when feature is disabled", () => {
       it("when querying single image from a product with a custom attribute", () => {
         imgixEnableProductImageProxyValue = false;
 
@@ -468,8 +468,8 @@ describe("ProductImages model", function () {
           quantity: "single",
         });
 
-        assert.notInclude(singleImage.large[0].url, "customImgixURL");
-        assert.include(singleImage.large[0].url, "sf_first_image_url");
+        assert.equal(singleImage.large[0].url, "/sf_first_image_url");
+        assert.equal(singleImage.large[0].absURL, "path/sf_first_image_url");
 
         imgixEnableProductImageProxyValue = true;
       });
@@ -482,16 +482,48 @@ describe("ProductImages model", function () {
           quantity: "*",
         });
 
-        assert.notInclude(multipleImages.large[0].url, "customImgixURL");
-        assert.include(multipleImages.large[0].url, "sf_first_image_url");
-
-        assert.notInclude(multipleImages.large[1].url, "customImgixURL");
-        assert.include(multipleImages.large[1].url, "sf_second_image_url");
+        assert.equal(multipleImages.large[0].url, "/sf_first_image_url");
+        assert.equal(multipleImages.large[0].absURL, "path/sf_first_image_url");
+        assert.equal(multipleImages.large[1].url, "/sf_second_image_url");
+        assert.equal(
+          multipleImages.large[1].absURL,
+          "path/sf_second_image_url"
+        );
 
         imgixEnableProductImageProxyValue = true;
       });
 
-      it("pass-through images");
+      it("when querying single pass-through image", () => {
+        imgixEnableProductImageProxyValue = false;
+
+        const singleImage = new ProductImages(new Product(), {
+          types: ["large"],
+          quantity: "single",
+        });
+
+        assert.equal(singleImage.large[0].url, "/sf_first_image_url");
+        assert.equal(singleImage.large[0].absURL, "path/sf_first_image_url");
+
+        imgixEnableProductImageProxyValue = true;
+      });
+      it("when querying multiple pass-through images", () => {
+        imgixEnableProductImageProxyValue = false;
+
+        const multipleImages = new ProductImages(new Product(), {
+          types: ["large"],
+          quantity: "*",
+        });
+
+        assert.equal(multipleImages.large[0].url, "/sf_first_image_url");
+        assert.equal(multipleImages.large[0].absURL, "path/sf_first_image_url");
+        assert.equal(multipleImages.large[1].url, "/sf_second_image_url");
+        assert.equal(
+          multipleImages.large[1].absURL,
+          "path/sf_second_image_url"
+        );
+
+        imgixEnableProductImageProxyValue = true;
+      });
     });
   });
 });
