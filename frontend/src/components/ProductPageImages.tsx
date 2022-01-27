@@ -1,12 +1,15 @@
 import React, { ReactElement } from "react";
-import { IImgixCustomAttributeValue } from "../types/imgixSF";
-import { AddButton } from "./buttons/AddButton";
+import { IProductImage } from "../types";
+import { FrameButton } from "./buttons/FrameButton/FrameButton";
+import { Divider } from "./dividers/Divider";
+import { AddSvg } from "./icons";
 import { OverflowScrollX } from "./layouts/OverflowScrollX";
 import { ProductImageContainer } from "./ProductImage/ProductImageContainer";
+import styles from "./ProductPageImages.module.scss";
 
 export interface ProductPageImagesProps {
   disabled: boolean;
-  images: IImgixCustomAttributeValue[] | undefined;
+  images: IProductImage[] | undefined;
   onClick: () => void;
 }
 
@@ -17,21 +20,24 @@ export const ProductPageImages = ({
 }: ProductPageImagesProps): ReactElement => {
   return (
     <OverflowScrollX>
-      <div style={{ margin: 5, minWidth: 120, display: "flex" }}>
-        <AddButton
-          disabled={disabled}
-          label="ADD IMAGE"
-          onOpenBreakoutClick={onClick}
+      <div className={styles.addImageButtonContainer}>
+        <FrameButton
+          frameless
+          label="Add Image"
+          type="tertiary"
+          className={styles.addImageButton}
+          icon={<AddSvg />}
         />
       </div>
+      <Divider vertical />
       <>
         {/* we have to create a fragment around jsx elements otherwise
         typescript will throw an error */}
-        {images?.map((image: IImgixCustomAttributeValue) => {
+        {images?.map((image: IProductImage) => {
           return (
             <ProductImageContainer
               onOpenBreakoutClick={onClick}
-              value={{ ...image } as IImgixCustomAttributeValue}
+              image={{ ...image } as IProductImage}
             />
           );
         })}
