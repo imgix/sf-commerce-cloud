@@ -1,17 +1,19 @@
 import React, { ReactElement } from "react";
-import Imgix from "react-imgix";
-import { IImgixCustomAttributeValue } from "../../types/imgixSF";
+import { IProductImage } from "../../types/";
+import { FrameButton } from "../buttons/FrameButton/FrameButton";
 import { ReplaceButton } from "../buttons/ReplaceButton";
+import { AssetCard } from "../card/AssetCard";
+import { Divider } from "../dividers/Divider";
 import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
   onOpenBreakoutClick: () => void;
-  value: IImgixCustomAttributeValue;
+  image: IProductImage;
 }
 
 export const ProductImageContainer = ({
-  value,
+  image,
   onOpenBreakoutClick,
 }: Props): ReactElement => {
   const [hovering, setHovering] = React.useState(false);
@@ -25,21 +27,36 @@ export const ProductImageContainer = ({
   };
 
   return (
-    <div
-      className={styles.imageWrapper}
-      onClick={onOpenBreakoutClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <Overlay visible={hovering}>
-        <ReplaceButton />
-      </Overlay>
-      <Imgix
-        height={60}
-        imgixParams={{ fit: "crop" }}
-        src={value.src}
-        width={60}
-      />
+    <div style={{ minWidth: 342, display: "flex" }}>
+      <div
+        className={styles.imageWrapper}
+        onClick={onOpenBreakoutClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        <Overlay rounded visible={hovering}>
+          <ReplaceButton label="REPLACE" />
+        </Overlay>
+        <AssetCard
+          asset={image.imgix_metadata}
+          domain={image.imgix_metadata.base_url}
+        />
+      </div>
+      <div className={styles.assetButtonsContainer}>
+        <div className={styles.assetButtons}>
+          <FrameButton size="small" type="primary" />
+          <p>Large</p>
+        </div>
+        <div className={styles.assetButtons}>
+          <FrameButton size="small" type="primary" />
+          <p>Medium</p>
+        </div>
+        <div className={styles.assetButtons}>
+          <FrameButton size="small" type="primary" />
+          <p>Small</p>
+        </div>
+      </div>
+      <Divider vertical />
     </div>
   );
 };
