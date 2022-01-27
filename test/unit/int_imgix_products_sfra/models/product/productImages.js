@@ -16,8 +16,8 @@ var toProductMock = require("../../../../util");
  */
 var images = new ArrayList([
   {
-    alt: "First Image",
-    title: "First Image",
+    alt: "First Image alt",
+    title: "First Image title",
     index: "0",
     URL: {
       toString: function () {
@@ -31,8 +31,8 @@ var images = new ArrayList([
     },
   },
   {
-    alt: "Second Image",
-    title: "Second Image",
+    alt: "Second Image alt",
+    title: "Second Image title",
     index: "1",
     URL: {
       toString: function () {
@@ -285,9 +285,9 @@ describe("ProductImages model", function () {
           quantity: "*",
         });
         assert.equal(images.small.length, 2);
-        assert.equal(images.small[0].alt, "First Image");
+        assert.equal(images.small[0].alt, "First Image alt");
         assert.equal(images.small[0].index, "0");
-        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].title, "First Image title");
         assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
         assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
         assert.equal(images.small[1].url, "imgixBaseURL/sf_second_image_url");
@@ -304,8 +304,8 @@ describe("ProductImages model", function () {
           quantity: "single",
         });
         assert.equal(images.small.length, 1);
-        assert.equal(images.small[0].alt, "First Image");
-        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].alt, "First Image alt");
+        assert.equal(images.small[0].title, "First Image title");
         assert.equal(images.small[0].index, "0");
         assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
         assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
@@ -324,8 +324,8 @@ describe("ProductImages model", function () {
           quantity: "*",
         });
         assert.equal(images.small.length, 2);
-        assert.equal(images.small[0].alt, "First Image");
-        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].alt, "First Image alt");
+        assert.equal(images.small[0].title, "First Image title");
         assert.equal(images.small[0].index, "0");
         assert.equal(images.small[0].url, "/sf_first_image_url");
         assert.equal(images.small[0].absURL, "path/sf_first_image_url");
@@ -348,8 +348,8 @@ describe("ProductImages model", function () {
           quantity: "single",
         });
         assert.equal(images.small.length, 1);
-        assert.equal(images.small[0].alt, "First Image");
-        assert.equal(images.small[0].title, "First Image");
+        assert.equal(images.small[0].alt, "First Image alt");
+        assert.equal(images.small[0].title, "First Image title");
         assert.equal(images.small[0].index, "0");
         assert.equal(images.small[0].url, "/sf_first_image_url");
 
