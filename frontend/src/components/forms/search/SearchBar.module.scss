@@ -19,6 +19,12 @@
 }
 // Form Styles
 .searchContent {
+  @media screen {
+    @media (max-width: 820px) {
+      display: none;
+    }
+  }
+
   align-items: center;
   background-color: #fff;
   border-radius: 4px;
