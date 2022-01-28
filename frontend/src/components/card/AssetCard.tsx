@@ -35,16 +35,12 @@ export function AssetCard({
     styles.container,
     layout === "list" ? styles.list : styles.grid,
     !isImage ? styles.disabled : "",
+    selectedAssetId === asset.id ? styles.selected : "",
+    noFilepath && styles["h-200"],
   ].join(" ");
 
   return (
-    <div
-      className={
-        containerStyles +
-        ` ${selectedAssetId === asset.id ? styles.selected : ""}`
-      }
-      onClick={() => onClick && onClick(asset)}
-    >
+    <div className={containerStyles} onClick={() => onClick && onClick(asset)}>
       {isImage ? (
         <div style={{ height }} className={styles.image}>
           <AssetCardImage asset={asset} domain={domain} />
@@ -54,9 +50,7 @@ export function AssetCard({
           <img src={placeholder} />
         </div>
       )}
-      {noFilepath ? null : (
-        <p className={styles.filename}>{domain + filename}</p>
-      )}
+      {noFilepath ? null : <p className={styles.filename}>{filename}</p>}
     </div>
   );
 }
