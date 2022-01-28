@@ -10,6 +10,5 @@ export type {
   IImgixMetadata,
   IProductImage,
   IProductImageData,
-  ISwatchImages,
 } from "./productImage";
 export type { SandboxContext, SandboxSubscribe } from "./sfcc";
