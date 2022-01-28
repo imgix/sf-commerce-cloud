@@ -1,5 +1,6 @@
 import React from "react";
-import styles from "./Button.module.scss";
+import { DownArrowSvg, SourceMenuSvg } from "../icons";
+import styles from "./SourceSelectButton.module.scss";
 
 interface Props {
   label: string;
@@ -11,15 +12,14 @@ interface Props {
   flat?: boolean;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
-export const Button = ({
-  label,
-  onClick,
-  leftIcon,
-  rightIcon,
-  flat,
+
+export const SourceSelectButton = ({
   className,
-  rightIconClassName,
+  flat,
+  label,
   leftIconClassName,
+  rightIconClassName,
+  onClick,
 }: Props) => {
   return (
     <div
@@ -30,27 +30,24 @@ export const Button = ({
         (className ? ` ${className}` : "")
       }
     >
-      {leftIcon && (
-        <div
-          className={
-            styles.leftIcon + (leftIconClassName ? ` ${leftIconClassName}` : "")
-          }
-        >
-          {leftIcon}
-        </div>
-      )}
+      <div
+        style={{ width: 21 }}
+        className={
+          styles.leftIcon + (leftIconClassName ? ` ${leftIconClassName}` : "")
+        }
+      >
+        <SourceMenuSvg />
+      </div>
       <div className={styles.label}>{label}</div>
       <div className={styles.spacer}></div>
-      {rightIcon && (
-        <div
-          className={
-            styles.rightIcon +
-            (rightIconClassName ? ` ${rightIconClassName}` : "")
-          }
-        >
-          {rightIcon}
-        </div>
-      )}
+      <div
+        className={
+          styles.rightIcon +
+          (rightIconClassName ? ` ${rightIconClassName}` : "")
+        }
+      >
+        <DownArrowSvg />
+      </div>
     </div>
   );
 };
