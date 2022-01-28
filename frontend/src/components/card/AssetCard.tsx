@@ -28,7 +28,7 @@ export function AssetCard({
   const filename =
     asset.attributes.origin_path.split("/").pop()?.split("?")[0] || "";
   const isImage = filename.match(
-    /\.(avif|gif|jp2|jpg|json|jxr|pjpg|png|png8|png32|webp|blurhash)$/
+    /\.(avif|gif|jp2|jpg|jpeg|json|jxr|pjpg|png|png8|png32|webp|blurhash|svg|ai)$/
   );
 
   const containerStyles = [
