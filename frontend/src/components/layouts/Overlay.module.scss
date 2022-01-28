@@ -9,4 +9,9 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  z-index: 2;
+
+  &.rounded {
+    border-radius: 4px;
+  }
 }
