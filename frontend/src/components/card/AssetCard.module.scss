@@ -16,11 +16,11 @@
     box-shadow: 0 0 0 2px rgba(0, 191, 254, 0.4);
   }
 
-  & .selected {
+  &.selected {
     box-shadow: 0 0 0 2px #00bffe;
   }
 
-  & .selected:hover {
+  &.selected:hover {
     box-shadow: 0 0 0 2px #00bffe;
   }
 }
