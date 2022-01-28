@@ -11,5 +11,6 @@ export type {
   IImgixCustomAttribute,
   IImgixCustomAttributeImage,
   IImgixCustomAttributeSwatch,
+  IImgixMetadata,
 } from "../src/cartridges/commonTypes";
-export { ProductImagesModelData } from "../src/cartridges/SFTypes";
+export type { ProductImagesModelData } from "../src/cartridges/SFTypes";
