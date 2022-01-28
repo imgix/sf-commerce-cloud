@@ -61,6 +61,11 @@
         background-color: $color_fg_tint;
       }
     }
+    &.noFill {
+      svg {
+        fill: inherit;
+      }
+    }
   }
 
   &.secondary {
@@ -85,6 +90,11 @@
       opacity: 0.5;
       &:active {
         background-color: $color_accent_blue_tint;
+      }
+    }
+    &.noFill {
+      svg {
+        fill: inherit;
       }
     }
   }
@@ -126,6 +136,11 @@
       opacity: 0.5;
       &:active {
         background-color: $color_bg_shade;
+      }
+    }
+    &.noFill {
+      svg {
+        fill: inherit;
       }
     }
   }
