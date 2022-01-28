@@ -3,7 +3,7 @@ import React from "react";
 import { Modal as _Modal } from "../components/layouts/Modal";
 
 export default {
-  title: "Style/Modal",
+  title: "Styles/Modal",
   component: _Modal,
   parameters: {
     layout: "centered",
