@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { ImgixGETAssetsData } from "../../types";
-import { Image } from "../image/Image";
+import { AssetCardImage } from "../image/AssetCardImage";
 import styles from "./AssetCard.module.scss";
 
 interface AssetCardProps {
@@ -47,7 +47,7 @@ export function AssetCard({
     >
       {isImage ? (
         <div style={{ height }} className={styles.image}>
-          <Image asset={asset} domain={domain} />
+          <AssetCardImage asset={asset} domain={domain} />
         </div>
       ) : (
         <div style={{ height }} className={styles.placeholder}>
