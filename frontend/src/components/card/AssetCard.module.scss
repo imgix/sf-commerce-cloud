@@ -8,8 +8,8 @@
   border-radius: 2px;
   border-radius: 4px;
   cursor: pointer;
-  max-height: 340px;
-  max-width: 340px;
+  max-height: 200px;
+  max-width: 200px;
   overflow: hidden;
 
   &:hover {
@@ -28,7 +28,7 @@
 .image {
   position: relative;
   overflow: hidden;
-  height: 180px;
+  height: 154px;
 
   & img {
     display: block;
@@ -76,10 +76,17 @@
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, 10px 0;
   transition: none;
-  min-height: 180px;
+  height: 154px;
 }
 
 .disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.h-200 {
+  .image,
+  .placeholder {
+    height: 200px;
+  }
 }
