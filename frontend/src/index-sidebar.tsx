@@ -12,6 +12,10 @@ declare const subscribe: SandboxSubscribe<
 
 export const createSidebarApp = () => {
   let localization: any;
+  let imgixApi: {
+    apiKey?: string;
+    enabled?: boolean;
+  };
 
   subscribe(
     "sfcc:ready",
@@ -24,7 +28,7 @@ export const createSidebarApp = () => {
       displayLocale,
     }: any) => {
       // Extract `localization` data from `config`
-      ({ localization = {} } = config);
+      ({ localization = {}, imgixApi = {} } = config);
 
       let state: {
         value: IImgixCustomAttributeValue | {};
@@ -95,6 +99,7 @@ export const createSidebarApp = () => {
               onOpenBreakoutClick={handleBreakoutOpen}
               onClear={handleValueClear}
               value={safeValue}
+              disabled={imgixApi.enabled === false}
             />
           </React.StrictMode>,
           rootEditorElement
