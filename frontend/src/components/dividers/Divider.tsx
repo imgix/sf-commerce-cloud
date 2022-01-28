@@ -1,6 +1,11 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import styles from "./Divider.module.scss";
 
-export function Divider() {
-  return <div className={styles.divider}></div>;
+interface Props {
+  vertical?: boolean;
+}
+
+export function Divider({ vertical }: Props): ReactElement {
+  const type = vertical ? styles.vertical : styles.horizontal;
+  return <div className={`${type}`}></div>;
 }
