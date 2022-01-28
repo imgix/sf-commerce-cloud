@@ -13,6 +13,9 @@
   &:hover {
     background: rgba(28, 44, 56, 0.8);
   }
+  & svg {
+    fill: #ffffff;
+  }
 }
 
 .replaceImageIcon {
