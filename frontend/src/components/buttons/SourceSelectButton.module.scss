@@ -48,8 +48,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  :hover {
-    background: #e8f0f4;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
   }
 
   svg {
