@@ -7,7 +7,7 @@ type Props = {
   domain: string;
 };
 
-export function Image({ asset, domain }: Props) {
+export function AssetCardImage({ asset, domain }: Props) {
   return (
     <Imgix
       src={"https://" + domain + asset.attributes.origin_path}
