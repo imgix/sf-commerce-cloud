@@ -79,6 +79,7 @@
   flex: 1 0 auto;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 /* Search form input */
 .searchBaseInput {
@@ -123,6 +124,7 @@
 }
 .searchExpander {
   margin-top: 50px;
+  margin-left: -55vw;
 }
 .searchBaseSuggestionsList {
   color: $color_fg;
@@ -164,7 +166,7 @@
 }
 
 .searchButtons {
-  padding-right: 10px;
+  padding-right: 2vw;
   & .search {
     font-style: normal;
     font-weight: 500;
