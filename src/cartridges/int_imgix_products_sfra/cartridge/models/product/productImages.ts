@@ -1,5 +1,6 @@
 "use strict";
 
+import { IImgixCustomAttribute } from "../../../../commonTypes";
 import { ProductImagesModelData } from "../../../../SFTypes";
 
 var collections = require("*/cartridge/scripts/util/collections");
@@ -33,7 +34,7 @@ function Images(
     "imgixEnableProductImageProxy"
   );
 
-  const imgixCustomAttributeData = (() => {
+  const imgixCustomAttributeData: IImgixCustomAttribute | undefined = (() => {
     if (product instanceof ProductVariationModel) {
       // Get imgix data custom attribute from selected variant or master product
       const productData = product.selectedVariant || product.master;
@@ -69,12 +70,9 @@ function Images(
     ) {
       const images = (() => {
         if (imageConfig.quantity === "single") {
-          return [imgixCustomAttributeData.images.primary];
+          return imgixCustomAttributeData.images.slice(0, 1);
         }
-        return [
-          imgixCustomAttributeData.images.primary,
-          ...imgixCustomAttributeData.images.alternatives,
-        ];
+        return imgixCustomAttributeData.images
       })();
 
       const result = images.map((image, index) => {
