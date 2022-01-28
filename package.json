@@ -16,9 +16,12 @@
     "proxyquire": "1.7.4",
     "sfcc-ci": "^2.7.3",
     "sgmf-scripts": "^2.3.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "typescript": "^4.5.5"
   },
   "scripts": {
+    "build": "yarn run build:cartridges",
+    "build:cartridges": "pushd src/cartridges && tsc",
     "test": "sgmf-scripts --test test/unit/**/*.js",
     "setup": "npm run setup:dw-json",
     "setup:dw-json": "node setup.js",

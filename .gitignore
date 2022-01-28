@@ -75,3 +75,6 @@ frontend/src/stories/assets
 dw*.json
 
 metadata/system-objecttype-extensions.xml
+
+# typescript
+*.tsbuildinfo
