@@ -12,6 +12,16 @@ module.exports.render = function (context, modelIn) {
   ImgixLogger.info(
     "************************** imgix Image Component Start Render"
   );
+  const isEnabled = Site.getCurrent().getCustomPreferenceValue(
+    "imgixEnablePageDesigner"
+  );
+
+  if (!isEnabled) {
+    ImgixLogger.info(
+      "************************** imgix Image Component Render Aborted"
+    );
+    return;
+  }
 
   var model = modelIn || new HashMap();
   var content = context.content;
