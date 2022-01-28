@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { FrameButton } from "../../components/buttons/FrameButton/FrameButton";
 import {
   AddSvg,
   ArrowLeft,
@@ -27,13 +26,13 @@ const _Button = ({ children }: any) => {
 
 export default {
   title: "Styles/Icons",
-  component: FrameButton,
+  component: _Button,
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof FrameButton>;
+} as ComponentMeta<typeof _Button>;
 
-const Template: ComponentStory<typeof FrameButton> = (args) => (
+const Template: ComponentStory<typeof _Button> = (args) => (
   <MultiStory
     style={{
       display: "flex",
