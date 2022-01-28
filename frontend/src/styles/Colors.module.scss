@@ -182,6 +182,7 @@ $zIndex_globalOverlay: 800;
 .color_bg {
   background-color: #ffffff;
 }
+
 .color_bg_shade {
   background-color: #e8f0f4;
 }
@@ -194,11 +195,11 @@ $zIndex_globalOverlay: 800;
 .color_fg_tint {
   background-color: $color_fg_tint;
 }
-.color_fg_shade {
-  background-color: shade($color_fg, 20%);
-}
 .color_fg_tint2 {
   background-color: tint($color_fg, 40%);
+}
+.color_fg_shade {
+  background-color: shade($color_fg, 20%);
 }
 .color_fg_shade2 {
   background-color: shade($color_fg, 40%);
@@ -212,11 +213,11 @@ $zIndex_globalOverlay: 800;
 .color_chrome_tint {
   background-color: tint($color_chrome, 20%);
 }
-.color_chrome_shade {
-  background-color: shade($color_chrome, 20%);
-}
 .color_chrome_tint2 {
   background-color: tint($color_chrome, 40%);
+}
+.color_chrome_shade {
+  background-color: shade($color_chrome, 20%);
 }
 .color_chrome_shade2 {
   background-color: shade($color_chrome, 40%);
@@ -230,11 +231,11 @@ $zIndex_globalOverlay: 800;
 .color_invert_bg_tint {
   background-color: tint($color_invert_bg, 20%);
 }
-.color_invert_bg_shade {
-  background-color: shade($color_invert_bg, 20%);
-}
 .color_invert_bg_tint2 {
   background-color: tint($color_invert_bg, 40%);
+}
+.color_invert_bg_shade {
+  background-color: shade($color_invert_bg, 20%);
 }
 .color_invert_bg_shade2 {
   background-color: shade($color_invert_bg, 40%);
@@ -254,11 +255,11 @@ $zIndex_globalOverlay: 800;
 .color_invert_chrome_tint {
   background-color: tint($color_invert_chrome, 20%);
 }
-.color_invert_chrome_shade {
-  background-color: shade($color_invert_chrome, 20%);
-}
 .color_invert_chrome_tint2 {
   background-color: tint($color_invert_chrome, 40%);
+}
+.color_invert_chrome_shade {
+  background-color: shade($color_invert_chrome, 20%);
 }
 .color_invert_chrome_shade2 {
   background-color: shade($color_invert_chrome, 40%);
@@ -272,11 +273,11 @@ $zIndex_globalOverlay: 800;
 .color_accent_orange_tint {
   background-color: tint($color_accent_orange, 20%);
 }
-.color_accent_orange_shade {
-  background-color: shade($color_accent_orange, 20%);
-}
 .color_accent_orange_tint2 {
   background-color: tint($color_accent_orange, 40%);
+}
+.color_accent_orange_shade {
+  background-color: shade($color_accent_orange, 20%);
 }
 .color_accent_orange_shade2 {
   background-color: shade($color_accent_orange, 40%);
@@ -287,11 +288,11 @@ $zIndex_globalOverlay: 800;
 .color_accent_blue_tint {
   background-color: tint($color_accent_blue, 20%);
 }
-.color_accent_blue_shade {
-  background-color: shade($color_accent_blue, 20%);
-}
 .color_accent_blue_tint2 {
   background-color: tint($color_accent_blue, 40%);
+}
+.color_accent_blue_shade {
+  background-color: shade($color_accent_blue, 20%);
 }
 .color_accent_blue_shade2 {
   background-color: shade($color_accent_blue, 40%);
@@ -302,11 +303,11 @@ $zIndex_globalOverlay: 800;
 .color_accent_green_tint {
   background-color: tint($color_accent_green, 40%);
 }
-.color_accent_green_shade {
-  background-color: shade($color_accent_green, 20%);
-}
 .color_accent_green_tint2 {
   background-color: tint($color_accent_green, 60%);
+}
+.color_accent_green_shade {
+  background-color: shade($color_accent_green, 20%);
 }
 .color_accent_green_shade2 {
   background-color: shade($color_accent_green, 40%);
