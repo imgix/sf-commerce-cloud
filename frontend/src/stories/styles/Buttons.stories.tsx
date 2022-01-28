@@ -74,7 +74,7 @@ const Template: ComponentStory<typeof FrameButton> = (args) => (
 
 export const Buttons = Template.bind({});
 Buttons.args = {
-  text: "Button",
+  label: "Button",
   color: "primary",
   icon: <AddSvg />,
 };
