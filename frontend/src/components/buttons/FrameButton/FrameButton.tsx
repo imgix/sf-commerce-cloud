@@ -2,23 +2,29 @@ import React, { ReactElement } from "react";
 import styles from "./FrameButton.module.scss";
 
 type Props = {
-  icon?: ReactElement;
+  className?: string;
   color?: "primary" | "secondary" | "tertiary";
   disabled?: boolean;
   frameless?: boolean;
-  onClick?: () => void;
+  icon?: ReactElement;
+  iconPosition?: "left" | "right";
+  label?: string;
+  noFill?: boolean;
   size?: "small" | "large";
-  text?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 export function FrameButton({
+  className,
   color = "primary",
   disabled,
   frameless,
   icon,
-  onClick,
+  iconPosition = "left",
+  label,
+  noFill,
   size = "large",
-  text,
+  onClick,
 }: Props) {
   // if label is not provided, display a button with only the icon
   // otherwise, display a button with icon and label
@@ -29,17 +35,20 @@ export function FrameButton({
     styles[(frameless && "frameless") || ""],
     styles[(icon && " ") || "noIcon"],
     styles[size],
-    styles[(text && " ") || "iconOnly"],
+    styles[(label && " ") || "iconOnly"],
+    styles[(noFill && "noFill") || " "],
+    className,
   ]
     .toString()
     .replace(/,/g, " ");
-  return text ? (
+  return iconPosition === "left" ? (
     <button className={buttonStyles} disabled={disabled} onClick={onClick}>
       {icon}
-      <span className="label">{text}</span>
+      {label && <span className={styles.label}>{label}</span>}
     </button>
   ) : (
     <button className={buttonStyles} disabled={disabled} onClick={onClick}>
+      {label && <span className={styles.label}>{label}</span>}
       {icon}
     </button>
   );
