@@ -48,7 +48,7 @@ var images = new ArrayList([
 ]);
 var customData = {
   imgixData:
-    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url", "title": "First Image title", "alt": "First Image alt"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
+    '{"images": [{"src": "customImgixURL/imgix_first_image_url", "title": "First Image title", "alt": "First Image alt"}, {"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}',
 };
 
 var productMock = {
