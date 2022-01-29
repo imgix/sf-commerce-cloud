@@ -1,0 +1,23 @@
+@import "../styles/Colors.module.scss";
+
+.addImageButtonContainer {
+  display: flex;
+  justify-content: center;
+  justify-self: stretch;
+  background: $color_invert_fg;
+  border-radius: 4px;
+  cursor: pointer;
+  min-height: 200px;
+  min-width: 200px;
+  overflow: hidden;
+  margin: 2px;
+  padding-top: 84px;
+
+  &:hover {
+    box-shadow: 0 0 0 2px $color_fg;
+  }
+
+  &:active {
+    box-shadow: 0 0 0 2px $color_fg_tint2;
+  }
+}
