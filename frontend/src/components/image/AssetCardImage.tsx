@@ -1,16 +1,16 @@
 import React from "react";
 import Imgix from "react-imgix";
-import { ImgixGETAssetsData } from "../../types";
+import { IImgixMetadata, ImgixGETAssetsData } from "../../types";
 
 type Props = {
-  asset: ImgixGETAssetsData[0];
+  asset: ImgixGETAssetsData[0] | IImgixMetadata | undefined;
   domain: string;
 };
 
 export function AssetCardImage({ asset, domain }: Props) {
   return (
     <Imgix
-      src={"https://" + domain + asset.attributes.origin_path}
+      src={"https://" + domain + asset?.attributes.origin_path}
       imgixParams={{
         auto: "format",
         fit: "crop",
