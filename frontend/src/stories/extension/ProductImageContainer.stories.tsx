@@ -4,7 +4,7 @@ import {
   ProductPageImages,
   ProductPageImagesProps,
 } from "../../components/ProductPageImages";
-import { IImgixCustomAttributeValue } from "../../types/imgixSF";
+import { IProductImage } from "../../types";
 import { MultiStory } from "../common/MultiStory";
 
 export default {
@@ -16,13 +16,47 @@ export default {
 const selectedImage = [
   {
     src: "https://sdk-test.imgix.net/amsterdam.jpg",
+    view_type: {
+      large: true,
+      medium: true,
+      small: true,
+    },
+    imgix_metadata: {
+      attributes: {
+        description: "amsterdam",
+        name: "/amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
+        media_height: 0,
+        media_width: 0,
+      },
+      base_url: "sdk-test.imgix.net",
+      id: "1",
+      type: "assets",
+    },
   },
-] as IImgixCustomAttributeValue[];
+] as IProductImage[];
 const selectedImages: any = [];
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 15; i++) {
   selectedImages.push({
     src: "https://sdk-test.imgix.net/amsterdam.jpg",
+    view_type: {
+      large: true,
+      medium: true,
+      small: true,
+    },
+    imgix_metadata: {
+      attributes: {
+        description: "amsterdam",
+        name: "/amsterdam.jpg",
+        origin_path: "/amsterdam.jpg",
+        media_height: 0,
+        media_width: 0,
+      },
+      base_url: "sdk-test.imgix.net",
+      id: i + 5,
+      type: "assets",
+    },
   });
 }
 
@@ -35,11 +69,11 @@ const Template: ComponentStory<typeof ProductPageImages> = (args) => (
       },
       {
         label: "With selected image",
-        story: <ProductPageImages {...{ ...args, images: selectedImage }} />,
+        story: <ProductPageImages {...args} images={selectedImage} />,
       },
       {
         label: "With many selected images",
-        story: <ProductPageImages {...{ ...args, images: selectedImages }} />,
+        story: <ProductPageImages {...args} images={selectedImages} />,
       },
     ]}
     style={{
@@ -49,6 +83,4 @@ const Template: ComponentStory<typeof ProductPageImages> = (args) => (
 );
 
 export const ProductImages = Template.bind({});
-ProductImages.args = {
-  images: selectedImage,
-} as ProductPageImagesProps;
+ProductImages.args = {} as ProductPageImagesProps;
