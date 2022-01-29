@@ -54,19 +54,28 @@ export const SFImgixProductsSection = () => {
                       className={`${styles.w100} ${styles.textarea}`}
                     >
                       {JSON.stringify({
-                        images: {
-                          primary: {
-                            src:
-                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwdb18b57a/images/large/PG.10221714.JJ169XX.PZ.jpg",
-                          },
-                          alternatives: [
-                            {
-                              src:
-                                "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwd910a0e9/images/large/PG.10221714.JJ169XX.BZ.jpg",
-                              sourceWidth: 3000,
+                        images: [
+                          {
+                            src: "https://sdk-test.imgix.net/amsterdam.jpg",
+                            view_type: {
+                              large: true,
+                              medium: true,
+                              small: true,
                             },
-                          ],
-                        },
+                            imgix_metadata: {
+                              attributes: {
+                                description: "amsterdam",
+                                name: "/amsterdam.jpg",
+                                origin_path: "/amsterdam.jpg",
+                                media_height: 0,
+                                media_width: 0,
+                              },
+                              base_url: "sdk-test.imgix.net",
+                              id: "1",
+                              type: "assets",
+                            },
+                          },
+                        ],
                         swatchImages: [
                           {
                             src:
