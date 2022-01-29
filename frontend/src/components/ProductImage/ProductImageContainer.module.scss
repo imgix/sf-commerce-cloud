@@ -1,10 +1,38 @@
+@import "../../styles/Colors.module.scss";
+
 .imageWrapper {
-  background-color: #e3e7eb;
-  height: 60px;
-  width: 60px;
+  background-color: $color_bg_new;
   overflow: hidden;
   display: flex;
   margin: 5px;
-  min-width: 60px;
+  max-width: 200px;
   position: relative;
+}
+
+.replaceImageButton {
+  color: $color_invert_fg;
+}
+
+.assetButtonsContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: $type_size_small;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 30px;
+
+  .assetButtons {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-size: $type_size_small;
+    justify-content: space-between;
+    padding: 10px 0 10px 0px;
+    width: 70px;
+
+    p {
+      margin-left: 10px;
+    }
+  }
 }
