@@ -35,40 +35,14 @@ export const injectExtensionApp = () => {
 
   const customAttributeValue = JSON.parse(customAttributeTextarea.value);
 
-  // reduce the custom attribute value to an array of images, where each image
-  // is an object with src, sourceWidth, and imageType properties
-  const storeCustomAttributeImages = (customAttributeValue: any) => {
-    let customImages = [];
-    // add the primary image to the array of images
-    customImages.push({
-      src: customAttributeValue?.images?.primary?.src,
-      sourceWidth: customAttributeValue?.images?.primary?.sourceWidth,
-      imageType: "primary",
-    });
-    customImages.push(
-      ...customAttributeValue?.images?.alternatives?.map((image: any) => ({
-        src: image.src,
-        sourceWidth: image.sourceWidth,
-        imageType: "alternative",
-      }))
-    );
-    // add the swatch images to the array of images
-    customImages.push(
-      ...customAttributeValue?.swatchImages?.map((image: any) => ({
-        src: image.src,
-        sourceWidth: image.sourceWidth,
-        imageType: "swatch",
-      }))
-    );
-
-    return customImages;
+  const data = {
+    images: customAttributeValue.images || [],
+    swatchImages: customAttributeValue?.swatchImages,
   };
-
-  const images = storeCustomAttributeImages(customAttributeValue);
 
   // uncomment next line and setCustomAttributeValue function when React app is ready
   ReactDOM.render(
-    <ExtensionApp images={images} onChange={setCustomAttributeValue} />,
+    <ExtensionApp data={data} onChange={setCustomAttributeValue} />,
     newTD
   );
 };
