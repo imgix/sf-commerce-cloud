@@ -1,35 +1,37 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { AssetCard } from "../components/card/AssetCard";
+import { AssetCard as _AssetCard } from "../components/card/AssetCard";
 import { MultiStory } from "./common/MultiStory";
 
 export default {
-  title: "Example/Image Card",
-  component: AssetCard,
+  title: "Example/Asset Card",
+  component: _AssetCard,
   parameters: {
     layout: "centered",
   },
-} as ComponentMeta<typeof AssetCard>;
+} as ComponentMeta<typeof _AssetCard>;
 
-const Template: ComponentStory<typeof AssetCard> = (args) => (
+const Template: ComponentStory<typeof _AssetCard> = (args) => (
   <MultiStory
     stories={[
       {
         label: "Normal",
-        story: <AssetCard {...args} />,
+        story: <_AssetCard {...args} />,
       },
       {
         label: "with unsupported file formal",
         story: (
-          <AssetCard
-            {...{
-              ...args,
-              asset: {
-                ...args.asset,
-                attributes: {
-                  ...args.asset.attributes,
-                  origin_path: "/amsterdam.mp4",
-                },
+          <_AssetCard
+            {...args}
+            asset={{
+              id: "1",
+              type: "assets",
+              attributes: {
+                origin_path: "/amsterdam.mov",
+                description: "",
+                name: "",
+                media_width: 0,
+                media_height: 0,
               },
             }}
           />
@@ -39,15 +41,17 @@ const Template: ComponentStory<typeof AssetCard> = (args) => (
       {
         label: "with invalid path",
         story: (
-          <AssetCard
-            {...{
-              ...args,
-              asset: {
-                ...args.asset,
-                attributes: {
-                  ...args.asset.attributes,
-                  origin_path: "/_amsterdam.jpg",
-                },
+          <_AssetCard
+            {...args}
+            asset={{
+              id: "2",
+              type: "assets",
+              attributes: {
+                origin_path: "/_amsterdam.jpg",
+                description: "",
+                name: "",
+                media_width: 0,
+                media_height: 0,
               },
             }}
           />
@@ -58,10 +62,10 @@ const Template: ComponentStory<typeof AssetCard> = (args) => (
   />
 );
 
-export const Simple = Template.bind({});
-Simple.args = {
+export const AssetCard = Template.bind({});
+AssetCard.args = {
   asset: {
-    id: "1",
+    id: "0",
     type: "assets",
     attributes: {
       origin_path: "/amsterdam.jpg",
@@ -72,6 +76,6 @@ Simple.args = {
     },
   },
   domain: "sdk-test.imgix.net",
-  selectedAssetId: "1",
+  selectedAssetId: "",
   onClick: () => {},
 };
