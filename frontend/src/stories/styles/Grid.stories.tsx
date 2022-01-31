@@ -41,14 +41,16 @@ const Template: ComponentStory<typeof AssetCard> = (args) => (
           <_Grid>
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((i) => (
               <AssetCard
-                {...{
-                  ...args,
-                  asset: {
-                    ...args.asset,
-                    attributes: {
-                      ...args.asset.attributes,
-                      origin_path: `/amsterdam.jpg?txt=${i}&txt-size=24&txt-color=ffff&txt-align=middle,center&txt-font=Futura%20Condensed%20Medium`,
-                    },
+                {...args}
+                asset={{
+                  id: "1",
+                  type: "assets",
+                  attributes: {
+                    origin_path: `/amsterdam.jpg?txt=${i}&txt-size=24&txt-color=ffff&txt-align=middle,center&txt-font=Futura%20Condensed%20Medium`,
+                    description: "",
+                    name: "",
+                    media_width: 0,
+                    media_height: 0,
                   },
                 }}
               />
