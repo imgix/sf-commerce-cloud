@@ -37,7 +37,7 @@ export const injectExtensionApp = () => {
 
   const data = {
     images: customAttributeValue.images || [],
-    swatchImages: customAttributeValue?.swatchImages,
+    swatches: customAttributeValue?.swatches,
   };
 
   // uncomment next line and setCustomAttributeValue function when React app is ready
