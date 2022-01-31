@@ -50,7 +50,7 @@ export function AssetCard({
         </div>
       ) : (
         <div style={{ height }} className={styles.placeholder}>
-          <img src={placeholder} />
+          <img alt="" src={placeholder} />
         </div>
       )}
       {noFilepath ? null : <p className={styles.filename}>{filename}</p>}
