@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Icon.module.scss";
 
 export const GCSIcon = ({ className }: { className?: string }) => (
-  <div className={`${styles.container} ${className}`}>
+  <div className={`${styles.container} ${className ? className : ""}`}>
     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <path d="M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z" />
       <path d="M2.19995 4L3.89995 7L5.39995 4.5C5.49995 4.2 5.89995 4 6.19995 4H13.7L12.3 1.5C12.1 1.2 11.8 1 11.4 1H4.49995C4.19995 1 3.79995 1.2 3.69995 1.5L2.19995 4Z" />
