@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Icon.module.scss";
 
 export const TrashcanSvg = ({ className }: { className?: string }) => (
-  <div className={`${styles.container} ${className}`}>
+  <div className={`${styles.container} ${className ? className : ""}`}>
     <svg viewBox="0 0 16 16">
       <path
         fillRule="evenodd"

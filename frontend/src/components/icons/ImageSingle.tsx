@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Icon.module.scss";
 
 export const ImageSingle = ({ className }: { className?: string }) => (
-  <div className={`${styles.container} ${className}`}>
+  <div className={`${styles.container} ${className ? className : ""}`}>
     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <g>
         <path d="M1 3V13H6H14H15V3H1ZM14 11L10 6L6.6 10.2L5 8L2 12V4H14V11Z" />
