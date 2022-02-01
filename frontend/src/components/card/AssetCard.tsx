@@ -34,9 +34,9 @@ export function AssetCard({
   const containerStyles = [
     styles.container,
     layout === "list" ? styles.list : styles.grid,
-    !isImage && styles.disabled,
-    selectedAssetId === asset.id && styles.selected,
-    noFilepath && styles["h-200"],
+    !isImage ? styles.disabled : "",
+    selectedAssetId === asset.id ? styles.selected : "",
+    noFilepath ? styles["h-200"] : "",
   ].join(" ");
 
   return (
