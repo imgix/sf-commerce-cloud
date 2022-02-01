@@ -13,7 +13,7 @@ export const Overlay = ({
   rounded,
 }: Props): ReactElement => {
   return visible ? (
-    <div className={`${styles.Overlay} ${rounded && styles.rounded}`}>
+    <div className={`${styles.Overlay} ${rounded ? styles.rounded : ""}`}>
       {children}
     </div>
   ) : (
