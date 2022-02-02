@@ -2,7 +2,20 @@ import ReactDOM from "react-dom";
 import { ExtensionApp } from "./components/ExtensionApp";
 import styles from "./index-extension.module.scss";
 
-declare const chrome: any;
+// extend the window type to include browser key as any
+declare global {
+  interface Window {
+    browser: any;
+    msBrowser: any;
+    chrome: any;
+  }
+}
+
+// Browser polyfill
+window.browser = (function () {
+  return window.msBrowser || window.browser || window.chrome;
+})();
+const browser = window.browser;
 
 const productsLabelSelector = '[data-dw-tooltip="Product.imgixData"]';
 export const injectExtensionApp = () => {
@@ -40,12 +53,30 @@ export const injectExtensionApp = () => {
     swatches: customAttributeValue?.swatches,
   };
 
-  // uncomment next line and setCustomAttributeValue function when React app is ready
-  ReactDOM.render(
-    // TODO: enter the actual api key from browser storage here
-    <ExtensionApp apiKey={""} data={data} onChange={setCustomAttributeValue} />,
-    newTD
-  );
+  browser?.storage?.sync.get(
+    {
+      ix22sfccak: "",
+    },
+    (value: any) => {
+      console.log("[imgix] browser.storage sync completed");
+      ReactDOM.render(
+        <ExtensionApp
+          apiKey={value.ix22sfccak}
+          data={data}
+          onChange={setCustomAttributeValue}
+        />,
+        newTD
+      );
+    }
+  ) ||
+    ReactDOM.render(
+      <ExtensionApp
+        apiKey={""}
+        data={data}
+        onChange={setCustomAttributeValue}
+      />,
+      newTD
+    );
 };
 
 export const injectExtensionAppWithInterval = () => {
@@ -67,7 +98,7 @@ export const injectExtensionAppWithInterval = () => {
 };
 
 export const runExtension = () => {
-  chrome.extension.sendMessage({}, function (response: any) {
+  browser.extension.sendMessage({}, function (response: any) {
     var readyStateCheckInterval = setInterval(function () {
       if (document.readyState === "complete") {
         clearInterval(readyStateCheckInterval);
