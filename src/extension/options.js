@@ -130,7 +130,7 @@ function restoreOptions() {
       document.getElementById("api_key").value = token;
       validateKey(token).then((isValid) => {
         if (isValid) {
-          updateStatus("Options restored.", "#3fb594");
+          updateStatus("Options restored.");
         } else {
           updateStatus("Invalid API key", "red");
         }
