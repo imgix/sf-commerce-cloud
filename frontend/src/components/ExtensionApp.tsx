@@ -24,6 +24,28 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   const [selectedAssetImage, setSelectedAssetImage] = React.useState<
     IImgixCustomAttributeImage | undefined
   >(undefined);
+  const [productImages, setProductImages] = React.useState<
+    IImgixCustomAttributeImage[]
+  >([]);
+
+  React.useEffect(() => {
+    if (data) {
+      // We store the products images in a local state
+      // so we can use it in the ProductPageImages component
+      // to accurately display the state of the product images
+      // json as it changes.
+      setProductImages(data.images || []);
+    }
+  }, [data]);
+
+  const updateProductImages = (
+    newProductImages: IImgixCustomAttributeImage[]
+  ) => {
+    setProductImages(newProductImages);
+    onChange({
+      images: newProductImages,
+    });
+  };
 
   const openModal = () => {
     console.info("[imgix] open imgix modal");
@@ -55,23 +77,23 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     if (selectedProductImageId && selectedAssetImage) {
       console.log("[imgix] selectedAssetImage exists, replacing data");
       // for image with matching id, replace the image with the selected asset
-      const newImages = data?.images.map((image) => {
+      const newImages = productImages.map((image) => {
         if (image.imgix_metadata?.id === selectedProductImageId) {
           return selectedAssetImage;
         }
         return image;
       });
-      onChange({ images: newImages || [] });
+      updateProductImages(newImages || []);
     } else if (selectedAssetImage) {
       console.log("[imgix] asset selected, adding to data");
-      const newImages = data?.images.concat(selectedAssetImage);
-      onChange({ images: newImages || [] });
+      const newImages = productImages.concat(selectedAssetImage);
+      updateProductImages(newImages || []);
     } else {
       console.log("[imgix] selectedAssetImage does not exist, not adding data");
     }
   };
 
-  const images = data?.images || [];
+  const images = productImages || [];
   const disabled = images === undefined || images.length === 0;
 
   return (
@@ -93,7 +115,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
           </Modal>
           <ProductPageImages
             onClick={onProductImageClick}
-            images={images}
+            images={productImages}
             disabled={disabled}
           />
         </div>
