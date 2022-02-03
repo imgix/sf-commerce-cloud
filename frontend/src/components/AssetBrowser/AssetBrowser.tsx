@@ -115,6 +115,7 @@ export function AssetBrowser({
       src,
       mediaWidth: assetData.attributes.media_width,
       mediaHeight: assetData.attributes.media_height,
+      imgix_metadata: { ...assetData, base_url: domain },
     };
 
     onAssetClick(data);
