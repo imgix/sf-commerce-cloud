@@ -6,9 +6,4 @@ export type {
   ImgixGETSourcesData,
 } from "./imgixAPITypes";
 export type { IImgixCustomAttributeValue } from "./imgixSF";
-export type {
-  IImgixMetadata,
-  IProductImage,
-  IProductImageData,
-} from "./productImage";
 export type { SandboxContext, SandboxSubscribe } from "./sfcc";
