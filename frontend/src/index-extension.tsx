@@ -53,7 +53,6 @@ export const injectExtensionApp = () => {
 
   const data = {
     images: customAttributeValue.images || [],
-    swatches: customAttributeValue?.swatches,
   };
 
   browser?.storage?.sync.get(
