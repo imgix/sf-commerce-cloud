@@ -1,5 +1,9 @@
 @import "../../styles/Colors.module.scss";
 
+.contentWrapper {
+  display: flex;
+}
+
 .imageWrapper {
   background-color: $color_bg_new;
   overflow: hidden;
