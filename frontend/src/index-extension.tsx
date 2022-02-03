@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import { IImgixCustomAttribute } from "../../types";
 import { ExtensionApp } from "./components/ExtensionApp";
 import styles from "./index-extension.module.scss";
 
@@ -41,7 +42,8 @@ export const injectExtensionApp = () => {
    * Set the imgix custom attribute value.
    * @param value The stringified JSON value to set in the custom attribute textarea
    */
-  const setCustomAttributeValue = (value: string) => {
+  const setCustomAttributeValue = (data: IImgixCustomAttribute) => {
+    const value = JSON.stringify(data);
     // TODO: check correct way to set textarea value
     customAttributeTextarea.value = value;
   };
