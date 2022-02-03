@@ -76,28 +76,6 @@ export const SFImgixProductsSection = () => {
                             },
                           },
                         ],
-                        swatchImages: [
-                          {
-                            src:
-                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwc3a4d25c/images/swatch/PG.10221714.JJ169XX.CP.jpg",
-                          },
-                          {
-                            src:
-                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwcb9a6e30/images/swatch/PG.10221714.JJ370XX.CP.jpg",
-                          },
-                          {
-                            src:
-                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dw163523bf/images/swatch/PG.10221714.JJ8UTXX.CP.jpg",
-                          },
-                          {
-                            src:
-                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dw9400c632/images/swatch/PG.10221714.JJ908XX.CP.jpg",
-                          },
-                          {
-                            src:
-                              "https://cc-zybp-002-sandbox.imgix.net/on/demandware.static/-/Sites-apparel-m-catalog/default/dwe3dd90d4/images/swatch/PG.10221714.JJI15XX.CP.jpg",
-                          },
-                        ],
                       })}
                     </textarea>
                   </td>
