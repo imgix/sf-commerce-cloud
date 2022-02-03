@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { IProductImage } from "../types";
+import { IImgixCustomAttributeImage } from "../../../types";
 import { FrameButton } from "./buttons/FrameButton/FrameButton";
 import { Divider } from "./dividers/Divider";
 import { AddSvg } from "./icons";
@@ -9,7 +9,7 @@ import styles from "./ProductPageImages.module.scss";
 
 export interface ProductPageImagesProps {
   disabled: boolean;
-  images: IProductImage[] | undefined;
+  images: IImgixCustomAttributeImage[] | undefined;
   onClick: () => void;
 }
 
@@ -33,11 +33,11 @@ export const ProductPageImages = ({
       <>
         {/* we have to create a fragment around jsx elements otherwise
         typescript will throw an error */}
-        {images?.map((image: IProductImage) => {
+        {images?.map((image: IImgixCustomAttributeImage) => {
           return (
             <ProductImageContainer
               onOpenBreakoutClick={onClick}
-              image={{ ...image } as IProductImage}
+              image={{ ...image } as IImgixCustomAttributeImage}
             />
           );
         })}

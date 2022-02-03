@@ -1,6 +1,6 @@
 import React from "react";
 import Imgix from "react-imgix";
-import { IImgixMetadata, ImgixGETAssetsData } from "../../types";
+import { IImgixMetadata, ImgixGETAssetsData } from "../../../../types";
 
 type Props = {
   asset: ImgixGETAssetsData[0] | IImgixMetadata | undefined;

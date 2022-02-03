@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
+import { IImgixCustomAttributeImage } from "../../../../types";
 import {
   ProductPageImages,
   ProductPageImagesProps,
 } from "../../components/ProductPageImages";
-import { IProductImage } from "../../types";
 import { MultiStory } from "../common/MultiStory";
 
 export default {
@@ -16,11 +16,6 @@ export default {
 const selectedImage = [
   {
     src: "https://sdk-test.imgix.net/amsterdam.jpg",
-    view_type: {
-      large: true,
-      medium: true,
-      small: true,
-    },
     imgix_metadata: {
       attributes: {
         description: "amsterdam",
@@ -34,7 +29,7 @@ const selectedImage = [
       type: "assets",
     },
   },
-] as IProductImage[];
+] as IImgixCustomAttributeImage[];
 const selectedImages: any = [];
 
 for (let i = 0; i < 15; i++) {
