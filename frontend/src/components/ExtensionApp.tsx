@@ -86,8 +86,19 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
       updateProductImages(newImages || []);
     } else if (selectedAssetImage) {
       console.log("[imgix] asset selected, adding to data");
-      const newImages = productImages.concat(selectedAssetImage);
-      updateProductImages(newImages || []);
+      // if image id already exists, do nothing
+      if (
+        productImages.find(
+          (image) =>
+            image.imgix_metadata?.id === selectedAssetImage.imgix_metadata?.id
+        )
+      ) {
+        return;
+      } else {
+        // otherwise, add the image to the data
+        const newImages = [...productImages, selectedAssetImage];
+        updateProductImages(newImages);
+      }
     } else {
       console.log("[imgix] selectedAssetImage does not exist, not adding data");
     }
