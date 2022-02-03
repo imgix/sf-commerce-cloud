@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { IImgixMetadata, ImgixGETAssetsData } from "../../types";
+import { IImgixMetadata, ImgixGETAssetsData } from "../../../../types";
 import { AssetCardImage } from "../image/AssetCardImage";
 import styles from "./AssetCard.module.scss";
 
