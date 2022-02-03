@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { IProductImage } from "../../types/";
+import { IImgixCustomAttributeImage } from "../../../../types";
 import { FrameButton } from "../buttons/FrameButton/FrameButton";
 import { ReplaceButton } from "../buttons/ReplaceButton";
 import { AssetCard } from "../card/AssetCard";
@@ -9,7 +9,7 @@ import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
   onOpenBreakoutClick: () => void;
-  image: IProductImage;
+  image: IImgixCustomAttributeImage;
 }
 
 export const ProductImageContainer = ({
