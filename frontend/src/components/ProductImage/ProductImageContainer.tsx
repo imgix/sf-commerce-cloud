@@ -8,7 +8,7 @@ import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
-  onOpenBreakoutClick: () => void;
+  onOpenBreakoutClick: (id: string) => void;
   image: IImgixCustomAttributeImage;
 }
 
@@ -30,7 +30,7 @@ export const ProductImageContainer = ({
     <div style={{ minWidth: 342, display: "flex" }}>
       <div
         className={styles.imageWrapper}
-        onClick={onOpenBreakoutClick}
+        onClick={() => onOpenBreakoutClick(image.imgix_metadata?.id || "")}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
