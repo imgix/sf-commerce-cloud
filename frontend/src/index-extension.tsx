@@ -48,7 +48,8 @@ export const injectExtensionApp = () => {
     customAttributeTextarea.value = value;
   };
 
-  const customAttributeValue = JSON.parse(customAttributeTextarea.value);
+  const customAttrTextAreaValue = customAttributeTextarea.value || "{}";
+  const customAttributeValue = JSON.parse(customAttrTextAreaValue);
 
   const data = {
     images: customAttributeValue.images || [],
