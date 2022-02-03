@@ -10,7 +10,7 @@ import styles from "./ProductPageImages.module.scss";
 export interface ProductPageImagesProps {
   disabled: boolean;
   images: IImgixCustomAttributeImage[] | undefined;
-  onClick: () => void;
+  onClick: (id: string) => void;
 }
 
 export const ProductPageImages = ({
@@ -27,6 +27,11 @@ export const ProductPageImages = ({
           color="tertiary"
           className={styles.addImageButton}
           icon={<AddSvg />}
+          onClick={(e) => {
+            // prevent form submission
+            e.preventDefault();
+            onClick("");
+          }}
         />
       </div>
       <Divider vertical />
