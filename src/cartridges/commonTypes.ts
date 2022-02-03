@@ -11,18 +11,11 @@ export type IImgixMetadata = {
   type: "assets";
 };
 
-interface IViewType {
-  small: boolean;
-  medium: boolean;
-  large: boolean;
-}
-
 export type IImgixCustomAttributeImage = {
   src: string;
   title?: string;
   alt?: string;
   imgix_metadata?: IImgixMetadata;
-  view_type?: IViewType;
 };
 export type IImgixCustomAttributeSwatch = {
   src: string;
@@ -31,5 +24,4 @@ export type IImgixCustomAttributeSwatch = {
 
 export type IImgixCustomAttribute = {
   images: IImgixCustomAttributeImage[];
-  swatches: IImgixCustomAttributeSwatch[];
 };
