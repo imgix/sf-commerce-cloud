@@ -81,14 +81,23 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
       title: metadata.attributes.name || metadata.attributes.origin_path,
       alt: metadata.attributes.name || metadata.attributes.origin_path,
     };
-
-    setSelectedAssetImage(newImage);
+    // If selected image already in data, set selectedAssetImage to undefined.
+    // This will disable the add-image button.
+    if (
+      productImages.find(
+        (image) => image.imgix_metadata?.id === newImage.imgix_metadata?.id
+      )
+    ) {
+      setSelectedAssetImage(undefined);
+    } else {
+      setSelectedAssetImage(newImage);
+    }
   };
 
   const saveSelectionToDataOnClick = () => {
     if (selectedProductImageId && selectedAssetImage) {
-      console.log("[imgix] selectedAssetImage exists, replacing data");
-      // for image with matching id, replace the image with the selected asset
+      console.log("[imgix] replacing product image");
+      // replace product image with selected asset image
       const newImages = productImages.map((image) => {
         if (image.imgix_metadata?.id === selectedProductImageId) {
           return selectedAssetImage;
@@ -97,21 +106,12 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
       });
       updateProductImages(newImages || []);
     } else if (selectedAssetImage) {
-      console.log("[imgix] asset selected, adding to data");
-      // if image id already exists, do nothing
-      if (
-        productImages.find(
-          (image) =>
-            image.imgix_metadata?.id === selectedAssetImage.imgix_metadata?.id
-        )
-      ) {
-        return;
-      } else {
-        // otherwise, add the image to the data
-        const newImages = [...productImages, selectedAssetImage];
-        updateProductImages(newImages);
-      }
+      // add product image to data
+      console.log("[imgix] adding asset to product images");
+      const newImages = [...productImages, selectedAssetImage];
+      updateProductImages(newImages);
     } else {
+      // TODO: this _should_ be dead code. Need to remove.
       console.log("[imgix] selectedAssetImage does not exist, not adding data");
     }
     closeModal();
