@@ -42,7 +42,8 @@ export const injectExtensionApp = () => {
 
   // uncomment next line and setCustomAttributeValue function when React app is ready
   ReactDOM.render(
-    <ExtensionApp data={data} onChange={setCustomAttributeValue} />,
+    // TODO: enter the actual api key from browser storage here
+    <ExtensionApp apiKey={""} data={data} onChange={setCustomAttributeValue} />,
     newTD
   );
 };
