@@ -1,6 +1,6 @@
 import React from "react";
+import { IImgixCustomAttribute } from "../../../types";
 import "../styles/App.css";
-import { IProductImageData } from "../types/";
 import { AssetBrowserContainer } from "./AssetBrowser/AssetBrowserContainer";
 import { Modal } from "./layouts/Modal";
 import { ProductPageImages } from "./ProductPageImages";
@@ -8,7 +8,7 @@ import { ProductPageImages } from "./ProductPageImages";
 export type ISidebarAppProps = {
   onChange: (value: string) => void;
   apiKey: string | null;
-  data: IProductImageData | undefined;
+  data: IImgixCustomAttribute | undefined;
 };
 
 export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
