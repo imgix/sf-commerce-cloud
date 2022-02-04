@@ -30,10 +30,10 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     setIsModalOpen(true);
   };
 
-  const onProductImageClick = (id: string) => {
+  const onProductImageClick = (id?: string) => {
     console.log("[imgix] onProductImageClick id:", id);
 
-    setSelectedProductImageId(id);
+    setSelectedProductImageId(id || "");
     openModal();
   };
 
