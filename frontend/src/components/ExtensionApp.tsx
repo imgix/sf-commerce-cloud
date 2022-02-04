@@ -5,8 +5,8 @@ import {
 } from "../../../types";
 import "../styles/App.css";
 import { IBreakoutAppData } from "../types/breakoutAppPublic";
+import ActionBar from "./ActionBar/ActionBar";
 import { AssetBrowserContainer } from "./AssetBrowser/AssetBrowserContainer";
-import { FrameButton } from "./buttons/FrameButton/FrameButton";
 import { Modal } from "./layouts/Modal";
 import { ProductPageImages } from "./ProductPageImages";
 
@@ -49,7 +49,18 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
 
   const openModal = () => {
     console.info("[imgix] open imgix modal");
+    setSelectedAssetImage(undefined);
     setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    console.info("[imgix] close imgix modal");
+    setIsModalOpen(false);
+  };
+
+  const closeModalAndResetSelectedAssetImage = () => {
+    setSelectedAssetImage(undefined);
+    closeModal();
   };
 
   const onProductImageClick = (id?: string) => {
@@ -102,6 +113,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     } else {
       console.log("[imgix] selectedAssetImage does not exist, not adding data");
     }
+    closeModal();
   };
 
   const images = productImages || [];
@@ -122,7 +134,11 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
               apiKey={apiKey}
               onSelectAsset={onSelectAsset}
             />
-            <FrameButton label="save" onClick={saveSelectionToDataOnClick} />
+            <ActionBar
+              disabled={selectedAssetImage === undefined}
+              onSave={saveSelectionToDataOnClick}
+              onCancel={closeModalAndResetSelectedAssetImage}
+            />
           </Modal>
           <ProductPageImages
             onClick={onProductImageClick}
