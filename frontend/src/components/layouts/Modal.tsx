@@ -15,7 +15,7 @@ export function Modal({ children, locked, open, onClose }: ModalProps) {
   React.useEffect(() => {
     const { current } = backdrop;
 
-    const keyHandler = (e: KeyboardEvent) => e.key == "Escape" && onClose();
+    const keyHandler = (e: KeyboardEvent) => e.key === "Escape" && onClose();
 
     const clickHandler = (e: MouseEvent) =>
       !locked && e.target === current && onClose();
