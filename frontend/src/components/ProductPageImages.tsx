@@ -10,7 +10,7 @@ import styles from "./ProductPageImages.module.scss";
 export interface ProductPageImagesProps {
   disabled: boolean;
   images: IImgixCustomAttributeImage[] | undefined;
-  onClick: (id: string) => void;
+  onClick: (id?: string) => void;
 }
 
 export const ProductPageImages = ({
@@ -30,7 +30,7 @@ export const ProductPageImages = ({
           onClick={(e) => {
             // prevent form submission
             e.preventDefault();
-            onClick("");
+            onClick();
           }}
         />
       </div>
