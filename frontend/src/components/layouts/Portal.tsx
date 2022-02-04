@@ -15,6 +15,14 @@ export default function Portal({
 }: PortalProps) {
   const portalWrapper = React.useMemo(() => document.createElement("div"), []);
 
+  // Prevent background scroll
+  React.useEffect(() => {
+    document.body.style.overflowY = "hidden";
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, []);
+
   React.useEffect(() => {
     const targetNode =
       container && container.appendChild ? container : document.body;
