@@ -1,7 +1,6 @@
 import { ComponentMeta } from "@storybook/react";
 import React from "react";
 import { injectExtensionAppWithInterval } from "../../index-extension";
-import "../../styles/App.css";
 import styles from "./products.module.scss";
 
 export const SFImgixProductsSection = () => {
@@ -91,6 +90,7 @@ export const SFImgixProductsSection = () => {
 
 const NoExtensionTemplate = () => (
   <div
+    className={styles.borderBoxInitial}
     style={{
       width: "90%",
       margin: "64px 5%",
