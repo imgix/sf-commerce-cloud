@@ -7,6 +7,7 @@ import "../styles/App.css";
 import { IBreakoutAppData } from "../types/breakoutAppPublic";
 import ActionBar from "./ActionBar/ActionBar";
 import { AssetBrowserContainer } from "./AssetBrowser/AssetBrowserContainer";
+import styles from "./ExtensionApp.module.scss";
 import { Modal } from "./layouts/Modal";
 import { ProductPageImages } from "./ProductPageImages";
 
@@ -120,7 +121,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   const disabled = images === undefined || images.length === 0;
 
   return (
-    <div className="App">
+    <div className={styles.fontSizeOverride}>
       <header className="App-header">
         <div>
           <Modal
@@ -130,15 +131,17 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
             }}
             open={isModalOpen}
           >
-            <AssetBrowserContainer
-              apiKey={apiKey}
-              onSelectAsset={onSelectAsset}
-            />
-            <ActionBar
-              disabled={selectedAssetImage === undefined}
-              onSave={saveSelectionToDataOnClick}
-              onCancel={closeModalAndResetSelectedAssetImage}
-            />
+            <div className={styles.fontSizeOverride}>
+              <AssetBrowserContainer
+                apiKey={apiKey}
+                onSelectAsset={onSelectAsset}
+              />
+              <ActionBar
+                disabled={selectedAssetImage === undefined}
+                onSave={saveSelectionToDataOnClick}
+                onCancel={closeModalAndResetSelectedAssetImage}
+              />
+            </div>
           </Modal>
           <ProductPageImages
             onClick={onProductImageClick}
