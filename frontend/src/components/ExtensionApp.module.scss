@@ -1,0 +1,9 @@
+// SFCC rem is not set to 16px. This breaks our typography.
+// We need to set size to 16px in order to use the correct font size.
+.fontSizeOverride {
+  *,
+  *:before,
+  *:after {
+    font-size: 16px;
+  }
+}
