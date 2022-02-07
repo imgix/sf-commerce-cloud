@@ -47,8 +47,16 @@ var images = new ArrayList([
   },
 ]);
 var customData = {
-  imgixData:
-    '{"images": [{"src": "customImgixURL/imgix_first_image_url", "title": "First Image title", "alt": "First Image alt"}, {"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}',
+  imgixData: JSON.stringify({
+    images: [
+      {
+        src: "customImgixURL/imgix_first_image_url",
+        title: "First Image title",
+        alt: "First Image alt",
+      },
+      { src: "customImgixURL/imgix_second_image_url", sourceWidth: 3000 },
+    ],
+  }),
 };
 
 var productMock = {
@@ -275,6 +283,24 @@ describe("ProductImages model", function () {
 
     it("should still work when imgixBaseURL preference is not set");
     it("should set default params on images");
+
+    it("should fallback to SF images with empty custom images array", function () {
+      var product = new Product({
+        customData: JSON.stringify({
+          imgixData: {
+            images: [],
+          },
+        }),
+      });
+      var images = new ProductImages(product, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
+    });
   });
 
   describe("without custom attribute", () => {
