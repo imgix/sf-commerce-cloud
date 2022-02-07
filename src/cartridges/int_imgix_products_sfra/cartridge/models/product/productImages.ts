@@ -54,6 +54,11 @@ function Images(
     return undefined;
   })();
 
+  const hasCustomImages: boolean = Boolean(
+    imgixCustomAttributeData?.images &&
+      imgixCustomAttributeData.images.length > 0
+  );
+
   /* The next section operates in one of three modes:
    * 1. if custom attribute data exists, use that to render the images (as this
    *    overrides the built-in SF data)
@@ -61,7 +66,11 @@ function Images(
    * 3. fallback to the built-in SF data
    */
 
-  if (imgixEnableProductImageProxy && imgixCustomAttributeData) {
+  if (
+    imgixEnableProductImageProxy &&
+    imgixCustomAttributeData &&
+    hasCustomImages
+  ) {
     // 1. custom attribute data exists
 
     imageConfig.types.forEach(function (
@@ -72,7 +81,7 @@ function Images(
         if (imageConfig.quantity === "single") {
           return imgixCustomAttributeData.images.slice(0, 1);
         }
-        return imgixCustomAttributeData.images
+        return imgixCustomAttributeData.images;
       })();
 
       const result = images.map((image, index) => {
