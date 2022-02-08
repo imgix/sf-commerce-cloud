@@ -91,21 +91,13 @@ function saveOptions() {
   // Only save if the key is valid
   validateKey(getInputApiKey()).then((isValid) => {
     if (isValid) {
+      // Save the new API key to browser storage
       browser.storage.sync.set(
         {
           ix22sfccak: token,
         },
         function () {
-          // Update statusText to let user know options were saved.
-          // validate the API key
-          if (isValid) {
-            // update the status
-            updateStatus("Options saved.", "#3fb594");
-            // save the new API key to local storage
-            // localStorage.setItem("ix22sfccak", getInputApiKey());
-          } else {
-            updateStatus("Invalid API key", "red");
-          }
+          updateStatus("Options saved.", "#3fb594");
         }
       );
     } else {
