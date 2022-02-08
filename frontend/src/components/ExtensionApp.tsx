@@ -110,9 +110,6 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
       console.log("[imgix] adding asset to product images");
       const newImages = [...productImages, selectedAssetImage];
       updateProductImages(newImages);
-    } else {
-      // TODO: this _should_ be dead code. Need to remove.
-      console.log("[imgix] selectedAssetImage does not exist, not adding data");
     }
     closeModal();
   };
