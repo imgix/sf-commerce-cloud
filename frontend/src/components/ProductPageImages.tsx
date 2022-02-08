@@ -37,7 +37,7 @@ export const ProductPageImages = ({
           return (
             <ProductImageContainer
               onOpenBreakoutClick={onClick}
-              image={{ ...image } as IImgixCustomAttributeImage}
+              image={{ ...image }}
             />
           );
         })}
