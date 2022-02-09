@@ -95,6 +95,7 @@ const NoExtensionTemplate = () => (
       width: "90%",
       margin: "64px 5%",
     }}
+    data-testid="no-extension-template"
   >
     <SFImgixProductsSection />
   </div>
