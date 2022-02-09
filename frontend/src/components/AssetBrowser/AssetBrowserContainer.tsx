@@ -49,7 +49,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
       .get(apiKey)
       .then((resp) => {
         const selectedSource = resp.data.filter(
-          (source) => source.id == defaultSourceId
+          (source) => source.id === defaultSourceId
         )[0];
         this.setState({
           // set selected source if defaultSourceId is set
