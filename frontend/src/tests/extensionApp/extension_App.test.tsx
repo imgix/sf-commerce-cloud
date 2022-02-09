@@ -37,7 +37,7 @@ describe("extension", () => {
     render(<WithExtension />);
 
     await waitFor(() => {
-      expect(screen.getByText("amsterdam.jpg")).toBeInTheDocument();
+      expect(screen.getByText("cub.jpg")).toBeInTheDocument();
     });
   });
 
@@ -45,7 +45,7 @@ describe("extension", () => {
     render(<WithExtension />);
 
     await waitFor(() => {
-      const assetCard = screen.getByText("amsterdam.jpg");
+      const assetCard = screen.getByText("cub.jpg");
       fireEvent.mouseOver(assetCard);
       screen.getByTestId("asset-card-replace-button");
     });
@@ -70,7 +70,7 @@ describe("extension", () => {
 
     // hover over asset card
     await waitFor(() => {
-      const assetCard = screen.getByText("amsterdam.jpg");
+      const assetCard = screen.getByText("cub.jpg");
       fireEvent.mouseOver(assetCard);
     });
 
@@ -81,15 +81,46 @@ describe("extension", () => {
       fireEvent.click(replaceButton);
     });
 
-    expect(screen.getByText("Select a Source")).toBeInTheDocument();
+    expect(screen.getByText("Save Image")).toBeInTheDocument();
   });
+
+  test("should auto-select source when replace button is clicked", async () => {
+    render(<WithExtension />);
+
+    // hover over asset card
+    await waitFor(() => {
+      const assetCard = screen.getByText("cub.jpg");
+      fireEvent.mouseOver(assetCard);
+    });
+
+    // click replace button
+    await waitFor(() => {
+      const replaceButton = screen.getByTestId("asset-card-replace-button")
+        .children[0];
+      fireEvent.click(replaceButton);
+    });
+
+    await waitFor(
+      () => {
+        screen.getByTestId("source-select-button-label-assets");
+      },
+      // had to increase timeout to account for hitting the actual API
+      { timeout: 2000 }
+    );
+
+    const selectedSource = screen.getByTestId(
+      "source-select-button-label-assets"
+    );
+
+    expect(selectedSource.innerHTML).toBe("assets");
+  }, 11000);
 
   test("should remove image when delete button is clicked", async () => {
     render(<WithExtension />);
 
     // hover over asset card
     await waitFor(() => {
-      const assetCard = screen.getByText("amsterdam.jpg");
+      const assetCard = screen.getByText("cub.jpg");
 
       fireEvent.mouseOver(assetCard);
     });
