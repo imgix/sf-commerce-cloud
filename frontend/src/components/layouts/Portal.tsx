@@ -13,7 +13,11 @@ export default function Portal({
   container,
   className,
 }: PortalProps) {
-  const portalWrapper = React.useMemo(() => document.createElement("div"), []);
+  const portalWrapper = React.useMemo(() => {
+    const wrapper = document.createElement("div");
+    wrapper.setAttribute("data-testid", "portal-wrapper");
+    return wrapper;
+  }, []);
 
   // Prevent background scroll
   React.useEffect(() => {
