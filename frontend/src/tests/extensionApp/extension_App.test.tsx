@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { WithExtension } from "../../stories/extension/products.stories";
 
 const cleanupPortal = () => {
@@ -39,5 +39,18 @@ describe("extension", () => {
     await waitFor(() => {
       expect(screen.getByText("amsterdam.jpg")).toBeInTheDocument();
     });
+  });
+
+  test("should show replace button on asset card hover", async () => {
+    render(<WithExtension />);
+
+    await waitFor(() => {
+      const assetCard = screen.getByText("amsterdam.jpg");
+      fireEvent.mouseOver(assetCard);
+      screen.getByTestId("asset-card-replace-button");
+    });
+
+    const replaceButton = screen.getByTestId("asset-card-replace-button");
+    expect(replaceButton).toBeInTheDocument();
   });
 });
