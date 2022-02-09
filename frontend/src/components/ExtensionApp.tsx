@@ -128,7 +128,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   const disabled = images === undefined || images.length === 0;
 
   return (
-    <div className={styles.fontSizeOverride}>
+    <div className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}>
       <header className="App-header">
         <div>
           <Modal
@@ -138,7 +138,9 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
             }}
             open={isModalOpen}
           >
-            <div className={styles.fontSizeOverride}>
+            <div
+              className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
+            >
               <AssetBrowserContainer
                 apiKey={apiKey}
                 onSelectAsset={onSelectAsset}
