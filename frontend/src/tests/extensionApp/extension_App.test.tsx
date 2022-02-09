@@ -53,4 +53,15 @@ describe("extension", () => {
     const replaceButton = screen.getByTestId("asset-card-replace-button");
     expect(replaceButton).toBeInTheDocument();
   });
+
+  test("should open modal when add image button is clicked", async () => {
+    render(<WithExtension />);
+
+    await waitFor(() => {
+      const addImageButton = screen.getByText("Add Image");
+      fireEvent.click(addImageButton);
+    });
+
+    expect(screen.getByText("Select a Source")).toBeInTheDocument();
+  });
 });
