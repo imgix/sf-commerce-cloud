@@ -46,9 +46,10 @@
     "deploy:extension": "yarn build:extension && cp build/js/extension.js ../src/extension/src/inject/inject.js && cp build/css/extension.css ../src/extension/src/inject/inject.css",
     "test": "yarn test:all",
     "test:ci": "CI=true yarn test:sidebar && CI=true yarn test:breakout",
-    "test:all": "yarn test:sidebar && yarn test:breakout",
+    "test:all": "yarn test:sidebar && yarn test:breakout && yarn test:extension",
     "test:sidebar": "yarn build:sidebar && REACT_APP_APP_TYPE=sidebar react-scripts test -t='sidebar'",
     "test:breakout": "yarn build:breakout && REACT_APP_APP_TYPE=breakout react-scripts test -t='breakout'",
+    "test:extension": "yarn build:extension && REACT_APP_APP_TYPE=extension react-scripts test -t='extension'",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
