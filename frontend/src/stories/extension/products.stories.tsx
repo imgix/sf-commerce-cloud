@@ -55,7 +55,7 @@ export const SFImgixProductsSection = () => {
                       {JSON.stringify({
                         images: [
                           {
-                            src: "https://sdk-test.imgix.net/amsterdam.jpg",
+                            src: "https://assets.imgix.net/sam-test/cub.jpg",
                             view_type: {
                               large: true,
                               medium: true,
@@ -63,14 +63,14 @@ export const SFImgixProductsSection = () => {
                             },
                             imgix_metadata: {
                               attributes: {
-                                description: "amsterdam",
-                                name: "/amsterdam.jpg",
-                                origin_path: "/amsterdam.jpg",
+                                description: "cub",
+                                name: "/cub.jpg",
+                                origin_path: "/sam-test/cub.jpg",
                                 media_height: 0,
                                 media_width: 0,
                               },
-                              base_url: "sdk-test.imgix.net",
-                              id: "1",
+                              base_url: "assets.imgix.net",
+                              id: "51f0282eadfe543b14000003/sam-test/cub.jpg",
                               type: "assets",
                             },
                           },
