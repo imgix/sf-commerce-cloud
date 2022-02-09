@@ -10,7 +10,7 @@ import styles from "./ProductPageImages.module.scss";
 export interface ProductPageImagesProps {
   disabled: boolean;
   images: IImgixCustomAttributeImage[] | undefined;
-  onClick: (type: "delete" | "add", id?: string) => void;
+  onClick: (type: "delete" | "replace" | "add", id?: string) => void;
 }
 
 export const ProductPageImages = ({
