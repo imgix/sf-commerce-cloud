@@ -1,8 +1,9 @@
 import React, { ReactElement } from "react";
 import { IImgixCustomAttributeImage } from "../../../../types";
-import { ReplaceButton } from "../buttons/ReplaceButton";
+import { FrameButton } from "../buttons/FrameButton/FrameButton";
 import { AssetCard } from "../card/AssetCard";
 import { Divider } from "../dividers/Divider";
+import { DeleteIcon, RefreshSvg } from "../icons";
 import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
@@ -33,7 +34,20 @@ export const ProductImageContainer = ({
         onMouseLeave={onMouseLeave}
       >
         <Overlay rounded visible={hovering}>
-          <ReplaceButton label="REPLACE" />
+          <div className={styles.buttonContainer}>
+            <FrameButton
+              className={styles.button}
+              color="tertiary"
+              icon={<DeleteIcon />}
+              onClick={() => onClick("delete", image.imgix_metadata?.id)}
+            />
+            <FrameButton
+              className={styles.button}
+              color="tertiary"
+              icon={<RefreshSvg />}
+              onClick={() => onClick("add", image.imgix_metadata?.id)}
+            />
+          </div>
         </Overlay>
         <AssetCard
           asset={image?.imgix_metadata}
