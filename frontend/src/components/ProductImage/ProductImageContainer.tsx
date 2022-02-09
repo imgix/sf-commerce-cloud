@@ -48,7 +48,10 @@ export const ProductImageContainer = ({
                 className={styles.button}
                 color="tertiary"
                 icon={<RefreshSvg />}
-                onClick={() => onClick("replace", image.imgix_metadata?.id)}
+                onClick={() => {
+                  setHovering(false);
+                  onClick("replace", image.imgix_metadata?.id);
+                }}
               />
             </div>
           </div>
