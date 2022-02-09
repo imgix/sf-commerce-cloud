@@ -38,7 +38,12 @@ export const SourceSelectButton = ({
       >
         <SourceMenuSvg />
       </div>
-      <div className={styles.label}>{label}</div>
+      <div
+        data-testid={`source-select-button-label-${label}`}
+        className={styles.label}
+      >
+        {label}
+      </div>
       <div className={styles.spacer}></div>
       <div
         className={
