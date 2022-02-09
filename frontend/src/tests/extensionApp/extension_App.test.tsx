@@ -12,19 +12,24 @@ describe("extension", () => {
   afterEach(() => {
     cleanupPortal();
   });
+
+  test("should render sfcc custom attribute scaffolding", async () => {
+    render(<WithExtension />);
     const htmlElement = screen.getByTestId("custom-attribute");
+
+    await waitFor(() => {
+      screen.getByText("Add Image");
+    });
 
     expect(htmlElement).toBeInTheDocument();
   });
 
-  describe("should render extension custom UI", () => {
-    test("should render add image button", async () => {
-      render(<WithExtension />);
+  test("should render add image button", async () => {
+    render(<WithExtension />);
 
-      await waitFor(() => {
-        const addImageButton = screen.getByText("Add Image")
-        expect(addImageButton).toBeInTheDocument();
-      })
-    })
+    await waitFor(() => {
+      screen.getByText("Add Image");
+    });
+    expect(screen.getByText("Add Image")).toBeInTheDocument();
   });
 });
