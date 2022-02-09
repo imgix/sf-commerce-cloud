@@ -1,9 +1,17 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { WithExtension } from "../../stories/extension/products.stories";
 
+const cleanupPortal = () => {
+  // cleanup, close modal
+  const portal = document.querySelector("[data-testid=portal-wrapper]");
+  // remove each child element from the portal
+  portal?.childNodes.forEach((child) => portal.removeChild(child));
+};
+
 describe("extension", () => {
-  test("should render sfcc custom attribute scaffolding", () => {
-    render(<WithExtension />)
+  afterEach(() => {
+    cleanupPortal();
+  });
     const htmlElement = screen.getByTestId("custom-attribute");
 
     expect(htmlElement).toBeInTheDocument();
