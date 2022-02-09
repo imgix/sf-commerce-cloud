@@ -129,6 +129,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
 
   const images = productImages || [];
   const disabled = images === undefined || images.length === 0;
+  const selectedSourceId = selectedProductImageId.split("/")[0];
 
   return (
     <div className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}>
@@ -146,6 +147,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
             >
               <AssetBrowserContainer
                 apiKey={apiKey}
+                defaultSourceId={selectedSourceId}
                 onSelectAsset={onSelectAsset}
               />
               <ActionBar
