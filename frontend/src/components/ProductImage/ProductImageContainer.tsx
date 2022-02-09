@@ -7,13 +7,13 @@ import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
-  onOpenBreakoutClick: (id?: string) => void;
+  onClick: (type: "delete" | "add", id?: string) => void;
   image: IImgixCustomAttributeImage;
 }
 
 export const ProductImageContainer = ({
   image,
-  onOpenBreakoutClick,
+  onClick,
 }: Props): ReactElement => {
   const [hovering, setHovering] = React.useState(false);
 
@@ -29,7 +29,6 @@ export const ProductImageContainer = ({
     <div className={styles.contentWrapper}>
       <div
         className={styles.imageWrapper}
-        onClick={() => onOpenBreakoutClick(image.imgix_metadata?.id)}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >

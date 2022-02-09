@@ -64,8 +64,18 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     closeModal();
   };
 
-  const onProductImageClick = (id?: string) => {
-    console.log("[imgix] onProductImageClick id:", id);
+  const onProductImageClick = (type: "delete" | "add", id?: string) => {
+    console.log(`[imgix] onProductImageClick - id: ${id} type: ${type}`);
+
+    // if type is "delete"
+    if (type === "delete") {
+      // remove the image from the productImages array
+      const newProductImages = productImages.filter(
+        (image) => image.imgix_metadata?.id !== id
+      );
+      updateProductImages(newProductImages);
+      return;
+    }
 
     setSelectedProductImageId(id || "");
     openModal();
