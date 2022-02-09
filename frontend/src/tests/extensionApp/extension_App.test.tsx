@@ -32,4 +32,12 @@ describe("extension", () => {
     });
     expect(screen.getByText("Add Image")).toBeInTheDocument();
   });
+
+  test("should render asset cards", async () => {
+    render(<WithExtension />);
+
+    await waitFor(() => {
+      expect(screen.getByText("amsterdam.jpg")).toBeInTheDocument();
+    });
+  });
 });
