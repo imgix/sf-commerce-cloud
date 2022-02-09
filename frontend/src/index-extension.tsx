@@ -3,6 +3,9 @@ import { IImgixCustomAttribute } from "../../types";
 import { ExtensionApp } from "./components/ExtensionApp";
 import styles from "./index-extension.module.scss";
 
+// read the environment variable
+const DEVELOPMENT_API_KEY = process.env.IMGIX_API_KEY || undefined;
+
 // extend the window type to include browser key as any
 declare global {
   interface Window {
@@ -73,7 +76,7 @@ export const injectExtensionApp = () => {
   ) ||
     ReactDOM.render(
       <ExtensionApp
-        apiKey={""}
+        apiKey={DEVELOPMENT_API_KEY || ""}
         data={data}
         onChange={setCustomAttributeValue}
       />,
