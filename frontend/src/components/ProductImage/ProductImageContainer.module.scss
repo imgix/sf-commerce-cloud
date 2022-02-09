@@ -17,26 +17,16 @@
   color: $color_invert_fg;
 }
 
-.assetButtonsContainer {
-  align-items: center;
+.buttonContainer {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  font-size: $type_size_small;
-  justify-content: space-between;
-  padding-left: 5px;
-  padding-right: 30px;
-
-  .assetButtons {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    font-size: $type_size_small;
-    justify-content: space-between;
-    padding: 10px 0 10px 0px;
-    width: 70px;
-
-    p {
-      margin-left: 10px;
-    }
+  flex-direction: row;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  margin-left: -6.5rem;
+  margin-top: -9rem;
+  width: 90px;
+  button {
+    box-sizing: border-box;
   }
 }
