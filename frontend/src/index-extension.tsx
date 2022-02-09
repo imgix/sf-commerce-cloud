@@ -100,8 +100,8 @@ export const injectExtensionAppWithInterval = () => {
 };
 
 export const runExtension = () => {
-  browser.extension.sendMessage({}, function (response: any) {
-    var readyStateCheckInterval = setInterval(function () {
+  browser.runtime.sendMessage({}, () => {
+    const readyStateCheckInterval = setInterval(function () {
       if (document.readyState === "complete") {
         clearInterval(readyStateCheckInterval);
 
