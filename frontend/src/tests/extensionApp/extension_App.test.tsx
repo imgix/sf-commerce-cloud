@@ -83,4 +83,24 @@ describe("extension", () => {
 
     expect(screen.getByText("Select a Source")).toBeInTheDocument();
   });
+
+  test("should remove image when delete button is clicked", async () => {
+    render(<WithExtension />);
+
+    // hover over asset card
+    await waitFor(() => {
+      const assetCard = screen.getByText("amsterdam.jpg");
+
+      fireEvent.mouseOver(assetCard);
+    });
+
+    // click delete button
+    await waitFor(() => {
+      const deleteButton = screen.getByTestId("asset-card-delete-button")
+        .children[0];
+      fireEvent.click(deleteButton);
+    });
+
+    expect(document.querySelectorAll("img").length).toBe(0);
+  });
 });
