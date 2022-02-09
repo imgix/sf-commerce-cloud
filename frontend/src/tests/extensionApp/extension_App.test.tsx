@@ -64,4 +64,18 @@ describe("extension", () => {
 
     expect(screen.getByText("Select a Source")).toBeInTheDocument();
   });
+
+  test("should open modal when replace button is clicked", async () => {
+    render(<WithExtension />);
+
+    await waitFor(() => {
+      const assetCard = screen.getByText("amsterdam.jpg");
+      fireEvent.mouseOver(assetCard);
+
+      const replaceButton = screen.getByTestId("asset-card-replace-button");
+      fireEvent.click(replaceButton);
+    });
+
+    expect(screen.getByText("Select a Source")).toBeInTheDocument();
+  });
 });
