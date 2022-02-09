@@ -8,7 +8,7 @@ import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
-  onClick: (type: "delete" | "add", id?: string) => void;
+  onClick: (type: "delete" | "replace" | "add", id?: string) => void;
   image: IImgixCustomAttributeImage;
 }
 
@@ -35,18 +35,22 @@ export const ProductImageContainer = ({
       >
         <Overlay rounded visible={hovering}>
           <div className={styles.buttonContainer}>
-            <FrameButton
-              className={styles.button}
-              color="tertiary"
-              icon={<DeleteIcon />}
-              onClick={() => onClick("delete", image.imgix_metadata?.id)}
-            />
-            <FrameButton
-              className={styles.button}
-              color="tertiary"
-              icon={<RefreshSvg />}
-              onClick={() => onClick("add", image.imgix_metadata?.id)}
-            />
+            <div data-testid="asset-card-delete-button">
+              <FrameButton
+                className={styles.button}
+                color="tertiary"
+                icon={<DeleteIcon />}
+                onClick={() => onClick("delete", image.imgix_metadata?.id)}
+              />
+            </div>
+            <div data-testid="asset-card-replace-button">
+              <FrameButton
+                className={styles.button}
+                color="tertiary"
+                icon={<RefreshSvg />}
+                onClick={() => onClick("replace", image.imgix_metadata?.id)}
+              />
+            </div>
           </div>
         </Overlay>
         <AssetCard
