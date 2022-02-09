@@ -38,7 +38,7 @@ export const SFImgixProductsSection = () => {
               </tbody>
             </table>
           </td>
-          <td width="100%">
+          <td width="100%" data-testid="custom-attribute">
             <table cellSpacing="0" cellPadding="0" width="100%">
               <tbody>
                 <tr>
