@@ -85,17 +85,20 @@ function Images(
       })();
 
       const result = images.map((image, index) => {
+        const rawURL = image.src;
+
         // TODO: add tests for default params
-        const imageUrl =
-          image.src +
+        const imageURL =
+          rawURL +
           (isBaseURLSet && imgixDefaultParams ? "?" + imgixDefaultParams : "");
 
         return {
           alt: image.alt,
-          url: imageUrl,
+          url: imageURL,
           index: index.toString(),
           title: image.title,
-          absURL: imageUrl,
+          absURL: imageURL,
+          rawURL,
         };
       });
       this[viewType] = result;
@@ -114,9 +117,9 @@ function Images(
       if (imageConfig.quantity === "single") {
         var firstImage = collections.first(images);
         if (firstImage) {
-          let imageUrl =
-            imgixBaseURL +
-            firstImage.URL.toString() +
+          const rawURL = imgixBaseURL + firstImage.URL.toString();
+          const imageURL =
+            rawURL +
             (isBaseURLSet && imgixDefaultParams
               ? "?" + imgixDefaultParams
               : "");
@@ -124,10 +127,11 @@ function Images(
           result = [
             {
               alt: firstImage.alt,
-              url: imageUrl,
+              url: imageURL,
               title: firstImage.title,
               index: "0",
-              absURL: imageUrl,
+              absURL: imageURL,
+              rawURL,
             },
           ];
         }
@@ -138,19 +142,20 @@ function Images(
             image: { URL: { toString: () => any }; alt: any; title: any },
             index: { toString: () => any }
           ) {
-            let imageUrl =
-              imgixBaseURL +
-              image.URL.toString() +
+            const rawURL = imgixBaseURL + image.URL.toString();
+            const imageURL =
+              rawURL +
               (isBaseURLSet && imgixDefaultParams
                 ? "?" + imgixDefaultParams
                 : "");
 
             return {
               alt: image.alt,
-              url: imageUrl,
+              url: imageURL,
               index: index.toString(),
               title: image.title,
-              absURL: imageUrl,
+              absURL: imageURL,
+              rawURL,
             };
           }
         );
