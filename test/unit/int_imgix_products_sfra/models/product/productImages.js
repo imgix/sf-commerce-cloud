@@ -301,6 +301,30 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
     });
+
+    describe("should pass through raw imgix url", () => {
+      ["small", "medium", "large"].map((viewType) => {
+        ["single", "*"].map((quantity) => {
+          it(`when view type is ${viewType} and quantity is ${quantity}`, () => {
+            var productObj = new Product({ customData });
+            var images = new ProductImages(productObj, {
+              types: [viewType],
+              quantity: quantity,
+            });
+            assert.equal(
+              images[viewType][0].rawURL,
+              "customImgixURL/imgix_first_image_url"
+            );
+            if (quantity === "*") {
+              assert.equal(
+                images[viewType][1].rawURL,
+                "customImgixURL/imgix_second_image_url"
+              );
+            }
+          });
+        });
+      });
+    });
   });
 
   describe("without custom attribute", () => {
@@ -418,6 +442,30 @@ describe("ProductImages model", function () {
       // Restore old value
       imgixProductDefaultParamsPreferenceValue =
         oldImgixProductDefaultParamsPreferenceValue;
+    });
+
+    describe("should pass through raw imgix url", () => {
+      ["small", "medium", "large"].map((viewType) => {
+        ["single", "*"].map((quantity) => {
+          it(`when view type is ${viewType} and quantity is ${quantity}`, () => {
+            var productObj = new Product();
+            var images = new ProductImages(productObj, {
+              types: [viewType],
+              quantity: quantity,
+            });
+            assert.equal(
+              images[viewType][0].rawURL,
+              "imgixBaseURL/sf_first_image_url"
+            );
+            if (quantity === "*") {
+              assert.equal(
+                images[viewType][1].rawURL,
+                "imgixBaseURL/sf_second_image_url"
+              );
+            }
+          });
+        });
+      });
     });
   });
 
