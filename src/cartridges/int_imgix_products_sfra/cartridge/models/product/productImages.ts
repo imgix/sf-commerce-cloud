@@ -89,8 +89,7 @@ function Images(
 
         // TODO: add tests for default params
         const imageURL =
-          rawURL +
-          (isBaseURLSet && imgixDefaultParams ? "?" + imgixDefaultParams : "");
+          rawURL + (imgixDefaultParams ? "?" + imgixDefaultParams : "");
 
         return {
           alt: image.alt,
@@ -144,10 +143,7 @@ function Images(
           ) {
             const rawURL = imgixBaseURL + image.URL.toString();
             const imageURL =
-              rawURL +
-              (isBaseURLSet && imgixDefaultParams
-                ? "?" + imgixDefaultParams
-                : "");
+              rawURL + (imgixDefaultParams ? "?" + imgixDefaultParams : "");
 
             return {
               alt: image.alt,
