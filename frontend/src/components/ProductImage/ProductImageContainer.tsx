@@ -8,7 +8,7 @@ import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
 interface Props {
-  onClick: (type: "delete" | "replace" | "add", id?: string) => void;
+  onClick: (type: "delete" | "replace" | "add" | "edit", id?: string) => void;
   image: IImgixCustomAttributeImage;
 }
 
