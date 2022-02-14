@@ -4,12 +4,19 @@ import Portal from "./Portal";
 
 interface ModalProps {
   children: React.ReactNode | React.ReactNode[];
+  className?: string;
   locked: boolean; // cant be closed by clicking outside if true
   open: boolean;
   onClose: () => void;
 }
 
-export function Modal({ children, locked, open, onClose }: ModalProps) {
+export function Modal({
+  children,
+  className,
+  locked,
+  open,
+  onClose,
+}: ModalProps) {
   const backdrop = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
@@ -51,7 +58,9 @@ export function Modal({ children, locked, open, onClose }: ModalProps) {
             ref={backdrop}
             className={`${styles.backdrop} ${open && styles.active}`}
           >
-            <div className={`${styles.content} ${styles["modal-content"]}`}>
+            <div
+              className={`${styles.content} ${styles["modal-content"]} ${className}`}
+            >
               {children}
             </div>
           </div>
