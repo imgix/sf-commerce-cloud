@@ -65,7 +65,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   };
 
   const onProductImageClick = (
-    type: "delete" | "replace" | "add",
+    type: "delete" | "replace" | "add" | "edit",
     id?: string
   ) => {
     console.log(`[imgix] onProductImageClick - id: ${id} type: ${type}`);
