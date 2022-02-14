@@ -216,11 +216,15 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
               />
             </div>
           </Modal>
-          <ProductPageImages
-            onClick={onProductImageClick}
-            images={productImages}
-            disabled={disabled}
-          />
+          <div
+            className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
+          >
+            <ProductPageImages
+              onClick={onProductImageClick}
+              images={productImages}
+              disabled={disabled}
+            />
+          </div>
         </div>
       </header>
     </div>
