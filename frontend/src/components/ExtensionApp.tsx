@@ -8,6 +8,7 @@ import { IBreakoutAppData } from "../types/breakoutAppPublic";
 import ActionBar from "./ActionBar/ActionBar";
 import { AssetBrowserContainer } from "./AssetBrowser/AssetBrowserContainer";
 import styles from "./ExtensionApp.module.scss";
+import { AttributeForm } from "./forms/attributes/AttributeForm";
 import { Modal } from "./layouts/Modal";
 import { ProductPageImages } from "./ProductPageImages";
 
@@ -28,6 +29,9 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   const [productImages, setProductImages] = React.useState<
     IImgixCustomAttributeImage[]
   >([]);
+  const [isAttributeEditorOpen, setIsAttributeEditorOpen] = React.useState(
+    false
+  );
 
   React.useEffect(() => {
     if (data) {
@@ -48,15 +52,22 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     });
   };
 
-  const openModal = () => {
+  const openModal = (type: "assets" | "attributes" = "assets") => {
     console.info("[imgix] open imgix modal");
-    setSelectedAssetImage(undefined);
-    setIsModalOpen(true);
+    if (type === "assets") {
+      setIsModalOpen(true);
+    } else if (type === "attributes") {
+      setIsAttributeEditorOpen(true);
+    }
   };
 
-  const closeModal = () => {
+  const closeModal = (type: "assets" | "attributes" = "assets") => {
     console.info("[imgix] close imgix modal");
-    setIsModalOpen(false);
+    if (type === "assets") {
+      setIsModalOpen(false);
+    } else if (type === "attributes") {
+      setIsAttributeEditorOpen(false);
+    }
   };
 
   const closeModalAndResetSelectedAssetImage = () => {
@@ -77,6 +88,11 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
         (image) => image.imgix_metadata?.id !== id
       );
       updateProductImages(newProductImages);
+      return;
+    } else if (type === "edit" && id) {
+      // open the modal to edit the image
+      setSelectedProductImageId(id);
+      openModal("attributes");
       return;
     }
 
@@ -124,17 +140,42 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
       const newImages = [...productImages, selectedAssetImage];
       updateProductImages(newImages);
     }
-    closeModal();
+    closeModalAndResetSelectedAssetImage();
   };
 
   const images = productImages || [];
   const disabled = images === undefined || images.length === 0;
   const selectedSourceId = selectedProductImageId.split("/")[0];
+  const selectedProductImage = images.find(
+    (image) => image.imgix_metadata?.id === selectedProductImageId
+  );
+
+  const setProductImageAttributes = (attributes: {
+    alt: string;
+    title: string;
+  }) => {
+    if (selectedProductImage) {
+      const newImages = productImages.map((image) => {
+        if (image.imgix_metadata?.id === selectedProductImageId) {
+          return {
+            ...image,
+            alt: attributes.alt,
+            title: attributes.title,
+          };
+        } else {
+          return image;
+        }
+      });
+      updateProductImages(newImages);
+      setIsAttributeEditorOpen(false);
+    }
+  };
 
   return (
     <div className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}>
       <header className="App-header">
         <div>
+          {/* AssetManager Modal */}
           <Modal
             locked={false}
             onClose={() => {
@@ -154,6 +195,24 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
                 disabled={selectedAssetImage === undefined}
                 onSave={saveSelectionToDataOnClick}
                 onCancel={closeModalAndResetSelectedAssetImage}
+              />
+            </div>
+          </Modal>
+          {/* AttributeEditor Modal */}
+          <Modal
+            locked={true}
+            onClose={() => {
+              setIsAttributeEditorOpen(false);
+            }}
+            open={isAttributeEditorOpen}
+          >
+            <div
+              className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
+            >
+              <AttributeForm
+                asset={selectedProductImage || undefined}
+                onSubmit={setProductImageAttributes}
+                onCancel={() => setIsAttributeEditorOpen(false)}
               />
             </div>
           </Modal>
