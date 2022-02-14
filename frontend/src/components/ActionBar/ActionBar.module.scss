@@ -1,11 +1,14 @@
+@import "../../styles/Colors.module.scss";
 .container {
-  margin: 20px auto auto auto;
+  padding: 20px 0px 20px 0px;
+  background: $color_bg;
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-flow: row nowrap;
   justify-content: flex-end;
+  height: auto;
 }
 
 .buttons {
