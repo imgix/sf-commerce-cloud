@@ -4,6 +4,7 @@ import { FrameButton } from "../buttons/FrameButton/FrameButton";
 import { AssetCard } from "../card/AssetCard";
 import { Divider } from "../dividers/Divider";
 import { DeleteIcon, RefreshSvg } from "../icons";
+import { MetaSvg } from "../icons/MetaSvg";
 import { Overlay } from "../layouts/Overlay";
 import styles from "./ProductImageContainer.module.scss";
 
@@ -51,6 +52,17 @@ export const ProductImageContainer = ({
                 onClick={() => {
                   setHovering(false);
                   onClick("replace", image.imgix_metadata?.id);
+                }}
+              />
+            </div>
+            <div data-testid="asset-card-edit-button">
+              <FrameButton
+                className={styles.button}
+                color="tertiary"
+                icon={<MetaSvg />}
+                onClick={() => {
+                  setHovering(false);
+                  onClick("edit", image.imgix_metadata?.id);
                 }}
               />
             </div>
