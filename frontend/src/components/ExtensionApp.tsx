@@ -8,7 +8,7 @@ import { IBreakoutAppData } from "../types/breakoutAppPublic";
 import ActionBar from "./ActionBar/ActionBar";
 import { AssetBrowserContainer } from "./AssetBrowser/AssetBrowserContainer";
 import styles from "./ExtensionApp.module.scss";
-import { AttributeForm } from "./forms/attributes/AttributeForm";
+import { AttributeFormContainer } from "./forms/attributes/AttributeFormContainer";
 import { Modal } from "./layouts/Modal";
 import { ProductPageImages } from "./ProductPageImages";
 
@@ -209,8 +209,8 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
             <div
               className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
             >
-              <AttributeForm
-                asset={selectedProductImage || undefined}
+              <AttributeFormContainer
+                asset={selectedProductImage}
                 onSubmit={setProductImageAttributes}
                 onCancel={() => setIsAttributeEditorOpen(false)}
               />
