@@ -52,6 +52,10 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     });
   };
 
+  const closeAttributeEditor = () => {
+    setIsAttributeEditorOpen(false);
+  };
+
   const openModal = (type: "assets" | "attributes" = "assets") => {
     console.info("[imgix] open imgix modal");
     if (type === "assets") {
@@ -66,7 +70,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
     if (type === "assets") {
       setIsModalOpen(false);
     } else if (type === "attributes") {
-      setIsAttributeEditorOpen(false);
+      closeAttributeEditor();
     }
   };
 
@@ -167,7 +171,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
         }
       });
       updateProductImages(newImages);
-      setIsAttributeEditorOpen(false);
+      closeAttributeEditor();
     }
   };
 
@@ -201,9 +205,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
           {/* AttributeEditor Modal */}
           <Modal
             locked={true}
-            onClose={() => {
-              setIsAttributeEditorOpen(false);
-            }}
+            onClose={closeAttributeEditor}
             open={isAttributeEditorOpen}
           >
             <div
@@ -212,7 +214,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
               <AttributeFormContainer
                 asset={selectedProductImage}
                 onSubmit={setProductImageAttributes}
-                onCancel={() => setIsAttributeEditorOpen(false)}
+                onCancel={closeAttributeEditor}
               />
             </div>
           </Modal>
