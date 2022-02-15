@@ -52,7 +52,8 @@ export class AssetBrowserContainer extends Component<Props, State> {
           (source) => source.id === defaultSourceId
         )[0];
         this.setState({
-          // set selected source if defaultSourceId is set
+          // Set selected source if defaultSourceId is set. Will default to
+          // first source if defaultSourceId is not set.
           selectedSource,
           sources: resp.data,
           loading: false,
