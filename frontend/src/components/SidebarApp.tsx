@@ -1,6 +1,7 @@
 import React from "react";
 import Imgix from "react-imgix";
-import "../styles/App.css";
+import "../styles/GlobalReset.css";
+import reset from "../styles/ScopedReset.module.scss";
 import { IImgixCustomAttributeValue } from "../types/imgixSF";
 import { AddSvg } from "./icons/AddSvg";
 import { RefreshSvg } from "./icons/RefreshSvg";
@@ -23,7 +24,7 @@ export function App({
   if (disabled) {
     // return a placeholder telling the user to enable the component
     return (
-      <div className={styles.disabled}>
+      <div className={`${styles.disabled} ${reset.ixReset}`}>
         <div className={`${styles.imageWrapper} ${styles.disabled}`}></div>
         <div className={styles.imageCaption}>
           <span className={styles.imageCaptionText}>
@@ -43,57 +44,50 @@ export function App({
     );
   }
   return (
-    <div className="App">
-      <header className="App-header">
-        <div>
-          <div className={styles.imageWrapper}>
-            {value ? (
-              <>
-                <div className={styles.replaceImageOverlay}>
-                  <div
-                    className={styles.replaceImageOverlayButton}
-                    onClick={onOpenBreakoutClick}
-                  >
-                    <div className={styles.replaceImageIcon}>
-                      <RefreshSvg />
-                    </div>
-                    REPLACE
-                  </div>
-                </div>
-                <Imgix
-                  src={value.src}
-                  width={344}
-                  height={215}
-                  imgixParams={{
-                    fit: "crop",
-                  }}
-                />
-              </>
-            ) : (
+    <div className={reset.ixReset}>
+      <div className={styles.imageWrapper}>
+        {value ? (
+          <>
+            <div className={styles.replaceImageOverlay}>
               <div
-                className={styles.addImageButton}
+                className={styles.replaceImageOverlayButton}
                 onClick={onOpenBreakoutClick}
               >
-                <div className={styles.addIcon}>
-                  <AddSvg />
+                <div className={styles.replaceImageIcon}>
+                  <RefreshSvg />
                 </div>
-                ADD IMAGE
-              </div>
-            )}
-          </div>
-          <div className={styles.imageCaption}>
-            <span className={styles.imageCaptionText}>
-              {value ? value.src : "Add an imgix Image"}
-            </span>
-            <div className={styles.removeImageButton} onClick={onClear}>
-              <div className={styles.removeImageIcon}>
-                <TrashcanSvg />
+                REPLACE
               </div>
             </div>
+            <Imgix
+              src={value.src}
+              width={344}
+              height={215}
+              imgixParams={{
+                fit: "crop",
+              }}
+            />
+          </>
+        ) : (
+          <div className={styles.addImageButton} onClick={onOpenBreakoutClick}>
+            <div className={styles.addIcon}>
+              <AddSvg />
+            </div>
+            ADD IMAGE
           </div>
-          <div className={styles.hr} />
+        )}
+      </div>
+      <div className={styles.imageCaption}>
+        <span className={styles.imageCaptionText}>
+          {value ? value.src : "Add an imgix Image"}
+        </span>
+        <div className={styles.removeImageButton} onClick={onClear}>
+          <div className={styles.removeImageIcon}>
+            <TrashcanSvg />
+          </div>
         </div>
-      </header>
+      </div>
+      <div className={styles.hr} />
     </div>
   );
 }

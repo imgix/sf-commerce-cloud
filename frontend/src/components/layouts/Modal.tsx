@@ -1,4 +1,5 @@
 import React from "react";
+import reset from "../../styles/ScopedReset.module.scss";
 import styles from "./Modal.module.scss";
 import Portal from "./Portal";
 
@@ -56,7 +57,9 @@ export function Modal({
         <Portal>
           <div
             ref={backdrop}
-            className={`${styles.backdrop} ${open && styles.active}`}
+            className={`${styles.backdrop} ${open && styles.active} ${
+              reset.ixReset
+            }`}
           >
             <div
               className={`${styles.content} ${styles["modal-content"]} ${className}`}

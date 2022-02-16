@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import { SourceSelect as _SourceSelect } from "../components/buttons/dropdowns/SourceSelect";
-import "../styles/App.css";
 import { ImgixGETSourcesData } from "../types";
 import "./ButtonLayout.css";
 

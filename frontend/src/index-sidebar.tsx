@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { App as SidebarApp } from "./components/SidebarApp";
-import "./styles/index.css";
 import { SandboxSubscribe } from "./types";
 import { IImgixCustomAttributeValue } from "./types/imgixSF";
 

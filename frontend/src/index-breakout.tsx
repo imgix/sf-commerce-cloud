@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { App as BreakoutApp } from "./components/BreakoutApp";
-import "./styles/index.css";
 import { IBreakoutAppOnSubmit } from "./types/breakoutAppPublic";
 import { IImgixCustomAttributeValue } from "./types/imgixSF";
 
