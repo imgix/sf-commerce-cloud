@@ -23,6 +23,7 @@
   "scripts": {
     "build": "yarn run build:cartridges",
     "build:cartridges": "cd src/cartridges && tsc",
+    "build:cartridges:watch": "cd src/cartridges && tsc -w",
     "test": "sgmf-scripts --test test/unit/**/*.js",
     "setup": "npm run setup:dw-json",
     "setup:dw-json": "node setup.js",
