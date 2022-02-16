@@ -3,7 +3,7 @@ import {
   IImgixCustomAttribute,
   IImgixCustomAttributeImage,
 } from "../../../types";
-import "../styles/App.css";
+import reset from "../styles/ScopedReset.module.scss";
 import { IBreakoutAppData } from "../types/breakoutAppPublic";
 import ActionBar from "./ActionBar/ActionBar";
 import { AssetBrowserContainer } from "./AssetBrowser/AssetBrowserContainer";
@@ -176,59 +176,55 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   };
 
   return (
-    <div className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}>
-      <header className="App-header">
-        <div>
-          {/* AssetManager Modal */}
-          <Modal
-            locked={false}
-            onClose={() => {
-              setIsModalOpen(false);
-            }}
-            open={isModalOpen}
-          >
-            <div
-              className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
-            >
-              <AssetBrowserContainer
-                apiKey={apiKey}
-                defaultSourceId={selectedSourceId}
-                onSelectAsset={onSelectAsset}
-              />
-              <ActionBar
-                disabled={selectedAssetImage === undefined}
-                onSave={saveSelectionToDataOnClick}
-                onCancel={closeModalAndResetSelectedAssetImage}
-              />
-            </div>
-          </Modal>
-          {/* AttributeEditor Modal */}
-          <Modal
-            locked={true}
-            onClose={closeAttributeEditor}
-            open={isAttributeEditorOpen}
-          >
-            <div
-              className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
-            >
-              <AttributeFormContainer
-                asset={selectedProductImage}
-                onSubmit={setProductImageAttributes}
-                onCancel={closeAttributeEditor}
-              />
-            </div>
-          </Modal>
-          <div
-            className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
-          >
-            <ProductPageImages
-              onClick={onProductImageClick}
-              images={productImages}
-              disabled={disabled}
-            />
-          </div>
+    <div
+      className={`${styles.fontSizeOverride} ${styles.boxSizingOverride} ${reset.ixReset}`}
+    >
+      {/* AssetManager Modal */}
+      <Modal
+        locked={false}
+        onClose={() => {
+          setIsModalOpen(false);
+        }}
+        open={isModalOpen}
+      >
+        <div
+          className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
+        >
+          <AssetBrowserContainer
+            apiKey={apiKey}
+            defaultSourceId={selectedSourceId}
+            onSelectAsset={onSelectAsset}
+          />
+          <ActionBar
+            disabled={selectedAssetImage === undefined}
+            onSave={saveSelectionToDataOnClick}
+            onCancel={closeModalAndResetSelectedAssetImage}
+          />
         </div>
-      </header>
+      </Modal>
+      {/* AttributeEditor Modal */}
+      <Modal
+        locked={true}
+        onClose={closeAttributeEditor}
+        open={isAttributeEditorOpen}
+      >
+        <div
+          className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}
+        >
+          <AttributeFormContainer
+            asset={selectedProductImage}
+            onSubmit={setProductImageAttributes}
+            onCancel={closeAttributeEditor}
+          />
+        </div>
+      </Modal>
+      <div className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}>
+        <ProductPageImages
+          onClick={onProductImageClick}
+          images={productImages}
+          disabled={disabled}
+        />
+      </div>
     </div>
   );
 }
