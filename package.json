@@ -39,7 +39,8 @@
     "storybook": "cd frontend && npm run storybook",
     "deploy": "cd frontend && npm run deploy",
     "build-zip": "pushd metadata && zip -j imgix_data.zip system-objecttype-extensions.xml && popd",
-    "unzip-metadata": "cd metadata && unzip imgix_data.zip"
+    "unzip-metadata": "cd metadata && unzip imgix_data.zip",
+    "build-extension-zip": "pushd src && zip -r extension.zip extension/"
   },
   "keywords": [
     "imgix",
