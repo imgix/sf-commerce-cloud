@@ -1,3 +1,5 @@
+import React from "react";
+import styles from "../src/styles/ScopedReset.module.scss";
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -21,3 +23,11 @@ export const parameters = {
     ],
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <div className={styles.ixReset}>
+      <Story />
+    </div>
+  ),
+];
