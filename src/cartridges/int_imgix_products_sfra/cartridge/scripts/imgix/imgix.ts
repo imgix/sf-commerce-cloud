@@ -5,11 +5,21 @@
  */
 
 import type IImgixClient from "@imgix/js-core";
+import type { SrcSetOptions } from "@imgix/js-core";
 const ImgixClient =
   require("*/cartridge/scripts/jsCore/jsCore") as IImgixClient;
 
-export const buildURL = (ImgixClient as any)
-  ._buildURL as IImgixClient["buildURL"];
+export type IBuildURL = (
+  url: string,
+  params?: Record<string, any>,
+  options?: Partial<ConstructorParameters<typeof IImgixClient>[0]>
+) => string;
+export const buildURL = (ImgixClient as any)._buildURL as IBuildURL;
 
-export const buildSrcSet = (ImgixClient as any)
-  ._buildSrcSet as IImgixClient["buildSrcSet"];
+export type IBuildSrcset = (
+  url: string,
+  params?: Record<string, any>,
+  srcsetParams?: SrcSetOptions,
+  options?: Partial<ConstructorParameters<typeof IImgixClient>[0]>
+) => string;
+export const buildSrcSet = (ImgixClient as any)._buildSrcSet as IBuildSrcset;
