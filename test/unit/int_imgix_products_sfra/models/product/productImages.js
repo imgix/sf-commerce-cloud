@@ -50,11 +50,11 @@ var customData = {
   imgixData: JSON.stringify({
     images: [
       {
-        src: "customImgixURL/imgix_first_image_url",
+        src: "custom.imgix.net/imgix_first_image_url",
         title: "First Image title",
         alt: "First Image alt",
       },
-      { src: "customImgixURL/imgix_second_image_url", sourceWidth: 3000 },
+      { src: "custom.imgix.net/imgix_second_image_url", sourceWidth: 3000 },
     ],
   }),
 };
@@ -96,9 +96,16 @@ class Logger {
 }
 
 describe("ProductImages model", function () {
-  let imgixBaseURLPreferenceValue = "imgixBaseURL";
+  let imgixBaseURLPreferenceValue = "webfolder.imgix.net";
   let imgixProductDefaultParamsPreferenceValue = "";
   let imgixEnableProductImageProxyValue = true;
+  var scriptImagesJS = proxyquire(
+    process.cwd() +
+      "/cartridges/int_imgix_products_sfra/cartridge/scripts/imgix/imgix",
+    {
+      "*/cartridge/scripts/jsCore/jsCore": require("../../../../../cartridges/int_imgix_products_sfra/cartridge/scripts/imgix/jsCore"),
+    }
+  );
   var ProductImages = proxyquire(
     process.cwd() +
       "/cartridges/int_imgix_products_sfra/cartridge/models/product/productImages",
@@ -149,6 +156,7 @@ describe("ProductImages model", function () {
       "dw/catalog/Product": Product,
       "dw/catalog/Variant": Variant,
       "dw/catalog/Logger": Logger,
+      "../../scripts/imgix/imgix": scriptImagesJS,
     }
   );
 
@@ -163,24 +171,27 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].title, "First Image title");
-      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
-      assert.equal(
-        images.small[0].absURL,
-        "customImgixURL/imgix_first_image_url"
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
       );
-      assert.equal(
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
         images.small[1].url,
-        "customImgixURL/imgix_second_image_url"
+        "custom.imgix.net/imgix_second_image_url"
       );
       // TODO: check if we should be modifying path
-      assert.equal(
+      assert.include(
         images.small[1].absURL,
-        "customImgixURL/imgix_second_image_url"
+        "custom.imgix.net/imgix_second_image_url"
       );
       assert.equal(images.small[1].index, "1");
     });
 
-    it("should get only first small image with customImgixURL", function () {
+    it("should get only first small image with custom.imgix.net", function () {
       var product = new Product({ customData });
       var images = new ProductImages(product, {
         types: ["small"],
@@ -190,10 +201,13 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
-      assert.equal(
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
         images.small[0].absURL,
-        "customImgixURL/imgix_first_image_url"
+        "custom.imgix.net/imgix_first_image_url"
       );
     });
     it("should get all small images with imgix data from selected variant product", function () {
@@ -206,19 +220,22 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].title, "First Image title");
-      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
-      assert.equal(
-        images.small[0].absURL,
-        "customImgixURL/imgix_first_image_url"
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
       );
-      assert.equal(
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
         images.small[1].url,
-        "customImgixURL/imgix_second_image_url"
+        "custom.imgix.net/imgix_second_image_url"
       );
 
-      assert.equal(
+      assert.include(
         images.small[1].absURL,
-        "customImgixURL/imgix_second_image_url"
+        "custom.imgix.net/imgix_second_image_url"
       );
       assert.equal(images.small[1].index, "1");
     });
@@ -232,19 +249,22 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].index, "0");
       assert.equal(images.small[0].title, "First Image title");
-      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
-      assert.equal(
-        images.small[0].absURL,
-        "customImgixURL/imgix_first_image_url"
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
       );
-      assert.equal(
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
         images.small[1].url,
-        "customImgixURL/imgix_second_image_url"
+        "custom.imgix.net/imgix_second_image_url"
       );
 
-      assert.equal(
+      assert.include(
         images.small[1].absURL,
-        "customImgixURL/imgix_second_image_url"
+        "custom.imgix.net/imgix_second_image_url"
       );
       assert.equal(images.small[1].index, "1");
     });
@@ -258,10 +278,13 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
-      assert.equal(
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
         images.small[0].absURL,
-        "customImgixURL/imgix_first_image_url"
+        "custom.imgix.net/imgix_first_image_url"
       );
     });
     it("should get only first small with imgix data from variant product", function () {
@@ -274,10 +297,13 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].url, "customImgixURL/imgix_first_image_url");
-      assert.equal(
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
         images.small[0].absURL,
-        "customImgixURL/imgix_first_image_url"
+        "custom.imgix.net/imgix_first_image_url"
       );
     });
 
@@ -299,7 +325,10 @@ describe("ProductImages model", function () {
       assert.equal(images.small[0].alt, "First Image alt");
       assert.equal(images.small[0].title, "First Image title");
       assert.equal(images.small[0].index, "0");
-      assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
+      assert.include(
+        images.small[0].url,
+        "webfolder.imgix.net/sf_first_image_url"
+      );
     });
 
     describe("should pass through raw imgix url", () => {
@@ -313,17 +342,27 @@ describe("ProductImages model", function () {
             });
             assert.equal(
               images[viewType][0].rawURL,
-              "customImgixURL/imgix_first_image_url"
+              "custom.imgix.net/imgix_first_image_url"
             );
             if (quantity === "*") {
               assert.equal(
                 images[viewType][1].rawURL,
-                "customImgixURL/imgix_second_image_url"
+                "custom.imgix.net/imgix_second_image_url"
               );
             }
           });
         });
       });
+    });
+    const PACKAGE_VERSION = require("../../../../../package").version;
+    it(`should set ixlib to sf-${PACKAGE_VERSION}`, () => {
+      var productObj = new Product({ customData });
+      var images = new ProductImages(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.include(images["small"][0].url, `ixlib=sf-${PACKAGE_VERSION}`);
+      assert.include(images["small"][0].absURL, `ixlib=sf-${PACKAGE_VERSION}`);
     });
   });
 
@@ -338,12 +377,21 @@ describe("ProductImages model", function () {
         assert.equal(images.small[0].alt, "First Image alt");
         assert.equal(images.small[0].index, "0");
         assert.equal(images.small[0].title, "First Image title");
-        assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
-        assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
-        assert.equal(images.small[1].url, "imgixBaseURL/sf_second_image_url");
-        assert.equal(
+        assert.include(
+          images.small[0].url,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
+        assert.include(
+          images.small[0].absURL,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
+        assert.include(
+          images.small[1].url,
+          "webfolder.imgix.net/sf_second_image_url"
+        );
+        assert.include(
           images.small[1].absURL,
-          "imgixBaseURL/sf_second_image_url"
+          "webfolder.imgix.net/sf_second_image_url"
         );
         assert.equal(images.small[1].index, "1");
       });
@@ -357,8 +405,14 @@ describe("ProductImages model", function () {
         assert.equal(images.small[0].alt, "First Image alt");
         assert.equal(images.small[0].title, "First Image title");
         assert.equal(images.small[0].index, "0");
-        assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
-        assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
+        assert.include(
+          images.small[0].url,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
+        assert.include(
+          images.small[0].absURL,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
       });
     });
     describe("when imgixBaseURL preference is not set", () => {
@@ -415,7 +469,7 @@ describe("ProductImages model", function () {
       imgixProductDefaultParamsPreferenceValue = "auto=format&fit=crop";
 
       const containsDefaultParams = (url) =>
-        url.includes("?auto=format&fit=crop");
+        url.includes("auto=format") && url.includes("fit=crop");
 
       const singleSmallImage = new ProductImages(toProductMock(productMock), {
         types: ["small"],
@@ -455,17 +509,27 @@ describe("ProductImages model", function () {
             });
             assert.equal(
               images[viewType][0].rawURL,
-              "imgixBaseURL/sf_first_image_url"
+              "webfolder.imgix.net/sf_first_image_url"
             );
             if (quantity === "*") {
               assert.equal(
                 images[viewType][1].rawURL,
-                "imgixBaseURL/sf_second_image_url"
+                "webfolder.imgix.net/sf_second_image_url"
               );
             }
           });
         });
       });
+    });
+    const PACKAGE_VERSION = require("../../../../../package").version;
+    it(`should set ixlib to sf-${PACKAGE_VERSION}`, () => {
+      var productObj = new Product();
+      var images = new ProductImages(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.include(images["small"][0].url, `ixlib=sf-${PACKAGE_VERSION}`);
+      assert.include(images["small"][0].absURL, `ixlib=sf-${PACKAGE_VERSION}`);
     });
   });
 
@@ -533,11 +597,31 @@ describe("ProductImages model", function () {
       });
     });
 
-    describe("should resize image from custom attribute", () => {
-      it("small image");
-      it("medium image");
-      it("large image");
-      it("original size image");
+    describe("when resizing image(s) from custom attribute", () => {
+      const CONFIG = {
+        small: { w: 140, h: 140 },
+        medium: { w: 400, h: 400 },
+        large: { w: 800, h: 800 },
+      };
+
+      Object.entries(CONFIG).map(([viewType, { w, h }]) => {
+        ["single", "*"].map((quantity) => {
+          it(`should resize image to ${w}x${h} when view type is ${viewType} and quantity is ${quantity}`, () => {
+            var productObj = new Product({ customData });
+            var images = new ProductImages(productObj, {
+              types: [viewType],
+              quantity: quantity,
+            });
+            assert(images[viewType].length > 0);
+            images[viewType].map(({ url, absURL }) => {
+              assert.include(url, `w=${w}`);
+              assert.include(url, `h=${h}`);
+              assert.include(absURL, `w=${w}`);
+              assert.include(absURL, `h=${h}`);
+            });
+          });
+        });
+      });
     });
 
     describe("should not proxy url or absURL when feature is disabled", () => {
@@ -602,6 +686,32 @@ describe("ProductImages model", function () {
           multipleImages.large[1].absURL,
           "path/sf_second_image_url"
         );
+
+        imgixEnableProductImageProxyValue = true;
+      });
+      it(`should not set ixlib for custom attribute images`, () => {
+        imgixEnableProductImageProxyValue = false;
+
+        var productObj = new Product({ customData });
+        var images = new ProductImages(productObj, {
+          types: ["small"],
+          quantity: "single",
+        });
+        assert.notInclude(images["small"][0].url, `ixlib=`);
+        assert.notInclude(images["small"][0].absURL, `ixlib=`);
+
+        imgixEnableProductImageProxyValue = true;
+      });
+      it(`should not set ixlib for SF product images`, () => {
+        imgixEnableProductImageProxyValue = false;
+
+        var productObj = new Product();
+        var images = new ProductImages(productObj, {
+          types: ["small"],
+          quantity: "single",
+        });
+        assert.notInclude(images["small"][0].url, `ixlib=`);
+        assert.notInclude(images["small"][0].absURL, `ixlib=`);
 
         imgixEnableProductImageProxyValue = true;
       });
