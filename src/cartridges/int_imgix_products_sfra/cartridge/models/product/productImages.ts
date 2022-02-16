@@ -2,12 +2,20 @@
 
 import { IImgixCustomAttribute } from "../../../../commonTypes";
 import { ProductImagesModelData } from "../../../../SFTypes";
+import * as ImgixCore from "../../scripts/imgix/imgix";
 
 var collections = require("*/cartridge/scripts/util/collections");
 const currentSite = require("dw/system/Site").getCurrent();
 const ProductVariationModel = require("dw/catalog/ProductVariationModel");
 const Variant = require("dw/catalog/Variant");
 const Product = require("dw/catalog/Product");
+
+const IMGIX_CORE_DEFAULT_PARAMS = {
+  ixlib: "sf-22.1.0",
+};
+const IMGIX_CORE_DEFAULT_OPTIONS = {
+  includeLibraryParam: false,
+};
 
 /**
  * @constructor
@@ -28,8 +36,23 @@ function Images(
   const imgixBaseURL =
     currentSite.getCustomPreferenceValue("imgixBaseURL") || "";
   const isBaseURLSet = imgixBaseURL.trim().length > 0;
-  const imgixDefaultParams =
+  const imgixDefaultParamsString: string =
     currentSite.getCustomPreferenceValue("imgixProductDefaultParams") || "";
+
+  const imgixDefaultParams = imgixDefaultParamsString
+    .split("&")
+    .reduce((p, paramString: string) => {
+      const equalsIndex = paramString.indexOf("=");
+      if (equalsIndex < 0) {
+        return p;
+      }
+
+      const key = paramString.substring(0, equalsIndex);
+      const value = paramString.substring(equalsIndex + 1);
+      p[key] = value;
+      return p;
+    }, {} as Record<string, string>);
+
   const imgixEnableProductImageProxy = currentSite.getCustomPreferenceValue(
     "imgixEnableProductImageProxy"
   );
@@ -87,9 +110,29 @@ function Images(
       const result = images.map((image, index) => {
         const rawURL = image.src;
 
+        const sizeParams = (() => {
+          if (viewType === "large") {
+            return { w: 800, h: 800 };
+          }
+          if (viewType === "medium") {
+            return { w: 400, h: 400 };
+          }
+          if (viewType === "small") {
+            return { w: 140, h: 140 };
+          }
+          return {};
+        })();
+
         // TODO: add tests for default params
-        const imageURL =
-          rawURL + (imgixDefaultParams ? "?" + imgixDefaultParams : "");
+        const imageURL = ImgixCore.buildURL(
+          rawURL,
+          {
+            ...IMGIX_CORE_DEFAULT_PARAMS,
+            ...imgixDefaultParams,
+            ...sizeParams,
+          },
+          IMGIX_CORE_DEFAULT_OPTIONS
+        );
 
         return {
           alt: image.alt,
@@ -117,11 +160,15 @@ function Images(
         var firstImage = collections.first(images);
         if (firstImage) {
           const rawURL = imgixBaseURL + firstImage.URL.toString();
-          const imageURL =
-            rawURL +
-            (isBaseURLSet && imgixDefaultParams
-              ? "?" + imgixDefaultParams
-              : "");
+          const imgixParams = {
+            ...IMGIX_CORE_DEFAULT_PARAMS,
+            ...imgixDefaultParams,
+          };
+          const imageURL = ImgixCore.buildURL(
+            rawURL,
+            imgixParams,
+            IMGIX_CORE_DEFAULT_OPTIONS
+          );
 
           result = [
             {
@@ -142,8 +189,15 @@ function Images(
             index: { toString: () => any }
           ) {
             const rawURL = imgixBaseURL + image.URL.toString();
-            const imageURL =
-              rawURL + (imgixDefaultParams ? "?" + imgixDefaultParams : "");
+            const imgixParams = {
+              ...IMGIX_CORE_DEFAULT_PARAMS,
+              ...imgixDefaultParams,
+            };
+            const imageURL = ImgixCore.buildURL(
+              rawURL,
+              imgixParams,
+              IMGIX_CORE_DEFAULT_OPTIONS
+            );
 
             return {
               alt: image.alt,
