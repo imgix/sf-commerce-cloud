@@ -99,14 +99,20 @@ describe("ProductImages model", function () {
   let imgixBaseURLPreferenceValue = "webfolder.imgix.net";
   let imgixProductDefaultParamsPreferenceValue = "";
   let imgixEnableProductImageProxyValue = true;
-  var scriptImagesJS = proxyquire(
+
+  // This loads a version of the imgix.js script that will actually load - the
+  // "*/cartridge/..." SF loading doesn't work in vanilla JS, so this just
+  // basically redirects the "*/cartridge/scripts/jsCore/jsCore" require to
+  // point to the right file
+  const imgixJSScript = proxyquire(
     process.cwd() +
       "/cartridges/int_imgix_products_sfra/cartridge/scripts/imgix/imgix",
     {
       "*/cartridge/scripts/jsCore/jsCore": require("../../../../../cartridges/int_imgix_products_sfra/cartridge/scripts/imgix/jsCore"),
     }
   );
-  var ProductImages = proxyquire(
+  // This loads the target test model with some mocked dependencies, for two reasons: a) the "*/..." requires don't work in vanilla JS, and b) sometime we want to modify/mock/spy on dependencies
+  const ProductImagesModel = proxyquire(
     process.cwd() +
       "/cartridges/int_imgix_products_sfra/cartridge/models/product/productImages",
     {
@@ -156,14 +162,14 @@ describe("ProductImages model", function () {
       "dw/catalog/Product": Product,
       "dw/catalog/Variant": Variant,
       "dw/catalog/Logger": Logger,
-      "../../scripts/imgix/imgix": scriptImagesJS,
+      "../../scripts/imgix/imgix": imgixJSScript,
     }
   );
 
   describe("with custom attribute", function () {
     it("should get all small images with imgixBaseURL", function () {
       var product = new Product({ customData });
-      var images = new ProductImages(product, {
+      var images = new ProductImagesModel(product, {
         types: ["small"],
         quantity: "*",
       });
@@ -193,7 +199,7 @@ describe("ProductImages model", function () {
 
     it("should get only first small image with custom.imgix.net", function () {
       var product = new Product({ customData });
-      var images = new ProductImages(product, {
+      var images = new ProductImagesModel(product, {
         types: ["small"],
         quantity: "single",
       });
@@ -212,7 +218,7 @@ describe("ProductImages model", function () {
     });
     it("should get all small images with imgix data from selected variant product", function () {
       var productObj = new ProductVariationModel(true, true);
-      var images = new ProductImages(productObj, {
+      var images = new ProductImagesModel(productObj, {
         types: ["small"],
         quantity: "*",
       });
@@ -241,7 +247,7 @@ describe("ProductImages model", function () {
     });
     it("should get all small images with imgix data from master product", function () {
       var productObj = new ProductVariationModel(false, true);
-      var images = new ProductImages(productObj, {
+      var images = new ProductImagesModel(productObj, {
         types: ["small"],
         quantity: "*",
       });
@@ -270,7 +276,7 @@ describe("ProductImages model", function () {
     });
     it("should get only first small with imgix data from master product", function () {
       var productObj = new Product({ customData });
-      var images = new ProductImages(productObj, {
+      var images = new ProductImagesModel(productObj, {
         types: ["small"],
         quantity: "single",
       });
@@ -289,7 +295,7 @@ describe("ProductImages model", function () {
     });
     it("should get only first small with imgix data from variant product", function () {
       var productObj = new Product({ customData });
-      var images = new ProductImages(productObj, {
+      var images = new ProductImagesModel(productObj, {
         types: ["small"],
         quantity: "single",
       });
@@ -318,7 +324,7 @@ describe("ProductImages model", function () {
           },
         }),
       });
-      var images = new ProductImages(product, {
+      var images = new ProductImagesModel(product, {
         types: ["small"],
         quantity: "single",
       });
@@ -336,7 +342,7 @@ describe("ProductImages model", function () {
         ["single", "*"].map((quantity) => {
           it(`when view type is ${viewType} and quantity is ${quantity}`, () => {
             var productObj = new Product({ customData });
-            var images = new ProductImages(productObj, {
+            var images = new ProductImagesModel(productObj, {
               types: [viewType],
               quantity: quantity,
             });
@@ -357,7 +363,7 @@ describe("ProductImages model", function () {
     const PACKAGE_VERSION = require("../../../../../package").version;
     it(`should set ixlib to sf-${PACKAGE_VERSION}`, () => {
       var productObj = new Product({ customData });
-      var images = new ProductImages(productObj, {
+      var images = new ProductImagesModel(productObj, {
         types: ["small"],
         quantity: "single",
       });
@@ -369,7 +375,7 @@ describe("ProductImages model", function () {
   describe("without custom attribute", () => {
     describe("when imgixBaseURL preference set", () => {
       it("should get all small images with imgixBaseURL", function () {
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "*",
         });
@@ -397,7 +403,7 @@ describe("ProductImages model", function () {
       });
 
       it("should get only first small image with imgixBaseURL", function () {
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "single",
         });
@@ -423,7 +429,7 @@ describe("ProductImages model", function () {
         // Disable imgix base URL preference
         imgixBaseURLPreferenceValue = "";
 
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "*",
         });
@@ -447,7 +453,7 @@ describe("ProductImages model", function () {
         // Disable imgix base URL preference
         imgixBaseURLPreferenceValue = "";
 
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "single",
         });
@@ -471,16 +477,19 @@ describe("ProductImages model", function () {
       const containsDefaultParams = (url) =>
         url.includes("auto=format") && url.includes("fit=crop");
 
-      const singleSmallImage = new ProductImages(toProductMock(productMock), {
-        types: ["small"],
-        quantity: "single",
-      });
+      const singleSmallImage = new ProductImagesModel(
+        toProductMock(productMock),
+        {
+          types: ["small"],
+          quantity: "single",
+        }
+      );
       assert(
         containsDefaultParams(singleSmallImage.small[0].url),
         "url should include default params"
       );
 
-      const smallImages = new ProductImages(toProductMock(productMock), {
+      const smallImages = new ProductImagesModel(toProductMock(productMock), {
         types: ["small"],
         quantity: "*",
       });
@@ -503,7 +512,7 @@ describe("ProductImages model", function () {
         ["single", "*"].map((quantity) => {
           it(`when view type is ${viewType} and quantity is ${quantity}`, () => {
             var productObj = new Product();
-            var images = new ProductImages(productObj, {
+            var images = new ProductImagesModel(productObj, {
               types: [viewType],
               quantity: quantity,
             });
@@ -524,7 +533,7 @@ describe("ProductImages model", function () {
     const PACKAGE_VERSION = require("../../../../../package").version;
     it(`should set ixlib to sf-${PACKAGE_VERSION}`, () => {
       var productObj = new Product();
-      var images = new ProductImages(productObj, {
+      var images = new ProductImagesModel(productObj, {
         types: ["small"],
         quantity: "single",
       });
@@ -536,7 +545,7 @@ describe("ProductImages model", function () {
   describe("auto-resizing images", () => {
     describe("should not resize passed-through images", () => {
       it("small image", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["small"],
           quantity: "single",
         });
@@ -545,7 +554,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.small[0].url, "h=");
       });
       it("small images", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["small"],
           quantity: "*",
         });
@@ -556,7 +565,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.small[1].url, "h=");
       });
       it("medium image", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["medium"],
           quantity: "single",
         });
@@ -565,7 +574,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.medium[0].url, "h=");
       });
       it("medium images", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["medium"],
           quantity: "*",
         });
@@ -576,7 +585,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.medium[1].url, "h=");
       });
       it("large image", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "single",
         });
@@ -585,7 +594,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.large[0].url, "h=");
       });
       it("large images", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "*",
         });
@@ -608,7 +617,7 @@ describe("ProductImages model", function () {
         ["single", "*"].map((quantity) => {
           it(`should resize image to ${w}x${h} when view type is ${viewType} and quantity is ${quantity}`, () => {
             var productObj = new Product({ customData });
-            var images = new ProductImages(productObj, {
+            var images = new ProductImagesModel(productObj, {
               types: [viewType],
               quantity: quantity,
             });
@@ -628,10 +637,13 @@ describe("ProductImages model", function () {
       it("when querying single image from a product with a custom attribute", () => {
         imgixEnableProductImageProxyValue = false;
 
-        const singleImage = new ProductImages(new Product({ customData }), {
-          types: ["large"],
-          quantity: "single",
-        });
+        const singleImage = new ProductImagesModel(
+          new Product({ customData }),
+          {
+            types: ["large"],
+            quantity: "single",
+          }
+        );
 
         assert.equal(singleImage.large[0].url, "/sf_first_image_url");
         assert.equal(singleImage.large[0].absURL, "path/sf_first_image_url");
@@ -642,10 +654,13 @@ describe("ProductImages model", function () {
       it("when querying multiple images from a product with a custom attribute", () => {
         imgixEnableProductImageProxyValue = false;
 
-        const multipleImages = new ProductImages(new Product({ customData }), {
-          types: ["large"],
-          quantity: "*",
-        });
+        const multipleImages = new ProductImagesModel(
+          new Product({ customData }),
+          {
+            types: ["large"],
+            quantity: "*",
+          }
+        );
 
         assert.equal(multipleImages.large[0].url, "/sf_first_image_url");
         assert.equal(multipleImages.large[0].absURL, "path/sf_first_image_url");
@@ -661,7 +676,7 @@ describe("ProductImages model", function () {
       it("when querying single pass-through image", () => {
         imgixEnableProductImageProxyValue = false;
 
-        const singleImage = new ProductImages(new Product(), {
+        const singleImage = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "single",
         });
@@ -674,7 +689,7 @@ describe("ProductImages model", function () {
       it("when querying multiple pass-through images", () => {
         imgixEnableProductImageProxyValue = false;
 
-        const multipleImages = new ProductImages(new Product(), {
+        const multipleImages = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "*",
         });
@@ -693,7 +708,7 @@ describe("ProductImages model", function () {
         imgixEnableProductImageProxyValue = false;
 
         var productObj = new Product({ customData });
-        var images = new ProductImages(productObj, {
+        var images = new ProductImagesModel(productObj, {
           types: ["small"],
           quantity: "single",
         });
@@ -706,7 +721,7 @@ describe("ProductImages model", function () {
         imgixEnableProductImageProxyValue = false;
 
         var productObj = new Product();
-        var images = new ProductImages(productObj, {
+        var images = new ProductImagesModel(productObj, {
           types: ["small"],
           quantity: "single",
         });
