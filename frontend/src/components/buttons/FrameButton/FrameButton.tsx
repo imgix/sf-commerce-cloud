@@ -12,7 +12,7 @@ type Props = {
   noFill?: boolean;
   size?: "small" | "large";
   type?: "button" | "submit" | "reset";
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export function FrameButton({
