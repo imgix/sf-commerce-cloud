@@ -11,6 +11,7 @@ type Props = {
   label?: string;
   noFill?: boolean;
   size?: "small" | "large";
+  type?: "button" | "submit" | "reset";
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
@@ -24,6 +25,7 @@ export function FrameButton({
   label,
   noFill,
   size = "large",
+  type = "button",
   onClick,
 }: Props) {
   // if label is not provided, display a button with only the icon
@@ -42,12 +44,22 @@ export function FrameButton({
     .toString()
     .replace(/,/g, " ");
   return iconPosition === "left" ? (
-    <button className={buttonStyles} disabled={disabled} onClick={onClick}>
+    <button
+      type={type}
+      className={buttonStyles}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {icon}
       {label && <span className={styles.label}>{label}</span>}
     </button>
   ) : (
-    <button className={buttonStyles} disabled={disabled} onClick={onClick}>
+    <button
+      type={type}
+      className={buttonStyles}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {label && <span className={styles.label}>{label}</span>}
       {icon}
     </button>
