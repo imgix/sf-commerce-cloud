@@ -67,7 +67,7 @@ export const imgixAPI = {
         apiKey: string,
         sourceId: string,
         index: string = "0",
-        size: string = "14"
+        size: string = "20"
       ) {
         // ?page[number]=${n}&page[size]=18`
         return await makeRequest<ImgixGETAssetsData>({
@@ -90,7 +90,7 @@ export const imgixAPI = {
       sourceId: string,
       query: string,
       index: string = "0",
-      size: string = "14"
+      size: string = "20"
     ) {
       // build the filter portion of the query
       const categories = `filter%5Bor:categories%5D=${query}`;
