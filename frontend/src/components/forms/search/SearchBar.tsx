@@ -48,7 +48,6 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
     const searchTerm = suggestedSearch || query;
     handleSubmit(searchTerm);
     updateSearchHistory(searchTerm);
-    setQuery("");
     setIsVisible(false);
   };
 
@@ -104,6 +103,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
         >
           <div className={styles.searchButtons}>
             <FrameButton
+              type="button"
               noFill
               size="small"
               className={styles.clear}
@@ -112,6 +112,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
               onClick={handleInputClear}
             />
             <FrameButton
+              type="submit"
               noFill
               color="secondary"
               size="small"
