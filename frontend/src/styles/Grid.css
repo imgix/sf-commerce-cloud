@@ -6,32 +6,49 @@
 }
 
 .ix-grid {
-  display: grid;
-  grid-gap: 16px;
-  justify-items: stretch;
-  align-items: start;
-  grid-template-columns: repeat(14, 1fr);
-}
-@media (max-width: 960px) {
-  .ix-grid {
-    grid-template-columns: repeat(12, 1fr);
-  }
-}
+  /** 
+   * Have the grid automatically resize itself to fill its container _and_
+   * have the grid automatically resize its columns to fill the grid.
+   *
+   * Based off of this excellent article:
+   * https://css-tricks.com/an-auto-filling-css-grid-with-max-columns/
+   */
 
-@media (max-width: 820px) {
-  .ix-grid {
-    grid-template-columns: repeat(8, 1fr);
-  }
-}
-@media (max-width: 700px) {
-  .ix-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-@media (max-width: 500px) {
-  .ix-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  /**
+   * User input values.
+   */
+
+  --grid-layout-gap: 10px;
+  --grid-column-count: 14;
+  --grid-item--min-width: 134px;
+
+  /**
+   * Calculated values.
+   */
+
+  /* gapCount = columnCount - 1 */
+  --gap-count: calc(var(--grid-column-count) - 1);
+  /* totalGapWidth = gapCount * gapSize */
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  /* gridItemMaxWidth = (containerWidth - gapWidth) / columnCount */
+  --grid-item--max-width: calc(
+    (100% - var(--total-gap-width)) / var(--grid-column-count)
+  );
+
+  display: grid;
+  grid-template-columns: repeat(
+    /* fill available columns without stretching the grid item */ auto-fill,
+    /* 
+     * gridItemWidth = max(minWidth, gridItemMaxWidth)
+     * gridColumnSize = minmax(gridItemWidth, 1 fraction of the available space)
+     *
+     * Where `minmax` returns size range greater than or equal to min and less
+     * than or equal to max. In this case, the grid item is constrained to be
+      * at least `gridItemWidth` and at most `1fr`.
+     */
+      minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
+  );
+  grid-gap: var(--grid-layout-gap);
 }
 
 .ix-grid-item {
@@ -41,7 +58,6 @@
   overflow: hidden;
   max-height: 340px;
   max-width: 340px;
-  grid-column: span 2;
   border-radius: 4px;
 }
 
