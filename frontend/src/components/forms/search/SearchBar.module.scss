@@ -218,10 +218,12 @@
 //  Util
 .hide {
   opacity: 0;
+  visibility: hidden;
   transition: opacity ease-out 0.2s;
 }
 .show {
   opacity: 1;
+  visibility: visible;
   transition: opacity ease-out 0.2s;
 }
 
