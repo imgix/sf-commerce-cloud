@@ -23,22 +23,48 @@ const browser = window.browser;
 
 const productsLabelSelector = '[data-dw-tooltip="Product.imgixData"]';
 export const injectExtensionApp = () => {
+  /**
+   * Note:
+   *
+   * We need to make a new table to hold the extension app
+   * because including the extension app in the same table
+   * as the imgix custom attribute textarea causes the other
+   * table rows to be shifted right as the extension app
+   * adds more images. This table _has_ to be outside the "root"
+   * table that holds the product attributes. Otherwise, the
+   * styling on the page is messed up.
+   *
+   */
+
   const productsLabel = document.querySelector(productsLabelSelector);
   const productsLabelParentTable = productsLabel?.closest("table");
   const closestTR = productsLabelParentTable?.closest("tr");
+  // The imgix custom attribute json
   const customAttributeTextarea = closestTR?.querySelector("textarea");
+  // Find and store the product attributes table for the imgix custom attribute
+  const productAttributesTable = productsLabelParentTable?.parentElement?.closest(
+    "table"
+  );
 
-  if (!closestTR || !customAttributeTextarea) {
+  if (!closestTR || !customAttributeTextarea || !productAttributesTable) {
     return;
   }
 
+  const newTable = document.createElement("table");
+  const newTB = document.createElement("tbody");
   const newTR = document.createElement("tr");
   const newTD = document.createElement("td");
+
   newTD.setAttribute("colspan", "2");
   newTD.setAttribute("class", styles.appContainer);
   newTR.appendChild(newTD);
+  newTB.appendChild(newTR);
+  newTable.appendChild(newTB);
 
-  closestTR.insertAdjacentElement("afterend", newTR);
+  // Add the new table with the extension app to the DOM
+  productAttributesTable?.insertAdjacentElement("afterend", newTable);
+
+  // keep the imgix custom attribute JSON from rendering but leave it editable
   closestTR.style.display = "none";
 
   /**
