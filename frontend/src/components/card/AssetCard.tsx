@@ -31,6 +31,13 @@ export function AssetCard({
     /\.(avif|gif|jp2|jpg|jpeg|json|jxr|pjpg|png|png8|png32|webp|blurhash|svg|ai)$/
   );
 
+  // Split filename to be last 18 characters, the full filepath will be in the
+  // title attribute tooltip that is displayed on hover.
+  const truncatedFilename =
+    filename.length > 18
+      ? filename.slice(filename.length - 19, filename.length)
+      : filename;
+
   const containerStyles = [
     styles.container,
     layout === "list" ? styles.list : styles.grid,
@@ -53,7 +60,11 @@ export function AssetCard({
           <img alt="" src={placeholder} />
         </div>
       )}
-      {noFilepath ? null : <p className={styles.filename}>{filename}</p>}
+      {noFilepath ? null : (
+        <p title={asset?.attributes.origin_path} className={styles.filename}>
+          {truncatedFilename}
+        </p>
+      )}
     </div>
   );
 }
