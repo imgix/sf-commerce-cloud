@@ -52,6 +52,8 @@ export const injectExtensionApp = () => {
 
   const newTable = document.createElement("table");
   const newTB = document.createElement("tbody");
+  // ensure newTB doesn't exceed viewport width
+  newTable.style.maxWidth = "100vw";
   const newTR = document.createElement("tr");
   const newTD = document.createElement("td");
 
