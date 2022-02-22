@@ -9,7 +9,7 @@ export const SFImgixProductsSection = () => {
       <tbody>
         <tr>
           <td
-            className={`${styles.tableHeader} ${styles.aldi}`}
+            className={`${styles.tableHeader} ${styles.aldi} table_header`}
             colSpan={3}
             width="100%"
           >
