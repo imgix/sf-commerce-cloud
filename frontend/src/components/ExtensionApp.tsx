@@ -218,7 +218,9 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
           />
         </div>
       </Modal>
-      <div className={`${styles.fontSizeOverride} ${styles.boxSizingOverride}`}>
+      <div
+        className={`${styles.fontSizeOverride} ${styles.boxSizingOverride} ${styles.productPageImagesContainer}`}
+      >
         <ProductPageImages
           onClick={onProductImageClick}
           images={productImages}
