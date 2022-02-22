@@ -16,6 +16,10 @@ export function AssetCardImage({ asset, domain }: Props) {
         fit: "crop",
         crop: "entropy",
       }}
+      htmlAttributes={{
+        title: asset?.attributes.name || asset?.attributes.origin_path || "",
+        alt: asset?.attributes.name || asset?.attributes.origin_path || "",
+      }}
       /* This sizes attribute is a monster and sets the size of the image
        * correctly, handling both the SF breakpoints and the design
        * breakpoints
