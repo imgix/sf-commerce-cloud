@@ -1,9 +1,14 @@
 .imageWrapper {
   background-color: #e3e7eb;
   height: 215px;
+  width: fit-content;
   overflow: hidden;
   display: flex;
   position: relative;
+
+  img {
+    width: 370px;
+  }
 }
 
 .replaceImageOverlay {

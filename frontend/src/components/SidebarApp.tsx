@@ -61,7 +61,7 @@ export function App({
             </div>
             <Imgix
               src={value.src}
-              width={344}
+              width={370}
               height={215}
               imgixParams={{
                 fit: "crop",
