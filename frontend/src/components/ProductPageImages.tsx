@@ -22,6 +22,7 @@ export const ProductPageImages = ({
     <OverflowScrollX>
       <div className={styles.addImageButtonContainer}>
         <FrameButton
+          disabled={disabled}
           frameless
           label="Add Image"
           color="tertiary"
@@ -40,7 +41,11 @@ export const ProductPageImages = ({
         typescript will throw an error */}
         {images?.map((image: IImgixCustomAttributeImage) => {
           return (
-            <ProductImageContainer onClick={onClick} image={{ ...image }} />
+            <ProductImageContainer
+              disabled={disabled}
+              onClick={onClick}
+              image={{ ...image }}
+            />
           );
         })}
       </>

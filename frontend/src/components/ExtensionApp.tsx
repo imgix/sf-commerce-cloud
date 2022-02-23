@@ -32,6 +32,13 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   const [isAttributeEditorOpen, setIsAttributeEditorOpen] = React.useState(
     false
   );
+  const [locked, setLocked] = React.useState(false);
+
+  React.useEffect(() => {
+    setLocked(
+      document.querySelector(".table_detail_link")?.textContent === "Lock"
+    );
+  }, []);
 
   React.useEffect(() => {
     if (data) {
@@ -148,7 +155,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   };
 
   const images = productImages || [];
-  const disabled = images === undefined || images.length === 0;
+  const disabled = images === undefined || images.length === 0 || locked;
   const selectedSourceId = selectedProductImageId.split("/")[0];
   const selectedProductImage = images.find(
     (image) => image.imgix_metadata?.id === selectedProductImageId

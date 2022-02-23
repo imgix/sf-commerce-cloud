@@ -11,10 +11,12 @@ import styles from "./ProductImageContainer.module.scss";
 interface Props {
   onClick: (type: "delete" | "replace" | "add" | "edit", id?: string) => void;
   image: IImgixCustomAttributeImage;
+  disabled?: boolean;
 }
 
 export const ProductImageContainer = ({
   image,
+  disabled,
   onClick,
 }: Props): ReactElement => {
   const [hovering, setHovering] = React.useState(false);
@@ -38,6 +40,7 @@ export const ProductImageContainer = ({
           <div className={styles.buttonContainer}>
             <div data-testid="asset-card-delete-button">
               <FrameButton
+                disabled={disabled}
                 className={styles.button}
                 color="tertiary"
                 icon={<DeleteIcon />}
@@ -46,6 +49,7 @@ export const ProductImageContainer = ({
             </div>
             <div data-testid="asset-card-replace-button">
               <FrameButton
+                disabled={disabled}
                 className={styles.button}
                 color="tertiary"
                 icon={<RefreshSvg />}
@@ -57,6 +61,7 @@ export const ProductImageContainer = ({
             </div>
             <div data-testid="asset-card-edit-button">
               <FrameButton
+                disabled={disabled}
                 className={styles.button}
                 color="tertiary"
                 icon={<MetaSvg />}
