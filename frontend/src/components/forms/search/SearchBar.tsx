@@ -48,6 +48,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
     const searchTerm = suggestedSearch || query;
     handleSubmit(searchTerm);
     updateSearchHistory(searchTerm);
+    setQuery(searchTerm);
     setIsVisible(false);
   };
 
