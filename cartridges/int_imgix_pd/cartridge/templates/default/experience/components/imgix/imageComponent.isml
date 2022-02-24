@@ -8,7 +8,7 @@
           alt="${pdict.alt ? pdict.alt : noText}" />
       </a>
       <iselse>
-        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes || ''}"
           alt="${pdict.alt ? pdict.alt : noText}" />
     </isif>
 <iselse/>
