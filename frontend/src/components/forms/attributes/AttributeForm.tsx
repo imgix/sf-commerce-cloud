@@ -1,6 +1,7 @@
 import React from "react";
 import { IImgixCustomAttributeImage } from "../../../../../types";
 import { FrameButton } from "../../buttons/FrameButton/FrameButton";
+import { AssetCard } from "../../card/AssetCard";
 import { ArrowRight, DisabledSvg } from "../../icons";
 import { ButtonListSvg } from "../../icons/ButtonListSvg";
 import { MetaSvg } from "../../icons/MetaSvg";
@@ -43,26 +44,36 @@ export function AttributeForm({
 
   return (
     <div className={styles.formContainer}>
-      <form className={styles.form} onKeyPress={submitFormOnEnter}>
-        <label className={styles.formLabel}>
-          <MetaSvg />
-          <p>Alt text</p>
-        </label>
-        <input
-          type="text"
-          value={alt}
-          onChange={(e) => setAlt(e.target.value)}
-        />
-        <label className={styles.formLabel}>
-          <ButtonListSvg />
-          <p>Title</p>
-        </label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </form>
+      <div className={styles.imageAndFormContainer}>
+        <div className={styles.assetCardContainer}>
+          <AssetCard
+            asset={asset.imgix_metadata}
+            domain={asset.imgix_metadata?.base_url || ""}
+          />
+        </div>
+        <form className={styles.form} onKeyPress={submitFormOnEnter}>
+          <label className={styles.formLabel}>
+            <MetaSvg />
+            <p>Alt text</p>
+          </label>
+          <input
+            type="text"
+            value={alt}
+            onChange={(e) => setAlt(e.target.value)}
+            placeholder="enter an alt text for the asset"
+          />
+          <label className={styles.formLabel}>
+            <ButtonListSvg />
+            <p>Title</p>
+          </label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="enter a title for the asset"
+          />
+        </form>
+      </div>
       <div className={styles.formButtons}>
         <FrameButton
           icon={<DisabledSvg />}
