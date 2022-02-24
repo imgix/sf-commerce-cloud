@@ -88,6 +88,16 @@ module.exports.render = function (context, modelIn) {
     );
     if (!fixedSize) {
       model.image_sizes = content.sizes;
+    } else if (fixedSize) {
+      // If fixed size image but we're not given the content width, have sizes
+      // fallback to browser default.
+      if (!content.width) {
+        model.image_sizes = "100vw";
+        // If we know the image width but sizes is not provided, use the width
+        // as the sizes value.
+      } else {
+        model.image_sizes = content.width + "px";
+      }
     }
   }
 
