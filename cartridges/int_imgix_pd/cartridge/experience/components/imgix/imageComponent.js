@@ -26,8 +26,16 @@ module.exports.render = function (context, modelIn) {
   var model = modelIn || new HashMap();
   var content = context.content;
 
-  const defaultParams =
+  let defaultParams =
     Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
+
+  // if default params string is empty or null, return empty string
+  if (!defaultParams) {
+    ImgixLogger.info(
+      "************************** imgix Image Component Not Provided Default Params"
+    );
+    defaultParams = "";
+  }
 
   const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
     const [queryParamKey, queryParamValue] = v.split("=");
