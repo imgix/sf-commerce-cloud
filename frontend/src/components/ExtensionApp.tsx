@@ -35,9 +35,10 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   const [locked, setLocked] = React.useState(false);
 
   React.useEffect(() => {
-    setLocked(
-      document.querySelector(".table_detail_link")?.textContent === "Lock"
-    );
+    // Set the extension to locked if the `.unlock_icon` class is present.
+    // This class is only present on the page when the SFCC product is locked.
+    // When it's unlocked, the class name changes to `lockedit_icon`.
+    setLocked(document.querySelector(".unlock_icon") !== null);
   }, []);
 
   React.useEffect(() => {
