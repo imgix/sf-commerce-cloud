@@ -53,7 +53,8 @@ module.exports.render = function (context, modelIn) {
     content.fit != null && { fit: content.fit }
   );
 
-  const fixedSize = content.width != null;
+  // content.width is guaranteed to be a number or undefined by SF
+  const fixedSize = content.width != null && content.width > 0;
 
   const ixlib = "sfccPD-" + version.version;
 
@@ -84,7 +85,7 @@ module.exports.render = function (context, modelIn) {
         libraryParam: ixlib,
       }
     );
-    if (!fixedSize) {
+    if (!fixedSize && content.sizes != null && content.sizes != "") {
       model.image_sizes = content.sizes;
     }
   }
