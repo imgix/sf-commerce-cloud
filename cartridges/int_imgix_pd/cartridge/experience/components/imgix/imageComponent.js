@@ -78,13 +78,11 @@ module.exports.render = function (context, modelIn) {
     model.image_srcset = ImgixClient._buildSrcSet(
       rawImageUrl,
       Object.assign({}, defaultParamsJSON, customImgixParams),
-      Object.assign(
-        {
-          includeLibraryParam: false,
-          libraryParam: ixlib,
-        },
-        mediaWidth && { maxWidth: mediaWidth }
-      )
+      Object.assign({}, mediaWidth && { maxWidth: mediaWidth }),
+      {
+        includeLibraryParam: false,
+        libraryParam: ixlib,
+      }
     );
     if (!fixedSize) {
       model.image_sizes = content.sizes;
