@@ -39,14 +39,14 @@ export class AssetBrowserContainer extends Component<Props, State> {
    * @returns {Promise} - A promise that resolves when the sources have been
    * fetched
    */
-  requestSources = async () => {
+  requestSources = async (index: string = "0") => {
     const { apiKey, defaultSourceId } = this.props;
     //  If the API key is not set, we don't want to make a request
     if (!apiKey) {
       return;
     }
     imgixAPI.sources
-      .get(apiKey)
+      .get(apiKey, index)
       .then((resp) => {
         const selectedSource = resp.data.filter(
           (source) => source.id === defaultSourceId
@@ -55,7 +55,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
           // Set selected source if defaultSourceId is set. Will default to
           // first source if defaultSourceId is not set.
           selectedSource,
-          sources: resp.data,
+          sources: [...this.state.sources, ...resp.data],
           loading: false,
         });
 
@@ -67,6 +67,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
           );
           source && this.requestAssetsFromSource({ source });
         }
+        return resp.data;
       })
       .catch((err) => {
         this.setState({
@@ -307,6 +308,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
         selectedSource={selectedSource}
         setSelectedSource={this.setSelectedSource}
         requestAssetsFromSource={this.requestAssetsFromSource}
+        requestSources={this.requestSources}
         onAssetClick={this.props.onSelectAsset}
       />
     );
