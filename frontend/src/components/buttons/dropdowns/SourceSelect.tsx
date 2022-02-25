@@ -56,7 +56,10 @@ export function SourceSelect({
   };
 
   React.useEffect(() => {
-    if (sources.length) {
+    // we don't want to select the first source's assets every time the page
+    // index changes, so we only do this if the page index is 0, or on the
+    // first load of the sources list.
+    if (sources.length && Number(pageIndex) < 1) {
       // if selectedSourceId is not set or no longer in the sources array,
       // set the selectedSourceId to the first source
       if (
