@@ -66,6 +66,11 @@ export function SourceSelect({
         updateSource(sources[0].id);
       }
     }
+    // if page index > 1 then we've clicked the next page button
+    // so we can assume the dropdown should stay open
+    if (pageIndex !== "0") {
+      setIsVisible(true);
+    }
   }, [sources]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const sourceList = sources.map((source) => {
@@ -129,7 +134,10 @@ export function SourceSelect({
             color="tertiary"
             frameless
             label={"Fetch more sources"}
-            onClick={requestNextSourcePage}
+            onClick={(e) => {
+              e.preventDefault();
+              requestNextSourcePage();
+            }}
           />
         </li>
       </ul>
