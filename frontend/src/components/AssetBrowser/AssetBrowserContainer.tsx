@@ -48,13 +48,13 @@ export class AssetBrowserContainer extends Component<Props, State> {
     imgixAPI.sources
       .get(apiKey, index)
       .then((resp) => {
-        const selectedSource = resp.data.filter(
+        const defaultSource = resp.data.filter(
           (source) => source.id === defaultSourceId
         )[0];
         this.setState({
           // Set selected source if defaultSourceId is set. Will default to
           // first source if defaultSourceId is not set.
-          selectedSource,
+          selectedSource: this.state.selectedSource || defaultSource,
           sources: [...this.state.sources, ...resp.data],
           loading: false,
         });
