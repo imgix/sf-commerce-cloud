@@ -137,13 +137,15 @@ export function AssetBrowser({
         <SearchBar handleSubmit={handleSearch} />
       </div>
       <div className={styles.assetGridContainer}>
-        <AssetGrid
-          domain={domain}
-          assets={assets}
-          loading={loading}
-          errors={errors}
-          handleAssetGridClick={handleAssetGridClick}
-        />
+        {domain ? (
+          <AssetGrid
+            domain={domain}
+            assets={assets}
+            loading={loading}
+            errors={errors}
+            handleAssetGridClick={handleAssetGridClick}
+          />
+        ) : null}
       </div>
       <div className={styles.paginationContainer}>
         {assets.length > 0 && (
