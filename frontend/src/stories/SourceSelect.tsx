@@ -17,10 +17,15 @@ export function SourceSelect({ sources }: Props): ReactElement {
     if (!source) return;
     setSelectedSource(source);
   };
+  const requestSources = async () => {
+    console.log("requested next source list");
+  };
+
   return (
     <_SourceSelect
       handleSelect={handleSourceSelect}
       selectedSource={selectedSource}
+      requestSources={requestSources}
       sources={sources}
     />
   );
