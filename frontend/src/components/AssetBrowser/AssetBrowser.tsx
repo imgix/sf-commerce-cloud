@@ -30,6 +30,7 @@ interface Props {
     cursor?: CursorT;
     query?: string;
   }) => Promise<void>;
+  requestSources: (index?: string) => Promise<void | ImgixGETSourcesData>;
   onAssetClick?: IBreakoutAppOnSubmit;
 }
 
@@ -47,6 +48,7 @@ export function AssetBrowser({
   setLoading,
   setSelectedSource,
   requestAssetsFromSource,
+  requestSources,
   onAssetClick,
 }: Props): ReactElement {
   /**
@@ -128,6 +130,7 @@ export function AssetBrowser({
           sources={sources}
           selectedSource={selectedSource}
           handleSelect={handleSourceSelect}
+          requestSources={requestSources}
           className={styles.sourceSelect}
         />
         <div className={styles.spacer} />
