@@ -50,9 +50,9 @@ export const imgixAPI = {
      * @param apiKey - The imgix API key to be used for the request
      * @returns A list of sources
      */
-    async get(apiKey: string) {
+    async get(apiKey: string, index: string = "0", size: string = "20") {
       return await makeRequest<ImgixGETSourcesData>({
-        url: `sources?sort=name&fields[sources]=name,deployment.custom_domains,deployment.type&filter[enabled]=true`,
+        url: `sources?sort=name&page[number]=${index}&page[size]=${size}&fields[sources]=name,deployment.custom_domains,deployment.type&filter[enabled]=true`,
         apiKey,
       });
     },
