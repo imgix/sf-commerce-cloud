@@ -48,7 +48,7 @@ export function SourceSelect({
     },
   });
 
-  const [pageIndex, setPageIndex] = React.useState("0");
+  const [pageIndex, setPageIndex] = React.useState("1");
 
   const requestNextSourcePage = () => {
     setPageIndex(String(Number(pageIndex) + 1));
@@ -68,7 +68,7 @@ export function SourceSelect({
     }
     // if page index > 1 then we've clicked the next page button
     // so we can assume the dropdown should stay open
-    if (pageIndex !== "0") {
+    if (Number(pageIndex) > 1) {
       setIsVisible(true);
     }
   }, [sources]); // eslint-disable-line react-hooks/exhaustive-deps
