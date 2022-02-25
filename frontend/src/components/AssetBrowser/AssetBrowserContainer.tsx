@@ -67,7 +67,6 @@ export class AssetBrowserContainer extends Component<Props, State> {
           );
           source && this.requestAssetsFromSource({ source });
         }
-        return resp.data;
       })
       .catch((err) => {
         this.setState({
