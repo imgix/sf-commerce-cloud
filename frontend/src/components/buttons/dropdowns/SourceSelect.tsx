@@ -6,6 +6,7 @@ import { IDeploymentType } from "../../../types/imgixAPITypes";
 import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 import { SourceTypeIcon } from "../../icons/SourceTypeIcon";
+import { FrameButton } from "../FrameButton/FrameButton";
 import { SourceSelectButton } from "../SourceSelectButton";
 import styles from "./SourceSelect.module.scss";
 
@@ -13,6 +14,7 @@ interface Props {
   sources: ImgixGETSourcesData;
   selectedSource: ImgixGETSourcesData[0] | null;
   handleSelect: (sourceId: string) => void;
+  requestSources: (index?: string) => Promise<void | ImgixGETSourcesData>;
   className?: string;
 }
 
@@ -28,6 +30,7 @@ export function SourceSelect({
   sources,
   selectedSource: activeSource,
   handleSelect,
+  requestSources,
   className,
 }: Props): ReactElement {
   const updateSource = (sourceId: string) => {
@@ -44,6 +47,13 @@ export function SourceSelect({
       updateSource(item.id);
     },
   });
+
+  const [pageIndex, setPageIndex] = React.useState("0");
+
+  const requestNextSourcePage = () => {
+    setPageIndex(String(Number(pageIndex) + 1));
+    requestSources(pageIndex);
+  };
 
   React.useEffect(() => {
     if (sources.length) {
@@ -114,6 +124,14 @@ export function SourceSelect({
       />
       <ul className={styles.dropdown + (isVisible ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}
+        <li className={styles.sourceSelectDropdownItem}>
+          <FrameButton
+            color="tertiary"
+            frameless
+            label={"Fetch more sources"}
+            onClick={requestNextSourcePage}
+          />
+        </li>
       </ul>
     </div>
   );
