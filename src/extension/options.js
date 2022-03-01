@@ -51,25 +51,48 @@ async function validateKey(apiKey) {
 /**
  * Update the status text and target element color as per the status
  * @param {string} statusText - text to display in the status bar
- * @param {string} color - color of the status bar
- * @param {string} elementId - id of the element to update
+ * @param {Object} options
+ * @param {string} options.color - color of the status bar
+ * @param {string} options.elementId - id of the element to update
+ * @param {boolean} options.shouldClearAfterTimeout - should the message be cleared after a timeout?
  */
-function updateStatus(statusText, color, elementId) {
+function updateStatus(
+  statusText,
+  { color, elementId, shouldClearAfterTimeout = true } = {}
+) {
   var status = document.getElementById("status");
-  var targetElement =
-    document.getElementById(elementId) || document.getElementById("save");
+  var targetElement = elementId
+    ? document.getElementById(elementId)
+    : document.getElementById("save");
+  if (!targetElement) {
+    return;
+  }
 
   // Update status to let user know options were saved.
   status.textContent = statusText;
-  status.style.color = color || "black";
+  status.style.color = color || "#475F72";
 
   targetElement.setAttribute("disabled", "disabled");
-  setTimeout(function () {
-    // reset the status message after 750ms
-    status.textContent = "";
-    targetElement.removeAttribute("disabled");
-    // restore color to default
-  }, 1200);
+  if (shouldClearAfterTimeout) {
+    setTimeout(function () {
+      // reset the status message after 750ms
+      status.textContent = "";
+      targetElement.removeAttribute("disabled");
+      // restore color to default
+    }, 2000);
+  }
+}
+
+/**
+ * Update post-save instructions
+ */
+function updatePostSaveInstructions(text) {
+  var instructions = document.getElementById("post-save-instructions");
+  if (!instructions) {
+    return;
+  }
+  instructions.textContent = text;
+  instructions.style.display = "block";
 }
 
 /**
@@ -85,25 +108,35 @@ function setInputFieldValue(value) {
  * @param {string} apiKey - imgix API key
  * @returns {Promise<boolean>}
  */
-function saveOptions() {
-  updateStatus("Saving...", "orange");
-  var token = document.getElementById("api_key").value;
+async function saveOptions() {
+  updateStatus("Saving...", { shouldClearAfterTimeout: false });
+  var token = getInputApiKey();
   // Only save if the key is valid
-  validateKey(getInputApiKey()).then((isValid) => {
-    if (isValid) {
-      // Save the new API key to browser storage
-      browser.storage.sync.set(
-        {
-          ix22sfccak: token,
-        },
-        function () {
-          updateStatus("Options saved.", "#3fb594");
-        }
-      );
-    } else {
-      updateStatus("Invalid API key", "red");
+  const isKeyValid = await (async () => {
+    if (token === "") {
+      return true;
     }
-  });
+    return await validateKey(token);
+  })();
+
+  if (isKeyValid) {
+    // Save the new API key to browser storage
+    browser.storage.sync.set(
+      {
+        ix22sfccak: token,
+      },
+      function () {
+        updateStatus("Options saved.", "#28e398");
+        if (token !== "") {
+          updatePostSaveInstructions(
+            "Success! Now you can go to any Salesforce product in your Business Manager and associate images from the imgix Image Manager with your products."
+          );
+        }
+      }
+    );
+  } else {
+    updateStatus("Invalid API key", "#f8510f");
+  }
 }
 
 /**
@@ -120,11 +153,18 @@ function restoreOptions() {
     function (storedData) {
       token = storedData["ix22sfccak"];
       document.getElementById("api_key").value = token;
+      if (token === "") {
+        return;
+      }
+      updateStatus("Restoring saved API key...");
+
       validateKey(token).then((isValid) => {
         if (isValid) {
-          updateStatus("Options restored.");
+          updateStatus("Saved API key restored.");
         } else {
-          updateStatus("Invalid API key", "red");
+          updateStatus("Saved API key restored, but invalid.", {
+            color: "#f8510f",
+          });
         }
       });
     }
