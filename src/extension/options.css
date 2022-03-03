@@ -62,7 +62,6 @@ body {
   padding: 10px 12px;
 
   position: static;
-  /* width: 81px; */
   height: 36px;
   left: 106px;
   top: 0px;
@@ -127,7 +126,6 @@ body {
   font-size: 14px;
   line-height: 24px;
   color: #475f72;
-  /* display: none; */
 }
 
 #status {
