@@ -156,7 +156,6 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
   };
 
   const images = productImages || [];
-  const disabled = images === undefined || images.length === 0 || locked;
   const selectedSourceId = selectedProductImageId.split("/")[0];
   const selectedProductImage = images.find(
     (image) => image.imgix_metadata?.id === selectedProductImageId
@@ -232,7 +231,7 @@ export function ExtensionApp({ onChange, apiKey, data }: ISidebarAppProps) {
         <ProductPageImages
           onClick={onProductImageClick}
           images={productImages}
-          disabled={disabled}
+          disabled={locked}
         />
       </div>
     </div>
