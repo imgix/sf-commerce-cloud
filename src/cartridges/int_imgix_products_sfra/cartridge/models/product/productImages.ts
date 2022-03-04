@@ -11,7 +11,7 @@ const Variant = require("dw/catalog/Variant");
 const Product = require("dw/catalog/Product");
 
 const IMGIX_CORE_DEFAULT_PARAMS = {
-  ixlib: "sf-22.1.0",
+  ixlib: "sf-22.2.0",
 };
 const IMGIX_CORE_DEFAULT_OPTIONS = {
   includeLibraryParam: false,
