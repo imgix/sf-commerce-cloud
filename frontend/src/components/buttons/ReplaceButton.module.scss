@@ -1,0 +1,26 @@
+.replaceImageOverlayButton {
+  align-items: center;
+  background: rgba(28, 44, 56, 0.5);
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 12px;
+  user-select: none;
+  &:hover {
+    background: rgba(28, 44, 56, 0.8);
+  }
+  & svg {
+    fill: #ffffff;
+  }
+}
+
+.replaceImageIcon {
+  color: white;
+  height: 16px;
+  margin-right: 4px;
+  width: 16px;
+}

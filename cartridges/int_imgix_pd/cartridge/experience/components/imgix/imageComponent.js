@@ -26,8 +26,16 @@ module.exports.render = function (context, modelIn) {
   var model = modelIn || new HashMap();
   var content = context.content;
 
-  const defaultParams =
+  let defaultParams =
     Site.getCurrent().getCustomPreferenceValue("imgixDefaultParams");
+
+  // if default params string is empty or null, return empty string
+  if (!defaultParams) {
+    ImgixLogger.info(
+      "************************** imgix Image Component Not Provided Default Params"
+    );
+    defaultParams = "";
+  }
 
   const defaultParamsJSON = defaultParams.split("&").reduce(function (p, v) {
     const [queryParamKey, queryParamValue] = v.split("=");
@@ -45,7 +53,8 @@ module.exports.render = function (context, modelIn) {
     content.fit != null && { fit: content.fit }
   );
 
-  const fixedSize = content.width != null;
+  // content.width is guaranteed to be a number or undefined by SF
+  const fixedSize = content.width != null && content.width > 0;
 
   const ixlib = "sfccPD-" + version.version;
 
@@ -70,15 +79,13 @@ module.exports.render = function (context, modelIn) {
     model.image_srcset = ImgixClient._buildSrcSet(
       rawImageUrl,
       Object.assign({}, defaultParamsJSON, customImgixParams),
-      Object.assign(
-        {
-          includeLibraryParam: false,
-          libraryParam: ixlib,
-        },
-        mediaWidth && { maxWidth: mediaWidth }
-      )
+      Object.assign({}, mediaWidth && { maxWidth: mediaWidth }),
+      {
+        includeLibraryParam: false,
+        libraryParam: ixlib,
+      }
     );
-    if (!fixedSize) {
+    if (!fixedSize && content.sizes != null && content.sizes != "") {
       model.image_sizes = content.sizes;
     }
   }

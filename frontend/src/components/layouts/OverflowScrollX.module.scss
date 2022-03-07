@@ -1,0 +1,12 @@
+.overflowXContainer {
+  overflow-x: auto;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: fill-available;
+  max-width: 100%;
+}
+
+.overflowListContainer {
+  display: flex;
+  flex-direction: row;
+}

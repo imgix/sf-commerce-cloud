@@ -47,8 +47,16 @@ var images = new ArrayList([
   },
 ]);
 var customData = {
-  imgixData:
-    '{"images": {"primary": {"src": "customImgixURL/imgix_first_image_url", "title": "First Image title", "alt": "First Image alt"},"alternatives": [{"src": "customImgixURL/imgix_second_image_url","sourceWidth": 3000}]}}',
+  imgixData: JSON.stringify({
+    images: [
+      {
+        src: "custom.imgix.net/imgix_first_image_url",
+        title: "First Image title",
+        alt: "First Image alt",
+      },
+      { src: "custom.imgix.net/imgix_second_image_url", sourceWidth: 3000 },
+    ],
+  }),
 };
 
 var productMock = {
@@ -88,10 +96,23 @@ class Logger {
 }
 
 describe("ProductImages model", function () {
-  let imgixBaseURLPreferenceValue = "imgixBaseURL";
+  let imgixBaseURLPreferenceValue = "webfolder.imgix.net";
   let imgixProductDefaultParamsPreferenceValue = "";
   let imgixEnableProductImageProxyValue = true;
-  var ProductImages = proxyquire(
+
+  // This loads a version of the imgix.js script that will actually load - the
+  // "*/cartridge/..." SF loading doesn't work in vanilla JS, so this just
+  // basically redirects the "*/cartridge/scripts/jsCore/jsCore" require to
+  // point to the right file
+  const imgixJSScript = proxyquire(
+    process.cwd() +
+      "/cartridges/int_imgix_products_sfra/cartridge/scripts/imgix/imgix",
+    {
+      "*/cartridge/scripts/jsCore/jsCore": require("../../../../../cartridges/int_imgix_products_sfra/cartridge/scripts/imgix/jsCore"),
+    }
+  );
+  // This loads the target test model with some mocked dependencies, for two reasons: a) the "*/..." requires don't work in vanilla JS, and b) sometime we want to modify/mock/spy on dependencies
+  const ProductImagesModel = proxyquire(
     process.cwd() +
       "/cartridges/int_imgix_products_sfra/cartridge/models/product/productImages",
     {
@@ -141,13 +162,220 @@ describe("ProductImages model", function () {
       "dw/catalog/Product": Product,
       "dw/catalog/Variant": Variant,
       "dw/catalog/Logger": Logger,
+      "../../scripts/imgix/imgix": imgixJSScript,
     }
   );
+
+  describe("with custom attribute", function () {
+    it("should get all small images with imgixBaseURL", function () {
+      var product = new Product({ customData });
+      var images = new ProductImagesModel(product, {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert.equal(images.small.length, 2);
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[1].url,
+        "custom.imgix.net/imgix_second_image_url"
+      );
+      // TODO: check if we should be modifying path
+      assert.include(
+        images.small[1].absURL,
+        "custom.imgix.net/imgix_second_image_url"
+      );
+      assert.equal(images.small[1].index, "1");
+    });
+
+    it("should get only first small image with custom.imgix.net", function () {
+      var product = new Product({ customData });
+      var images = new ProductImagesModel(product, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small.length, 1);
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.equal(images.small[0].index, "0");
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+    });
+    it("should get all small images with imgix data from selected variant product", function () {
+      var productObj = new ProductVariationModel(true, true);
+      var images = new ProductImagesModel(productObj, {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert.equal(images.small.length, 2);
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[1].url,
+        "custom.imgix.net/imgix_second_image_url"
+      );
+
+      assert.include(
+        images.small[1].absURL,
+        "custom.imgix.net/imgix_second_image_url"
+      );
+      assert.equal(images.small[1].index, "1");
+    });
+    it("should get all small images with imgix data from master product", function () {
+      var productObj = new ProductVariationModel(false, true);
+      var images = new ProductImagesModel(productObj, {
+        types: ["small"],
+        quantity: "*",
+      });
+      assert.equal(images.small.length, 2);
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].index, "0");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[1].url,
+        "custom.imgix.net/imgix_second_image_url"
+      );
+
+      assert.include(
+        images.small[1].absURL,
+        "custom.imgix.net/imgix_second_image_url"
+      );
+      assert.equal(images.small[1].index, "1");
+    });
+    it("should get only first small with imgix data from master product", function () {
+      var productObj = new Product({ customData });
+      var images = new ProductImagesModel(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small.length, 1);
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.equal(images.small[0].index, "0");
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+    });
+    it("should get only first small with imgix data from variant product", function () {
+      var productObj = new Product({ customData });
+      var images = new ProductImagesModel(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small.length, 1);
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.equal(images.small[0].index, "0");
+      assert.include(
+        images.small[0].url,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+      assert.include(
+        images.small[0].absURL,
+        "custom.imgix.net/imgix_first_image_url"
+      );
+    });
+
+    it("should still work when imgixBaseURL preference is not set");
+    it("should set default params on images");
+
+    it("should fallback to SF images with empty custom images array", function () {
+      var product = new Product({
+        customData: JSON.stringify({
+          imgixData: {
+            images: [],
+          },
+        }),
+      });
+      var images = new ProductImagesModel(product, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.equal(images.small[0].alt, "First Image alt");
+      assert.equal(images.small[0].title, "First Image title");
+      assert.equal(images.small[0].index, "0");
+      assert.include(
+        images.small[0].url,
+        "webfolder.imgix.net/sf_first_image_url"
+      );
+    });
+
+    describe("should pass through raw imgix url", () => {
+      ["small", "medium", "large"].map((viewType) => {
+        ["single", "*"].map((quantity) => {
+          it(`when view type is ${viewType} and quantity is ${quantity}`, () => {
+            var productObj = new Product({ customData });
+            var images = new ProductImagesModel(productObj, {
+              types: [viewType],
+              quantity: quantity,
+            });
+            assert.equal(
+              images[viewType][0].rawURL,
+              "custom.imgix.net/imgix_first_image_url"
+            );
+            if (quantity === "*") {
+              assert.equal(
+                images[viewType][1].rawURL,
+                "custom.imgix.net/imgix_second_image_url"
+              );
+            }
+          });
+        });
+      });
+    });
+    const PACKAGE_VERSION = require("../../../../../package").version;
+    it(`should set ixlib to sf-${PACKAGE_VERSION}`, () => {
+      var productObj = new Product({ customData });
+      var images = new ProductImagesModel(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.include(images["small"][0].url, `ixlib=sf-${PACKAGE_VERSION}`);
+      assert.include(images["small"][0].absURL, `ixlib=sf-${PACKAGE_VERSION}`);
+    });
+  });
 
   describe("without custom attribute", () => {
     describe("when imgixBaseURL preference set", () => {
       it("should get all small images with imgixBaseURL", function () {
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "*",
         });
@@ -155,18 +383,27 @@ describe("ProductImages model", function () {
         assert.equal(images.small[0].alt, "First Image alt");
         assert.equal(images.small[0].index, "0");
         assert.equal(images.small[0].title, "First Image title");
-        assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
-        assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
-        assert.equal(images.small[1].url, "imgixBaseURL/sf_second_image_url");
-        assert.equal(
+        assert.include(
+          images.small[0].url,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
+        assert.include(
+          images.small[0].absURL,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
+        assert.include(
+          images.small[1].url,
+          "webfolder.imgix.net/sf_second_image_url"
+        );
+        assert.include(
           images.small[1].absURL,
-          "imgixBaseURL/sf_second_image_url"
+          "webfolder.imgix.net/sf_second_image_url"
         );
         assert.equal(images.small[1].index, "1");
       });
 
       it("should get only first small image with imgixBaseURL", function () {
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "single",
         });
@@ -174,8 +411,14 @@ describe("ProductImages model", function () {
         assert.equal(images.small[0].alt, "First Image alt");
         assert.equal(images.small[0].title, "First Image title");
         assert.equal(images.small[0].index, "0");
-        assert.equal(images.small[0].url, "imgixBaseURL/sf_first_image_url");
-        assert.equal(images.small[0].absURL, "imgixBaseURL/sf_first_image_url");
+        assert.include(
+          images.small[0].url,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
+        assert.include(
+          images.small[0].absURL,
+          "webfolder.imgix.net/sf_first_image_url"
+        );
       });
     });
     describe("when imgixBaseURL preference is not set", () => {
@@ -186,7 +429,7 @@ describe("ProductImages model", function () {
         // Disable imgix base URL preference
         imgixBaseURLPreferenceValue = "";
 
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "*",
         });
@@ -210,7 +453,7 @@ describe("ProductImages model", function () {
         // Disable imgix base URL preference
         imgixBaseURLPreferenceValue = "";
 
-        var images = new ProductImages(toProductMock(productMock), {
+        var images = new ProductImagesModel(toProductMock(productMock), {
           types: ["small"],
           quantity: "single",
         });
@@ -232,18 +475,21 @@ describe("ProductImages model", function () {
       imgixProductDefaultParamsPreferenceValue = "auto=format&fit=crop";
 
       const containsDefaultParams = (url) =>
-        url.includes("?auto=format&fit=crop");
+        url.includes("auto=format") && url.includes("fit=crop");
 
-      const singleSmallImage = new ProductImages(toProductMock(productMock), {
-        types: ["small"],
-        quantity: "single",
-      });
+      const singleSmallImage = new ProductImagesModel(
+        toProductMock(productMock),
+        {
+          types: ["small"],
+          quantity: "single",
+        }
+      );
       assert(
         containsDefaultParams(singleSmallImage.small[0].url),
         "url should include default params"
       );
 
-      const smallImages = new ProductImages(toProductMock(productMock), {
+      const smallImages = new ProductImagesModel(toProductMock(productMock), {
         types: ["small"],
         quantity: "*",
       });
@@ -260,12 +506,46 @@ describe("ProductImages model", function () {
       imgixProductDefaultParamsPreferenceValue =
         oldImgixProductDefaultParamsPreferenceValue;
     });
+
+    describe("should pass through raw imgix url", () => {
+      ["small", "medium", "large"].map((viewType) => {
+        ["single", "*"].map((quantity) => {
+          it(`when view type is ${viewType} and quantity is ${quantity}`, () => {
+            var productObj = new Product();
+            var images = new ProductImagesModel(productObj, {
+              types: [viewType],
+              quantity: quantity,
+            });
+            assert.equal(
+              images[viewType][0].rawURL,
+              "webfolder.imgix.net/sf_first_image_url"
+            );
+            if (quantity === "*") {
+              assert.equal(
+                images[viewType][1].rawURL,
+                "webfolder.imgix.net/sf_second_image_url"
+              );
+            }
+          });
+        });
+      });
+    });
+    const PACKAGE_VERSION = require("../../../../../package").version;
+    it(`should set ixlib to sf-${PACKAGE_VERSION}`, () => {
+      var productObj = new Product();
+      var images = new ProductImagesModel(productObj, {
+        types: ["small"],
+        quantity: "single",
+      });
+      assert.include(images["small"][0].url, `ixlib=sf-${PACKAGE_VERSION}`);
+      assert.include(images["small"][0].absURL, `ixlib=sf-${PACKAGE_VERSION}`);
+    });
   });
 
   describe("auto-resizing images", () => {
     describe("should not resize passed-through images", () => {
       it("small image", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["small"],
           quantity: "single",
         });
@@ -274,7 +554,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.small[0].url, "h=");
       });
       it("small images", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["small"],
           quantity: "*",
         });
@@ -285,7 +565,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.small[1].url, "h=");
       });
       it("medium image", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["medium"],
           quantity: "single",
         });
@@ -294,7 +574,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.medium[0].url, "h=");
       });
       it("medium images", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["medium"],
           quantity: "*",
         });
@@ -305,7 +585,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.medium[1].url, "h=");
       });
       it("large image", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "single",
         });
@@ -314,7 +594,7 @@ describe("ProductImages model", function () {
         assert.notInclude(singleSmallImage.large[0].url, "h=");
       });
       it("large images", () => {
-        const singleSmallImage = new ProductImages(new Product(), {
+        const singleSmallImage = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "*",
         });
@@ -326,11 +606,77 @@ describe("ProductImages model", function () {
       });
     });
 
+    describe("when resizing image(s) from custom attribute", () => {
+      const CONFIG = {
+        small: { w: 140, h: 140 },
+        medium: { w: 400, h: 400 },
+        large: { w: 800, h: 800 },
+      };
+
+      Object.entries(CONFIG).map(([viewType, { w, h }]) => {
+        ["single", "*"].map((quantity) => {
+          it(`should resize image to ${w}x${h} when view type is ${viewType} and quantity is ${quantity}`, () => {
+            var productObj = new Product({ customData });
+            var images = new ProductImagesModel(productObj, {
+              types: [viewType],
+              quantity: quantity,
+            });
+            assert(images[viewType].length > 0);
+            images[viewType].map(({ url, absURL }) => {
+              assert.include(url, `w=${w}`);
+              assert.include(url, `h=${h}`);
+              assert.include(absURL, `w=${w}`);
+              assert.include(absURL, `h=${h}`);
+            });
+          });
+        });
+      });
+    });
+
     describe("should not proxy url or absURL when feature is disabled", () => {
+      it("when querying single image from a product with a custom attribute", () => {
+        imgixEnableProductImageProxyValue = false;
+
+        const singleImage = new ProductImagesModel(
+          new Product({ customData }),
+          {
+            types: ["large"],
+            quantity: "single",
+          }
+        );
+
+        assert.equal(singleImage.large[0].url, "/sf_first_image_url");
+        assert.equal(singleImage.large[0].absURL, "path/sf_first_image_url");
+
+        imgixEnableProductImageProxyValue = true;
+      });
+
+      it("when querying multiple images from a product with a custom attribute", () => {
+        imgixEnableProductImageProxyValue = false;
+
+        const multipleImages = new ProductImagesModel(
+          new Product({ customData }),
+          {
+            types: ["large"],
+            quantity: "*",
+          }
+        );
+
+        assert.equal(multipleImages.large[0].url, "/sf_first_image_url");
+        assert.equal(multipleImages.large[0].absURL, "path/sf_first_image_url");
+        assert.equal(multipleImages.large[1].url, "/sf_second_image_url");
+        assert.equal(
+          multipleImages.large[1].absURL,
+          "path/sf_second_image_url"
+        );
+
+        imgixEnableProductImageProxyValue = true;
+      });
+
       it("when querying single pass-through image", () => {
         imgixEnableProductImageProxyValue = false;
 
-        const singleImage = new ProductImages(new Product(), {
+        const singleImage = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "single",
         });
@@ -343,7 +689,7 @@ describe("ProductImages model", function () {
       it("when querying multiple pass-through images", () => {
         imgixEnableProductImageProxyValue = false;
 
-        const multipleImages = new ProductImages(new Product(), {
+        const multipleImages = new ProductImagesModel(new Product(), {
           types: ["large"],
           quantity: "*",
         });
@@ -355,6 +701,32 @@ describe("ProductImages model", function () {
           multipleImages.large[1].absURL,
           "path/sf_second_image_url"
         );
+
+        imgixEnableProductImageProxyValue = true;
+      });
+      it(`should not set ixlib for custom attribute images`, () => {
+        imgixEnableProductImageProxyValue = false;
+
+        var productObj = new Product({ customData });
+        var images = new ProductImagesModel(productObj, {
+          types: ["small"],
+          quantity: "single",
+        });
+        assert.notInclude(images["small"][0].url, `ixlib=`);
+        assert.notInclude(images["small"][0].absURL, `ixlib=`);
+
+        imgixEnableProductImageProxyValue = true;
+      });
+      it(`should not set ixlib for SF product images`, () => {
+        imgixEnableProductImageProxyValue = false;
+
+        var productObj = new Product();
+        var images = new ProductImagesModel(productObj, {
+          types: ["small"],
+          quantity: "single",
+        });
+        assert.notInclude(images["small"][0].url, `ixlib=`);
+        assert.notInclude(images["small"][0].absURL, `ixlib=`);
 
         imgixEnableProductImageProxyValue = true;
       });

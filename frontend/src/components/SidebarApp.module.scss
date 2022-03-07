@@ -1,9 +1,14 @@
 .imageWrapper {
   background-color: #e3e7eb;
   height: 215px;
+  width: 353px;
   overflow: hidden;
   display: flex;
   position: relative;
+
+  img {
+    width: 370px;
+  }
 }
 
 .replaceImageOverlay {
@@ -46,6 +51,9 @@
   height: 16px;
   width: 16px;
   margin-right: 4px;
+  svg {
+    fill: white;
+  }
 }
 
 .hr {

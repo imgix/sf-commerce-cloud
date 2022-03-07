@@ -14,12 +14,6 @@ jobs:
           app-dir: frontend
           pkg-manager: yarn
       - run:
-          command: cd frontend && yarn run build
-          name: Build project
-      - run:
-          command: cd frontend && yarn run test:ci
-          name: Run integration and BM cartridge tests with CI flag
-      - run:
           command: cd frontend && yarn run test:ci
           name: Run integration and BM cartridge tests with CI flag
   test-sf:
@@ -31,6 +25,9 @@ jobs:
           install-yarn: true
       - node/install-packages:
           pkg-manager: yarn
+      - run:
+          command: yarn build
+          name: Build project
       - run:
           command: yarn test
           name: Run unit tests

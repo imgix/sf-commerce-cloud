@@ -9,6 +9,7 @@ const CURSOR_PAGE_LIMIT = 14;
 
 interface Props {
   apiKey: string | null;
+  defaultSourceId?: string;
   onSelectAsset?: IBreakoutAppOnSubmit;
 }
 
@@ -38,19 +39,34 @@ export class AssetBrowserContainer extends Component<Props, State> {
    * @returns {Promise} - A promise that resolves when the sources have been
    * fetched
    */
-  requestSources = async () => {
-    const { apiKey } = this.props;
+  requestSources = async (index: string = "0") => {
+    const { apiKey, defaultSourceId } = this.props;
     //  If the API key is not set, we don't want to make a request
     if (!apiKey) {
       return;
     }
     imgixAPI.sources
-      .get(apiKey)
+      .get(apiKey, index)
       .then((resp) => {
+        const defaultSource = resp.data.filter(
+          (source) => source.id === defaultSourceId
+        )[0];
         this.setState({
-          sources: resp.data,
+          // Set selected source if defaultSourceId is set. Will default to
+          // first source if defaultSourceId is not set.
+          selectedSource: this.state.selectedSource || defaultSource,
+          sources: [...this.state.sources, ...resp.data],
           loading: false,
         });
+
+        // if default source, request assets from that source
+        if (defaultSourceId) {
+          // find the default source from the response
+          const source = resp.data.find(
+            (assetSource) => assetSource.id === defaultSourceId
+          );
+          source && this.requestAssetsFromSource({ source });
+        }
       })
       .catch((err) => {
         this.setState({
@@ -291,6 +307,7 @@ export class AssetBrowserContainer extends Component<Props, State> {
         selectedSource={selectedSource}
         setSelectedSource={this.setSelectedSource}
         requestAssetsFromSource={this.requestAssetsFromSource}
+        requestSources={this.requestSources}
         onAssetClick={this.props.onSelectAsset}
       />
     );

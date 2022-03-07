@@ -50,9 +50,9 @@ export const imgixAPI = {
      * @param apiKey - The imgix API key to be used for the request
      * @returns A list of sources
      */
-    async get(apiKey: string) {
+    async get(apiKey: string, index: string = "0", size: string = "20") {
       return await makeRequest<ImgixGETSourcesData>({
-        url: `sources?sort=name&fields[sources]=name,deployment.custom_domains,deployment.type&filter[enabled]=true`,
+        url: `sources?sort=name&page[number]=${index}&page[size]=${size}&fields[sources]=name,deployment.custom_domains,deployment.type&filter[enabled]=true`,
         apiKey,
       });
     },
@@ -67,7 +67,7 @@ export const imgixAPI = {
         apiKey: string,
         sourceId: string,
         index: string = "0",
-        size: string = "14"
+        size: string = "20"
       ) {
         // ?page[number]=${n}&page[size]=18`
         return await makeRequest<ImgixGETAssetsData>({
@@ -90,7 +90,7 @@ export const imgixAPI = {
       sourceId: string,
       query: string,
       index: string = "0",
-      size: string = "14"
+      size: string = "20"
     ) {
       // build the filter portion of the query
       const categories = `filter%5Bor:categories%5D=${query}`;

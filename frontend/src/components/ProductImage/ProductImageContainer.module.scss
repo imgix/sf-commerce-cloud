@@ -1,0 +1,32 @@
+@import "../../styles/Colors.module.scss";
+
+.contentWrapper {
+  display: flex;
+}
+
+.imageWrapper {
+  background-color: $color_bg_new;
+  overflow: hidden;
+  display: flex;
+  margin: 5px;
+  max-width: 200px;
+  position: relative;
+}
+
+.replaceImageButton {
+  color: $color_invert_fg;
+}
+
+.buttonContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  margin-top: -95px;
+  width: 135px;
+  .button {
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+}

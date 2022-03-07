@@ -6,13 +6,15 @@ import { IDeploymentType } from "../../../types/imgixAPITypes";
 import { DownArrowSvg } from "../../icons/DownArrowSvg";
 import { SourceMenuSvg } from "../../icons/SourceMenuSvg";
 import { SourceTypeIcon } from "../../icons/SourceTypeIcon";
-import { Button } from "../Button";
+import { FrameButton } from "../FrameButton/FrameButton";
+import { SourceSelectButton } from "../SourceSelectButton";
 import styles from "./SourceSelect.module.scss";
 
 interface Props {
   sources: ImgixGETSourcesData;
   selectedSource: ImgixGETSourcesData[0] | null;
   handleSelect: (sourceId: string) => void;
+  requestSources: (index?: string) => Promise<void | ImgixGETSourcesData>;
   className?: string;
 }
 
@@ -28,6 +30,7 @@ export function SourceSelect({
   sources,
   selectedSource: activeSource,
   handleSelect,
+  requestSources,
   className,
 }: Props): ReactElement {
   const updateSource = (sourceId: string) => {
@@ -45,8 +48,18 @@ export function SourceSelect({
     },
   });
 
+  const [pageIndex, setPageIndex] = React.useState("1");
+
+  const requestNextSourcePage = () => {
+    setPageIndex(String(Number(pageIndex) + 1));
+    requestSources(pageIndex);
+  };
+
   React.useEffect(() => {
-    if (sources.length) {
+    // we don't want to select the first source's assets every time the page
+    // index changes, so we only do this if the page index is 0, or on the
+    // first load of the sources list.
+    if (sources.length && Number(pageIndex) < 1) {
       // if selectedSourceId is not set or no longer in the sources array,
       // set the selectedSourceId to the first source
       if (
@@ -55,6 +68,11 @@ export function SourceSelect({
       ) {
         updateSource(sources[0].id);
       }
+    }
+    // if page index > 1 then we've clicked the next page button
+    // so we can assume the dropdown should stay open
+    if (Number(pageIndex) > 1) {
+      setIsVisible(true);
     }
   }, [sources]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -94,7 +112,7 @@ export function SourceSelect({
 
   const noSourcePlaceholder = (
     <li key="no-source" value="">
-      <Button label={"No sources"} />
+      <SourceSelectButton label={"No sources"} />
     </li>
   );
 
@@ -103,7 +121,7 @@ export function SourceSelect({
       className={styles.container + (className ? ` ${className}` : "")}
       ref={visibleRef}
     >
-      <Button
+      <SourceSelectButton
         label={activeSource?.attributes.name || "Select a Source"}
         onClick={() => setIsVisible(true)}
         leftIcon={<SourceMenuSvg className={styles.sourceIcon} />}
@@ -114,6 +132,17 @@ export function SourceSelect({
       />
       <ul className={styles.dropdown + (isVisible ? ` ${styles.open}` : "")}>
         {sourceList.length ? sourceList : noSourcePlaceholder}
+        <li className={styles.sourceSelectDropdownItem}>
+          <FrameButton
+            color="tertiary"
+            frameless
+            label={"Fetch more sources"}
+            onClick={(e) => {
+              e.preventDefault();
+              requestNextSourcePage();
+            }}
+          />
+        </li>
       </ul>
     </div>
   );

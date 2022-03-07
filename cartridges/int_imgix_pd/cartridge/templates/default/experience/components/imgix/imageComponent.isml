@@ -4,11 +4,11 @@
     <isprint value="${pdict.title}" />
     <isif condition="${!empty(pdict.anchorTagUrl)}">
       <a href="${pdict.anchorTagUrl}" aria-label="${pdict.alt ? pdict.alt : 'no alt text'}">
-        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes || ''}"
           alt="${pdict.alt ? pdict.alt : noText}" />
       </a>
       <iselse>
-        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes}"
+        <img src="${pdict.image_src}" srcset="${pdict.image_srcset}" sizes="${pdict.image_sizes || ''}"
           alt="${pdict.alt ? pdict.alt : noText}" />
     </isif>
 <iselse/>

@@ -1,0 +1,153 @@
+@import "../../../styles/Colors.module.scss";
+
+.button {
+  align-items: center;
+  border-radius: 4px;
+  border-radius: 4px;
+  display: flex;
+  height: 40px;
+  justify-content: space-evenly;
+  padding-right: 12px;
+  padding: 6px 10px;
+  text-align: right;
+  width: fit-content;
+  min-width: 98px;
+  box-sizing: border-box;
+
+  &.icon {
+    span {
+      padding-left: 9px;
+    }
+  }
+  &.iconOnly {
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  &.large {
+    height: 36px;
+  }
+  // storybook is bugging out and won't let me remove the medium option
+  &.medium {
+    height: 36px;
+  }
+  &.small {
+    height: 26px;
+  }
+
+  &.primary {
+    background-color: $color_fg;
+    box-shadow: 0px 2px 0px $shadow_light_color;
+    color: $color_bg;
+    font-size: 1rem;
+    &:hover {
+      background-color: $color_fg_tint;
+    }
+    &:active {
+      background-color: $color_fg_shade;
+    }
+    svg {
+      fill: $color_fg_tint2;
+    }
+    &.iconOnly {
+      width: fit-content;
+      svg {
+        fill: $color_bg;
+      }
+    }
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:active {
+        background-color: $color_fg_tint;
+      }
+    }
+    &.noFill {
+      svg {
+        fill: inherit;
+      }
+    }
+  }
+
+  &.secondary {
+    background-color: $color_accent_blue;
+    box-shadow: 0px 2px 0px $shadow_light_color;
+    color: $color_bg;
+    font-size: 1rem;
+    &:hover {
+      background-color: $color_accent_blue_tint;
+    }
+    &:active {
+      background-color: $color_accent_blue_shade;
+    }
+    svg {
+      fill: $color_bg_shade;
+    }
+    &.iconOnly {
+      width: fit-content;
+    }
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:active {
+        background-color: $color_accent_blue_tint;
+      }
+    }
+    &.noFill {
+      svg {
+        fill: inherit;
+      }
+    }
+  }
+
+  &.tertiary {
+    background-color: $color_bg;
+    border: 2px solid $color_fg;
+    color: $color_fg;
+    font-size: 1rem;
+    &:hover {
+      background-color: $color_bg_shade;
+    }
+    &:active {
+      background-color: $color_chrome;
+    }
+    svg {
+      fill: $color_fg;
+    }
+    &.iconOnly {
+      width: fit-content;
+      &:hover {
+        background-color: $color_bg_shade;
+      }
+      &:active {
+        background-color: $color_chrome;
+      }
+    }
+    &.frameless {
+      background-color: transparent;
+      &:hover {
+        background-color: $color_bg_shade;
+      }
+      &:active {
+        background-color: $color_chrome;
+      }
+    }
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:active {
+        background-color: $color_bg_shade;
+      }
+    }
+    &.noFill {
+      svg {
+        fill: inherit;
+      }
+    }
+  }
+
+  &.frameless {
+    border: none;
+    box-shadow: none;
+  }
+}

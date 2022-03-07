@@ -1,0 +1,19 @@
+@import "../styles/Colors.module.scss";
+
+.addImageButtonContainer {
+  display: flex;
+  justify-content: center;
+  justify-self: stretch;
+  background: $color_invert_fg;
+  border-radius: 4px;
+  height: 134px;
+  width: 134px;
+  overflow: hidden;
+  margin: 2px;
+  padding: 0px;
+
+  button {
+    margin-top: 45px;
+    cursor: pointer;
+  }
+}

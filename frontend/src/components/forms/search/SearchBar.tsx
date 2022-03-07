@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { useClickOutside } from "../../../common/hooks/useClickOutside";
 import { useLocalStorage } from "../../../common/hooks/useLocalStorage";
-import { Button } from "../../buttons/Button";
+import { FrameButton } from "../../buttons/FrameButton/FrameButton";
 import { DisabledSvg } from "../../icons/DisabledSvg";
 import { SearchIconSvg } from "../../icons/SearchIconSvg";
 import styles from "./SearchBar.module.scss";
@@ -48,7 +48,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
     const searchTerm = suggestedSearch || query;
     handleSubmit(searchTerm);
     updateSearchHistory(searchTerm);
-    setQuery("");
+    setQuery(searchTerm);
     setIsVisible(false);
   };
 
@@ -74,7 +74,10 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
       className={styles.searchContent + " " + (isVisible ? styles.open : "")}
       onSubmit={handleSearchSubmit}
     >
-      <div ref={visibleRef} className={styles.searchWrapper}>
+      <div
+        ref={visibleRef}
+        className={styles.searchWrapper + " " + (isVisible ? styles.open : "")}
+      >
         <div className={styles.searchBase}>
           <div className={styles.searchBaseInput}>
             <div className={styles.simpleSearchIcon}>
@@ -91,6 +94,7 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
             />
           </div>
         </div>
+        {isVisible && <hr></hr>}
         <div
           className={
             styles.searchExpander +
@@ -99,24 +103,29 @@ export function SearchBar({ placeholder, handleSubmit }: Props): ReactElement {
           }
         >
           <div className={styles.searchButtons}>
-            <Button
+            <FrameButton
+              type="button"
+              noFill
+              size="small"
               className={styles.clear}
-              leftIconClassName={styles.clearIcon}
               label={"Clear"}
-              leftIcon={<DisabledSvg />}
+              icon={<DisabledSvg className={styles.clearIcon} />}
               onClick={handleInputClear}
             />
-            <Button
+            <FrameButton
+              type="submit"
+              noFill
+              color="secondary"
+              size="small"
               className={styles.search}
-              leftIconClassName={styles.searchIcon}
               label={"Search"}
-              leftIcon={<SearchIconSvg />}
-              onClick={handleSearchSubmit}
+              icon={<SearchIconSvg className={styles.searchIcon} />}
+              onClick={handleSearchSubmit as () => void}
             />
           </div>
           <hr></hr>
           <div className={styles.searchBaseSuggestionsList}>
-            <p>Recent Searches</p>
+            <p>RECENT SEARCHES</p>
             {searchHistory.map((suggestion: string, idx: number) =>
               // if search input is not in focus, don't render anything
               // if search is empty, don't render anything

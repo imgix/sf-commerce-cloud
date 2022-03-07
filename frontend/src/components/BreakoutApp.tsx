@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/App.css";
+import "../styles/GlobalReset.css";
+import styles from "../styles/ScopedReset.module.scss";
 import { IBreakoutAppOnSubmit } from "../types/breakoutAppPublic";
 import { AssetBrowserContainer as AssetBrowser } from "./AssetBrowser/AssetBrowserContainer";
 
@@ -9,10 +10,8 @@ interface Props {
 }
 export function App({ onSubmit, apiKey }: Props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <AssetBrowser apiKey={apiKey} onSelectAsset={onSubmit} />
-      </header>
+    <div className={styles.ixReset}>
+      <AssetBrowser apiKey={apiKey} onSelectAsset={onSubmit} />
     </div>
   );
 }

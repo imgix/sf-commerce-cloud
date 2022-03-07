@@ -30,6 +30,7 @@ interface Props {
     cursor?: CursorT;
     query?: string;
   }) => Promise<void>;
+  requestSources: (index?: string) => Promise<void | ImgixGETSourcesData>;
   onAssetClick?: IBreakoutAppOnSubmit;
 }
 
@@ -47,6 +48,7 @@ export function AssetBrowser({
   setLoading,
   setSelectedSource,
   requestAssetsFromSource,
+  requestSources,
   onAssetClick,
 }: Props): ReactElement {
   /**
@@ -115,6 +117,7 @@ export function AssetBrowser({
       src,
       mediaWidth: assetData.attributes.media_width,
       mediaHeight: assetData.attributes.media_height,
+      imgix_metadata: { ...assetData, base_url: domain },
     };
 
     onAssetClick(data);
@@ -127,19 +130,22 @@ export function AssetBrowser({
           sources={sources}
           selectedSource={selectedSource}
           handleSelect={handleSourceSelect}
+          requestSources={requestSources}
           className={styles.sourceSelect}
         />
         <div className={styles.spacer} />
         <SearchBar handleSubmit={handleSearch} />
       </div>
       <div className={styles.assetGridContainer}>
-        <AssetGrid
-          domain={domain}
-          assets={assets}
-          loading={loading}
-          errors={errors}
-          handleAssetGridClick={handleAssetGridClick}
-        />
+        {domain ? (
+          <AssetGrid
+            domain={domain}
+            assets={assets}
+            loading={loading}
+            errors={errors}
+            handleAssetGridClick={handleAssetGridClick}
+          />
+        ) : null}
       </div>
       <div className={styles.paginationContainer}>
         {assets.length > 0 && (

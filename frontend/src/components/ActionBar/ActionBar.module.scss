@@ -1,0 +1,25 @@
+@import "../../styles/Colors.module.scss";
+.container {
+  padding: 20px 0px 20px 0px;
+  background: $color_bg;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  height: auto;
+}
+
+.buttons {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 250px;
+  span {
+    margin-left: 5px;
+  }
+}

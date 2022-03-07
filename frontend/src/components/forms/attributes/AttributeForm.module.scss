@@ -1,0 +1,62 @@
+@import "../../../styles/Colors.module.scss";
+
+.formContainer {
+  padding: 24px;
+  border-top: 12px solid $color_accent_blue;
+  background-color: $color_bg;
+  width: 100%;
+}
+
+.imageAndFormContainer {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.assetCardContainer {
+  border: 1px solid #e3e7eb;
+  border-radius: 5px;
+  margin-right: 24px;
+}
+
+.form {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  input {
+    border: 1px solid $color_chrome;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 8px 10px 8px 10px;
+    color: $color_fg;
+    font-size: $type_size_small;
+    height: 30px;
+  }
+
+  .formLabel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 11px;
+    color: $color_fg;
+    svg {
+      fill: $color_fg;
+    }
+    p {
+      margin: 0;
+      margin-left: 12px;
+    }
+  }
+}
+
+.formButtons {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 24px;
+  button {
+    margin-left: 8px;
+  }
+}

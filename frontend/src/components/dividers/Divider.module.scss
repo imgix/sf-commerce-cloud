@@ -1,0 +1,21 @@
+@import "../../styles/Colors.module.scss";
+
+.horizontal {
+  background-color: $color_chrome;
+  bottom: 100%;
+  height: 1px;
+  // fill-available is only supported in Firefox and Safari behind a flag
+  width: fill-available;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  margin: 13px 0px 13px 0px;
+}
+
+.vertical {
+  background-color: $color_chrome;
+  height: 100%;
+  left: 100%;
+  top: 0;
+  width: 1px;
+  margin: 0px 13px 0px 13px;
+}

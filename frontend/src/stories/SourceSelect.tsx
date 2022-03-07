@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import { SourceSelect as _SourceSelect } from "../components/buttons/dropdowns/SourceSelect";
-import "../styles/App.css";
 import { ImgixGETSourcesData } from "../types";
 import "./ButtonLayout.css";
 
@@ -18,10 +17,15 @@ export function SourceSelect({ sources }: Props): ReactElement {
     if (!source) return;
     setSelectedSource(source);
   };
+  const requestSources = async () => {
+    console.log("requested next source list");
+  };
+
   return (
     <_SourceSelect
       handleSelect={handleSourceSelect}
       selectedSource={selectedSource}
+      requestSources={requestSources}
       sources={sources}
     />
   );

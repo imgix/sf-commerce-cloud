@@ -1,6 +1,6 @@
 {
   "name": "sf-commerce-cloud",
-  "version": "22.1.0",
+  "version": "22.2.0",
   "description": "Use this integration to insert images from imgix's Image Manager into your Salesforce Commerce Cloud websites",
   "main": "index.js",
   "repository": "https://github.com/imgix/sf-commerce-cloud.git",
@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@imgix/js-core": "^3.4.0",
     "chai": "^3.5.0",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
@@ -16,9 +17,13 @@
     "proxyquire": "1.7.4",
     "sfcc-ci": "^2.7.3",
     "sgmf-scripts": "^2.3.0",
-    "sinon": "^1.17.7"
+    "sinon": "^1.17.7",
+    "typescript": "^4.5.5"
   },
   "scripts": {
+    "build": "yarn run build:cartridges",
+    "build:cartridges": "cd src/cartridges && tsc",
+    "build:cartridges:watch": "cd src/cartridges && tsc -w",
     "test": "sgmf-scripts --test test/unit/**/*.js",
     "setup": "npm run setup:dw-json",
     "setup:dw-json": "node setup.js",
@@ -32,9 +37,10 @@
     "cartridge:add-to-path": "sfcc-ci cartridge:add",
     "uploadCartridge": "sgmf-scripts --uploadCartridge app_imgix_base_sfra",
     "storybook": "cd frontend && npm run storybook",
-    "deploy": "cd frontend && npm run deploy",
+    "deploy": "yarn run build && cd frontend && yarn run deploy",
     "build-zip": "pushd metadata && zip -j imgix_data.zip system-objecttype-extensions.xml && popd",
-    "unzip-metadata": "cd metadata && unzip imgix_data.zip"
+    "unzip-metadata": "cd metadata && unzip imgix_data.zip",
+    "build-extension-zip": "pushd src && zip -r extension.zip extension/"
   },
   "keywords": [
     "imgix",
