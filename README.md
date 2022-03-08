@@ -14,7 +14,7 @@ A Salesforce Commerce Cloud integration between imgix's Image Manager product an
 
 ## Documentation
 
-Extensive documentation for this integration can be found in the [`docs/imgix Commerce Cloud Integration Documentation.pdf`](docs/imgix%20Commerce%20Cloud%20Integration%20Documentation.pdf) file.
+Extensive documentation for this integration can be found in the [`documentation/imgix Commerce Cloud Integration Documentation.pdf`](documentation/imgix%20Commerce%20Cloud%20Integration%20Documentation.pdf) file.
 
 ## License
 
