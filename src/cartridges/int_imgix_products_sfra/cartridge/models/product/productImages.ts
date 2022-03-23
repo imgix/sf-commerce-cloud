@@ -134,6 +134,12 @@ function Images(
           IMGIX_CORE_DEFAULT_OPTIONS
         );
 
+        const imageSrcSet = ImgixCore.buildSrcSet(rawURL, {
+          ...IMGIX_CORE_DEFAULT_PARAMS,
+          ...imgixDefaultParams,
+          ...sizeParams,
+        });
+
         return {
           alt: image.alt,
           url: imageURL,
@@ -141,6 +147,7 @@ function Images(
           title: image.title,
           absURL: imageURL,
           rawURL,
+          srcSet: imageSrcSet,
         };
       });
       this[viewType] = result;
@@ -170,6 +177,10 @@ function Images(
             IMGIX_CORE_DEFAULT_OPTIONS
           );
 
+          const imageSrcSet = ImgixCore.buildSrcSet(rawURL, {
+            ...imgixParams,
+          });
+
           result = [
             {
               alt: firstImage.alt,
@@ -178,6 +189,7 @@ function Images(
               index: "0",
               absURL: imageURL,
               rawURL,
+              srcSet: imageSrcSet,
             },
           ];
         }
