@@ -16,30 +16,6 @@ const IMGIX_CORE_DEFAULT_PARAMS = {
 const IMGIX_CORE_DEFAULT_OPTIONS = {
   includeLibraryParam: false,
 };
-// Store the imgixAttributes custom preference group values for the current site
-const imgixBaseURL: string =
-  currentSite.getCustomPreferenceValue("imgixBaseURL") || "";
-const imgixEnableProductImageProxy: boolean =
-  currentSite.getCustomPreferenceValue("imgixEnableProductImageProxy");
-const imgixDefaultParamsString: string =
-  currentSite.getCustomPreferenceValue("imgixProductDefaultParams") || "";
-
-// Create imgix params object from imgixDefaultParamsString custom preference
-const imgixDefaultParams = imgixDefaultParamsString
-  .split("&")
-  .reduce((p, paramString: string) => {
-    const equalsIndex = paramString.indexOf("=");
-    if (equalsIndex < 0) {
-      return p;
-    }
-    const key = paramString.substring(0, equalsIndex);
-    const value = paramString.substring(equalsIndex + 1);
-    p[key] = value;
-    return p;
-  }, {} as Record<string, string>);
-
-// Determine if baseURL string was provided
-const isBaseURLSet: boolean = imgixBaseURL.trim().length > 0;
 
 /**
  * @constructor
@@ -57,6 +33,31 @@ function Images(
   },
   imageConfig: { types: any[]; quantity: string }
 ) {
+  // Store the imgixAttributes custom preference group values for the current site
+  const imgixBaseURL: string =
+    currentSite.getCustomPreferenceValue("imgixBaseURL") || "";
+  const imgixEnableProductImageProxy: boolean =
+    currentSite.getCustomPreferenceValue("imgixEnableProductImageProxy");
+  const imgixDefaultParamsString: string =
+    currentSite.getCustomPreferenceValue("imgixProductDefaultParams") || "";
+
+  // Create imgix params object from imgixDefaultParamsString custom preference
+  const imgixDefaultParams = imgixDefaultParamsString
+    .split("&")
+    .reduce((p, paramString: string) => {
+      const equalsIndex = paramString.indexOf("=");
+      if (equalsIndex < 0) {
+        return p;
+      }
+      const key = paramString.substring(0, equalsIndex);
+      const value = paramString.substring(equalsIndex + 1);
+      p[key] = value;
+      return p;
+    }, {} as Record<string, string>);
+
+  // Determine if baseURL string was provided
+  const isBaseURLSet: boolean = imgixBaseURL.trim().length > 0;
+
   /**
    * Parse imgixData custom attribute JSON string into an object if it exists.
    * Depending on whether the product is an instance of ProductVariationModel or
