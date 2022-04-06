@@ -1,4 +1,5 @@
 import ImgixManagementJS from "imgix-management-js";
+import PACKAGE_VERSION from "../../package.json";
 import {
   ImgixGETAssetsData,
   ImgixGETSourcesData,
@@ -23,6 +24,7 @@ const makeRequest = async <TData = {}>({
 }) => {
   const client = new ImgixManagementJS({
     apiKey: apiKey,
+    pluginOrigin: `sfcc/v${PACKAGE_VERSION.version}`,
   });
   const response = await client.request(url, {
     method,
