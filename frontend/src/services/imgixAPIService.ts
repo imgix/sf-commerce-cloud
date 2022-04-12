@@ -1,9 +1,25 @@
 import ImgixManagementJS from "imgix-management-js";
-import PACKAGE_VERSION from "../../package.json";
+import PACKAGE from "../../package.json";
 import {
   ImgixGETAssetsData,
   ImgixGETSourcesData,
 } from "../types/imgixAPITypes";
+
+export type IAPIEnvironment = "page_designer" | "products";
+let environment: IAPIEnvironment | undefined = undefined;
+
+export const setAPIEnvironment = (_environment: IAPIEnvironment) =>
+  (environment = _environment);
+
+const getPluginOriginValue = (): string => {
+  if (environment === "page_designer") {
+    return "sfcc-page_designer/v" + PACKAGE.version;
+  }
+  if (environment === "products") {
+    return "sfcc-products/v" + PACKAGE.version;
+  }
+  return "sfcc/v" + PACKAGE.version;
+};
 
 /**
  * Make a request to the imgix API.
@@ -24,7 +40,7 @@ const makeRequest = async <TData = {}>({
 }) => {
   const client = new ImgixManagementJS({
     apiKey: apiKey,
-    pluginOrigin: `sfcc/v${PACKAGE_VERSION.version}`,
+    pluginOrigin: getPluginOriginValue(),
   });
   const response = await client.request(url, {
     method,
