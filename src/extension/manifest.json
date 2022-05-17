@@ -12,11 +12,17 @@
   "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": ["https://*.salesforce.com/*ViewProduct_52*"],
+      "matches": [
+        "https://*.salesforce.com/*ViewProduct_52*",
+        "https://*.demandware.net/*ViewProduct_52*"
+      ],
       "css": ["src/inject/inject.css"]
     },
     {
-      "matches": ["https://*.salesforce.com/*ViewProduct_52*"],
+      "matches": [
+        "https://*.salesforce.com/*ViewProduct_52*",
+        "https://*.demandware.net/*ViewProduct_52*"
+      ],
       "js": ["src/inject/inject.js"]
     }
   ],
