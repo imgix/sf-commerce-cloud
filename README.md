@@ -2,7 +2,7 @@
 
 ![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
 
-A Salesforce Commerce Cloud integration between imgix's Image Manager product and Commerce Cloud. Use this integration to insert images from your cloud buckets into your Commerce Cloud pages.
+A Salesforce Commerce Cloud integration between imgix's Asset Manager product and Commerce Cloud. Use this integration to insert images from your cloud buckets into your Commerce Cloud pages.
 
 [![License](https://img.shields.io/github/license/imgix/sf-commerce-cloud)](https://github.com/imgix/sf-commerce-cloud/blob/main/LICENSE.md)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
