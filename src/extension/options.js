@@ -129,7 +129,7 @@ async function saveOptions() {
         updateStatus("Options saved.", "#28e398");
         if (token !== "") {
           updatePostSaveInstructions(
-            "Success! Now you can go to any Salesforce product in your Business Manager and associate images from the imgix Image Manager with your products."
+            "Success! Now you can go to any Salesforce product in your Business Manager and associate images from the imgix Asset Manager with your products."
           );
         }
       }
