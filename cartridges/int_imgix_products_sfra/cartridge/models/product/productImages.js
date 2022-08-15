@@ -37,7 +37,7 @@ var ProductVariationModel = require("dw/catalog/ProductVariationModel");
 var Variant = require("dw/catalog/Variant");
 var Product = require("dw/catalog/Product");
 var IMGIX_CORE_DEFAULT_PARAMS = {
-    ixlib: "sf-22.2.1",
+    ixlib: "sf-22.2.2",
 };
 var IMGIX_CORE_DEFAULT_OPTIONS = {
     includeLibraryParam: false,
