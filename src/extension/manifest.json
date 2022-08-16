@@ -1,6 +1,6 @@
 {
   "name": "imgix Salesforce B2C Commerce Cloud Extension",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "manifest_version": 3,
   "description": "This extension provides a Salesforce Commerce Cloud B2C integration with imgix.",
   "homepage_url": "https://imgix.com",
