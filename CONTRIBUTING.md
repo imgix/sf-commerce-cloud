@@ -1,131 +1,108 @@
-# Contributing Guidelines
+# Contributing Guide
 
-Below are some guidelines for contributing to the project.
+Thank you for investing your time in contributing to this project! Please take a moment to review this document in order to streamline the contribution process for you and any reviewers involved.
 
-## Workflow
+Read our [Code of Conduct](./CODE_OF_CONDUCT.md) to keep our community approachable and respectable.
+
+In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
+
+## New contributor guide
+
+To get an overview of the project, read the [README](README.md). Here are some resources to help you get started with open source contributions:
+
+- [Finding ways to contribute to open source on GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github)
+- [Set up Git](https://docs.github.com/en/get-started/quickstart/set-up-git)
+- [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow)
+- [Collaborating with pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests)
+
+## Opening a Pull Request
+
+_To help the project's maintainers and community quickly understand the nature of your pull request, please be sure to do the following:_
+
+1. Include a descriptive Pull Request title.
+2. Provide a detailed description that explains the nature of the change(s) introduced. This is not only helpful for your reviewer, but also for future users who may need to revisit your Pull Request for context purposes. Screenshots/video captures are helpful here!
+3. Make incremental, modular changes, with a clean commit history. This helps reviewers understand your contribution more easily and maintain project quality.
+
+### Checklist
+
+Check to see that you have completed each of the following before requesting a review of your Pull Request:
+
+- [ ] All existing unit tests are still passing (if applicable)
+- [ ] Add new passing unit tests to cover the code introduced by your PR
+- [ ] Update the README
+- [ ] Update or add any necessary API documentation
+- [ ] All commits in the branch adhere to the [conventional commit](#conventional-commit-spec) format: e.g. `fix: bug #issue-number`
+
+## Conventional Commit Spec
+
+Commits should be in the format `<type>(<scope>): <description>`. This allows our team to leverage tooling for automatic releases and changelog generation. An example of a commit in this format might be: `docs(readme): fix typo in documentation`
+
+`type` can be any of the follow:
+
+- `feat`: a feature, or breaking change
+- `fix`: a bug-fix
+- `test`: Adding missing tests or correcting existing tests
+- `docs`: documentation only changes (readme, changelog, contributing guide)
+- `refactor`: a code change that neither fixes a bug nor adds a feature
+- `chore`: reoccurring tasks for project maintainability (example scopes: release, deps)
+- `config`: changes to tooling configurations used in the project
+- `build`: changes that affect the build system or external dependencies (example scopes: npm, bundler, gradle)
+- `ci`: changes to CI configuration files and scripts (example scopes: travis)
+- `perf`: a code change that improves performance
+- `style`: changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+
+`scope` is optional, and can be anything.
+`description` should be a short description of the change, written in the imperative-mood.
+
+### Example workflow
 
 Follow this process if you'd like your work considered for inclusion in the
 project:
 
-0.  [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork, and configure the remotes. This is for outside contributions
+1. [Fork](http://help.github.com/fork-a-repo/) the project, clone your fork,
+   and configure the remotes:
 
-    ```bash
-    # Clone your fork of the repo into the current directory
-    git clone git@github.com:<YOUR_USERNAME>/sf-commerce-cloud.git
-    # Navigate to the newly cloned directory
-    cd sf-commerce-cloud
-    # Assign the original repo to a remote called "upstream"
-    git remote add upstream https://github.com/imgix/sf-commerce-cloud
-    ```
+   ```bash
+   # Clone your fork of the repo into the current directory
+   git clone git@github.com:<YOUR_USERNAME>/sf-commerce-cloud.git
+   # Navigate to the newly cloned directory
+   cd sf-commerce-cloud
+   # Assign the original repo to a remote called "upstream"
+   git remote add upstream https://github.com/imgix/sf-commerce-cloud
+   ```
 
-1.  If you cloned a while ago, get the latest changes from upstream:
+2. If you cloned a while ago, get the latest changes from upstream:
 
-    ```bash
-    git checkout next
-    git pull upstream next
-    ```
+   ```bash
+   git checkout <dev-branch>
+   git pull upstream <dev-branch>
+   ```
 
-2.  Create a new topic branch (off the `next` project development branch) to contain your feature, change, or fix:
+3. Create a new topic branch (off the main project development branch) to
+   contain your feature, change, or fix:
 
-    ```bash
-    git checkout -b <topic-branch-name>
-    ```
+   ```bash
+   git checkout -b <topic-branch-name>
+   ```
 
-3.  Commit your changes in logical chunks. Please adhere to these [git commit message guidelines](https://www.conventionalcommits.org/en/v1.0.0/) or your code is unlikely be merged into the main project. Use Git's [interactive rebase](https://help.github.com/articles/interactive-rebase) feature to tidy up your commits before making them public.
+4. Commit your changes in logical chunks. Use Git's
+   [interactive rebase](https://help.github.com/articles/interactive-rebase)
+   feature to tidy up your commits before making them public.
 
-4.  Locally merge (or rebase) the upstream development branch into your topic branch:
+5. Locally merge (or rebase) the upstream development branch into your topic branch:
 
-    ```bash
-    git pull [--rebase] upstream next
-    ```
+   ```bash
+   git pull [--rebase] upstream <dev-branch>
+   ```
 
-5.  Push your topic branch up to your fork:
+6. Push your topic branch up to your fork:
 
-    ```bash
-    git push origin <topic-branch-name>
-    ```
+   ```bash
+   git push origin <topic-branch-name>
+   ```
 
-6.  [Open a Pull Request](https://help.github.com/articles/using-pull-requests/) with a clear title and description.
+7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
+   with a clear title and description.
 
-7.  If your PR is out of sync with `next`, locally merge (or rebase) the upstream development branch into your topic branch and force push the changes into your topic branch.
-
-    ```bash
-    git pull [--rebase] upstream next
-    git push origin <topic-branch-name> --force
-    ```
-
-8.  If you're happy with your changes and your PR has been approved, rebase and merge your topic branch into the `next` project development branch using the GitHub PR interface.
-
-**IMPORTANT**: By submitting a patch, you agree to allow the project owner to license your work under the same license as that used by the project.
-
-## Pull Requests
-
-- **Do** branch off `next`. You can always branch off `next`. Note: In special cases, it might be necessary to branch off `beta` or `alpha` if you are working on a pre-release version of a library.
-
-- **Do** make, incremental, modular changes. When creating a feature/bug-fix branch, try to keep it to one modular change only.
-
-- **Do** open PRs. There’s no shame in creating a new branch/pull request just to change one character in a file. PRs are free! Use 'em!
-
-- **Do** rebase and merge your PR once approved/ready.
-
-- **Do** clean up your branch history before merging changes into `next`. For example, do not include commits such as `testing` or `does this do anything`. Sometimes it is unavoidable to check in changes like this (such as when testing against CI), but these commits should not make it to the default branch.
-
-- **Do** provide detailed descriptions. Pull requests should include an extremely-detailed description, even if you know your reviewer will have sufficient context on it.
-
-- **Do** provide context that will help future developers. Assume that you are writing the PR description for a future developer (probably yourself) who will stumble across it and need to be reminded of the relevant context.
-
-- **Do** favor Angular-style commit messages. The syntax makes it easy to quickly understand the scope of a commit from its message, e.g. `feat: create new function to build responsive images`. Also see the [Conventional Commit spec](https://www.conventionalcommits.org/en/v1.0.0/) for more details.
-
-- **Do** tag someone on the SDK team to review the pull request once ready. Barring that, someone else on the engineering team who is familiar with the particular language/framework that the pull request is related to.
-
-- **Do not** check compiled, "dist" files into your PRs. Compiling, building, and prepping for distribution should be done in a separate branch or on `main` immediately before releasing.
-
-## Commit Messages
-
-A commit message contains:
-
-- a header specifying the
-  - the `type` of commit, i.e. `fix`, `docs`, `feat`, etc. and
-  - the `scope` of the commit, i.e. `docs`, `infra`, `core`, `https`, `builder` , `validator`, etc.
-- (Optional) a body providing an extremely-detailed description (think what, where, when, why, and/or how), and finally
-- (Optional) a footer that should contain a closing reference to an issue, if any.
-
-A full list of commit header types can be found [here](https://www.conventionalcommits.org/en/v1.0.0/).
-
-### Examples
-
-    type(scope): subject
-
-    body
-
-    footer
-
-Given the format, the following message-header states that this commit makes a document-only change, `docs`, scoped to the builder-module, where the typo-fix occurs in the module README. The header is followed by the body that describes the details of the commit.
-
-    docs(builder): fixes `builder` doc typos in README
-
-    This PR updates the `builder` docs to reflect the latest API change in which
-    the `source_path` parameter was renamed to `src_path`.
-
----
-
-    fix(web-thing): change `thing` to `some_thing` when doing `Z`
-
-    The `thing` component has been used to do `X, Y, and Z`, but the specification
-    states that `some_thing` should be preferred under `condition-1 and
-    condition-2` when doing `Z`.
-
-    This PR changes `thing` to `some_thing` only when doing `Z` under
-    `condition-1 and condition-2`.
-
-    Closes #78559
-
----
-
-    docs(index.js): fixes typos on index.md file and fixes on code examples.
-
-    1. While reading the documentation, I encountered `thisVariable` in index.js
-      that was referred to as `thatVariable` in the index.md documentation file.
-      This PR corrects that typo and
-    2. A minor typo in the `Read More` section of index.md
-    4. A minor typo in the `Read Less` section of index.md
+**IMPORTANT**: By submitting a patch, you agree to allow the project owner to
+license your work under the same license as that used by the project.
