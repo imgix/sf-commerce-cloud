@@ -1,6 +1,6 @@
 <!-- ix-docs-ignore -->
 
-![imgix logo](https://assets.imgix.net/sdk-imgix-logo.svg)
+![imgix logo](https://assets.imgix.net/sdk-imgix-logo-new.svg)
 
 A Salesforce Commerce Cloud integration between imgix's Asset Manager product and Commerce Cloud. Use this integration to insert images from your cloud buckets into your Commerce Cloud pages.
 
